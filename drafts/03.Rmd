@@ -1,0 +1,132 @@
+# Simplex Method - Example
+
+The simplex method jumps from vertex of the feasible region to find the optimal solution. It is best demonstrated using an example. Consider the following linear program.
+
+\begin{equation}
+```{r, simplex-example, results = 'asis'}
+simplex_method_example <- new_linear_program(
+  obj = c(1, 1.5),
+  A = matrix(c(1, 2, 4, 3), nrow = 2, byrow = TRUE),
+  b = c(10, 20),
+  variables = c('x_1', 'x_2')
+)
+
+cat(str(simplex_method_example))
+```
+(\#eq:simplex-example)
+\end{equation}
+
+The optimal solution is $(x_1, x_2) = (2, 4)$ with objective value $6$. There are six different points at which the lines corresponding to the constraints intersect. We'll start with the vertex $(0,0)$ and make our way up to $(2, 4)$ while making sure that we do not leave the feasible region.
+
+```{r, simplex-example-plot}
+library(ggplot2)
+
+simplex_example_plot <- ggplot() + 
+  xlim(0, max(10, 20/4)) +
+  ylim(0, max(10/2, 20/3)) +
+  geom_vline(xintercept=c(0), alpha = 0.4) +
+  geom_hline(yintercept=c(0), alpha = 0.4) +
+  theme_bw() + 
+  geom_polygon(
+      data = data.frame(
+        x = c(0, 0, 10/1),
+        y = c(0, 10/2, 0)),
+      aes(x = x, y = y, fill = "1: x + 2y <= 10"),
+      inherit.aes = FALSE, alpha = 0.4) + 
+  geom_polygon(
+      data = data.frame(
+        x = c(0, 0, 20/4),
+        y = c(0, 20/3, 0)),
+      aes(x = x, y = y, fill = "2: 4x + 3y <= 20"),
+      inherit.aes = TRUE, alpha = 0.4) +
+  scale_fill_brewer(name = "Constraints", palette = "Pastel2")
+
+simplex_example_plot +
+  geom_point(aes(x=2, y=4)) +
+  geom_point(aes(x=10/1, y=0)) +
+  geom_point(aes(x=0, y=10/2)) +
+  geom_point(aes(x=20/4, y=0)) +
+  geom_point(aes(x=0, y=20/3)) +
+  geom_point(aes(x=0, y=0))
+```
+
+The first, and arguably the most important trick in the simplex algorithm is the introduction of *slack variables*  $x_3$ and $x_4$, one for each constraint, as shown below, to create a new linear program called a *dictionary* which is equivalent to \@ref(eq:simplex-example)
+
+\begin{equation}
+``` {r, resource-example-dictionary, results="asis"}
+x <- new_dictionary(
+  objective = c(0, 1, 1.5),
+  coefficients = matrix(c(1, 2, 4, 3), nrow = 2, byrow = TRUE),
+  constants = c(10, 20),
+  non_basic_variables = c("x_1", "x_2"),
+  basic_variables = c("x_3", "x_4")
+)
+cat(str(x))
+```
+(\#eq:simplex-example-dictionary)
+\end{equation}
+
+Using these new variables, the points of intersection can be written as intersections of the lines $x_i = 0$ and $x_j = 0$, as $i$ and $j$ vary over the index set $\{1, 2, 3, 4\}$. And so to traverse the set of vertices, we simply need to traverse the two element subsets of $\{x_1 = 0, x_2 = 0, x_3 = 0, x_4 = 0\}$.
+
+```{r, simplex-example-intersections-labeled}
+library(ggplot2)
+
+simplex_example_plot +
+  geom_point(aes(x=0, y=0, color = "x_1, x_2")) +
+  geom_point(aes(x=0, y=10/2, color = "x_1, x_3")) +
+  geom_point(aes(x=0, y=20/3, color = "x_1, x_4")) +
+  geom_point(aes(x=10/1, y=0, color = "x_2, x_3")) +
+  geom_point(aes(x=20/4, y=0, color = "x_2, x_4")) +
+  geom_point(aes(x=2, y=4, color = "x_3, x_4")) +
+  scale_colour_brewer("Intersection points", palette = "Dark2")
+```
+
+1. We start with the guess: $x_1 = 0, x_2 = 0, x_3 = 10, x_4 = 20$. 
+    1. At this point, $\zeta = 0$. We can increase $\zeta$ by increasing either $x_1$ or $x_2$. Let's choose $x_1$ and leave $x_2$ fixed at $0$.
+    2. To not violate the positivity of $x_3$, $x_4$, we can only increase $x_1$ enough that both $10 \ge x_1$ and $20 \ge 4x_1$ remain true. The maximum such $x_1$ is $5$ and this makes $x_4 = 0$.
+    3. We rewrite $x_1$, $x_3$, and $\zeta$ in terms of the new variables that are $0$, namely $x_2$ and $x_4$, to create a new dictionary:
+    \begin{equation}
+    ``` {r, simplex-example-step-1, results="asis"}
+    x <- new_dictionary(
+      objective = c(5, -1/4, 3/4),
+      coefficients = matrix(c(-1/4, 5/4, 1/4, 3/4), nrow = 2, byrow = TRUE),
+      constants = c(5, 5),
+      basic_variables = c("x_3", "x_1"),
+      non_basic_variables = c("x_4", "x_2")
+    )
+    cat(str(x))
+    ```
+    (\#eq:simplex-example-dictionary-step-1)
+    \end{equation}
+2. Our new guess is: $x_1 = 5, x_2 = 0, x_3 = 5, x_4 = 0$. 
+    1. The coefficient of $x_4$ in the objective function is negative. Increasing it will only decrease the objective value. The only variable we can increase in the objective function is $x_2$.
+    2. To not violate the positivity of $x_1$, $x_3$, we can only increase $x_2$ enough that both $5 \ge 1.25x_2$ and $5 \ge 0.75x_2$ remain true. The maximum such $x_2$ is $\min(5/1.25, 5/0.75) = 5/1.25 = 4$ and this makes $x_3 = 0$.
+    3. We rewrite $x_2$, $x_1$, and $\zeta$ in terms of the new variables that are $0$, namely $x_3$ and $x_4$, to create a new dictionary:
+    \begin{equation}
+    ``` {r, simplex-example-step-2, results="asis"}
+    x <- new_dictionary(
+      objective = c(8, -1/10, -3/5),
+      coefficients = matrix(c(-1/5, 4/5, 2/5, -3/5), nrow = 2, byrow = TRUE),
+      constants = c(4, 2),
+      basic_variables = c("x_2", "x_1"),
+      non_basic_variables = c("x_4", "x_3")
+    )
+    cat(str(x))
+    ```
+    (\#eq:simplex-example-dictionary-step-2)
+    \end{equation}
+3. Our new guess is: $x_1 = 2, x_2 = 4, x_3 = 0, x_4 = 0$. 
+    1. The coefficients of both the variables that appear in $\zeta$ are negative. It is not possible to increase either variable without decreasing the objective value. The simplex algorithm halts. 
+
+The optimal objective value $8$ is the constant coefficient in the final $\zeta$ and it is attained at $(x_1, x_2) = (2, 4)$.
+
+
+```{r, simplex-example-intersections-traced}
+library(ggplot2)
+
+simplex_example_plot +
+  geom_point(aes(x=0, y=0, color = "Guess 1: x_1, x_2")) +
+  geom_point(aes(x=20/4, y=0, color = "Guess 2: x_2, x_4")) +
+  geom_point(aes(x=2, y=4, color = "Guess 3: x_3, x_4")) +
+  scale_colour_brewer("Guesses", palette = "Set1")
+```
