@@ -1,4 +1,4 @@
-# Geometry, Equivalence, Standard form 
+# Linear programs in 2 variables 
 
 ## Using geometry to solve linear programs
 Here is one way to see that $(2, 2)$ is the optimal solution to Example \@ref(resource-allocation-problem). For any constant $c$, the equation 
