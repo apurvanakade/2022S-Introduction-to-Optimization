@@ -4,3 +4,6 @@
 .Ruserdata
 .DS_Store
 .vscode
+_bookdown_files/**
+.rdb
+.rdx

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 1 Introduction | Introduction to Optimization</title>
+  <meta name="description" content="Chapter 1 Introduction | Introduction to Optimization." />
+  <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 1 Introduction | Introduction to Optimization" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Chapter 1 Introduction | Introduction to Optimization." />
+  <meta name="github-repo" content="apurvanakade/2022S-Introduction-to-optimization" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 1 Introduction | Introduction to Optimization" />
+  
+  <meta name="twitter:description" content="Chapter 1 Introduction | Introduction to Optimization." />
+  
+
+<meta name="author" content="Apurva Nakade" />
+
+
+<meta name="date" content="2022-03-29" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="index.html#preface">Preface<span></span></a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction<span></span></a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Optimization</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="introduction" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Chapter 1</span> Introduction<a href="introduction.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>The question of optimization is the very general question of deciding when a function <span class="math inline">\(f(x_1, \dots, x_n)\)</span> attains its maximum or minimum value on a domain <span class="math inline">\(D\)</span> in <span class="math inline">\(\mathbb{R^n}\)</span>.
+<span class="math display">\[\begin{align}
+\mbox{optimize: } &amp;&amp; f(x_1, \dots, x_n) &amp; \\
+\mbox{subject to: } &amp;&amp; (x_1, \dots, x_n) &amp;\in D.
+\end{align}\]</span>
+These kinds questions show up naturally in every quantitative field.
+To analyze the question meaningfully, one needs to make some assumptions on <span class="math inline">\(f\)</span> and <span class="math inline">\(D\)</span>.</p>
+<p>In this course, we’ll analyze this question in the special case when the function <span class="math inline">\(f\)</span> is linear and the constraint set <span class="math inline">\(D\)</span> is described using linear inequalities. The study of this problem is called <em>Linear Programming</em>. Despite the simplicity of the Linear Programming setup, or perhaps because of it, LP is one of the most commonly used models for optimization problems. We’ll see how to solve linear programs using the simplex method and go on to analyze the solution sets using duality theory.</p>
+<p>Linear programs are used for modeling real world problems when prices/costs and constraints are fixed and known beforehand.
+Even when this is not the case, linear programs are often used to approximate and estimate costs/prices before moving on to more sophisticated techniques.</p>
+<div class="example">
+<p><span id="exm:bond-portfolio" class="example"><strong>Example 1.1  </strong></span>A bond portfolio manager has $100,000 to allocate to two different bonds; one corporate and one government bond.
+The corporate bond has a yield of 4%, a maturity of 3 years and an A rating from a rating agency that is translated into a numerical rating of 2 for computational purposes.
+In contrast, the government bond has a yield of 3%, a maturity of 6 years and rating of Aaa with the corresponding numerical rating of 1 (lower numerical ratings correspond to higher quality bonds). The portfolio manager would like to allocate her funds so that the average rating for the portfolio is no worse than Aa (numerical equivalent 1.5) and average maturity of the portfolio is at most 3.6 years.
+Any amount not invested in the two bonds will be kept in a cash account that is assumed to earn no interest for simplicity and does not contribute to the average rating or maturity computations.
+How should the manager allocate her funds between these two bonds to achieve her objective of maximizing the annual yield from this investment?</p>
+<pre><code>                 Corporate Government  Bounds
+Yield                   4%         3%        
+Maturity                 3          6     3.6
+Rating               A = 2    Aaa = 1     1.5
+Fund Allocations        ??         ?? 100,000</code></pre>
+</div>
+<details>
+<summary>
+Solution
+</summary>
+<p>We can formulate the above problem as the following linear program.</p>
+<p><span class="math display" id="eq:bond-portfolio-lp-incomplete">\[\begin{equation}
+  \begin{array}{rrrrrl}
+  \mbox{maximize:} &amp; 0.04x &amp; + &amp; 0.03y \\
+  \mbox{subject to:}
+    &amp; 3x &amp; + &amp; 6y &amp; \le &amp; 3.6 \\
+    &amp; 2x &amp; + &amp; y &amp; \le &amp; 1.5 
+    % &amp; x &amp; + &amp; y &amp; \le &amp; 1 \\
+    % &amp; x &amp; , &amp; y &amp; \ge &amp; 0,
+  \end{array}
+  \tag{1.1}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span> are the percentages of corporate and government bonds respectively and the objective function when multiplied by $100,000 gives us the net yield. This is an example of a <strong>linear program</strong>.</p>
+<p>Note that we cannot subtract inequalities the same way that we can subtract equalities. So to get started, let us assume that all the inequalities are in fact equalities. We can solve the system</p>
+<p><span class="math display">\[\begin{equation}
+  \begin{array}{rrrrrl}
+    &amp; 3x &amp; + &amp; 6y &amp; = &amp; 3.6 \\
+    &amp; 2x &amp; + &amp; y &amp; = &amp; 1.5
+  \end{array}
+\end{equation}\]</span></p>
+<p>to obtain <span class="math inline">\(x = 0.6\)</span> and <span class="math inline">\(y = 0.3\)</span>. Note that for this solution <span class="math inline">\(x + y = 0.9\)</span> which is less that 1, meaning that we’re not investing all the money available! Which raises the question: Is it possible to increase the yield further by not satisfying both of the above inequalities and investing all the money instead? This question becomes even more apparent once we realize that the linear program <a href="introduction.html#eq:bond-portfolio-lp-incomplete">(1.1)</a> is incomplete and the complete linear program that models the problem is as follows:</p>
+<p><span class="math display" id="eq:bond-portfolio-lp">\[\begin{equation}
+  \begin{array}{rrrrrl}
+  \mbox{maximize:} &amp; 0.04x &amp; + &amp; 0.03y \\
+  \mbox{subject to:}
+    &amp; 3x &amp; + &amp; 6y &amp; \le &amp; 3.6 \\
+    &amp; 2x &amp; + &amp; y &amp; \le &amp; 1.5 \\
+    &amp; x &amp; + &amp; y &amp; \le &amp; 1 \\
+    &amp; x &amp;  &amp;  &amp; \ge &amp; 0 \\
+    &amp;   &amp;  &amp; y &amp; \ge &amp; 0.
+  \end{array}
+  \tag{1.2}
+\end{equation}\]</span></p>
+<p>Here we can see that to obtain the solution <span class="math inline">\((x, y) = (0.6, 0.3)\)</span> we’re solving</p>
+<p><span class="math display">\[\begin{equation}
+  \begin{array}{rrrrrl}
+    &amp; 3x &amp; + &amp; 6y &amp; = &amp; 3.6 \\
+    &amp; 2x &amp; + &amp; y &amp; = &amp; 1.5 \\
+    &amp; x &amp; + &amp; y &amp; &lt; &amp; 1. 
+  \end{array}
+\end{equation}\]</span></p>
+However, we could have switched the other inequalities to equalities instead and obtained a different solution. We’d then need to compare the yield in the solutions obtained in each of these cases and find one that maximizes it. This method becomes unwieldy very fast and we’ll need to develop better ways to solve linear programs.
+</details>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": "github"
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "lunr",
+"options": null
+},
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"toolbar": {
+"position": "fixed"
+},
+"info": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
