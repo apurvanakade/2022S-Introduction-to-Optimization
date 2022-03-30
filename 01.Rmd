@@ -35,7 +35,7 @@ df
 :::
 
 
-<details>
+<details open=TRUE>
 <summary>Solution</summary>
 
 We can model the above problem as follows:
@@ -80,3 +80,33 @@ to obtain $x = 0.6$ and $y = 0.3$. But for this solution $x + y = 0.9$ which is 
 
 The solution $(x, y) = (0.6, 0.3)$ is obtained by changing the first two inequalities to equalities. But this choice is completely arbitrary! We could have switched some other set of inequalities to equalities and obtained a different solution. We'd then need to compare the solutions obtained in each of these cases and find the one that maximizes it. This method becomes unwieldy very fast and we'll need to develop better ways to solve linear programs. 
 </details>
+
+## Software tools
+
+### Graphing calculator
+
+Linear programs in two variables can be visualized using a graphing calculator. The constraints in Example \@ref(exm:bond-portfolio) can be visualized as follows:
+
+
+```{r, fig-bond-portfolio}
+
+source("graphs/bond-portfolio.R", local = knitr::knit_global())
+
+```
+
+The feasible set is the quadrilateral formed by the overlap of all three constraint regions. The level sets of the objective function are straight lines of the form $0.04x + 0.03y = c$. We can use a graphical calculator to find the largest value of $c$ for which these level sets intersect the feasible region, which turns out to be $c = 3.3\%$ which gives us a net yield of $3.3\% \times \$100,000 = \$3,300$.
+
+
+```{r, fig-bond-portfolio-solution}
+
+source("graphs/bond-portfolio-solution.R", local = knitr::knit_global())
+
+```
+
+Here is the same picture in Desmos: https://www.desmos.com/calculator/bexwrrcbwx 
+
+As it turns out, there is no efficient way to implement this method purely algebraically, thereby making it unusable in higher dimensions.
+
+### Solver add-in 
+
+[Excel](https://support.microsoft.com/en-us/office/load-the-solver-add-in-in-excel-612926fc-d53b-46b4-872c-e24772f078ca) and [Google sheets](https://workspace.google.com/marketplace/app/solver/539454054595) have free, easy-to-use linear program solvers that can be used to solve linear programs and generate sensitivity analysis. Here is a sample solution of Example \@ref(exm:bond-portfolio) using Solver in Excel: https://1drv.ms/x/s!AnwQOvs0HXuihl3PWf5YQLWsF6qB?e=rddRBy

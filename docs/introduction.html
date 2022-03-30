@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="index.html"/>
-
+<link rel="next" href="slack-variables.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -71,7 +71,15 @@
 
 <ul class="summary">
 <li><a href="index.html#preface">Preface<span></span></a></li>
-<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction<span></span></a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction<span></span></a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#software-tools"><i class="fa fa-check"></i><b>1.1</b> Software tools<span></span></a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="introduction.html"><a href="introduction.html#graphing-calculator"><i class="fa fa-check"></i><b>1.1.1</b> Graphing calculator<span></span></a></li>
+<li class="chapter" data-level="1.1.2" data-path="introduction.html"><a href="introduction.html#solver-add-in"><i class="fa fa-check"></i><b>1.1.2</b> Solver add-in<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="slack-variables.html"><a href="slack-variables.html"><i class="fa fa-check"></i><b>2</b> Slack variables<span></span></a></li>
 </ul>
 
       </nav>
@@ -113,7 +121,7 @@ Maturity                 3          6     3.6
 Rating               A = 2    Aaa = 1     1.5
 Fund Allocations        ??         ?? 100,000</code></pre>
 </div>
-<details>
+<details open="TRUE">
 <summary>
 Solution
 </summary>
@@ -152,15 +160,31 @@ Solution
 \end{equation}\]</span></p>
 The solution <span class="math inline">\((x, y) = (0.6, 0.3)\)</span> is obtained by changing the first two inequalities to equalities. But this choice is completely arbitrary! We could have switched some other set of inequalities to equalities and obtained a different solution. We’d then need to compare the solutions obtained in each of these cases and find the one that maximizes it. This method becomes unwieldy very fast and we’ll need to develop better ways to solve linear programs.
 </details>
+<div id="software-tools" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Software tools<a href="introduction.html#software-tools" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="graphing-calculator" class="section level3 hasAnchor" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> Graphing calculator<a href="introduction.html#graphing-calculator" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Linear programs in two variables can be visualized using a graphing calculator. The constraints in Example <a href="introduction.html#exm:bond-portfolio">1.1</a> can be visualized as follows:</p>
+<p><img src="Introduction-to-Optimization_files/figure-html/fig-bond-portfolio-1.png" width="672" /></p>
+<p>The feasible set is the quadrilateral formed by the overlap of all three constraint regions. The level sets of the objective function are straight lines of the form <span class="math inline">\(0.04x + 0.03y = c\)</span>. We can use a graphical calculator to find the largest value of <span class="math inline">\(c\)</span> for which these level sets intersect the feasible region, which turns out to be <span class="math inline">\(c = 3.3\%\)</span> which gives us a net yield of <span class="math inline">\(3.3\% \times \$100,000 = \$3,300\)</span>.</p>
+<p><img src="Introduction-to-Optimization_files/figure-html/fig-bond-portfolio-solution-1.png" width="672" /></p>
+<p>Here is the same picture in Desmos: <a href="https://www.desmos.com/calculator/bexwrrcbwx" class="uri">https://www.desmos.com/calculator/bexwrrcbwx</a></p>
+<p>As it turns out, there is no efficient way to implement this method purely algebraically, thereby making it unusable in higher dimensions.</p>
+</div>
+<div id="solver-add-in" class="section level3 hasAnchor" number="1.1.2">
+<h3><span class="header-section-number">1.1.2</span> Solver add-in<a href="introduction.html#solver-add-in" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><a href="https://support.microsoft.com/en-us/office/load-the-solver-add-in-in-excel-612926fc-d53b-46b4-872c-e24772f078ca">Excel</a> and <a href="https://workspace.google.com/marketplace/app/solver/539454054595">Google sheets</a> have free, easy-to-use linear program solvers that can be used to solve linear programs and generate sensitivity analysis. Here is a sample solution of Example <a href="introduction.html#exm:bond-portfolio">1.1</a> using Solver in Excel: <a href="https://1drv.ms/x/s!AnwQOvs0HXuihl3PWf5YQLWsF6qB?e=rddRBy" class="uri">https://1drv.ms/x/s!AnwQOvs0HXuihl3PWf5YQLWsF6qB?e=rddRBy</a></p>
 
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="slack-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

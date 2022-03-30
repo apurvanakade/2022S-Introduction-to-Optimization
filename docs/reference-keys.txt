@@ -1,4 +1,14 @@
 exm:bond-portfolio
 eq:bond-portfolio-lp-incomplete
 eq:bond-portfolio-lp
+eq:standard-lp
+exm:unlabeled-div-1
+thm:unlabeled-div-3
+thm:unlabeled-div-4
+eq:slack-variables-def
+exm:unlabeled-div-5
 introduction
+software-tools
+graphing-calculator
+solver-add-in
+slack-variables

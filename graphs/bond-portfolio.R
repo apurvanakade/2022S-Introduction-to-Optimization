@@ -11,8 +11,8 @@ labels <- c(
 bond_portfolio <- ggplot() +
   xlim(0, max(b / A[, 1])) +
   ylim(0, max(b / A[, 2])) +
-  geom_vline(xintercept=c(0), alpha = 0.4) +
-  geom_hline(yintercept=c(0), alpha = 0.4) +
+  geom_vline(xintercept = c(0), alpha = 0.4) +
+  geom_hline(yintercept = c(0), alpha = 0.4) +
   theme_bw() +
   geom_polygon(
     data = data.frame(
@@ -31,6 +31,7 @@ bond_portfolio <- ggplot() +
       x = c(0, 0, b[3] / A[3, 1]),
       y = c(0, b[3] / A[3, 2], 0)),
     aes(x = x, y = y, fill = labels[3]),
-    inherit.aes = FALSE, alpha = 0.4)
+    inherit.aes = FALSE, alpha = 0.4) + 
+  guides(fill = guide_legend(title = "Constraints"))
 
 print(bond_portfolio)
