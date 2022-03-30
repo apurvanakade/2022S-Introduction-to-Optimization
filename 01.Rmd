@@ -35,10 +35,10 @@ df
 :::
 
 
-<details>
+<details open=TRUE>
 <summary>Solution</summary>
 
-We can formulate the above problem as the following linear program.
+We can model the above problem as follows:
 
 \begin{equation}
   \begin{array}{rrrrrl}
@@ -52,9 +52,9 @@ We can formulate the above problem as the following linear program.
   (\#eq:bond-portfolio-lp-incomplete)
 \end{equation}
 
-where $x$, $y$ are the percentages of corporate and government bonds respectively and the objective function when multiplied by $100,000 gives us the net yield. This is an example of a **linear program**.
+where $x$, $y$ are the percentages of corporate and government bonds, respectively, and the objective function when multiplied by $100,000 gives us the net yield. This is an example of a **linear program**.
 
-Note that we cannot subtract inequalities the same way that we can subtract equalities. So to get started, let us assume that all the inequalities are in fact equalities. We can solve the system 
+Note that we cannot subtract inequalities the same way that we can subtract equalities. So to get started, let us assume that both the inequalities are in fact equalities. We can solve the system 
 
 \begin{equation}
   \begin{array}{rrrrrl}
@@ -63,7 +63,7 @@ Note that we cannot subtract inequalities the same way that we can subtract equa
   \end{array}
 \end{equation}
 
-to obtain $x = 0.6$ and $y = 0.3$. Note that for this solution $x + y = 0.9$ which is less that 1, meaning that we're not investing all the money available! Which raises the question: Is it possible to increase the yield further by not satisfying both of the above inequalities and investing all the money instead? This question becomes even more apparent once we realize that the linear program \@ref(eq:bond-portfolio-lp-incomplete) is incomplete and the complete linear program that models the problem is as follows:
+to obtain $x = 0.6$ and $y = 0.3$. But for this solution $x + y = 0.9$ which is less that 1, meaning that we're not investing all the available funds! Which raises the question: Is it possible to increase the yield further by not satisfying both of the above equalities and investing all the money instead? This question becomes even more apparent once we realize that the linear program \@ref(eq:bond-portfolio-lp-incomplete) is incomplete and the complete linear program that models the problem is as follows:
 
 \begin{equation}
   \begin{array}{rrrrrl}
@@ -78,15 +78,5 @@ to obtain $x = 0.6$ and $y = 0.3$. Note that for this solution $x + y = 0.9$ whi
   (\#eq:bond-portfolio-lp)
 \end{equation}
 
-Here we can see that to obtain the solution $(x, y) = (0.6, 0.3)$ we're solving 
-
-\begin{equation}
-  \begin{array}{rrrrrl}
-    & 3x & + & 6y & = & 3.6 \\
-    & 2x & + & y & = & 1.5 \\
-    & x & + & y & < & 1. 
-  \end{array}
-\end{equation}
-
-However, we could have switched the other inequalities to equalities instead and obtained a different solution. We'd then need to compare the yield in the solutions obtained in each of these cases and find one that maximizes it. This method becomes unwieldy very fast and we'll need to develop better ways to solve linear programs. 
+The solution $(x, y) = (0.6, 0.3)$ is obtained by changing the first two inequalities to equalities. But this choice is completely arbitrary! We could have switched some other set of inequalities to equalities and obtained a different solution. We'd then need to compare the solutions obtained in each of these cases and find the one that maximizes it. This method becomes unwieldy very fast and we'll need to develop better ways to solve linear programs. 
 </details>

@@ -113,11 +113,11 @@ Maturity                 3          6     3.6
 Rating               A = 2    Aaa = 1     1.5
 Fund Allocations        ??         ?? 100,000</code></pre>
 </div>
-<details>
+<details open="TRUE">
 <summary>
 Solution
 </summary>
-<p>We can formulate the above problem as the following linear program.</p>
+<p>We can model the above problem as follows:</p>
 <p><span class="math display" id="eq:bond-portfolio-lp-incomplete">\[\begin{equation}
   \begin{array}{rrrrrl}
   \mbox{maximize:} &amp; 0.04x &amp; + &amp; 0.03y \\
@@ -129,15 +129,15 @@ Solution
   \end{array}
   \tag{1.1}
 \end{equation}\]</span></p>
-<p>where <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span> are the percentages of corporate and government bonds respectively and the objective function when multiplied by $100,000 gives us the net yield. This is an example of a <strong>linear program</strong>.</p>
-<p>Note that we cannot subtract inequalities the same way that we can subtract equalities. So to get started, let us assume that all the inequalities are in fact equalities. We can solve the system</p>
+<p>where <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span> are the percentages of corporate and government bonds, respectively, and the objective function when multiplied by $100,000 gives us the net yield. This is an example of a <strong>linear program</strong>.</p>
+<p>Note that we cannot subtract inequalities the same way that we can subtract equalities. So to get started, let us assume that both the inequalities are in fact equalities. We can solve the system</p>
 <p><span class="math display">\[\begin{equation}
   \begin{array}{rrrrrl}
     &amp; 3x &amp; + &amp; 6y &amp; = &amp; 3.6 \\
     &amp; 2x &amp; + &amp; y &amp; = &amp; 1.5
   \end{array}
 \end{equation}\]</span></p>
-<p>to obtain <span class="math inline">\(x = 0.6\)</span> and <span class="math inline">\(y = 0.3\)</span>. Note that for this solution <span class="math inline">\(x + y = 0.9\)</span> which is less that 1, meaning that we’re not investing all the money available! Which raises the question: Is it possible to increase the yield further by not satisfying both of the above inequalities and investing all the money instead? This question becomes even more apparent once we realize that the linear program <a href="introduction.html#eq:bond-portfolio-lp-incomplete">(1.1)</a> is incomplete and the complete linear program that models the problem is as follows:</p>
+<p>to obtain <span class="math inline">\(x = 0.6\)</span> and <span class="math inline">\(y = 0.3\)</span>. But for this solution <span class="math inline">\(x + y = 0.9\)</span> which is less that 1, meaning that we’re not investing all the available funds! Which raises the question: Is it possible to increase the yield further by not satisfying both of the above equalities and investing all the money instead? This question becomes even more apparent once we realize that the linear program <a href="introduction.html#eq:bond-portfolio-lp-incomplete">(1.1)</a> is incomplete and the complete linear program that models the problem is as follows:</p>
 <p><span class="math display" id="eq:bond-portfolio-lp">\[\begin{equation}
   \begin{array}{rrrrrl}
   \mbox{maximize:} &amp; 0.04x &amp; + &amp; 0.03y \\
@@ -150,15 +150,7 @@ Solution
   \end{array}
   \tag{1.2}
 \end{equation}\]</span></p>
-<p>Here we can see that to obtain the solution <span class="math inline">\((x, y) = (0.6, 0.3)\)</span> we’re solving</p>
-<p><span class="math display">\[\begin{equation}
-  \begin{array}{rrrrrl}
-    &amp; 3x &amp; + &amp; 6y &amp; = &amp; 3.6 \\
-    &amp; 2x &amp; + &amp; y &amp; = &amp; 1.5 \\
-    &amp; x &amp; + &amp; y &amp; &lt; &amp; 1. 
-  \end{array}
-\end{equation}\]</span></p>
-However, we could have switched the other inequalities to equalities instead and obtained a different solution. We’d then need to compare the yield in the solutions obtained in each of these cases and find one that maximizes it. This method becomes unwieldy very fast and we’ll need to develop better ways to solve linear programs.
+The solution <span class="math inline">\((x, y) = (0.6, 0.3)\)</span> is obtained by changing the first two inequalities to equalities. But this choice is completely arbitrary! We could have switched some other set of inequalities to equalities and obtained a different solution. We’d then need to compare the solutions obtained in each of these cases and find the one that maximizes it. This method becomes unwieldy very fast and we’ll need to develop better ways to solve linear programs.
 </details>
 
 </div>
