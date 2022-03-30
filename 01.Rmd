@@ -35,7 +35,7 @@ df
 :::
 
 
-<details open=TRUE>
+<details>
 <summary>Solution</summary>
 
 We can model the above problem as follows:
