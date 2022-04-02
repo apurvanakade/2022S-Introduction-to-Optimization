@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Simplex method | Introduction to Optimization</title>
+  <meta name="description" content="Chapter 3 Simplex method | Introduction to Optimization." />
+  <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Simplex method | Introduction to Optimization" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Chapter 3 Simplex method | Introduction to Optimization." />
+  <meta name="github-repo" content="apurvanakade/2022S-Introduction-to-optimization" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Simplex method | Introduction to Optimization" />
+  
+  <meta name="twitter:description" content="Chapter 3 Simplex method | Introduction to Optimization." />
+  
+
+<meta name="author" content="Apurva Nakade" />
+
+
+<meta name="date" content="2022-04-02" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="standard-linear-program.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="index.html#preface">Preface<span></span></a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction<span></span></a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#software-tools"><i class="fa fa-check"></i><b>1.1</b> Software tools<span></span></a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="introduction.html"><a href="introduction.html#graphing-calculator"><i class="fa fa-check"></i><b>1.1.1</b> Graphing calculator<span></span></a></li>
+<li class="chapter" data-level="1.1.2" data-path="introduction.html"><a href="introduction.html#solver-add-in"><i class="fa fa-check"></i><b>1.1.2</b> Solver add-in<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="standard-linear-program.html"><a href="standard-linear-program.html"><i class="fa fa-check"></i><b>2</b> Standard linear program<span></span></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="standard-linear-program.html"><a href="standard-linear-program.html#slack-variables"><i class="fa fa-check"></i><b>2.1</b> Slack variables<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="simplex-method.html"><a href="simplex-method.html"><i class="fa fa-check"></i><b>3</b> Simplex method<span></span></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="simplex-method.html"><a href="simplex-method.html#entering-and-leaving-variables"><i class="fa fa-check"></i><b>3.1</b> Entering and leaving variables<span></span></a></li>
+<li class="chapter" data-level="3.2" data-path="simplex-method.html"><a href="simplex-method.html#dictionaries"><i class="fa fa-check"></i><b>3.2</b> Dictionaries<span></span></a></li>
+<li class="chapter" data-level="3.3" data-path="simplex-method.html"><a href="simplex-method.html#the-simplex-step"><i class="fa fa-check"></i><b>3.3</b> The simplex step<span></span></a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="simplex-method.html"><a href="simplex-method.html#choosing-the-entering-variable"><i class="fa fa-check"></i><b>3.3.1</b> Choosing the entering variable<span></span></a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Optimization</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="simplex-method" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Simplex method<a href="simplex-method.html#simplex-method" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>The Simplex method is an iterative process for finding the optimal solution of a standard linear program. It starts at the some vertex of the feasible region and in each step moves to an adjacent vertex with a higher objective value. The following picture shows one possible run of the simplex algorithm for solving the linear program <a href="introduction.html#eq:bond-portfolio-lp">(1.2)</a>.</p>
+<div class="figure"><span style="display:block;" id="fig:sample-run"></span>
+<img src="Introduction-to-Optimization_files/figure-html/sample-run-1.png" alt="A possible run of the simplex algorithm." width="672" />
+<p class="caption">
+Figure 3.1: A possible run of the simplex algorithm.
+</p>
+</div>
+<div id="entering-and-leaving-variables" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Entering and leaving variables<a href="simplex-method.html#entering-and-leaving-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Each vertex of the feasible region of a standard linear program in <span class="math inline">\(n\)</span> variables is obtained by setting at least <span class="math inline">\(n\)</span> variables (decision or slack) to zero. These variables are called <strong>non-basic</strong> and the remaining ones are called <strong>basic</strong>. In each step, one non-basic variable <strong>enters</strong> the set of basic variables and one basic variable <strong>leaves</strong> the set of basic variables. The table below explains how these sets are getting updated in the sample simplex algorithm run in Figure <a href="simplex-method.html#fig:sample-run">3.1</a>.</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Leaving variable</th>
+<th>Entering variable</th>
+<th>Basic variables</th>
+<th>Non-basic variables</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Start</td>
+<td></td>
+<td></td>
+<td><span class="math inline">\(\{w_1, w_2, w_3\}\)</span></td>
+<td><span class="math inline">\(\{x, y\}\)</span></td>
+</tr>
+<tr class="even">
+<td>Step 1</td>
+<td><span class="math inline">\(w_2\)</span></td>
+<td><span class="math inline">\(x\)</span></td>
+<td><span class="math inline">\(\{w_1, x, w_3\}\)</span></td>
+<td><span class="math inline">\(\{w_2, y\}\)</span></td>
+</tr>
+<tr class="odd">
+<td>Step 2</td>
+<td><span class="math inline">\(w_1\)</span></td>
+<td><span class="math inline">\(y\)</span></td>
+<td><span class="math inline">\(\{y, x, w_3\}\)</span></td>
+<td><span class="math inline">\(\{w_2, w_1\}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><img src="Introduction-to-Optimization_files/figure-html/fig-bond-portfolio-entering-1.png" width="672" /></p>
+<p>Our goal at each step is now reduced to figuring out the entering and leaving variables.</p>
+</div>
+<div id="dictionaries" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Dictionaries<a href="simplex-method.html#dictionaries" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We’ll find the entering and leaving variables using dictionaries. A <strong>dictionary</strong> is a set of equations describing the objective function and the constraints in terms of the <strong>non-basic variables</strong>.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-6" class="example"><strong>Example 3.1  </strong></span>Consider <a href="introduction.html#eq:bond-portfolio-lp">(1.2)</a> again. At the origin the non-basic variables are <span class="math inline">\(x, y\)</span> and hence the initial dictionary is:
+<span class="math display" id="eq:example-dictionary-1">\[\begin{equation}
+  \begin{array}{rlrrrr}
+  \mbox{objective} &amp; = &amp; 0 &amp; + &amp; 0.04x &amp; + &amp; 0.03y \\
+  w_1 &amp; = &amp; 3.6 &amp; - &amp; 3x &amp; - &amp; 6y \\
+  w_2 &amp; = &amp; 1.5 &amp; - &amp; 2x &amp; - &amp; y \\
+  w_3 &amp; = &amp; 1 &amp; - &amp; x &amp; - &amp; y.
+  \end{array}
+  \tag{3.1}
+\end{equation}\]</span></p>
+</div>
+<p>After the first step of the simplex algorithm, the non-basic variables are <span class="math inline">\(w_2, y\)</span>. We can write <span class="math inline">\(x\)</span> in terms of <span class="math inline">\(w_2\)</span> to get</p>
+<p><span class="math display">\[\begin{equation}
+  x = 0.75 - 0.5 w_2 - 0.5 y
+\end{equation}\]</span></p>
+<p>We can then substitute this into the initial dictionary to get the dictionary after the first step:</p>
+<p><span class="math display" id="eq:example-dictionary-2">\[\begin{equation}
+  \begin{array}{rlrrrr}
+  \mbox{objective} &amp; = &amp; 3 &amp; + &amp; (-2)w_2 &amp; + &amp; y \\
+  w_1 &amp; = &amp; 1.35 &amp; - &amp; (-1.5) w_2 &amp; - &amp; 4.5y \\
+  x &amp; = &amp; 0.75 &amp; - &amp; 0.5 w_2 &amp; - &amp; 0.5y \\
+  w_3 &amp; = &amp; 0.25 &amp; - &amp; (-0.5) w_2 &amp; - &amp; 0.5y.
+  \end{array}
+  \tag{3.2}
+\end{equation}\]</span></p>
+<p>Finally, the non-basic variables at the optimal solution are <span class="math inline">\(w_1, w_2\)</span>. We can repeat the above process and get the dictionary for the optimal solution:</p>
+<p><span class="math display" id="eq:example-dictionary-3">\[\begin{equation}
+  \begin{array}{rlrrrr}
+  \mbox{objective} &amp; = &amp; 3.3 &amp; + &amp; (-5/3)w_2 &amp; + &amp; (-2/9)w_1 \\
+  y &amp; = &amp; 0.3 &amp; - &amp; (-1/3) w_2 &amp; - &amp; 2/9 w_1 \\
+  x &amp; = &amp; 0.6 &amp; - &amp; 2/3 w_2 &amp; - &amp; (-1/9) w_1 \\
+  w_3 &amp; = &amp; 0.9 &amp; - &amp; (-1/3) w_2 &amp; - &amp; (-1/9) w_1.
+  \end{array}
+  \tag{3.3}
+\end{equation}\]</span></p>
+<div class="remark">
+<p><span id="unlabeled-div-7" class="remark"><em>Remark</em>. </span>From the dictionary, one can extract the set of basic variables and the set of non-basic variables by looking at the variables appearing on the LHS and RHS, respectively. Furthermore, by setting the non-basic variables to 0, we obtain the very useful fact that</p>
+<ul>
+<li>the values of the basic variables are simply the constants “<span class="math inline">\(b_i\)</span>”, and</li>
+<li>the value of the objective function is the constant “<span class="math inline">\(c_0\)</span>”.</li>
+</ul>
+<p>For example, from the final dictionary above, we can immediately see that <span class="math inline">\(x = 0.6\)</span>, <span class="math inline">\(y = 0.3\)</span>, <span class="math inline">\(w_3 = 0.9\)</span>, and the objective value is <span class="math inline">\(3.3%\)</span> (and <span class="math inline">\(w_1 = 0\)</span> and <span class="math inline">\(w_2 = 0.3\)</span>) at the optimal solution.</p>
+</div>
+</div>
+<div id="the-simplex-step" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> The simplex step<a href="simplex-method.html#the-simplex-step" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We’ll make several simplifying assumptions to begin with and then extend the algorithm to handle more complicated cases.
+To start, we’ll assume that at each vertex of the feasible region <em>exactly</em> <span class="math inline">\(n\)</span> variables are non-basic.
+Such a linear program is called <strong>non-degenerate</strong>.</p>
+<p>Secondly, we’ll assume that out variables and constants are dynamically updated i.e. after each step we rename the variables so that <span class="math inline">\(\{w_1, \dots, w_m\}\)</span> is the set of basic variables, <span class="math inline">\(\{x_1, \dots, x_n\}\)</span> is the set of non-basic variables, <span class="math inline">\(c_j\)</span>, <span class="math inline">\(b_i\)</span>, and <span class="math inline">\(a_{ij}\)</span> are the constants appearing in the dictionary so that at the start of each step the dictionary is as follows:</p>
+<p><span class="math display" id="eq:standard-dictionary">\[\begin{equation}
+  \begin{array}{rrrrrrrrrr}
+  \mbox{objective} &amp; = &amp; c_0 &amp; + &amp; c_1x_1 &amp; + &amp; \dots &amp; + &amp; c_nx_n \\
+      w_1 &amp; = &amp; b_1 &amp; - &amp; a_{11} x_1 &amp; - &amp; \dots &amp; - &amp; a_{1n} x_n \\
+      w_2 &amp; = &amp; b_2 &amp; - &amp; a_{21} x_1 &amp; - &amp; \dots &amp; - &amp; a_{2n} x_n \\
+      &amp; &amp; &amp; &amp; &amp; \vdots &amp;  \\
+      w_m &amp; = &amp; b_m &amp; - &amp; a_{m1} x_1 &amp; - &amp; \dots &amp; - &amp; a_{mn} x_n 
+  \end{array} 
+  \tag{3.4}
+\end{equation}\]</span></p>
+<div id="choosing-the-entering-variable" class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Choosing the entering variable<a href="simplex-method.html#choosing-the-entering-variable" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The entering variable is going to be some <span class="math inline">\(x_j\)</span>. Because the objective function has the following expression,</p>
+<p><span class="math display">\[\begin{align}
+  \mbox{objective} =  c_0  +  c_1x_1  +  \dots  +  c_nx_n
+\end{align}\]</span></p>
+<p>we can only choose <span class="math inline">\(x_j\)</span> to be <em>entering</em> if <span class="math inline">\(c_j\)</span> is positive. In fact, any such <span class="math inline">\(x_j\)</span> will work as increasing this variable will increase the objective value.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-8" class="example"><strong>Example 3.2  </strong></span>In the dictionary <a href="simplex-method.html#eq:example-dictionary-1">(3.1)</a>, the objective function is <span class="math inline">\(4x + 0.03y\)</span>. Hence, both <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> can be chosen as the entering variables. Geometrically, we can see that there are two different paths going from the origin to the optimal solution. In the dictionary <a href="simplex-method.html#eq:example-dictionary-2">(3.2)</a>, the objective function is <span class="math inline">\(3 + (-2)w_2 + y\)</span>. Hence, only <span class="math inline">\(y\)</span> can be the entering variable. In dictionary <a href="simplex-method.html#eq:example-dictionary-3">(3.3)</a>, the objective function is <span class="math inline">\(3.3 + (-5/3)w_2 + (-2/9)w_1\)</span>. Hence, there cannot be any entering variable.</p>
+</div>
+<!-- ### Choosing the leaving variable
+
+Suppose we've chosen the entering variable to be $x_j$. We next need to decide how much we can increase $x_j$ by without leaving the feasible region.  -->
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="standard-linear-program.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": "github"
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "lunr",
+"options": null
+},
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"toolbar": {
+"position": "fixed"
+},
+"info": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

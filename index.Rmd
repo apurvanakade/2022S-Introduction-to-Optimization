@@ -4,11 +4,13 @@ author: "Apurva Nakade"
 date: "`r Sys.Date()`"
 output: pdf_document
 documentclass: book
-link-citations: yes
 github-repo: apurvanakade/2022S-Introduction-to-optimization
 url: https\://apurvanakade.github.io/2022S-introduction-to-optimization/
 description: Introduction to Optimization.
 site: bookdown::bookdown_site
+bibliography: [references.bib]
+biblio-style: apalike
+link-citations: true
 ---
 
 

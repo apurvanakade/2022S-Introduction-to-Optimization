@@ -4,20 +4,20 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Slack variables | Introduction to Optimization</title>
-  <meta name="description" content="Chapter 2 Slack variables | Introduction to Optimization." />
+  <title>Chapter 2 Standard linear program | Introduction to Optimization</title>
+  <meta name="description" content="Chapter 2 Standard linear program | Introduction to Optimization." />
   <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Slack variables | Introduction to Optimization" />
+  <meta property="og:title" content="Chapter 2 Standard linear program | Introduction to Optimization" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="Chapter 2 Slack variables | Introduction to Optimization." />
+  <meta property="og:description" content="Chapter 2 Standard linear program | Introduction to Optimization." />
   <meta name="github-repo" content="apurvanakade/2022S-Introduction-to-optimization" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Slack variables | Introduction to Optimization" />
+  <meta name="twitter:title" content="Chapter 2 Standard linear program | Introduction to Optimization" />
   
-  <meta name="twitter:description" content="Chapter 2 Slack variables | Introduction to Optimization." />
+  <meta name="twitter:description" content="Chapter 2 Standard linear program | Introduction to Optimization." />
   
 
 <meta name="author" content="Apurva Nakade" />
@@ -56,6 +56,28 @@
 
 
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
@@ -79,11 +101,18 @@
 <li class="chapter" data-level="1.1.2" data-path="introduction.html"><a href="introduction.html#solver-add-in"><i class="fa fa-check"></i><b>1.1.2</b> Solver add-in<span></span></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="slack-variables.html"><a href="slack-variables.html"><i class="fa fa-check"></i><b>2</b> Slack variables<span></span></a></li>
+<li class="chapter" data-level="2" data-path="standard-linear-program.html"><a href="standard-linear-program.html"><i class="fa fa-check"></i><b>2</b> Standard linear program<span></span></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="standard-linear-program.html"><a href="standard-linear-program.html#slack-variables"><i class="fa fa-check"></i><b>2.1</b> Slack variables<span></span></a></li>
+</ul></li>
 <li class="chapter" data-level="3" data-path="simplex-method.html"><a href="simplex-method.html"><i class="fa fa-check"></i><b>3</b> Simplex method<span></span></a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="simplex-method.html"><a href="simplex-method.html#entering-and-leaving-variables"><i class="fa fa-check"></i><b>3.1</b> Entering and leaving variables<span></span></a></li>
 <li class="chapter" data-level="3.2" data-path="simplex-method.html"><a href="simplex-method.html#dictionaries"><i class="fa fa-check"></i><b>3.2</b> Dictionaries<span></span></a></li>
+<li class="chapter" data-level="3.3" data-path="simplex-method.html"><a href="simplex-method.html#the-simplex-step"><i class="fa fa-check"></i><b>3.3</b> The simplex step<span></span></a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="simplex-method.html"><a href="simplex-method.html#choosing-the-entering-variable"><i class="fa fa-check"></i><b>3.3.1</b> Choosing the entering variable<span></span></a></li>
+</ul></li>
 </ul></li>
 </ul>
 
@@ -102,8 +131,8 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="slack-variables" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">Chapter 2</span> Slack variables<a href="slack-variables.html#slack-variables" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="standard-linear-program" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Standard linear program<a href="standard-linear-program.html#standard-linear-program" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>A <strong>standard linear program</strong> is an optimization problem of the following form:</p>
 <p><span class="math display" id="eq:standard-lp">\[\begin{equation}
   \begin{array}{lrrrrrrrrr}
@@ -133,6 +162,8 @@ where <span class="math inline">\(c_i\)</span>, <span class="math inline">\(a_{i
 <p><span id="thm:unlabeled-div-4" class="theorem"><strong>Theorem 2.2  </strong></span>Every standard linear program attains its optimal solution, if any, at one of the vertices of the feasible region.</p>
 </div>
 <p>Note that the above theorem claims neither the existence nor the uniqueness of an optimal solution. All it is saying is that if a maximum objective value exists then it is attained at one of the vertices. It is possible that no optimal value exists or that the optimal value is attained more than one points, possible at a non-vertex.</p>
+<div id="slack-variables" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Slack variables<a href="standard-linear-program.html#slack-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>For each constraint, we introduce a <strong>slack variable</strong> by subtracting the LHS from the RHS as follows.</p>
 <p><span class="math display" id="eq:slack-variables-def">\[\begin{equation}
   \begin{array}{lrrrrrrrrr}
@@ -143,7 +174,7 @@ where <span class="math inline">\(c_i\)</span>, <span class="math inline">\(a_{i
   \end{array} 
   \tag{2.2}
 \end{equation}\]</span>
-We can think of the slack variable <span class="math inline">\(w_i\)</span> as measuring the “slackness” in the <span class="math inline">\(i^{th}\)</span> constraint. The <span class="math inline">\(i^{th}\)</span> constraint is strictly met exactly when <span class="math inline">\(w_i\)</span> is zero. Using the slack variables the linear program <a href="slack-variables.html#eq:standard-lp">(2.1)</a> can be succinctly rewritten as:</p>
+We can think of the slack variable <span class="math inline">\(w_i\)</span> as measuring the “slackness” in the <span class="math inline">\(i^{th}\)</span> constraint. The <span class="math inline">\(i^{th}\)</span> constraint is strictly met exactly when <span class="math inline">\(w_i\)</span> is zero. Using the slack variables, the linear program <a href="standard-linear-program.html#eq:standard-lp">(2.1)</a> can be succinctly rewritten as:</p>
 <p><span class="math display">\[\begin{equation}
   w_1, \dots, w_m, x_1, \dots, x_n \geq 0.
 \end{equation}\]</span></p>
@@ -161,6 +192,7 @@ We can think of the slack variable <span class="math inline">\(w_i\)</span> as m
 <p><img src="Introduction-to-Optimization_files/figure-html/fig-bond-portfolio-slack-1.png" width="672" /></p>
 </div>
 
+</div>
 </div>
             </section>
 

@@ -1,4 +1,4 @@
-# Slack variables
+# Standard linear program
 
 A **standard linear program** is an optimization problem of the following form:
 
@@ -36,17 +36,18 @@ The feasible region of a standard linear program is either empty, or a [convex p
 
 :::
 
-The precise definition of a convex polytope is quite complicated. For the purposes of this class, it is sufficient to think of a polytope as a region that has vertices, edges, faces, etc.
+The precise definition of a convex polytope is quite complicated. For the purposes of this class, it is sufficient to think of a polytope as a region that has vertices and edges.
 
 
 ::: {.theorem}
 
-Every standard linear program attains its maxima, if any, at one of the vertices of the feasible region.
+Every standard linear program attains its optimal solution, if any, at one of the vertices of the feasible region.
 
 :::
 
-Note that the above theorem claims neither the existence nor the uniqueness of a maximum solution. All it is saying is that if a maxima exists then one of the vertices must be a maxima.
+Note that the above theorem claims neither the existence nor the uniqueness of an optimal solution. All it is saying is that if a maximum objective value exists then it is attained at one of the vertices. It is possible that no optimal value exists or that the optimal value is attained more than one points, possible at a non-vertex.
 
+## Slack variables
 For each constraint, we introduce a **slack variable** by subtracting the LHS from the RHS as follows.
 
 \begin{equation}
@@ -58,7 +59,7 @@ For each constraint, we introduce a **slack variable** by subtracting the LHS fr
   \end{array} 
   (\#eq:slack-variables-def)
 \end{equation}
-We can think of the slack variable $w_i$ as measuring the "slackness" in the $i^{th}$ constraint. The $i^{th}$ constraint is strictly met exactly when $w_i$ is zero. Using the slack variables the linear program \@ref(eq:standard-lp) can be succinctly rewritten as:
+We can think of the slack variable $w_i$ as measuring the "slackness" in the $i^{th}$ constraint. The $i^{th}$ constraint is strictly met exactly when $w_i$ is zero. Using the slack variables, the linear program \@ref(eq:standard-lp) can be succinctly rewritten as:
 
 \begin{equation}
   w_1, \dots, w_m, x_1, \dots, x_n \geq 0.

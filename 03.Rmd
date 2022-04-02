@@ -1,0 +1,126 @@
+# Simplex method
+
+The Simplex method is an iterative process for finding the optimal solution of a standard linear program. It starts at the some vertex of the feasible region and in each step moves to an adjacent vertex with a higher objective value. The following picture shows one possible run of the simplex algorithm for solving the linear program \@ref(eq:bond-portfolio-lp).
+
+```{r, sample-run, fig.cap="A possible run of the simplex algorithm."}
+
+source("graphs/bond-portfolio-simplex.R", local = knitr::knit_global())
+
+```
+
+## Entering and leaving variables
+
+Each vertex of the feasible region of a standard linear program in $n$ variables is obtained by setting at least $n$ variables (decision or slack) to zero. These variables are called **non-basic** and the remaining ones are called **basic**. In each step, one non-basic variable **enters** the set of basic variables and one basic variable **leaves** the set of basic variables. The table below explains how these sets are getting updated in the sample simplex algorithm run in Figure \@ref(fig:sample-run).
+
+|  | Leaving variable | Entering variable | Basic variables | Non-basic variables |
+| - | - | - | - | - |
+| Start |  |  | $\{w_1, w_2, w_3\}$ | $\{x, y\}$ |
+| Step 1 | $w_2$ | $x$ | $\{w_1, x, w_3\}$ |$\{w_2, y\}$ | 
+| Step 2 | $w_1$ | $y$ | $\{y, x, w_3\}$ |$\{w_2, w_1\}$ | 
+
+```{r, fig-bond-portfolio-entering}
+
+source("graphs/bond-portfolio-entering.R", local = knitr::knit_global())
+
+```
+
+Our goal at each step is now reduced to figuring out the entering and leaving variables.
+
+## Dictionaries
+
+We'll find the entering and leaving variables using dictionaries. A **dictionary** is a set of equations describing the objective function and the constraints in terms of the **non-basic variables**. 
+
+::: {.example}
+
+Consider \@ref(eq:bond-portfolio-lp) again. At the origin the non-basic variables are $x, y$ and hence the initial dictionary is:
+\begin{equation}
+  \begin{array}{rlrrrr}
+  \mbox{objective} & = & 0 & + & 0.04x & + & 0.03y \\
+  w_1 & = & 3.6 & - & 3x & - & 6y \\
+  w_2 & = & 1.5 & - & 2x & - & y \\
+  w_3 & = & 1 & - & x & - & y.
+  \end{array}
+  (\#eq:example-dictionary-1)
+\end{equation}
+
+:::
+
+After the first step of the simplex algorithm, the non-basic variables are $w_2, y$. We can write $x$ in terms of $w_2$ to get 
+
+\begin{equation}
+  x = 0.75 - 0.5 w_2 - 0.5 y
+\end{equation}
+
+We can then substitute this into the initial dictionary to get the dictionary after the first step: 
+
+\begin{equation}
+  \begin{array}{rlrrrr}
+  \mbox{objective} & = & 3 & + & (-2)w_2 & + & y \\
+  w_1 & = & 1.35 & - & (-1.5) w_2 & - & 4.5y \\
+  x & = & 0.75 & - & 0.5 w_2 & - & 0.5y \\
+  w_3 & = & 0.25 & - & (-0.5) w_2 & - & 0.5y.
+  \end{array}
+  (\#eq:example-dictionary-2)
+\end{equation}
+
+Finally, the non-basic variables at the optimal solution are $w_1, w_2$. We can repeat the above process and get the dictionary for the optimal solution:
+
+\begin{equation}
+  \begin{array}{rlrrrr}
+  \mbox{objective} & = & 3.3 & + & (-5/3)w_2 & + & (-2/9)w_1 \\
+  y & = & 0.3 & - & (-1/3) w_2 & - & 2/9 w_1 \\
+  x & = & 0.6 & - & 2/3 w_2 & - & (-1/9) w_1 \\
+  w_3 & = & 0.9 & - & (-1/3) w_2 & - & (-1/9) w_1.
+  \end{array}
+  (\#eq:example-dictionary-3)
+\end{equation}
+
+::: {.remark} 
+
+From the dictionary, one can extract the set of basic variables and the set of non-basic variables by looking at the variables appearing on the LHS and RHS, respectively. Furthermore, by setting the non-basic variables to 0, we obtain the very useful fact that 
+
+- the values of the basic variables are simply the constants "$b_i$", and 
+- the value of the objective function is the constant "$c_0$".
+
+For example, from the final dictionary above, we can immediately see that $x = 0.6$, $y = 0.3$, $w_3 = 0.9$, and the objective value is $3.3%$ (and $w_1 = 0$ and $w_2 = 0.3$) at the optimal solution.
+
+:::
+
+
+## The simplex step 
+
+We'll make several simplifying assumptions to begin with and then extend the algorithm to handle more complicated cases.
+To start, we'll assume that at each vertex of the feasible region *exactly* $n$ variables are non-basic. 
+Such a linear program is called **non-degenerate**.
+
+Secondly, we'll assume that out variables and constants are dynamically updated i.e. after each step we rename the variables so that $\{w_1, \dots, w_m\}$ is the set of basic variables, $\{x_1, \dots, x_n\}$ is the set of non-basic variables, $c_j$, $b_i$, and $a_{ij}$ are the constants appearing in the dictionary so that at the start of each step the dictionary is as follows:
+
+
+\begin{equation}
+  \begin{array}{rrrrrrrrrr}
+  \mbox{objective} & = & c_0 & + & c_1x_1 & + & \dots & + & c_nx_n \\
+      w_1 & = & b_1 & - & a_{11} x_1 & - & \dots & - & a_{1n} x_n \\
+      w_2 & = & b_2 & - & a_{21} x_1 & - & \dots & - & a_{2n} x_n \\
+      & & & & & \vdots &  \\
+      w_m & = & b_m & - & a_{m1} x_1 & - & \dots & - & a_{mn} x_n 
+  \end{array} 
+  (\#eq:standard-dictionary)
+\end{equation}
+
+### Choosing the entering variable
+
+The entering variable is going to be some $x_j$. Because the objective function has the following expression, 
+
+\begin{align}
+  \mbox{objective} =  c_0  +  c_1x_1  +  \dots  +  c_nx_n
+\end{align}
+
+we can only choose $x_j$ to be *entering* if $c_j$ is positive. In fact, any such $x_j$ will work as increasing this variable will increase the objective value. 
+
+::: {.example}
+In the dictionary \@ref(eq:example-dictionary-1), the objective function is $4x + 0.03y$. Hence, both $x$ and $y$ can be chosen as the entering variables. Geometrically, we can see that there are two different paths going from the origin to the optimal solution. In the dictionary \@ref(eq:example-dictionary-2), the objective function is $3 + (-2)w_2 + y$. Hence, only $y$ can be the entering variable. In dictionary \@ref(eq:example-dictionary-3), the objective function is $3.3 + (-5/3)w_2 + (-2/9)w_1$. Hence, there cannot be any entering variable.
+:::
+
+<!-- ### Choosing the leaving variable
+
+Suppose we've chosen the entering variable to be $x_j$. We next need to decide how much we can increase $x_j$ by without leaving the feasible region.  -->

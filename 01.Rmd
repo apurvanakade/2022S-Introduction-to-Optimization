@@ -20,7 +20,7 @@ A bond portfolio manager has $100,000 to allocate to two different bonds; one co
 The corporate bond has a yield of 4%, a maturity of 3 years and an A rating from a rating agency that is translated into a numerical rating of 2 for computational purposes. 
 In contrast, the government bond has a yield of 3%, a maturity of 6 years and rating of Aaa with the corresponding numerical rating of 1 (lower numerical ratings correspond to higher quality bonds). The portfolio manager would like to allocate her funds so that the average rating for the portfolio is no worse than Aa (numerical equivalent 1.5) and average maturity of the portfolio is at most 3.6 years. 
 Any amount not invested in the two bonds will be kept in a cash account that is assumed to earn no interest for simplicity and does not contribute to the average rating or maturity computations. 
-How should the manager allocate her funds between these two bonds to achieve her objective of maximizing the annual yield from this investment?
+How should the manager allocate her funds between these two bonds to achieve her objective of maximizing the annual yield from this investment? [@optimization-methods-in-finance]
 
 ```{r, table-bond-portfolio, echo=FALSE, comment=NA}
 
@@ -41,8 +41,8 @@ df
 We can model the above problem as follows:
 
 \begin{equation}
-  \begin{array}{rrrrrl}
-  \mbox{maximize:} & 0.04x & + & 0.03y \\
+  \begin{array}{rrrrrr}
+  \mbox{maximize:} & 4x & + & 3y \\
   \mbox{subject to:}
     & 3x & + & 6y & \le & 3.6 \\
     & 2x & + & y & \le & 1.5 
@@ -67,7 +67,7 @@ to obtain $x = 0.6$ and $y = 0.3$. But for this solution $x + y = 0.9$ which is 
 
 \begin{equation}
   \begin{array}{rrrrrl}
-  \mbox{maximize:} & 0.04x & + & 0.03y \\
+  \mbox{maximize:} & 4x & + & 3y \\
   \mbox{subject to:}
     & 3x & + & 6y & \le & 3.6 \\
     & 2x & + & y & \le & 1.5 \\
@@ -94,7 +94,7 @@ source("graphs/bond-portfolio.R", local = knitr::knit_global())
 
 ```
 
-The feasible set is the quadrilateral formed by the overlap of all three constraint regions. The level sets of the objective function are straight lines of the form $0.04x + 0.03y = c$. We can use a graphical calculator to find the largest value of $c$ for which these level sets intersect the feasible region, which turns out to be $c = 3.3\%$ which gives us a net yield of $3.3\% \times \$100,000 = \$3,300$.
+The feasible set is the quadrilateral formed by the overlap of all three constraint regions. The level sets of the objective function are straight lines of the form $4x + 3y = c$. We can use a graphical calculator to find the largest value of $c$ for which these level sets intersect the feasible region, which turns out to be $c = 3.3\%$ which gives us a net yield of $3.3\% \times \$100,000 = \$3,300$.
 
 
 ```{r, fig-bond-portfolio-solution}
