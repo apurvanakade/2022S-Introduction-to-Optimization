@@ -10,7 +10,7 @@ source("graphs/bond-portfolio-simplex.R", local = knitr::knit_global())
 
 ## Entering and leaving variables
 
-Each vertex of the feasible region of a standard linear program in $n$ variables is obtained by setting at least $n$ variables (decision or slack) to zero. These variables are called **non-basic** and the remaining ones are called **basic**. In each step, one non-basic variable **enters** the set of basic variables and one basic variable **leaves** the set of basic variables. The table below explains how these sets are getting updated in the sample simplex algorithm run in Figure \@ref(fig:sample-run).
+In each step, one non-basic variable **enters** the set of basic variables and one basic variable **leaves** the set of basic variables. The table below explains how these sets are getting updated in the sample simplex algorithm run in Figure \@ref(fig:sample-run).
 
 |  | Leaving variable | Entering variable | Basic variables | Non-basic variables |
 | - | - | - | - | - |

@@ -65,8 +65,6 @@ We can think of the slack variable $w_i$ as measuring the "slackness" in the $i^
   w_1, \dots, w_m, x_1, \dots, x_n \geq 0.
 \end{equation}
 
-Moreover, each of the vertices of the feasible region is obtained by setting at least $n$ of the decision or slack variables to 0. 
-
 ::: {.example}
 
 The slack variables for the linear program \@ref(eq:bond-portfolio-lp) are as follows:
@@ -87,5 +85,24 @@ In terms of these slack variables, the constraints can be rewritten as $x, y, w_
 source("graphs/bond-portfolio-slack.R", local = knitr::knit_global())
 
 ```
+
+:::
+
+## Basic and non-basic variables
+
+Each vertex of the feasible region of a standard linear program in $n$ variables is obtained by setting at least $n$ variables (decision or slack) to zero. These variables are called **non-basic** and the remaining ones are called **basic**. 
+
+::: {.example}
+
+For the linear program \@ref(eq:bond-portfolio-lp), 
+
+- at the origin: the non-basic variables are $x, y$ and the basic variables are $w_1, w_2, w_3$,
+- at the optimal solution: the non-basic variables are $w_1, w_2$ and the basic variables are $x, y, w_3$.
+
+:::
+
+::: {.remark}
+
+Not every vertex obtained by setting $n$ variables to zero is in the feasible region. For example, the vertex $x = 0, w_2 = 0$ is not the in feasible region of the linear program \@ref(eq:bond-portfolio-lp).
 
 :::
