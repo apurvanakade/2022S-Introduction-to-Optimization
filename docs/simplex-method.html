@@ -241,7 +241,7 @@ Figure 3.1: A possible run of the simplex algorithm.
 <p>We’ll make several simplifying assumptions to begin with and then extend the algorithm to handle more complicated cases.
 To start, we’ll assume that at each vertex of the feasible region <em>exactly</em> <span class="math inline">\(n\)</span> variables are non-basic.
 Such a linear program is called <strong>non-degenerate</strong>.</p>
-<p>Secondly, we’ll assume that out variables and constants are dynamically updated i.e. after each step we rename the variables so that <span class="math inline">\(\{w_1, \dots, w_m\}\)</span> is the set of basic variables, <span class="math inline">\(\{x_1, \dots, x_n\}\)</span> is the set of non-basic variables, <span class="math inline">\(c_j\)</span>, <span class="math inline">\(b_i\)</span>, and <span class="math inline">\(a_{ij}\)</span> are the constants appearing in the dictionary so that at the start of each step the dictionary is as follows:</p>
+<p>Secondly, for the sake of explaining the algorithm, we’ll assume that out variable names and constants are dynamically updated i.e. after each step we rename the variables so that <span class="math inline">\(\{w_1, \dots, w_m\}\)</span> is the set of basic variables, <span class="math inline">\(\{x_1, \dots, x_n\}\)</span> is the set of non-basic variables and <span class="math inline">\(c_j\)</span>, <span class="math inline">\(b_i\)</span>, and <span class="math inline">\(a_{ij}\)</span> are the constants appearing in the dictionary so that at the start of each step the dictionary is as follows:</p>
 <p><span class="math display" id="eq:standard-dictionary">\[\begin{equation}
   \begin{array}{rrrrrrrrrr}
   \mbox{objective} &amp; = &amp; c_0 &amp; + &amp; c_1x_1 &amp; + &amp; \dots &amp; + &amp; c_nx_n \\
@@ -252,6 +252,7 @@ Such a linear program is called <strong>non-degenerate</strong>.</p>
   \end{array} 
   \tag{3.4}
 \end{equation}\]</span></p>
+<p>Note that you do not have to make this assumption when actually solving the linear program. This assumption is for exposition purposes only.</p>
 <div id="choosing-the-entering-variable" class="section level3 hasAnchor" number="3.3.1">
 <h3><span class="header-section-number">3.3.1</span> Choosing the entering variable<a href="simplex-method.html#choosing-the-entering-variable" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We need to choose the entering variable to be one of the non-basic variables. This non-basic variable is going to increase from 0 to a positive value.
@@ -310,7 +311,7 @@ Because the objective function has the following expression,</p>
 <div id="tableau" class="section level3 hasAnchor" number="3.3.3">
 <h3><span class="header-section-number">3.3.3</span> Tableau<a href="simplex-method.html#tableau" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Once we have found the entering and leaving variables <span class="math inline">\(x_j\)</span> and <span class="math inline">\(w_i\)</span>, we rewrite <span class="math inline">\(x_j\)</span> in terms of <span class="math inline">\(w_i\)</span> and the other non-basic variables to create the updated dictionary as in Example <a href="simplex-method.html#exm:dictionaries">3.1</a>. This process can get extremely tedious to perform “by hand”. Instead, we introduce tableau to simplify the process.</p>
-<p>To begin we rewrite the constraints in the dictionary with all the variables on the LHS and all the constants on the RHS:</p>
+<p>We start by rewriting the constraints in the dictionary with all the variables on the LHS and all the constants on the RHS:</p>
 <p><span class="math display">\[\begin{equation}
   \begin{array}{rrrrrrrrrr}
       a_{11} x_1 &amp; + &amp; \dots &amp; + &amp; a_{1n} x_n &amp; + &amp; w_1 &amp; &amp; &amp; &amp; &amp; &amp; = &amp;  b_1\\
@@ -338,7 +339,7 @@ Because the objective function has the following expression,</p>
       a_{m1}  &amp; &amp; \dots &amp; &amp; a_{mn}  &amp; &amp; &amp; &amp; &amp; &amp; 1 &amp;b_m\\
   \end{array} 
 \end{equation}\]</span></p>
-<p>Every column in this augmented matrix corresponds to the variables <span class="math inline">\(w_i\)</span> and <span class="math inline">\(x_j\)</span>. The columns with contain <em>pivots</em> correspond to the basic variables.</p>
+<p>The columns in this augmented matrix correspond to the variables <span class="math inline">\(w_i\)</span> and <span class="math inline">\(x_j\)</span>. The columns with the <em>pivots</em> correspond to the basic variables.</p>
 <p>If <span class="math inline">\(x_j\)</span> is the entering variable and <span class="math inline">\(w_i\)</span> is the leaving variable, then we simply perform elementary row operations and turn the entry <span class="math inline">\(a_{ij}\)</span> into a pivot for its column. Hence, this step is also called the <strong>pivot step</strong>.</p>
 <div class="example">
 <p><span id="exm:unlabeled-div-11" class="example"><strong>Example 3.4  </strong></span>The tableau corresponding to the dictionary <a href="simplex-method.html#eq:example-dictionary-1">(3.1)</a> is as follows:</p>

@@ -93,7 +93,7 @@ We'll make several simplifying assumptions to begin with and then extend the alg
 To start, we'll assume that at each vertex of the feasible region *exactly* $n$ variables are non-basic. 
 Such a linear program is called **non-degenerate**.
 
-Secondly, we'll assume that out variables and constants are dynamically updated i.e. after each step we rename the variables so that $\{w_1, \dots, w_m\}$ is the set of basic variables, $\{x_1, \dots, x_n\}$ is the set of non-basic variables, $c_j$, $b_i$, and $a_{ij}$ are the constants appearing in the dictionary so that at the start of each step the dictionary is as follows:
+Secondly, for the sake of explaining the algorithm, we'll assume that out variable names and constants are dynamically updated i.e. after each step we rename the variables so that $\{w_1, \dots, w_m\}$ is the set of basic variables, $\{x_1, \dots, x_n\}$ is the set of non-basic variables and $c_j$, $b_i$, and $a_{ij}$ are the constants appearing in the dictionary so that at the start of each step the dictionary is as follows:
 
 
 \begin{equation}
@@ -106,6 +106,8 @@ Secondly, we'll assume that out variables and constants are dynamically updated 
   \end{array} 
   (\#eq:standard-dictionary)
 \end{equation}
+
+Note that you do not have to make this assumption when actually solving the linear program. This assumption is for exposition purposes only.
 
 ### Choosing the entering variable
 
@@ -150,7 +152,7 @@ We can see that the smallest ratio is obtained for $w_2$ hence it is the only ca
 
 Once we have found the entering and leaving variables $x_j$ and $w_i$, we rewrite $x_j$ in terms of $w_i$ and the other non-basic variables to create the updated dictionary as in Example \@ref(exm:dictionaries). This process can get extremely tedious to perform "by hand". Instead, we introduce tableau to simplify the process.
 
-To begin we rewrite the constraints in the dictionary with all the variables on the LHS and all the constants on the RHS:
+We start by rewriting the constraints in the dictionary with all the variables on the LHS and all the constants on the RHS:
 
 \begin{equation}
   \begin{array}{rrrrrrrrrr}
@@ -184,7 +186,7 @@ We add back the objective function, but because of a quirk of algebra we need to
   \end{array} 
 \end{equation}
 
-Every column in this augmented matrix corresponds to the variables $w_i$ and $x_j$. The columns with contain *pivots* correspond to the basic variables. 
+The columns in this augmented matrix correspond to the variables $w_i$ and $x_j$. The columns with the *pivots* correspond to the basic variables. 
 
 If $x_j$ is the entering variable and $w_i$ is the leaving variable, then we simply perform elementary row operations and turn the entry $a_{ij}$ into a pivot for its column. Hence, this step is also called the **pivot step**.
 
