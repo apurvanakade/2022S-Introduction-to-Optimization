@@ -9,12 +9,14 @@ eq:slack-variables-def
 exm:unlabeled-div-5
 exm:unlabeled-div-6
 fig:sample-run
-exm:unlabeled-div-8
+exm:dictionaries
 eq:example-dictionary-1
 eq:example-dictionary-2
 eq:example-dictionary-3
 eq:standard-dictionary
+exm:unlabeled-div-9
 exm:unlabeled-div-10
+exm:unlabeled-div-11
 introduction
 software-tools
 graphing-calculator
@@ -27,3 +29,8 @@ entering-and-leaving-variables
 dictionaries
 the-simplex-step
 choosing-the-entering-variable
+choosing-the-leaving-variable
+tableau
+stopping-conditions
+no-entering-variable
+no-leaving-variable
