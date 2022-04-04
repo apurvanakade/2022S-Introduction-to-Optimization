@@ -195,7 +195,7 @@ Figure 3.1: A possible run of the simplex algorithm.
 <p><span id="exm:dictionaries" class="example"><strong>Example 3.1  </strong></span>Consider <a href="introduction.html#eq:bond-portfolio-lp">(1.2)</a> again. At the origin the non-basic variables are <span class="math inline">\(x, y\)</span> and hence the initial dictionary is:
 <span class="math display" id="eq:example-dictionary-1">\[\begin{equation}
   \begin{array}{rlrrrr}
-  \mbox{objective} &amp; = &amp; 0 &amp; + &amp; 0.04x &amp; + &amp; 0.03y \\
+  \mbox{objective} &amp; = &amp; 0 &amp; + &amp; 4x &amp; + &amp; 3y \\
   w_1 &amp; = &amp; 3.6 &amp; - &amp; 3x &amp; - &amp; 6y \\
   w_2 &amp; = &amp; 1.5 &amp; - &amp; 2x &amp; - &amp; y \\
   w_3 &amp; = &amp; 1 &amp; - &amp; x &amp; - &amp; y.
@@ -254,19 +254,19 @@ Such a linear program is called <strong>non-degenerate</strong>.</p>
 \end{equation}\]</span></p>
 <div id="choosing-the-entering-variable" class="section level3 hasAnchor" number="3.3.1">
 <h3><span class="header-section-number">3.3.1</span> Choosing the entering variable<a href="simplex-method.html#choosing-the-entering-variable" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The entering variable can be some <span class="math inline">\(x_j\)</span> which gets increased from 0 to a positive value.
+<p>We need to choose the entering variable to be one of the non-basic variables. This non-basic variable is going to increase from 0 to a positive value.
 Because the objective function has the following expression,</p>
 <p><span class="math display">\[\begin{align}
   \mbox{objective} =  c_0  +  c_1x_1  +  \dots  +  c_nx_n
 \end{align}\]</span></p>
 <p>we can choose the variable <span class="math inline">\(x_j\)</span> to be <em>entering</em> if and only if <span class="math inline">\(c_j\)</span> is positive as increasing such a variable increases the objective value. We can think of the entering variable as determining <em>the direction of the simplex step</em>.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-9" class="example"><strong>Example 3.2  </strong></span>In the dictionary <a href="simplex-method.html#eq:example-dictionary-1">(3.1)</a>, the objective function is <span class="math inline">\(4x + 0.03y\)</span>. Hence, both <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> can be chosen as the entering variables. Geometrically, we can see that there are two different paths going from the origin to the optimal solution. In the dictionary <a href="simplex-method.html#eq:example-dictionary-2">(3.2)</a>, the objective function is <span class="math inline">\(3 + (-2)w_2 + y\)</span>. Hence, only <span class="math inline">\(y\)</span> can be the entering variable. In dictionary <a href="simplex-method.html#eq:example-dictionary-3">(3.3)</a>, the objective function is <span class="math inline">\(3.3 + (-5/3)w_2 + (-2/9)w_1\)</span>. Hence, there cannot be any entering variable.</p>
+<p><span id="exm:unlabeled-div-9" class="example"><strong>Example 3.2  </strong></span>In the dictionary <a href="simplex-method.html#eq:example-dictionary-1">(3.1)</a>, the objective function is <span class="math inline">\(4x + 3y\)</span>. Hence, both <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> can be chosen as the entering variables. Geometrically, we can see that there are two different paths going from the origin to the optimal solution. In the dictionary <a href="simplex-method.html#eq:example-dictionary-2">(3.2)</a>, the objective function is <span class="math inline">\(3 + (-2)w_2 + y\)</span>. Hence, only <span class="math inline">\(y\)</span> can be the entering variable. In dictionary <a href="simplex-method.html#eq:example-dictionary-3">(3.3)</a>, the objective function is <span class="math inline">\(3.3 + (-5/3)w_2 + (-2/9)w_1\)</span>. Hence, there cannot be any entering variable.</p>
 </div>
 </div>
 <div id="choosing-the-leaving-variable" class="section level3 hasAnchor" number="3.3.2">
 <h3><span class="header-section-number">3.3.2</span> Choosing the leaving variable<a href="simplex-method.html#choosing-the-leaving-variable" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Suppose <span class="math inline">\(x_j\)</span> is the chosen entering variable. Then instead of choosing the leaving variable directly from among the basic variables, we instead increase the largest value that the variable <span class="math inline">\(x_j\)</span> can be increased to. We can think of finding the leaving variable as determining <em>how far we can move in the direction of the simplex step without leaving the feasible region</em>.</p>
+<p>Suppose <span class="math inline">\(x_j\)</span> is the chosen entering variable. Instead of choosing the leaving variable directly from among the basic variables, we find the largest value that the variable <span class="math inline">\(x_j\)</span> can be increased to. We can think of finding the leaving variable as determining <em>how far we can move in the direction of the simplex step without leaving the feasible region</em>.</p>
 <p>As <span class="math inline">\(x_j\)</span> increases <span class="math inline">\(w_i\)</span> will decrease exactly when <span class="math inline">\(a_{ij} &gt; 0\)</span>. Because we want all the variables to be non-negative, we must always have <span class="math inline">\(w_i = b_i - a_{ij} x_j \ge 0\)</span>. But this condition must hold true for all such <span class="math inline">\(w_i\)</span>. Hence, we get that <span class="math inline">\(w_i\)</span> will be the leaving variable if</p>
 <p><span class="math display">\[\begin{align}
   i = {\arg \min} _{a_{ij} &gt; 0} \dfrac{b_i}{a_{ij}}
@@ -305,7 +305,7 @@ Because the objective function has the following expression,</p>
 </tbody>
 </table>
 </div>
-<p>We can see that the smallest ratio is obtained for <span class="math inline">\(w_2\)</span> hence it is the only possible candidate for the leaving variable.</p>
+<p>We can see that the smallest ratio is obtained for <span class="math inline">\(w_2\)</span> hence it is the only candidate for the leaving variable.</p>
 </div>
 <div id="tableau" class="section level3 hasAnchor" number="3.3.3">
 <h3><span class="header-section-number">3.3.3</span> Tableau<a href="simplex-method.html#tableau" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -368,14 +368,14 @@ Because the objective function has the following expression,</p>
 <p>Once we’ve found the entering and leaving variables, we can update the dictionary using the pivot step and start the process again. However, we might not always be able to find the entering and leaving variables.</p>
 <div id="no-entering-variable" class="section level3 hasAnchor" number="3.4.1">
 <h3><span class="header-section-number">3.4.1</span> No entering variable<a href="simplex-method.html#no-entering-variable" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>If no entering variable is found, then the geometry tells us that there is no direction in which the objective value can be increased i.e. we’re at a local maxima. But because the objective function a linear function this local maxima is also an absolute maxima and <strong>provides an optimal solution to our linear program</strong>.</p>
+<p>If no entering variable is found, then the geometry tells us that there is no direction in which the objective value can be increased i.e. we’re at a local maxima. But because the objective function is a linear function this local maxima is also an absolute maxima and <strong>provides an optimal solution to our linear program</strong>.</p>
 <p>Algebraically, this happens when none of the <span class="math inline">\(c_i\)</span> are positive.</p>
 </div>
 <div id="no-leaving-variable" class="section level3 hasAnchor" number="3.4.2">
 <h3><span class="header-section-number">3.4.2</span> No leaving variable<a href="simplex-method.html#no-leaving-variable" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>If no leaving variable is found, then the geometry tells us that we can keep increasing the entering variable indefinitely without leaving the feasible region. Such a linear program is called <strong>unbounded</strong>. An unbounded linear program has no optimal solution as the objective can be made arbitrary large without leaving the feasible region.</p>
+<p>If no leaving variable is found, then the geometry tells us that we can keep increasing the entering variable indefinitely without leaving the feasible region. Such a linear program is called <strong>unbounded</strong>. An unbounded linear program has no optimal solution as the objective value can be made arbitrary large without leaving the feasible region.</p>
 <p>Algebraically, this happens when none of the <span class="math inline">\(a_{ij}\)</span> are positive.</p>
-<p>The simplex method about starts at a vertex and tries to find an adjacent vertex with a higher objective value. However, we still need some method of finding one vertex of a feasible region. We also have not proven that the simplex algorithm halts. For example, it is possible for the above algorithm to get stuck in a loop. We’ll see how to answer these questions in the next few chapters.</p>
+<p>The simplex method starts at a vertex and tries to find an adjacent vertex with a higher objective value. However, we still need some method of finding one vertex of the feasible region. We also have not proven that the simplex algorithm halts. For example, it is possible for the above algorithm to get stuck in a loop. We’ll see how to answer these questions in the next few chapters.</p>
 
 </div>
 </div>

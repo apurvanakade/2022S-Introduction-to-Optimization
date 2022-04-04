@@ -35,7 +35,7 @@ We'll find the entering and leaving variables using dictionaries. A **dictionary
 Consider \@ref(eq:bond-portfolio-lp) again. At the origin the non-basic variables are $x, y$ and hence the initial dictionary is:
 \begin{equation}
   \begin{array}{rlrrrr}
-  \mbox{objective} & = & 0 & + & 0.04x & + & 0.03y \\
+  \mbox{objective} & = & 0 & + & 4x & + & 3y \\
   w_1 & = & 3.6 & - & 3x & - & 6y \\
   w_2 & = & 1.5 & - & 2x & - & y \\
   w_3 & = & 1 & - & x & - & y.
@@ -109,7 +109,7 @@ Secondly, we'll assume that out variables and constants are dynamically updated 
 
 ### Choosing the entering variable
 
-The entering variable can be some $x_j$ which gets increased from 0 to a positive value. 
+We need to choose the entering variable to be one of the non-basic variables. This non-basic variable is going to increase from 0 to a positive value. 
 Because the objective function has the following expression, 
 
 \begin{align}
@@ -119,12 +119,12 @@ Because the objective function has the following expression,
 we can choose the variable $x_j$ to be *entering* if and only if $c_j$ is positive as increasing such a variable increases the objective value. We can think of the entering variable as determining *the direction of the simplex step*.
 
 ::: {.example}
-In the dictionary \@ref(eq:example-dictionary-1), the objective function is $4x + 0.03y$. Hence, both $x$ and $y$ can be chosen as the entering variables. Geometrically, we can see that there are two different paths going from the origin to the optimal solution. In the dictionary \@ref(eq:example-dictionary-2), the objective function is $3 + (-2)w_2 + y$. Hence, only $y$ can be the entering variable. In dictionary \@ref(eq:example-dictionary-3), the objective function is $3.3 + (-5/3)w_2 + (-2/9)w_1$. Hence, there cannot be any entering variable.
+In the dictionary \@ref(eq:example-dictionary-1), the objective function is $4x + 3y$. Hence, both $x$ and $y$ can be chosen as the entering variables. Geometrically, we can see that there are two different paths going from the origin to the optimal solution. In the dictionary \@ref(eq:example-dictionary-2), the objective function is $3 + (-2)w_2 + y$. Hence, only $y$ can be the entering variable. In dictionary \@ref(eq:example-dictionary-3), the objective function is $3.3 + (-5/3)w_2 + (-2/9)w_1$. Hence, there cannot be any entering variable.
 :::
 
 ### Choosing the leaving variable 
 
-Suppose $x_j$ is the chosen entering variable. Then instead of choosing the leaving variable directly from among the basic variables, we instead increase the largest value that the variable $x_j$ can be increased to. We can think of finding the leaving variable as determining *how far we can move in the direction of the simplex step without leaving the feasible region*. 
+Suppose $x_j$ is the chosen entering variable. Instead of choosing the leaving variable directly from among the basic variables, we find the largest value that the variable $x_j$ can be increased to. We can think of finding the leaving variable as determining *how far we can move in the direction of the simplex step without leaving the feasible region*. 
 
 As $x_j$ increases $w_i$ will decrease exactly when $a_{ij} > 0$. Because we want all the variables to be non-negative, we must always have $w_i = b_i - a_{ij} x_j \ge 0$. But this condition must hold true for all such $w_i$. Hence, we get that $w_i$ will be the leaving variable if 
 
@@ -143,7 +143,7 @@ In the dictionary \@ref(eq:example-dictionary-1), if we choose $x$ to be our ent
 | 2 | 2 | 1.5 | 0.75 |
 | 3 | 1 | 1 | 1 |  
 :::
-We can see that the smallest ratio is obtained for $w_2$ hence it is the only possible candidate for the leaving variable.
+We can see that the smallest ratio is obtained for $w_2$ hence it is the only candidate for the leaving variable.
 
 
 ### Tableau 
@@ -222,14 +222,14 @@ Once we've found the entering and leaving variables, we can update the dictionar
 
 ### No entering variable
 
-If no entering variable is found, then the geometry tells us that there is no direction in which the objective value can be increased i.e. we're at a local maxima. But because the objective function a linear function this local maxima is also an absolute maxima and **provides an optimal solution to our linear program**.
+If no entering variable is found, then the geometry tells us that there is no direction in which the objective value can be increased i.e. we're at a local maxima. But because the objective function is a linear function this local maxima is also an absolute maxima and **provides an optimal solution to our linear program**.
 
 Algebraically, this happens when none of the $c_i$ are positive. 
 
 ### No leaving variable
 
-If no leaving variable is found, then the geometry tells us that we can keep increasing the entering variable indefinitely without leaving the feasible region. Such a linear program is called **unbounded**. An unbounded linear program has no optimal solution as the objective can be made arbitrary large without leaving the feasible region.
+If no leaving variable is found, then the geometry tells us that we can keep increasing the entering variable indefinitely without leaving the feasible region. Such a linear program is called **unbounded**. An unbounded linear program has no optimal solution as the objective value can be made arbitrary large without leaving the feasible region.
 
 Algebraically, this happens when none of the $a_{ij}$ are positive.
 
-The simplex method about starts at a vertex and tries to find an adjacent vertex with a higher objective value. However, we still need some method of finding one vertex of a feasible region. We also have not proven that the simplex algorithm halts. For example, it is possible for the above algorithm to get stuck in a loop. We'll see how to answer these questions in the next few chapters.
+The simplex method starts at a vertex and tries to find an adjacent vertex with a higher objective value. However, we still need some method of finding one vertex of the feasible region. We also have not proven that the simplex algorithm halts. For example, it is possible for the above algorithm to get stuck in a loop. We'll see how to answer these questions in the next few chapters.
