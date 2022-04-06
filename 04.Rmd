@@ -1,0 +1,39 @@
+# Initialization  
+
+The simplex method starts at a vertex and tries to find an adjacent vertex with a higher objective value.  We can start this process at the origin if it is a vertex of the feasible region. However, this is not always the case.
+The origin is in the feasible region of the standard linear program \@ref(eq:standard-lp) if and only if $b_i < 0$ for some $i$. When the origin is not a vertex of the feasible region, we need a process to find some vertex of the feasible region. This is called the **initialization phase** or simpl **Phase I** of the simplex algorithm.
+
+## Auxiliary linear program 
+
+We say that a linear program is **feasible** if its feasible region is non-empty. The initialization phase determines if a standard linear program is feasible and if it is then finds a vertex of the feasible region. To do this we create an auxiliary linear program whose *optimal* solution provides a *feasible* solution of the original linear program.
+
+The auxiliary linear program of the standard linear program \@ref(eq:standard-lp) is defined as follows:
+\begin{equation}
+  \begin{array}{lrrrrrrrrrrr}
+    \mbox{maximize: } &  &  &   &  & &  & & - & x_0 & \\
+    \mbox{subject to: } 
+      & & & a_{11} x_1 & + & \dots & + & a_{1n} x_n & - &x_0 & \leq & b_1 \\
+      & & & a_{21} x_1 & + & \dots & + & a_{2n} x_n & - &x_0 & \leq & b_2 \\
+      & & & & & \vdots &  \\
+      & & & a_{m1} x_1 & + & \dots & + & a_{mn} x_n & - &x_0 & \leq & b_m \\
+      & & & x_1, & x_2, & \dots &, & x_n & , & x_0 & \geq & 0
+  \end{array} 
+  (\#eq:auxiliary-lp)
+\end{equation}
+
+One can show, using extreme value theorem, that the auxiliary linear program \@ref(eq:auxiliary-lp) always has an optimal solution. 
+
+::: {.theorem}
+
+Suppose $(k_1, k_2, \dots, k_n, k_0)$ is an optimal solution of the auxiliary linear program \@ref(eq:auxiliary-lp). Then, the standard linear program \@ref(eq:standard-lp) is feasible if and only if $k_0 = 0$. In this case, $(k_1, k_2, \dots, k_n, k_0)$ is a vertex of the feasible region of \@ref(eq:standard-lp).
+:::
+
+If the origin is not a vertex of the feasible region, then the method of solving the standard linear program \@ref(eq:standard-lp), starting with **Phase I** is as follows:
+
+1. Form the auxiliary linear program and its tableau. Note that we still cannot proceed normally as even for the auxiliary linear program the $b_i$'s are not all non-negative.
+2. Perform a pivot operation about the entry in the column corresponding to the variable $x_0$ and the row corresponding to the *most negative $b_i$*. This results in a dictionary where all the $b_i$'s are now non-negative.
+3. Solve the auxiliary linear program using the simplex method.
+
+Suppose $(k_1, k_2, \dots, k_n, k_0)$ is an optimal solution of the auxiliary linear program. If $k_0 \neq 0$, then we halt as the primary linear program is not feasible. If $k_0 = 0$, then we proceed to **Phase II**.
+
+4. Find the 
