@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Initialization | Introduction to Optimization</title>
+  <meta name="description" content="Chapter 4 Initialization | Introduction to Optimization." />
+  <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Initialization | Introduction to Optimization" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Chapter 4 Initialization | Introduction to Optimization." />
+  <meta name="github-repo" content="apurvanakade/2022S-Introduction-to-optimization" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Initialization | Introduction to Optimization" />
+  
+  <meta name="twitter:description" content="Chapter 4 Initialization | Introduction to Optimization." />
+  
+
+<meta name="author" content="Apurva Nakade" />
+
+
+<meta name="date" content="2022-04-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="simplex-method.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="index.html#preface">Preface<span></span></a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction<span></span></a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#software-tools"><i class="fa fa-check"></i><b>1.1</b> Software tools<span></span></a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="introduction.html"><a href="introduction.html#graphing-calculator"><i class="fa fa-check"></i><b>1.1.1</b> Graphing calculator<span></span></a></li>
+<li class="chapter" data-level="1.1.2" data-path="introduction.html"><a href="introduction.html#solver-add-in"><i class="fa fa-check"></i><b>1.1.2</b> Solver add-in<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="standard-linear-program.html"><a href="standard-linear-program.html"><i class="fa fa-check"></i><b>2</b> Standard linear program<span></span></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="standard-linear-program.html"><a href="standard-linear-program.html#slack-variables"><i class="fa fa-check"></i><b>2.1</b> Slack variables<span></span></a></li>
+<li class="chapter" data-level="2.2" data-path="standard-linear-program.html"><a href="standard-linear-program.html#basic-and-non-basic-variables"><i class="fa fa-check"></i><b>2.2</b> Basic and non-basic variables<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="simplex-method.html"><a href="simplex-method.html"><i class="fa fa-check"></i><b>3</b> Simplex method<span></span></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="simplex-method.html"><a href="simplex-method.html#entering-and-leaving-variables"><i class="fa fa-check"></i><b>3.1</b> Entering and leaving variables<span></span></a></li>
+<li class="chapter" data-level="3.2" data-path="simplex-method.html"><a href="simplex-method.html#dictionaries"><i class="fa fa-check"></i><b>3.2</b> Dictionaries<span></span></a></li>
+<li class="chapter" data-level="3.3" data-path="simplex-method.html"><a href="simplex-method.html#the-simplex-step"><i class="fa fa-check"></i><b>3.3</b> The simplex step<span></span></a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="simplex-method.html"><a href="simplex-method.html#choosing-the-entering-variable"><i class="fa fa-check"></i><b>3.3.1</b> Choosing the entering variable<span></span></a></li>
+<li class="chapter" data-level="3.3.2" data-path="simplex-method.html"><a href="simplex-method.html#choosing-the-leaving-variable"><i class="fa fa-check"></i><b>3.3.2</b> Choosing the leaving variable<span></span></a></li>
+<li class="chapter" data-level="3.3.3" data-path="simplex-method.html"><a href="simplex-method.html#tableau"><i class="fa fa-check"></i><b>3.3.3</b> Tableau<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="simplex-method.html"><a href="simplex-method.html#stopping-conditions"><i class="fa fa-check"></i><b>3.4</b> Stopping conditions<span></span></a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="simplex-method.html"><a href="simplex-method.html#no-entering-variable"><i class="fa fa-check"></i><b>3.4.1</b> No entering variable<span></span></a></li>
+<li class="chapter" data-level="3.4.2" data-path="simplex-method.html"><a href="simplex-method.html#no-leaving-variable"><i class="fa fa-check"></i><b>3.4.2</b> No leaving variable<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="initialization.html"><a href="initialization.html"><i class="fa fa-check"></i><b>4</b> Initialization<span></span></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="initialization.html"><a href="initialization.html#auxiliary-linear-program"><i class="fa fa-check"></i><b>4.1</b> Auxiliary linear program<span></span></a></li>
+<li class="chapter" data-level="4.2" data-path="initialization.html"><a href="initialization.html#combined-tableau"><i class="fa fa-check"></i><b>4.2</b> Combined tableau<span></span></a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Optimization</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="initialization" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Initialization<a href="initialization.html#initialization" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>The simplex method starts at a vertex and tries to find an adjacent vertex with a higher objective value. We can start this process at the origin if it is a vertex of the feasible region. However, this is not always the case.
+The origin is in the feasible region of the standard linear program <a href="standard-linear-program.html#eq:standard-lp">(2.1)</a> if and only if <span class="math inline">\(b_i \ge 0\)</span> for all <span class="math inline">\(1 \le i \le m.\)</span> When the origin is not a vertex of the feasible region, we need a process to find some vertex of the feasible region. This is called the <strong>initialization phase</strong> or <strong>Phase I</strong> of the simplex algorithm.</p>
+<div id="auxiliary-linear-program" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Auxiliary linear program<a href="initialization.html#auxiliary-linear-program" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We say that a linear program is <strong>feasible</strong> if its feasible region is non-empty. The initialization phase determines if a standard linear program is feasible and if it is then finds a vertex of the feasible region. To do this we create an auxiliary linear program whose <em>optimal</em> solution provides a <em>feasible</em> solution of the original linear program.</p>
+<p>The auxiliary linear program of the standard linear program <a href="standard-linear-program.html#eq:standard-lp">(2.1)</a> is defined as follows:
+<span class="math display" id="eq:auxiliary-lp">\[\begin{equation}
+  \begin{array}{lrrrrrrrrrrr}
+    \mbox{maximize: } &amp;  &amp;  &amp;   &amp;  &amp; &amp;  &amp; &amp; - &amp; x_0 &amp; \\
+    \mbox{subject to: }
+      &amp; &amp; &amp; a_{11} x_1 &amp; + &amp; \dots &amp; + &amp; a_{1n} x_n &amp; - &amp;x_0 &amp; \leq &amp; b_1 \\
+      &amp; &amp; &amp; a_{21} x_1 &amp; + &amp; \dots &amp; + &amp; a_{2n} x_n &amp; - &amp;x_0 &amp; \leq &amp; b_2 \\
+      &amp; &amp; &amp; &amp; &amp; \vdots &amp;  \\
+      &amp; &amp; &amp; a_{m1} x_1 &amp; + &amp; \dots &amp; + &amp; a_{mn} x_n &amp; - &amp;x_0 &amp; \leq &amp; b_m \\
+      &amp; &amp; &amp; x_1, &amp; x_2, &amp; \dots &amp;, &amp; x_n &amp; , &amp; x_0 &amp; \geq &amp; 0
+  \end{array}
+  \tag{4.1}
+\end{equation}\]</span></p>
+<p>One can show, using the <a href="https://en.wikipedia.org/wiki/Extreme_value_theorem">extreme value theorem</a>, that the auxiliary linear program <a href="initialization.html#eq:auxiliary-lp">(4.1)</a> always has an optimal solution. Furthermore, using some basic algebraic manipulations one can prove the following theorem.</p>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-12" class="theorem"><strong>Theorem 4.1  </strong></span>Suppose <span class="math inline">\((k_1, k_2, \dots, k_n, k_0)\)</span> is an optimal solution of the auxiliary linear program <a href="initialization.html#eq:auxiliary-lp">(4.1)</a>. Then, the standard linear program <a href="standard-linear-program.html#eq:standard-lp">(2.1)</a> is feasible if and only if <span class="math inline">\(k_0 = 0\)</span>. In this case, <span class="math inline">\((k_1, k_2, \dots, k_n, k_0)\)</span> is a vertex of the feasible region of <a href="standard-linear-program.html#eq:standard-lp">(2.1)</a>.</p>
+</div>
+<p>To understand the auxiliary linear program, it is better to write it in the following non-standard form:
+<span class="math display">\[\begin{equation}
+  \begin{array}{lrrrrrrrrrrr}
+    \mbox{minimize: } &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; x_0 &amp; \\
+    \mbox{subject to: }
+      &amp; &amp; &amp; a_{11} x_1 &amp; + &amp; \dots &amp; + &amp; a_{1n} x_n &amp; \leq &amp; b_1 &amp; + &amp; x_0 \\
+      &amp; &amp; &amp; a_{21} x_1 &amp; + &amp; \dots &amp; + &amp; a_{2n} x_n &amp; \leq &amp; b_2 &amp; + &amp; x_0 \\
+      &amp; &amp; &amp; &amp; &amp; \vdots &amp;  \\
+      &amp; &amp; &amp; a_{m1} x_1 &amp; + &amp; \dots &amp; + &amp; a_{mn} x_n &amp; \leq &amp; b_m &amp; + &amp; x_0 \\
+      &amp; &amp; &amp; x_1, &amp; x_2, &amp; \dots &amp;, &amp; x_n &amp; , &amp; x_0 &amp; \geq &amp; 0
+  \end{array}
+\end{equation}\]</span></p>
+<p>We can then interpret <span class="math inline">\(x_0\)</span> as a relaxation of the constraints. The auxiliary linear program is then asking - <em>what is the smallest constraint relaxation necessary to make our linear program feasible?</em>. The primary linear program is feasible if and only if no relaxation is necessary.</p>
+<p>If the origin is not a vertex of the feasible region, then the method of solving the standard linear program <a href="standard-linear-program.html#eq:standard-lp">(2.1)</a>, starting with <strong>Phase I</strong>, is as follows:</p>
+<ol style="list-style-type: decimal">
+<li>Form the auxiliary linear program and its tableau. Note that we still cannot proceed normally as even for the auxiliary linear program the <span class="math inline">\(b_i\)</span>’s are not all non-negative.</li>
+<li>Perform a pivot operation about the entry in the column corresponding to the variable <span class="math inline">\(x_0\)</span> and the row corresponding to the <em>most negative <span class="math inline">\(b_i\)</span></em>. This results in a dictionary where all the <span class="math inline">\(b_i\)</span>’s are now non-negative.</li>
+<li>Solve the auxiliary linear program using the simplex method.</li>
+</ol>
+<p>Suppose <span class="math inline">\((k_1, k_2, \dots, k_n, k_0)\)</span> is an optimal solution of the auxiliary linear program. If <span class="math inline">\(k_0 \neq 0\)</span>, then we halt as the primary linear program is not feasible. If <span class="math inline">\(k_0 = 0\)</span>, then we proceed to <strong>Phase II</strong> with the <em>initial</em> vertex <span class="math inline">\((k_1, \dots, k_n)\)</span>.</p>
+<ol start="4" style="list-style-type: decimal">
+<li>Find the dictionary at the <em>initial</em> vertex and proceed with the simplex method to find an optimal solution.</li>
+</ol>
+</div>
+<div id="combined-tableau" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Combined tableau<a href="initialization.html#combined-tableau" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>There is a shortcut to combining both Phase I and Phase II and reduce the number of pivots necessary. We create a <em>combined tableau</em> which contains information about both the auxiliary linear program and the primary linear program as follows:</p>
+<p><span class="math display">\[\begin{equation}
+  \begin{array}{rrrrrrrrrrrr|l}
+      c_1  &amp; &amp; \dots &amp; &amp; c_{n}  &amp; 0 &amp; &amp; 0 &amp; \dots &amp; &amp; 0 &amp; 0 &amp; 0\\ \hline
+      0  &amp; &amp; \dots &amp; &amp; 0  &amp; 0 &amp; &amp; 0 &amp; \dots &amp; &amp; 0 &amp; -1 &amp; 0\\ \hline
+      a_{11}  &amp; &amp; \dots &amp; &amp; a_{1n}  &amp; 1 &amp; &amp; &amp; &amp; &amp; &amp; -1 &amp;b_1\\
+      a_{21}  &amp; &amp; \dots &amp; &amp; a_{2n}  &amp; &amp; &amp; 1 &amp; &amp; &amp; &amp; -1 &amp;b_2\\
+      &amp; &amp; &amp; &amp; &amp; \vdots &amp; &amp; &amp; &amp; &amp; &amp; \vdots &amp; \vdots \\
+      a_{m1}  &amp; &amp; \dots &amp; &amp; a_{mn}  &amp; &amp; &amp; &amp; &amp; &amp; 1 &amp; -1 &amp;b_m\\
+  \end{array}
+\end{equation}\]</span></p>
+<p>The first row of the tableau is the objective function of the primary linear program and the second row of the tableau is the objective of the auxiliary linear program. We use the combined tableau to first perform Phase I and then neglect the auxiliary objective and the variable <span class="math inline">\(x_0\)</span> and proceed on to Phase II using the same tableau.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-13" class="example"><strong>Example 4.1  </strong></span>Consider the following linear program:
+<span class="math display">\[\begin{equation}
+  \begin{array}{rrrrrl}
+  \mbox{maximize:} &amp; x &amp; + &amp; y \\
+  \mbox{subject to:}
+    &amp; x &amp; + &amp; 2y &amp; \le &amp; 6 \\
+    &amp; -x &amp;  &amp;  &amp; \ge &amp; -1 \\
+    &amp;  &amp;  &amp; -y &amp; \ge &amp; -2 \\
+    &amp; x &amp; , &amp; y &amp; \ge &amp; 0.
+  \end{array}
+\end{equation}\]</span></p>
+<p>It is easy to see that feasible region is given by the triangle with vertices <span class="math inline">\((1,2)\)</span>, <span class="math inline">\((2,2)\)</span>, and <span class="math inline">\((1, 2.5)\)</span> and the optimal solution is given by <span class="math inline">\((2,2)\)</span>.</p>
+<p>Because <span class="math inline">\((0,0)\)</span> is not feasible, we need the two-phase simplex method to solve this problem. We start with the combined tableau:</p>
+<p><span class="math display">\[\begin{align}
+  \begin{bmatrix}
+    1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+    0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; -1 &amp; 0 \\
+    1 &amp; 2 &amp; 1 &amp; 0 &amp; 0 &amp; -1 &amp; 6 \\
+    -1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; -1 &amp; -1 \\
+    0 &amp; -1 &amp; 0 &amp; 0 &amp; 1 &amp; \boxed{-1} &amp; -2
+  \end{bmatrix}
+\end{align}\]</span></p>
+<p>The first pivot is in the column corresponding to the variable <span class="math inline">\(x_0\)</span> and the row corresponding to the <em>most negative <span class="math inline">\(b_i\)</span></em> (which is the last row). This results in the following combined tableau:</p>
+<p><span class="math display">\[\begin{align}
+  \begin{bmatrix}
+    1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+    0 &amp; 1 &amp; 0 &amp; 0 &amp; -1 &amp; 0 &amp; 2 \\
+    1 &amp; 3 &amp; 1 &amp; 0 &amp; -1 &amp; 0 &amp; 8 \\
+    -1 &amp; 1 &amp; 0 &amp; 1 &amp; -1 &amp; 0 &amp; 1 \\
+    0 &amp; 1 &amp; 0 &amp; 0 &amp; -1 &amp; 1 &amp; 2
+  \end{bmatrix}
+\end{align}\]</span></p>
+<p>We then continue with the standard simplex method to find the solution:</p>
+<p><span class="math display">\[\begin{align}
+  \begin{bmatrix}
+    0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; -2 &amp; -3 \\
+    0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; -1 &amp; \boxed{0} \\
+    0 &amp; 0 &amp; 1 &amp; 1 &amp; 2 &amp; -4 &amp; 1 \\
+    0 &amp; 1 &amp; 0 &amp; 0 &amp; -1 &amp; 1 &amp; 2 \\
+    1 &amp; 0 &amp; 0 &amp; -1 &amp; 0 &amp; 1 &amp; 1
+  \end{bmatrix}
+\end{align}\]</span></p>
+<p>We see that the optimal value is 0 and hence the primary linear program is feasible. We then remove the auxiliary objective and coefficient to get the following tableau for the primary linear program:</p>
+<p><span class="math display">\[\begin{align}
+  \begin{bmatrix}
+    0 &amp; 0 &amp; 0 &amp; 1 &amp; 1  &amp; -3 \\
+    0 &amp; 0 &amp; 1 &amp; \boxed{1} &amp; 2  &amp; 1 \\
+    0 &amp; 1 &amp; 0 &amp; 0 &amp; -1 &amp; 2 \\
+    1 &amp; 0 &amp; 0 &amp; -1 &amp; 0 &amp; 1
+  \end{bmatrix}
+\end{align}\]</span></p>
+<p>We continue solving this using the simplex method to get the final tableau</p>
+<p><span class="math display">\[\begin{align}
+  \begin{bmatrix}
+    0 &amp; 0 &amp; -1 &amp; 0 &amp; -1 &amp; -4 \\
+    0 &amp; 0 &amp; 1 &amp; 0 &amp; 2 &amp; 1 \\
+    0 &amp; 1 &amp; 0 &amp; 1 &amp; -1 &amp; 2 \\
+    1 &amp; 0 &amp; 1 &amp; 0 &amp; 2 &amp; 2
+  \end{bmatrix}
+\end{align}\]</span></p>
+<p>The final non-basic variables are <span class="math inline">\(w_1\)</span> and <span class="math inline">\(w_3\)</span> and the basic variables are <span class="math inline">\(x, y, w_2\)</span> with values <span class="math inline">\(2, 2, 1\)</span>, respectively. The optimal objective value is <span class="math inline">\(4\)</span>.</p>
+</div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="simplex-method.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": "github"
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "lunr",
+"options": null
+},
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"toolbar": {
+"position": "fixed"
+},
+"info": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

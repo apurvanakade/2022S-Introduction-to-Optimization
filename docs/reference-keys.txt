@@ -17,6 +17,9 @@ eq:standard-dictionary
 exm:unlabeled-div-9
 exm:unlabeled-div-10
 exm:unlabeled-div-11
+eq:auxiliary-lp
+thm:unlabeled-div-12
+exm:unlabeled-div-13
 introduction
 software-tools
 graphing-calculator
@@ -34,3 +37,6 @@ tableau
 stopping-conditions
 no-entering-variable
 no-leaving-variable
+initialization
+auxiliary-linear-program
+combined-tableau
