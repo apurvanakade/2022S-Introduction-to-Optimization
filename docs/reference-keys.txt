@@ -20,6 +20,11 @@ exm:unlabeled-div-11
 eq:auxiliary-lp
 thm:unlabeled-div-12
 exm:unlabeled-div-13
+thm:unlabeled-div-14
+exm:unlabeled-div-15
+exm:cycling
+thm:unlabeled-div-16
+exm:unlabeled-div-17
 introduction
 software-tools
 graphing-calculator
@@ -40,3 +45,7 @@ no-leaving-variable
 initialization
 auxiliary-linear-program
 combined-tableau
+halting-problem
+fundamental-theorem-of-linear-programming
+degeneracy
+blands-rule
