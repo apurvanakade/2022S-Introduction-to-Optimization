@@ -1,0 +1,38 @@
+# Standardization 
+
+A **general linear program** is an optimization question where the objective function is a linear program and the constraints are linear equalities or inequalities.
+
+::: {.remark}
+
+We do not allow the inequalities to be "<" or ">". This is because the region defined by using such inequalities is an open set and extreme value theorem is not applicable to these open sets. This further implies that the fundamental theorem of linear programming is no longer valid for these kinds of constraints. 
+
+For example, consider the following linear program:
+
+\begin{align}
+\mbox{maximize: } & x \\
+\mbox{subject to: } & x < 1 \\
+& x \geq 1. \\
+\end{align}
+
+The feasible region is $[0, 1)$ which is bounded from above and yet there is no optimal solution. 
+:::
+
+Given a general linear program, we can **standardize** it by a sequence of algebraic transformations and convert it to a standard linear program of the form \@ref(eq:standard-lp).
+
+### Objective 
+
+If the goal is to minimize the objective function then to convert it to a maximization problem, we simply multiply the objective function by $-1$. Minimizing a function $f$ is the same as maximizing $-f$.
+
+### Constraints
+
+We first move all the variables in the constraints to the LHS and the constants to the RHS and then fix the constraints one at a time. 
+
+If a constraint has the inequality $\geq$ then we multiply both sides of the constraint by -1 to change the inequality to $\leq$.
+
+If a constraint is an equality constraint, then we replace the equality with two constraints: one with the inequality $\leq$ and one with the inequality $\geq$.
+
+### Variables 
+
+If a variable has a non-positivity constraint of the form $x_j \le 0$, then we replace $x_j$ with $-x_j$ everywhere.
+
+If a variable $x_j$ is **free** i.e. it does not have any sign constraints on it, then we introduce two new variables $x_j'$, $x_j''$ which are both non-negative and make the substitution $x_j = x_j' - x_j''$. This trick works because any real number can be written as a difference of two non-negative reals.

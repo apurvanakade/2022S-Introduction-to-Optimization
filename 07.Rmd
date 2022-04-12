@@ -1,0 +1,69 @@
+# Dual linear program
+
+In the next few chapters we'll prove duality theorems about linear programs. We start by introducing the matrix notation. 
+
+We'll let $x$ denote the vector of decision variables, $b$ the vector of upper bounds, $c$ the vector of objective coefficients, and $A$ the matrix of constraints in the standard linear program \@ref(eq:standard-lp).
+
+\begin{align}
+  x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{bmatrix}, \quad
+  b = \begin{bmatrix} b_1 \\ b_2 \\ \vdots \\ b_m \end{bmatrix}, \quad
+  c = \begin{bmatrix} c_1 \\ c_2 \\ \vdots \\ c_n \end{bmatrix}, \quad
+  A = \begin{bmatrix} a_{11} & a_{12} & \dots & a_{1n} \\
+            a_{21} & a_{22} & \dots & a_{2n} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            a_{m1} & a_{m2} & \dots & a_{mn} \end{bmatrix}.
+\end{align}
+
+We'll assume that $c_0 = 0$ at the start. The standard linear program \@ref(eq:standard-lp) can be written as follows:
+
+\begin{equation}
+\begin{array}{lrll}
+  \mbox{maximize: } & c^T x \\
+  \mbox{subject to: } 
+    & A x & \leq & b \\
+    & x & \geq & 0.
+\end{array}
+\end{equation}
+
+The **dual** of this linear program is defined as the following linear program:
+
+\begin{equation}
+\begin{array}{lrll}
+  \mbox{minimize: } & b^T y \\
+  \mbox{subject to: } 
+    & A^T y & \geq & c \\
+    & y & \geq & 0,
+\end{array}
+\end{equation}
+
+where $y = \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_m \end{bmatrix}$ is the vector of **dual decision variables**. 
+
+The original linear program is called the **primal**. The dual decision variables correspond to the constraints of the original linear program. By explicitly computation, we can easily prove that the following theorem.
+
+::: {.theorem}
+
+The (standardization of) the dual of the (standardized) dual is the primal.
+
+:::
+
+Hence, we think of linear programs as coming in **primal-dual pairs**. Every linear program has a dual and it is itself the dual of the dual. 
+The dual decision variables correspond to the constraints of the original linear program and the primal decision variables correspond to the constraints of the dual.
+
+::: {.example}
+
+The dual of \@ref(eq:bond-portfolio-lp) is:
+
+\begin{equation}
+\begin{array}{lrrrrrrrrrr}
+  \mbox{minimize: } 
+    & 3.6 y_1 & + & 1.5 y_2 & + & y_3 \\
+  \mbox{subject to: }
+    & 3y_1 & + & 2 y_2 & + & y_3 & \geq & 4 \\
+    & 6y_1 & + & y_2 & + & y_3 & \geq & 3 \\
+    & y_1 & , & y_2 & , & y_3 & \geq & 0.
+\end{array}
+(\#eq:bond-portfolio-dual)
+\end{equation}
+
+The variable $y_1$ corresponds to the "maturity", the variable $y_2$ corresponds to the "risk", and the variable $y_3$ corresponds to the "percentage". We can think of these variables as "internal costs/prices". The expression $3y_1 + 2 y_2 + y_3$ is the "price" of the corporate bond and the expression $6 y_1 + y_2 + y_3$ is the "price" of the government bond. The dual constraints are saying that the "internal price" of either of the two bonds should be at least as large as the "external price" i.e. yield of the corporate bond.
+:::

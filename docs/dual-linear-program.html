@@ -4,20 +4,20 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 5 Halting problem | Introduction to Optimization</title>
-  <meta name="description" content="Chapter 5 Halting problem | Introduction to Optimization." />
+  <title>Chapter 7 Dual linear program | Introduction to Optimization</title>
+  <meta name="description" content="Chapter 7 Dual linear program | Introduction to Optimization." />
   <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 5 Halting problem | Introduction to Optimization" />
+  <meta property="og:title" content="Chapter 7 Dual linear program | Introduction to Optimization" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="Chapter 5 Halting problem | Introduction to Optimization." />
+  <meta property="og:description" content="Chapter 7 Dual linear program | Introduction to Optimization." />
   <meta name="github-repo" content="apurvanakade/2022S-Introduction-to-optimization" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 5 Halting problem | Introduction to Optimization" />
+  <meta name="twitter:title" content="Chapter 7 Dual linear program | Introduction to Optimization" />
   
-  <meta name="twitter:description" content="Chapter 5 Halting problem | Introduction to Optimization." />
+  <meta name="twitter:description" content="Chapter 7 Dual linear program | Introduction to Optimization." />
   
 
 <meta name="author" content="Apurva Nakade" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="initialization.html"/>
-<link rel="next" href="standardization.html"/>
+<link rel="prev" href="standardization.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -157,98 +157,68 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="halting-problem" class="section level1 hasAnchor" number="5">
-<h1><span class="header-section-number">Chapter 5</span> Halting problem<a href="halting-problem.html#halting-problem" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>We now have a complete algorithm for solving a standard linear program. However, we have not shown that it always finds the optimal solution. Let us start with the existence of optimal solution.</p>
-<div id="fundamental-theorem-of-linear-programming" class="section level2 hasAnchor" number="5.1">
-<h2><span class="header-section-number">5.1</span> Fundamental theorem of linear programming<a href="halting-problem.html#fundamental-theorem-of-linear-programming" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>To resolve the issue of getting stuck in a loop, we first need the following theorem about linear programs:</p>
-<div class="theorem">
-<p><span id="thm:unlabeled-div-14" class="theorem"><strong>Theorem 5.1  (Fundamental theorem of linear programming) </strong></span>Every standard linear program is exactly one of the following:</p>
-<ol style="list-style-type: decimal">
-<li>Infeasible,</li>
-<li>Unbounded,</li>
-<li>Has an optimal solution. In this case, the optimal solution is obtained at one of the vertices of the feasible region.</li>
-</ol>
-</div>
-<p>This theorem is an easy corollary of the <a href="https://en.wikipedia.org/wiki/Extreme_value_theorem">extreme value theorem</a> for multi-variate functions and relies on the closedness of the feasible region of a standard linear program and the continuity of the objective function.</p>
-<p>We see that the simplex method is able to detect all three cases. The first case happens when the Phase I algorithm is unable to find a feasible solution, the second case happens when no leaving variable is found, and the third case happens when no entering variable is found.</p>
-<p>However, it is possible for the simplex method to get stuck in a loop. This is called <strong>cycling</strong>. One way to show that the simplex method does not cycle is to show that the <em>objective value always increases after the simplex step</em>. If this were the case then we would never visit the same vertex twice. The vertices of the feasible region are obtained by intersecting constraint boundaries and hence only are finite in number (even if the region is unbounded). So, if we never visit the same vertex twice, the simplex method must halt.</p>
-<p>However, it is not always the case that the objective value increases after a simplex step!</p>
-</div>
-<div id="degeneracy" class="section level2 hasAnchor" number="5.2">
-<h2><span class="header-section-number">5.2</span> Degeneracy<a href="halting-problem.html#degeneracy" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>We saw in Section <a href="simplex-method.html#choosing-the-leaving-variable">3.3.2</a> that after the simplex step the entering and leaving variable gets updated as follows:
-<span class="math display">\[\begin{align}
-  x_j &amp; \mapsto 0 \\
-  w_i &amp; \mapsto b_i/a_{ij}.
-\end{align}\]</span>
-This increases the value of the objective function by <span class="math inline">\(c_j b_i/a_{ij}\)</span>. Because of the criterion for choosing the entering and leaving variables, the constants <span class="math inline">\(c_i\)</span> and <span class="math inline">\(a_{ij}\)</span> are always positive. We know that <span class="math inline">\(b_i\)</span> this is the value of the basic variable <span class="math inline">\(w_i\)</span> and hence must be <span class="math inline">\(\ge 0\)</span>. But we cannot guarantee that <span class="math inline">\(b_i &gt; 0\)</span>. If <span class="math inline">\(b_i = 0\)</span>, then the objective value does not increase after the simplex step. This can result in the simplex method to get stuck in a loop.</p>
-<p>We say that the dictionary at a feasible vertex is <strong>degenerate</strong> if some <span class="math inline">\(b_i = 0\)</span>. In this case, one of the basic variables also has the value 0 at this vertex. Geometrically, this is saying that more than <span class="math inline">\(n\)</span> constraints are satisfied at this vertex.</p>
-<div class="example">
-<p><span id="exm:unlabeled-div-15" class="example"><strong>Example 5.1  </strong></span>The following slight modification of Example <a href="introduction.html#eq:bond-portfolio-lp">(1.2)</a> is a degenerate linear program:</p>
-<p><span class="math display">\[\begin{equation}
-  \begin{array}{rrrrrl}
-  \mbox{maximize:} &amp; 4x &amp; + &amp; 3y \\
-  \mbox{subject to:}
-    &amp; 3x &amp; + &amp; 6y &amp; \le &amp; 4.5 \\
-    &amp; 2x &amp; + &amp; y &amp; \le &amp; 1.5 \\
-    &amp; x &amp; + &amp; y &amp; \le &amp; 1 \\
-    &amp; x &amp; , &amp; y &amp; \ge &amp; 0.
-  \end{array}
-\end{equation}\]</span></p>
-<p><img src="Introduction-to-Optimization_files/figure-html/fig-degenerate-lp-1.png" width="672" /></p>
-<p>At the optimal solution, <span class="math inline">\((0.5, 0.5)\)</span> all three constraints are met. At this vertex, one of the rows is
-<span class="math display">\[\begin{align}
-  w_3 &amp;= 0 + 0.33 w_2 + 0.11 w_1.
+<div id="dual-linear-program" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Dual linear program<a href="dual-linear-program.html#dual-linear-program" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>In the next few chapters we’ll prove duality theorems about linear programs. We start by introducing the matrix notation.</p>
+<p>We’ll let <span class="math inline">\(x\)</span> denote the vector of decision variables, <span class="math inline">\(b\)</span> the vector of upper bounds, <span class="math inline">\(c\)</span> the vector of objective coefficients, and <span class="math inline">\(A\)</span> the matrix of constraints in the standard linear program <a href="standard-linear-program.html#eq:standard-lp">(2.1)</a>.</p>
+<p><span class="math display">\[\begin{align}
+  x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{bmatrix}, \quad
+  b = \begin{bmatrix} b_1 \\ b_2 \\ \vdots \\ b_m \end{bmatrix}, \quad
+  c = \begin{bmatrix} c_1 \\ c_2 \\ \vdots \\ c_n \end{bmatrix}, \quad
+  A = \begin{bmatrix} a_{11} &amp; a_{12} &amp; \dots &amp; a_{1n} \\
+            a_{21} &amp; a_{22} &amp; \dots &amp; a_{2n} \\
+            \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+            a_{m1} &amp; a_{m2} &amp; \dots &amp; a_{mn} \end{bmatrix}.
 \end{align}\]</span></p>
-</div>
-<div class="example">
-<p><span id="exm:cycling" class="example"><strong>Example 5.2  </strong></span>Consider the following degenerate linear program:</p>
+<p>We’ll assume that <span class="math inline">\(c_0 = 0\)</span> at the start. The standard linear program <a href="standard-linear-program.html#eq:standard-lp">(2.1)</a> can be written as follows:</p>
 <p><span class="math display">\[\begin{equation}
-  \begin{array}{rrrrrrrl}
-  \mbox{maximize:} &amp; x_1 &amp; - &amp; 2x_2 &amp; &amp; &amp; - &amp; 2x_4 \\
-  \mbox{subject to:}
-    &amp; 0.5 x_1 &amp; - &amp; 3.5x_2 &amp; - &amp; 2x_3 &amp; + &amp; 4 x_4 &amp; \le &amp; 0 \\
-    &amp; 0.5 x_1 &amp; - &amp; x_2 &amp; - &amp; 0.5 x_3 &amp; + &amp; 0.5 x_4 &amp; \le &amp; 0 \\
-    &amp; x_1 &amp; &amp; &amp; &amp; &amp;  &amp;  &amp; \le &amp; 1 \\
-    &amp; x_1 &amp; , &amp; x_2 &amp; , &amp; x_3 &amp; , &amp; x_4 &amp; \ge &amp; 0 \\
-  \end{array}
+\begin{array}{lrll}
+  \mbox{maximize: } &amp; c^T x \\
+  \mbox{subject to: } 
+    &amp; A x &amp; \leq &amp; b \\
+    &amp; x &amp; \geq &amp; 0.
+\end{array}
 \end{equation}\]</span></p>
-<p>The following is a valid sequence of simplex steps:</p>
-<ol style="list-style-type: decimal">
-<li><span class="math inline">\(x_1\)</span> enters and <span class="math inline">\(w_1\)</span> leaves,</li>
-<li><span class="math inline">\(x_2\)</span> enters and <span class="math inline">\(w_2\)</span> leaves,</li>
-<li><span class="math inline">\(x_3\)</span> enters and <span class="math inline">\(x_1\)</span> leaves,</li>
-<li><span class="math inline">\(x_4\)</span> enters and <span class="math inline">\(x_2\)</span> leaves,</li>
-<li><span class="math inline">\(w_1\)</span> enters and <span class="math inline">\(x_3\)</span> leaves,</li>
-<li><span class="math inline">\(w_2\)</span> enters and <span class="math inline">\(x_4\)</span> leaves.</li>
-</ol>
-<p>At the end of the <span class="math inline">\(6^{th}\)</span> simplex step, we end up looping back to the origin.</p>
-</div>
-</div>
-<div id="blands-rule" class="section level2 hasAnchor" number="5.3">
-<h2><span class="header-section-number">5.3</span> Bland’s rule<a href="halting-problem.html#blands-rule" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>There are various ways of dealing with cycling. The simplex way is to remember all the simplex steps taken so far and if we happen to revisit a vertex then we simple make a different choice of entering and leaving variables.</p>
-<p>However, as it turns out, there is a much simpler way to avoid cycling by using Bland’s rule. <strong>Bland’s rule</strong> says that if there are multiple candidates for the entering/variable then we choose the one with the smallest index. (We assume that the decision variables have a smaller index than the slack variables.)</p>
+<p>The <strong>dual</strong> of this linear program is defined as the following linear program:</p>
+<p><span class="math display">\[\begin{equation}
+\begin{array}{lrll}
+  \mbox{minimize: } &amp; b^T y \\
+  \mbox{subject to: } 
+    &amp; A^T y &amp; \geq &amp; c \\
+    &amp; y &amp; \geq &amp; 0,
+\end{array}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(y = \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_m \end{bmatrix}\)</span> is the vector of <strong>dual decision variables</strong>.</p>
+<p>The original linear program is called the <strong>primal</strong>. The dual decision variables correspond to the constraints of the original linear program. By explicitly computation, we can easily prove that the following theorem.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-16" class="theorem"><strong>Theorem 5.2  (Bland's rule) </strong></span>The simplex method always terminates provided that both the
-entering and the leaving variable are chosen according to Bland’s rule.</p>
+<p><span id="thm:unlabeled-div-19" class="theorem"><strong>Theorem 7.1  </strong></span>The (standardization of) the dual of the (standardized) dual is the primal.</p>
 </div>
-<p>The proof of this theorem is too complicated for this course. With this modification, for both Phase I and Phase II of the simplex method, we now have a complete algorithm for solving linear programs.</p>
+<p>Hence, we think of linear programs as coming in <strong>primal-dual pairs</strong>. Every linear program has a dual and it is itself the dual of the dual.
+The dual decision variables correspond to the constraints of the original linear program and the primal decision variables correspond to the constraints of the dual.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-17" class="example"><strong>Example 5.3  </strong></span>In Example <a href="halting-problem.html#exm:cycling">5.2</a>, the <em>sixth simplex step</em> violates Bland’s rule. Once we choose the entering and leaving variables using Bland’s rule, we can check that the simplex step for Example <a href="halting-problem.html#exm:cycling">5.2</a> indeed terminates at the optimal solution.</p>
+<p><span id="exm:unlabeled-div-20" class="example"><strong>Example 7.1  </strong></span>The dual of <a href="introduction.html#eq:bond-portfolio-lp">(1.2)</a> is:</p>
+<p><span class="math display" id="eq:bond-portfolio-dual">\[\begin{equation}
+\begin{array}{lrrrrrrrrrr}
+  \mbox{minimize: } 
+    &amp; 3.6 y_1 &amp; + &amp; 1.5 y_2 &amp; + &amp; y_3 \\
+  \mbox{subject to: }
+    &amp; 3y_1 &amp; + &amp; 2 y_2 &amp; + &amp; y_3 &amp; \geq &amp; 4 \\
+    &amp; 6y_1 &amp; + &amp; y_2 &amp; + &amp; y_3 &amp; \geq &amp; 3 \\
+    &amp; y_1 &amp; , &amp; y_2 &amp; , &amp; y_3 &amp; \geq &amp; 0.
+\end{array}
+\tag{7.1}
+\end{equation}\]</span></p>
+<p>The variable <span class="math inline">\(y_1\)</span> corresponds to the “maturity”, the variable <span class="math inline">\(y_2\)</span> corresponds to the “risk”, and the variable <span class="math inline">\(y_3\)</span> corresponds to the “percentage”. We can think of these variables as “internal costs/prices”. The expression <span class="math inline">\(3y_1 + 2 y_2 + y_3\)</span> is the “price” of the corporate bond and the expression <span class="math inline">\(6 y_1 + y_2 + y_3\)</span> is the “price” of the government bond. The dual constraints are saying that the “internal price” of either of the two bonds should be at least as large as the “external price” i.e. yield of the corporate bond.</p>
 </div>
 
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="initialization.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="standardization.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="standardization.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

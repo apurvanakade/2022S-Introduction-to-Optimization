@@ -25,6 +25,9 @@ exm:unlabeled-div-15
 exm:cycling
 thm:unlabeled-div-16
 exm:unlabeled-div-17
+thm:unlabeled-div-19
+exm:unlabeled-div-20
+eq:bond-portfolio-dual
 introduction
 software-tools
 graphing-calculator
@@ -49,3 +52,8 @@ halting-problem
 fundamental-theorem-of-linear-programming
 degeneracy
 blands-rule
+standardization
+objective
+constraints
+variables
+dual-linear-program
