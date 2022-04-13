@@ -25,9 +25,19 @@ exm:unlabeled-div-15
 exm:cycling
 thm:unlabeled-div-16
 exm:unlabeled-div-17
+eq:standard-dual-lp
 thm:unlabeled-div-19
 exm:unlabeled-div-20
 eq:bond-portfolio-dual
+thm:weak-duality
+cor:unlabeled-div-22
+cor:unlabeled-div-23
+cor:unlabeled-div-24
+eq:tableau-primal
+eq:tableau-dual
+lem:unlabeled-div-25
+lem:unlabeled-div-26
+thm:strong-duality
 introduction
 software-tools
 graphing-calculator
@@ -57,3 +67,6 @@ objective
 constraints
 variables
 dual-linear-program
+weak-and-strong-duality
+weak-duality
+strong-duality

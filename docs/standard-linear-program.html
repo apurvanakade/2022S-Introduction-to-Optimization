@@ -23,7 +23,7 @@
 <meta name="author" content="Apurva Nakade" />
 
 
-<meta name="date" content="2022-04-12" />
+<meta name="date" content="2022-04-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -140,6 +140,11 @@ div.csl-indent {
 <li class="chapter" data-level="6.0.3" data-path="standardization.html"><a href="standardization.html#variables"><i class="fa fa-check"></i><b>6.0.3</b> Variables<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="dual-linear-program.html"><a href="dual-linear-program.html"><i class="fa fa-check"></i><b>7</b> Dual linear program<span></span></a></li>
+<li class="chapter" data-level="8" data-path="weak-and-strong-duality.html"><a href="weak-and-strong-duality.html"><i class="fa fa-check"></i><b>8</b> Weak and strong duality<span></span></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="weak-and-strong-duality.html"><a href="weak-and-strong-duality.html#weak-duality"><i class="fa fa-check"></i><b>8.1</b> Weak duality<span></span></a></li>
+<li class="chapter" data-level="8.2" data-path="weak-and-strong-duality.html"><a href="weak-and-strong-duality.html#strong-duality"><i class="fa fa-check"></i><b>8.2</b> Strong duality<span></span></a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -163,13 +168,13 @@ div.csl-indent {
 <p><span class="math display" id="eq:standard-lp">\[\begin{equation}
   \begin{array}{lrrrrrrrrr}
     \mbox{maximize: } &amp; c_0 &amp; + &amp; c_1 x_1 &amp; + &amp; \dots &amp; + &amp; c_n x_n &amp; \\
-    \mbox{subject to: } 
+    \mbox{subject to: }
       &amp; &amp; &amp; a_{11} x_1 &amp; + &amp; \dots &amp; + &amp; a_{1n} x_n &amp; \leq &amp; b_1 \\
       &amp; &amp; &amp; a_{21} x_1 &amp; + &amp; \dots &amp; + &amp; a_{2n} x_n &amp; \leq &amp; b_2 \\
       &amp; &amp; &amp; &amp; &amp; \vdots &amp;  \\
       &amp; &amp; &amp; a_{m1} x_1 &amp; + &amp; \dots &amp; + &amp; a_{mn} x_n &amp; \leq &amp; b_m \\
       &amp; &amp; &amp; x_1, &amp; x_2, &amp; \dots &amp;, &amp; x_n &amp; \geq &amp; 0
-  \end{array} 
+  \end{array}
   \tag{2.1}
 \end{equation}\]</span>
 where <span class="math inline">\(c_i\)</span>, <span class="math inline">\(a_{ij}\)</span>, and <span class="math inline">\(b_j\)</span> are real constants. The variables <span class="math inline">\(x_1, \dots, x_n\)</span> are called <strong>decision variables</strong>. The set of tuples <span class="math inline">\((x_1, \dots, x_n)\)</span> that satisfy <em>all</em> the constraints is called the <strong>feasible region</strong>.</p>
@@ -196,8 +201,8 @@ where <span class="math inline">\(c_i\)</span>, <span class="math inline">\(a_{i
       w_1 &amp; = &amp; b_1 &amp; - &amp; a_{11} x_1 &amp; - &amp; \dots &amp; - &amp; a_{1n} x_n \\
       w_2 &amp; = &amp; b_2 &amp; - &amp; a_{21} x_1 &amp; - &amp; \dots &amp; - &amp; a_{2n} x_n \\
       &amp; &amp; &amp; &amp; &amp; \vdots &amp;  \\
-      w_m &amp; = &amp; b_m &amp; - &amp; a_{m1} x_1 &amp; - &amp; \dots &amp; - &amp; a_{mn} x_n 
-  \end{array} 
+      w_m &amp; = &amp; b_m &amp; - &amp; a_{m1} x_1 &amp; - &amp; \dots &amp; - &amp; a_{mn} x_n
+  \end{array}
   \tag{2.2}
 \end{equation}\]</span>
 We can think of the slack variable <span class="math inline">\(w_i\)</span> as measuring the “slackness” in the <span class="math inline">\(i^{th}\)</span> constraint. The <span class="math inline">\(i^{th}\)</span> constraint is strictly met exactly when <span class="math inline">\(w_i\)</span> is zero. Using the slack variables, the linear program <a href="standard-linear-program.html#eq:standard-lp">(2.1)</a> can be succinctly rewritten as:</p>

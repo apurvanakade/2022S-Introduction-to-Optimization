@@ -23,7 +23,7 @@
 <meta name="author" content="Apurva Nakade" />
 
 
-<meta name="date" content="2022-04-12" />
+<meta name="date" content="2022-04-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="standardization.html"/>
-<link rel="next" href="references.html"/>
+<link rel="next" href="weak-and-strong-duality.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -140,6 +140,11 @@ div.csl-indent {
 <li class="chapter" data-level="6.0.3" data-path="standardization.html"><a href="standardization.html#variables"><i class="fa fa-check"></i><b>6.0.3</b> Variables<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="dual-linear-program.html"><a href="dual-linear-program.html"><i class="fa fa-check"></i><b>7</b> Dual linear program<span></span></a></li>
+<li class="chapter" data-level="8" data-path="weak-and-strong-duality.html"><a href="weak-and-strong-duality.html"><i class="fa fa-check"></i><b>8</b> Weak and strong duality<span></span></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="weak-and-strong-duality.html"><a href="weak-and-strong-duality.html#weak-duality"><i class="fa fa-check"></i><b>8.1</b> Weak duality<span></span></a></li>
+<li class="chapter" data-level="8.2" data-path="weak-and-strong-duality.html"><a href="weak-and-strong-duality.html#strong-duality"><i class="fa fa-check"></i><b>8.2</b> Strong duality<span></span></a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -174,19 +179,20 @@ div.csl-indent {
 <p><span class="math display">\[\begin{equation}
 \begin{array}{lrll}
   \mbox{maximize: } &amp; c^T x \\
-  \mbox{subject to: } 
+  \mbox{subject to: }
     &amp; A x &amp; \leq &amp; b \\
     &amp; x &amp; \geq &amp; 0.
 \end{array}
 \end{equation}\]</span></p>
 <p>The <strong>dual</strong> of this linear program is defined as the following linear program:</p>
-<p><span class="math display">\[\begin{equation}
-\begin{array}{lrll}
-  \mbox{minimize: } &amp; b^T y \\
-  \mbox{subject to: } 
-    &amp; A^T y &amp; \geq &amp; c \\
-    &amp; y &amp; \geq &amp; 0,
-\end{array}
+<p><span class="math display" id="eq:standard-dual-lp">\[\begin{equation}
+  \begin{array}{lrll}
+    \mbox{minimize: } &amp; b^T y \\
+    \mbox{subject to: }
+      &amp; A^T y &amp; \geq &amp; c \\
+      &amp; y &amp; \geq &amp; 0,
+  \end{array}
+  \tag{7.1}
 \end{equation}\]</span></p>
 <p>where <span class="math inline">\(y = \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_m \end{bmatrix}\)</span> is the vector of <strong>dual decision variables</strong>.</p>
 <p>The original linear program is called the <strong>primal</strong>. The dual decision variables correspond to the constraints of the original linear program. By explicitly computation, we can easily prove that the following theorem.</p>
@@ -199,14 +205,14 @@ The dual decision variables correspond to the constraints of the original linear
 <p><span id="exm:unlabeled-div-20" class="example"><strong>Example 7.1  </strong></span>The dual of <a href="introduction.html#eq:bond-portfolio-lp">(1.2)</a> is:</p>
 <p><span class="math display" id="eq:bond-portfolio-dual">\[\begin{equation}
 \begin{array}{lrrrrrrrrrr}
-  \mbox{minimize: } 
+  \mbox{minimize: }
     &amp; 3.6 y_1 &amp; + &amp; 1.5 y_2 &amp; + &amp; y_3 \\
   \mbox{subject to: }
     &amp; 3y_1 &amp; + &amp; 2 y_2 &amp; + &amp; y_3 &amp; \geq &amp; 4 \\
     &amp; 6y_1 &amp; + &amp; y_2 &amp; + &amp; y_3 &amp; \geq &amp; 3 \\
     &amp; y_1 &amp; , &amp; y_2 &amp; , &amp; y_3 &amp; \geq &amp; 0.
 \end{array}
-\tag{7.1}
+\tag{7.2}
 \end{equation}\]</span></p>
 <p>The variable <span class="math inline">\(y_1\)</span> corresponds to the “maturity”, the variable <span class="math inline">\(y_2\)</span> corresponds to the “risk”, and the variable <span class="math inline">\(y_3\)</span> corresponds to the “percentage”. We can think of these variables as “internal costs/prices”. The expression <span class="math inline">\(3y_1 + 2 y_2 + y_3\)</span> is the “price” of the corporate bond and the expression <span class="math inline">\(6 y_1 + y_2 + y_3\)</span> is the “price” of the government bond. The dual constraints are saying that the “internal price” of either of the two bonds should be at least as large as the “external price” i.e. yield of the corporate bond.</p>
 </div>
@@ -218,7 +224,7 @@ The dual decision variables correspond to the constraints of the original linear
         </div>
       </div>
 <a href="standardization.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="weak-and-strong-duality.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
