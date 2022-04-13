@@ -28,12 +28,13 @@ We'll assume that $c_0 = 0$ at the start. The standard linear program \@ref(eq:s
 The **dual** of this linear program is defined as the following linear program:
 
 \begin{equation}
-\begin{array}{lrll}
-  \mbox{minimize: } & b^T y \\
-  \mbox{subject to: } 
-    & A^T y & \geq & c \\
-    & y & \geq & 0,
-\end{array}
+  \begin{array}{lrll}
+    \mbox{minimize: } & b^T y \\
+    \mbox{subject to: } 
+      & A^T y & \geq & c \\
+      & y & \geq & 0,
+  \end{array}
+  (\#eq:standard-dual-lp)
 \end{equation}
 
 where $y = \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_m \end{bmatrix}$ is the vector of **dual decision variables**. 

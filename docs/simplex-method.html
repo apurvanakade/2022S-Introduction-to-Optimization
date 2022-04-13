@@ -23,7 +23,7 @@
 <meta name="author" content="Apurva Nakade" />
 
 
-<meta name="date" content="2022-04-12" />
+<meta name="date" content="2022-04-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -140,6 +140,11 @@ div.csl-indent {
 <li class="chapter" data-level="6.0.3" data-path="standardization.html"><a href="standardization.html#variables"><i class="fa fa-check"></i><b>6.0.3</b> Variables<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="dual-linear-program.html"><a href="dual-linear-program.html"><i class="fa fa-check"></i><b>7</b> Dual linear program<span></span></a></li>
+<li class="chapter" data-level="8" data-path="weak-and-strong-duality.html"><a href="weak-and-strong-duality.html"><i class="fa fa-check"></i><b>8</b> Weak and strong duality<span></span></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="weak-and-strong-duality.html"><a href="weak-and-strong-duality.html#weak-duality"><i class="fa fa-check"></i><b>8.1</b> Weak duality<span></span></a></li>
+<li class="chapter" data-level="8.2" data-path="weak-and-strong-duality.html"><a href="weak-and-strong-duality.html#strong-duality"><i class="fa fa-check"></i><b>8.2</b> Strong duality<span></span></a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -170,6 +175,13 @@ Figure 3.1: A possible run of the simplex algorithm.
 <h2><span class="header-section-number">3.1</span> Entering and leaving variables<a href="simplex-method.html#entering-and-leaving-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In each step, one non-basic variable <strong>enters</strong> the set of basic variables and one basic variable <strong>leaves</strong> the set of basic variables. The table below explains how these sets are getting updated in the sample simplex algorithm run in Figure <a href="simplex-method.html#fig:sample-run">3.1</a>.</p>
 <table>
+<colgroup>
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th></th>
@@ -266,8 +278,8 @@ Such a linear program is called <strong>non-degenerate</strong>.</p>
       w_1 &amp; = &amp; b_1 &amp; - &amp; a_{11} x_1 &amp; - &amp; \dots &amp; - &amp; a_{1n} x_n \\
       w_2 &amp; = &amp; b_2 &amp; - &amp; a_{21} x_1 &amp; - &amp; \dots &amp; - &amp; a_{2n} x_n \\
       &amp; &amp; &amp; &amp; &amp; \vdots &amp;  \\
-      w_m &amp; = &amp; b_m &amp; - &amp; a_{m1} x_1 &amp; - &amp; \dots &amp; - &amp; a_{mn} x_n 
-  \end{array} 
+      w_m &amp; = &amp; b_m &amp; - &amp; a_{m1} x_1 &amp; - &amp; \dots &amp; - &amp; a_{mn} x_n
+  \end{array}
   \tag{3.4}
 \end{equation}\]</span></p>
 <p>Note that you do not have to make this assumption when actually solving the linear program. This assumption is for exposition purposes only.</p>
@@ -336,7 +348,7 @@ Because the objective function has the following expression,</p>
       a_{21} x_1 &amp; + &amp; \dots &amp; + &amp; a_{2n} x_n &amp; &amp; &amp; + &amp; w_2 &amp; &amp; &amp; &amp; = &amp;  b_2\\
       &amp; &amp; &amp; &amp; &amp; \vdots &amp;  \\
       a_{m1} x_1 &amp; + &amp; \dots &amp; + &amp; a_{mn} x_n &amp; &amp; &amp; &amp; &amp; &amp; + &amp; w_m &amp; = &amp; b_m\\
-  \end{array} 
+  \end{array}
   \end{equation}\]</span></p>
 <p>This can then be encoded using the following augmented matrix:</p>
 <p><span class="math display">\[\begin{equation}
@@ -345,7 +357,7 @@ Because the objective function has the following expression,</p>
       a_{21}  &amp; &amp; \dots &amp; &amp; a_{2n}  &amp; &amp; &amp; 1 &amp; &amp; &amp; &amp;b_2\\
       &amp; &amp; &amp; &amp; &amp; \vdots &amp;  \\
       a_{m1}  &amp; &amp; \dots &amp; &amp; a_{mn}  &amp; &amp; &amp; &amp; &amp; &amp; 1 &amp;b_m\\
-  \end{array} 
+  \end{array}
 \end{equation}\]</span></p>
 <p>We add back the objective function, but because of a quirk of algebra we need to add the objective function coefficients as follows.</p>
 <p><span class="math display">\[\begin{equation}
@@ -355,7 +367,7 @@ Because the objective function has the following expression,</p>
       a_{21}  &amp; &amp; \dots &amp; &amp; a_{2n}  &amp; &amp; &amp; 1 &amp; &amp; &amp; &amp;b_2\\
       &amp; &amp; &amp; &amp; &amp; \vdots &amp;  \\
       a_{m1}  &amp; &amp; \dots &amp; &amp; a_{mn}  &amp; &amp; &amp; &amp; &amp; &amp; 1 &amp;b_m\\
-  \end{array} 
+  \end{array}
 \end{equation}\]</span></p>
 <p>The columns in this augmented matrix correspond to the variables <span class="math inline">\(w_i\)</span> and <span class="math inline">\(x_j\)</span>. The columns with the <em>pivots</em> correspond to the basic variables.</p>
 <p>If <span class="math inline">\(x_j\)</span> is the entering variable and <span class="math inline">\(w_i\)</span> is the leaving variable, then we simply perform elementary row operations and turn the entry <span class="math inline">\(a_{ij}\)</span> into a pivot for its column. Hence, this step is also called the <strong>pivot step</strong>.</p>
