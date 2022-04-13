@@ -1,0 +1,113 @@
+# Weak and strong duality
+
+Consider the standard linear program (primal) \@ref(eq:standard-lp) and its dual \@ref(eq:standard-dual-lp).
+We say that a vector $x = \begin{bmatrix} x_1 \\ \dots \\ x_n \end{bmatrix}$ is **primal feasible** if it is in the feasible region of the primal and a vector $y = \begin{bmatrix} y_1 \\ \dots \\ y_m \end{bmatrix}$ is **dual feasible** if it is in the feasible region of the dual.
+
+
+## Weak duality
+
+::: {.theorem name="Weak duality" #weak-duality}
+
+Suppose $x$ is primal feasible and $y$ is dual feasible. Then the primal objective value at $x$ is less than or equal to the dual objective value at $y$.
+:::
+
+::: {.proof}
+
+The proof relies on analyzing the term $y^T A x$ and follows by looking at the following sequence of inequalities:
+
+\begin{align} 
+b^T y 
+  & = y^T b \\
+  & \ge y^T (Ax) && \mbox{ as } Ax \leq b \mbox{ and } y \geq 0 \\
+  & = (y^T A x)^T \\
+  & = x^T A y \\ 
+  & \ge x^T c && \mbox{ as } A^Ty \leq c \mbox{ and } x \geq 0 \\
+  & = c^T x.
+\end{align}
+
+:::
+
+We get several immediate corollaries out of Weak duality.
+
+::: {.corollary}
+
+If the primal is unbounded, then the dual is infeasible.
+
+:::
+
+::: {.corollary}
+
+If the dual is unbounded, then the primal is infeasible.
+
+::: 
+
+::: {.corollary}
+
+If both the primal and dual have optimal solutions, then the optimal value of the primal is less than or equal to the optimal value of the dual.
+
+:::
+
+We cannot say anything about the dual in the case when the primal is infeasible. Similarly, we cannot conclude anything about the existence of an optimal value of the dual in the case when the primal has an optimal solution.
+
+Some variant of Weak duality usually exists for optimization problems which are non-linear programming. However, the Strong duality theorem below is much more rare and only exists under very stringent conditions on the optimization problem.
+
+## Strong duality
+
+The tableau of the primal problem \@ref(eq:standard-lp) is as follows:
+
+\begin{equation} 
+  \begin{array}{ll|r}
+  c & 0 & c_0 \\ \hline
+  A & I_m & b 
+  \end{array}
+  (\#eq:tableau-primal)
+\end{equation}
+
+We can standardize the dual problem \@ref(eq:standard-dual-lp) and form its tableau: 
+
+\begin{equation} 
+  \begin{array}{ll|r}
+  -b & 0 & -c_0 \\ \hline
+  -A^T & I_n & -c 
+  \end{array}
+  (\#eq:tableau-dual)
+\end{equation}
+
+We will such tableaus **duals** of each other. More generally, we'll say that two tableaus (of appropriate dimensions) are **duals** of each other if after removing the pivot columns the resulting matrices are *negative transposes* of each other.
+
+One can show the following theorem by explicit computation:
+
+::: {.lemma}
+
+Consider the two dual tableaus \@ref(eq:tableau-primal) and \@ref(eq:tableau-dual) . 
+If we pivot the first tableau about the $i^{th}$ row and $j^{th}$ column of $A$ and the second tableau about the $i^{th}$ column and $j^{th}$ row of $-A^T$, then the resulting tableaus remain duals of each other.
+
+:::
+
+::: {.lemma}
+
+If the tableau \@ref(eq:tableau-primal) corresponds to an optimal solution of the primal then the tableau \@ref(eq:tableau-dual) corresponds to an optimal solution of the dual.
+:::
+
+::: {.proof}
+
+The tableau \@ref(eq:tableau-primal) corresponds to an optimal solution of the primal precisely when 
+
+1. (primal optimality) $c^T \le 0$ as in this case no entering variable can be found for the primal, and
+2. (primal feasibility) $b \ge 0$.
+
+These conditions translate to 
+
+1. (dual optimality) $-b^T \le 0$ as in this case no leaving variable can be found for the dual, and
+2. (dual feasibility) $-c \ge 0$.
+
+:::
+
+Using the above two lemmas, and by explicitly running the simplex method we get the following result:
+
+::: {.theorem name="Strong duality" #strong-duality}
+
+If the primal has an optimal solution then so does the dual. Moreover, they have the same optimal values.
+
+:::
+
