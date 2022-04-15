@@ -23,7 +23,7 @@
 <meta name="author" content="Apurva Nakade" />
 
 
-<meta name="date" content="2022-04-13" />
+<meta name="date" content="2022-04-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -178,8 +178,8 @@ b^T y
   &amp; = y^T b \\
   &amp; \ge y^T (Ax) &amp;&amp; \mbox{ as } Ax \leq b \mbox{ and } y \geq 0 \\
   &amp; = (y^T A x)^T \\
-  &amp; = x^T A y \\
-  &amp; \ge x^T c &amp;&amp; \mbox{ as } A^Ty \leq c \mbox{ and } x \geq 0 \\
+  &amp; = x^T A^T y \\
+  &amp; \ge x^T c &amp;&amp; \mbox{ as } A^Ty \geq c \mbox{ and } x \geq 0 \\
   &amp; = c^T x.
 \end{align}\]</span></p>
 </div>
@@ -214,7 +214,7 @@ b^T y
   \end{array}
   \tag{8.2}
 \end{equation}\]</span></p>
-<p>We will such tableaus <strong>duals</strong> of each other. More generally, we’ll say that two tableaus (of appropriate dimensions) are <strong>duals</strong> of each other if after removing the pivot columns the resulting matrices are <em>negative transposes</em> of each other.</p>
+<p>We will such tableaus <strong>duals</strong> of each other. More generally, we’ll say that two tableaus (of appropriate dimensions) are <strong>duals</strong> of each other if after rearranging the pivot columns, if necessary, they’re of the above form.</p>
 <p>One can show the following theorem by explicit computation:</p>
 <div class="lemma">
 <p><span id="lem:unlabeled-div-25" class="lemma"><strong>Lemma 8.1  </strong></span>Consider the two dual tableaus <a href="weak-and-strong-duality.html#eq:tableau-primal">(8.1)</a> and <a href="weak-and-strong-duality.html#eq:tableau-dual">(8.2)</a> .

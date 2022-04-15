@@ -20,8 +20,8 @@ b^T y
   & = y^T b \\
   & \ge y^T (Ax) && \mbox{ as } Ax \leq b \mbox{ and } y \geq 0 \\
   & = (y^T A x)^T \\
-  & = x^T A y \\ 
-  & \ge x^T c && \mbox{ as } A^Ty \leq c \mbox{ and } x \geq 0 \\
+  & = x^T A^T y \\ 
+  & \ge x^T c && \mbox{ as } A^Ty \geq c \mbox{ and } x \geq 0 \\
   & = c^T x.
 \end{align}
 
@@ -73,7 +73,7 @@ We can standardize the dual problem \@ref(eq:standard-dual-lp) and form its tabl
   (\#eq:tableau-dual)
 \end{equation}
 
-We will such tableaus **duals** of each other. More generally, we'll say that two tableaus (of appropriate dimensions) are **duals** of each other if after removing the pivot columns the resulting matrices are *negative transposes* of each other.
+We will such tableaus **duals** of each other. More generally, we'll say that two tableaus (of appropriate dimensions) are **duals** of each other if after rearranging the pivot columns, if necessary, they're of the above form.
 
 One can show the following theorem by explicit computation:
 
