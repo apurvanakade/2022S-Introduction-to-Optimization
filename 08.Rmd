@@ -57,7 +57,7 @@ The tableau of the primal problem \@ref(eq:standard-lp) is as follows:
 
 \begin{equation} 
   \begin{array}{ll|r}
-  c & 0 & c_0 \\ \hline
+  c^T & 0 & c_0 \\ \hline
   A & I_m & b 
   \end{array}
   (\#eq:tableau-primal)
@@ -67,7 +67,7 @@ We can standardize the dual problem \@ref(eq:standard-dual-lp) and form its tabl
 
 \begin{equation} 
   \begin{array}{ll|r}
-  -b & 0 & -c_0 \\ \hline
+  -b^T & 0 & -c_0 \\ \hline
   -A^T & I_n & -c 
   \end{array}
   (\#eq:tableau-dual)
@@ -98,7 +98,7 @@ The tableau \@ref(eq:tableau-primal) corresponds to an optimal solution of the p
 
 These conditions translate to 
 
-1. (dual optimality) $-b^T \le 0$ as in this case no leaving variable can be found for the dual, and
+1. (dual optimality) $-b^T \le 0$ as in this case no entering variable can be found for the dual, and
 2. (dual feasibility) $-c \ge 0$.
 
 :::

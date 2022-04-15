@@ -29,8 +29,8 @@ However, it is not always the case that the objective value increases after a si
 
 We saw in Section \@ref(choosing-the-leaving-variable) that after the simplex step the entering and leaving variable gets updated as follows: 
 \begin{align}
-  x_j & \mapsto 0 \\
-  w_i & \mapsto b_i/a_{ij}.
+  x_j & \mapsto b_i/a_{ij} \\
+  w_i & \mapsto 0.
 \end{align}
 This increases the value of the objective function by $c_j b_i/a_{ij}$. Because of the criterion for choosing the entering and leaving variables, the constants $c_i$ and $a_{ij}$ are always positive. We know that $b_i$ this is the value of the basic variable $w_i$ and hence must be $\ge 0$. But we cannot guarantee that $b_i > 0$. If $b_i = 0$, then the objective value does not increase after the simplex step. This can result in the simplex method to get stuck in a loop. 
 

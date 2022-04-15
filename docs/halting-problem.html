@@ -23,7 +23,7 @@
 <meta name="author" content="Apurva Nakade" />
 
 
-<meta name="date" content="2022-04-13" />
+<meta name="date" content="2022-04-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -185,8 +185,8 @@ div.csl-indent {
 <h2><span class="header-section-number">5.2</span> Degeneracy<a href="halting-problem.html#degeneracy" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We saw in Section <a href="simplex-method.html#choosing-the-leaving-variable">3.3.2</a> that after the simplex step the entering and leaving variable gets updated as follows:
 <span class="math display">\[\begin{align}
-  x_j &amp; \mapsto 0 \\
-  w_i &amp; \mapsto b_i/a_{ij}.
+  x_j &amp; \mapsto b_i/a_{ij} \\
+  w_i &amp; \mapsto 0.
 \end{align}\]</span>
 This increases the value of the objective function by <span class="math inline">\(c_j b_i/a_{ij}\)</span>. Because of the criterion for choosing the entering and leaving variables, the constants <span class="math inline">\(c_i\)</span> and <span class="math inline">\(a_{ij}\)</span> are always positive. We know that <span class="math inline">\(b_i\)</span> this is the value of the basic variable <span class="math inline">\(w_i\)</span> and hence must be <span class="math inline">\(\ge 0\)</span>. But we cannot guarantee that <span class="math inline">\(b_i &gt; 0\)</span>. If <span class="math inline">\(b_i = 0\)</span>, then the objective value does not increase after the simplex step. This can result in the simplex method to get stuck in a loop.</p>
 <p>We say that the dictionary at a feasible vertex is <strong>degenerate</strong> if some <span class="math inline">\(b_i = 0\)</span>. In this case, one of the basic variables also has the value 0 at this vertex. Geometrically, this is saying that more than <span class="math inline">\(n\)</span> constraints are satisfied at this vertex.</p>

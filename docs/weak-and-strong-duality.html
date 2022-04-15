@@ -201,7 +201,7 @@ b^T y
 <p>The tableau of the primal problem <a href="standard-linear-program.html#eq:standard-lp">(2.1)</a> is as follows:</p>
 <p><span class="math display" id="eq:tableau-primal">\[\begin{equation}
   \begin{array}{ll|r}
-  c &amp; 0 &amp; c_0 \\ \hline
+  c^T &amp; 0 &amp; c_0 \\ \hline
   A &amp; I_m &amp; b
   \end{array}
   \tag{8.1}
@@ -209,7 +209,7 @@ b^T y
 <p>We can standardize the dual problem <a href="dual-linear-program.html#eq:standard-dual-lp">(7.1)</a> and form its tableau:</p>
 <p><span class="math display" id="eq:tableau-dual">\[\begin{equation}
   \begin{array}{ll|r}
-  -b &amp; 0 &amp; -c_0 \\ \hline
+  -b^T &amp; 0 &amp; -c_0 \\ \hline
   -A^T &amp; I_n &amp; -c
   \end{array}
   \tag{8.2}
@@ -231,7 +231,7 @@ If we pivot the first tableau about the <span class="math inline">\(i^{th}\)</sp
 </ol>
 <p>These conditions translate to</p>
 <ol style="list-style-type: decimal">
-<li>(dual optimality) <span class="math inline">\(-b^T \le 0\)</span> as in this case no leaving variable can be found for the dual, and</li>
+<li>(dual optimality) <span class="math inline">\(-b^T \le 0\)</span> as in this case no entering variable can be found for the dual, and</li>
 <li>(dual feasibility) <span class="math inline">\(-c \ge 0\)</span>.</li>
 </ol>
 </div>

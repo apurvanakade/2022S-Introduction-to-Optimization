@@ -25,7 +25,7 @@ One can show, using the [extreme value theorem](https://en.wikipedia.org/wiki/Ex
 
 ::: {.theorem}
 
-Suppose $(k_1, k_2, \dots, k_n, k_0)$ is an optimal solution of the auxiliary linear program \@ref(eq:auxiliary-lp). Then, the standard linear program \@ref(eq:standard-lp) is feasible if and only if $k_0 = 0$. In this case, $(k_1, k_2, \dots, k_n, k_0)$ is a vertex of the feasible region of \@ref(eq:standard-lp).
+Suppose $(k_1, k_2, \dots, k_n, k_0)$ is an optimal solution of the auxiliary linear program \@ref(eq:auxiliary-lp). Then, the standard linear program \@ref(eq:standard-lp) is feasible if and only if $k_0 = 0$. In this case, $(k_1, k_2, \dots, k_n)$ is a vertex of the feasible region of \@ref(eq:standard-lp).
 :::
 
 To understand the auxiliary linear program, it is better to write it in the following non-standard form:
