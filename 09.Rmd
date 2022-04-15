@@ -1,0 +1,86 @@
+# Certificate of optimality 
+
+We can use the two duality theorems to come up with a fast way to check optimality. 
+
+::: {.theorem name="Certificate of optimality" #certificate-of-optimality}
+
+$x$ is an optimal solution for the primal and $y$ is an optimal solution for the dual if and only if 
+
+1. $x$ is primal-feasible, 
+2. $y$ is dual-feasible,
+3. $c^T x = b^T y$ i.e. the primal objective value at $x$ is equal to the dual objective value at $y$.
+
+:::
+
+::: {.proof}
+
+**( $\Rightarrow$ )** 
+
+If $x$ and $y$ are optimal solutions, then they are feasible by definition and by strong duality \@ref(eq:strong-duality) they have the same objective value. 
+
+**( $\Leftarrow$ )**
+
+If $x$ and $y$ are feasible solutions then by weak duality \@ref(eq:weak-duality) the dual objective values provide an upper bound on the primal objective value. Because this upper bound is attained at $x$, $x$ must be an optimal solution of the primal. Similarly, for $y$.
+
+:::
+
+
+## Complimentary slackness 
+
+There is another closely related method for verifying the correctness of solution using primal and dual slack variables. 
+
+Denote by $w = \begin{bmatrix} w_1 \\ \vdots \\ w_m \end{bmatrix}$ the primal slack variables and by $z = \begin{bmatrix} v_1 \\ \vdots \\ v_n \end{bmatrix}$ the dual slack variables. More explicitly, 
+
+\begin{align}
+  w &= b - A x \\ 
+  z &= -c + A^T y.  
+\end{align}
+
+We use this convention for $z$ as then at a dual feasible solution $z \ge 0$.
+
+::: {.theorem name="Complimentary slackness" #complimentary-slackness}
+
+Suppose $x$ is primal feasible and $y$ is dual feasible. Then $x$ and $y$ are optimal if and only if 
+
+1. for all $1 \le j \le n$, $x_j z_j = 0$, and 
+2. for all $1 \le i \le m$, $y_i w_i = 0$.
+
+:::
+
+::: {.proof}
+
+The proof is in two steps. We first show a weaker statement about the vanishing of two scalars and then show that the vanishing of these scalars implies complementary slackness.
+
+**Claim:** $x$ and $y$ are optimal solutions if and only if $x^T z = 0$ and $y^T w = 0$.
+
+We start by rewriting the slack variable: 
+
+\begin{align}
+    && x^T z = 0 && \mbox{ and } && y^T w = 0 \\ 
+  \Leftrightarrow 
+  && x^T (-c + A^T y) = 0 && \mbox{ and } && y^T (b - A x) = 0 \\ 
+  \Leftrightarrow 
+  && x^T c = x^T A^T y && \mbox{ and } && y^T b = y^T A x \\ 
+  \Leftrightarrow 
+  && c^T x = y^T A x && \mbox{ and } && b^T y = y^T A x \\ 
+\end{align}
+
+Thus we are reduced to showing that $x$ and $y$ are optimal solutions if and only if $c^T x = y^T A x$ and $b^T y = y^T A x$.
+
+**( $\Leftarrow$ )** 
+As $c^T x = y^T A x = b^T y$, and $x$ and $y$ are given to be feasible, $x$ and $y$ are optimal by Theorem \@ref(thm:certificate-of-optimality). 
+
+**( $\Rightarrow$ )** 
+By the proof of weak duality \@ref(thm:weak-duality), we know that as $x$ and $y$ are feasible, 
+$$c^T x \le y^T A x \le b^T y.$$ 
+By strong duality, as $x$ and $y$ are optimal 
+$$c^T x = b^T y.$$
+The only way the two can be simultaneously true is if $c^T x = y^T A x$ and $b^T y = y^T A x$.
+
+**Claim:**  $x^T z = 0$ and $y^T w = 0$ if and only if 
+
+1. for all $1 \le j \le n$, $x_j z_j = 0$, and 
+2. for all $1 \le i \le m$, $y_i w_i = 0$.
+
+This follows from the fact that at a feasible solution $x, y, w, z \ge 0$.
+:::

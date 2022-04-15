@@ -35,9 +35,11 @@ cor:unlabeled-div-23
 cor:unlabeled-div-24
 eq:tableau-primal
 eq:tableau-dual
-lem:unlabeled-div-25
-lem:unlabeled-div-26
+lem:pivot
+lem:optimality
 thm:strong-duality
+thm:certificate-of-optimality
+thm:complimentary-slackness
 introduction
 software-tools
 graphing-calculator
@@ -70,3 +72,5 @@ dual-linear-program
 weak-and-strong-duality
 weak-duality
 strong-duality
+certificate-of-optimality
+complimentary-slackness

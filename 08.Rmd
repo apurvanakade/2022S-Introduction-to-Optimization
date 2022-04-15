@@ -1,7 +1,7 @@
 # Weak and strong duality
 
 Consider the standard linear program (primal) \@ref(eq:standard-lp) and its dual \@ref(eq:standard-dual-lp).
-We say that a vector $x = \begin{bmatrix} x_1 \\ \dots \\ x_n \end{bmatrix}$ is **primal feasible** if it is in the feasible region of the primal and a vector $y = \begin{bmatrix} y_1 \\ \dots \\ y_m \end{bmatrix}$ is **dual feasible** if it is in the feasible region of the dual.
+We say that a vector $x = \begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix}$ is **primal feasible** if it is in the feasible region of the primal and a vector $y = \begin{bmatrix} y_1 \\ \vdots \\ y_m \end{bmatrix}$ is **dual feasible** if it is in the feasible region of the dual.
 
 
 ## Weak duality
@@ -77,14 +77,14 @@ We will such tableaus **duals** of each other. More generally, we'll say that tw
 
 One can show the following theorem by explicit computation:
 
-::: {.lemma}
+::: {.lemma #pivot}
 
 Consider the two dual tableaus \@ref(eq:tableau-primal) and \@ref(eq:tableau-dual) . 
 If we pivot the first tableau about the $i^{th}$ row and $j^{th}$ column of $A$ and the second tableau about the $i^{th}$ column and $j^{th}$ row of $-A^T$, then the resulting tableaus remain duals of each other.
 
 :::
 
-::: {.lemma}
+::: {.lemma #optimality}
 
 If the tableau \@ref(eq:tableau-primal) corresponds to an optimal solution of the primal then the tableau \@ref(eq:tableau-dual) corresponds to an optimal solution of the dual.
 :::
@@ -111,3 +111,7 @@ If the primal has an optimal solution then so does the dual. Moreover, they have
 
 :::
 
+::: {.proof}
+
+At the optimal solution for the primal, we have a set of basic and non-basic variables. We can perform a set of pivot operations to get this tableau from the initial tableau. We then perform the corresponding pivots on the dual tableau. By Lemma \@ref(lem:pivot) the resulting tableau will be dual to the primal tableau at the optimal solution. By Lemma \@ref(lem:optimality) the dual is also optimal and has the same objective value.
+:::
