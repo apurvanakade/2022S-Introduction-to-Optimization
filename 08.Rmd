@@ -49,7 +49,7 @@ If both the primal and dual have optimal solutions, then the optimal value of th
 
 We cannot say anything about the dual in the case when the primal is infeasible. Similarly, we cannot conclude anything about the existence of an optimal value of the dual in the case when the primal has an optimal solution.
 
-Some variant of Weak duality usually exists for optimization problems which are non-linear programming. However, the Strong duality theorem below is much more rare and only exists under very stringent conditions on the optimization problem.
+Some variant of weak duality usually exists for optimization problems which are non-linear. However, the strong duality theorem stated below is more uncommon and only holds true under very special conditions on the constraints.
 
 ## Strong duality
 
@@ -113,5 +113,5 @@ If the primal has an optimal solution then so does the dual. Moreover, they have
 
 ::: {.proof}
 
-At the optimal solution for the primal, we have a set of basic and non-basic variables. We can perform a set of pivot operations to get this tableau from the initial tableau. We then perform the corresponding pivots on the dual tableau. By Lemma \@ref(lem:pivot) the resulting tableau will be dual to the primal tableau at the optimal solution. By Lemma \@ref(lem:optimality) the dual is also optimal and has the same objective value.
+At the optimal solution for the primal, we have a set of basic and non-basic variables. We can perform a sequence of pivot operations to get this tableau from the initial tableau. We then perform the corresponding pivots on the dual tableau. By Lemma \@ref(lem:pivot) the resulting tableau will be dual to the primal tableau at the optimal solution. By Lemma \@ref(lem:optimality) the dual is also optimal and has the same objective value.
 :::

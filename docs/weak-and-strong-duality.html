@@ -23,7 +23,7 @@
 <meta name="author" content="Apurva Nakade" />
 
 
-<meta name="date" content="2022-04-15" />
+<meta name="date" content="2022-04-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -149,6 +149,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="9.1" data-path="certificate-of-optimality.html"><a href="certificate-of-optimality.html#complimentary-slackness"><i class="fa fa-check"></i><b>9.1</b> Complimentary slackness<span></span></a></li>
 </ul></li>
+<li class="chapter" data-level="10" data-path="dual-of-a-general-linear-program.html"><a href="dual-of-a-general-linear-program.html"><i class="fa fa-check"></i><b>10</b> Dual of a general linear program<span></span></a></li>
 </ul>
 
       </nav>
@@ -177,12 +178,12 @@ We say that a vector <span class="math inline">\(x = \begin{bmatrix} x_1 \\ \vdo
 </div>
 <div class="proof">
 <p><span id="unlabeled-div-21" class="proof"><em>Proof</em>. </span>The proof relies on analyzing the term <span class="math inline">\(y^T A x\)</span> and follows by looking at the following sequence of inequalities:</p>
-<p><span class="math display">\[\begin{align}
-b^T y
+<p><span class="math display">\[\begin{align} 
+b^T y 
   &amp; = y^T b \\
   &amp; \ge y^T (Ax) &amp;&amp; \mbox{ as } Ax \leq b \mbox{ and } y \geq 0 \\
   &amp; = (y^T A x)^T \\
-  &amp; = x^T A^T y \\
+  &amp; = x^T A^T y \\ 
   &amp; \ge x^T c &amp;&amp; \mbox{ as } A^Ty \geq c \mbox{ and } x \geq 0 \\
   &amp; = c^T x.
 \end{align}\]</span></p>
@@ -198,23 +199,23 @@ b^T y
 <p><span id="cor:unlabeled-div-24" class="corollary"><strong>Corollary 8.3  </strong></span>If both the primal and dual have optimal solutions, then the optimal value of the primal is less than or equal to the optimal value of the dual.</p>
 </div>
 <p>We cannot say anything about the dual in the case when the primal is infeasible. Similarly, we cannot conclude anything about the existence of an optimal value of the dual in the case when the primal has an optimal solution.</p>
-<p>Some variant of Weak duality usually exists for optimization problems which are non-linear programming. However, the Strong duality theorem below is much more rare and only exists under very stringent conditions on the optimization problem.</p>
+<p>Some variant of weak duality usually exists for optimization problems which are non-linear. However, the strong duality theorem stated below is more uncommon and only holds true under very special conditions on the constraints.</p>
 </div>
 <div id="strong-duality" class="section level2 hasAnchor" number="8.2">
 <h2><span class="header-section-number">8.2</span> Strong duality<a href="weak-and-strong-duality.html#strong-duality" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The tableau of the primal problem <a href="standard-linear-program.html#eq:standard-lp">(2.1)</a> is as follows:</p>
-<p><span class="math display" id="eq:tableau-primal">\[\begin{equation}
+<p><span class="math display" id="eq:tableau-primal">\[\begin{equation} 
   \begin{array}{ll|r}
   c^T &amp; 0 &amp; c_0 \\ \hline
-  A &amp; I_m &amp; b
+  A &amp; I_m &amp; b 
   \end{array}
   \tag{8.1}
 \end{equation}\]</span></p>
 <p>We can standardize the dual problem <a href="dual-linear-program.html#eq:standard-dual-lp">(7.1)</a> and form its tableau:</p>
-<p><span class="math display" id="eq:tableau-dual">\[\begin{equation}
+<p><span class="math display" id="eq:tableau-dual">\[\begin{equation} 
   \begin{array}{ll|r}
   -b^T &amp; 0 &amp; -c_0 \\ \hline
-  -A^T &amp; I_n &amp; -c
+  -A^T &amp; I_n &amp; -c 
   \end{array}
   \tag{8.2}
 \end{equation}\]</span></p>
@@ -244,7 +245,7 @@ If we pivot the first tableau about the <span class="math inline">\(i^{th}\)</sp
 <p><span id="thm:strong-duality" class="theorem"><strong>Theorem 8.2  (Strong duality) </strong></span>If the primal has an optimal solution then so does the dual. Moreover, they have the same optimal values.</p>
 </div>
 <div class="proof">
-<p><span id="unlabeled-div-26" class="proof"><em>Proof</em>. </span>At the optimal solution for the primal, we have a set of basic and non-basic variables. We can perform a set of pivot operations to get this tableau from the initial tableau. We then perform the corresponding pivots on the dual tableau. By Lemma <a href="weak-and-strong-duality.html#lem:pivot">8.1</a> the resulting tableau will be dual to the primal tableau at the optimal solution. By Lemma <a href="weak-and-strong-duality.html#lem:optimality">8.2</a> the dual is also optimal and has the same objective value.</p>
+<p><span id="unlabeled-div-26" class="proof"><em>Proof</em>. </span>At the optimal solution for the primal, we have a set of basic and non-basic variables. We can perform a sequence of pivot operations to get this tableau from the initial tableau. We then perform the corresponding pivots on the dual tableau. By Lemma <a href="weak-and-strong-duality.html#lem:pivot">8.1</a> the resulting tableau will be dual to the primal tableau at the optimal solution. By Lemma <a href="weak-and-strong-duality.html#lem:optimality">8.2</a> the dual is also optimal and has the same objective value.</p>
 </div>
 
 </div>

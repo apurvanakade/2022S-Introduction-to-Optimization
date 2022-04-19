@@ -23,7 +23,7 @@
 <meta name="author" content="Apurva Nakade" />
 
 
-<meta name="date" content="2022-04-15" />
+<meta name="date" content="2022-04-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="weak-and-strong-duality.html"/>
-<link rel="next" href="references.html"/>
+<link rel="next" href="dual-of-a-general-linear-program.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -149,6 +149,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="9.1" data-path="certificate-of-optimality.html"><a href="certificate-of-optimality.html#complimentary-slackness"><i class="fa fa-check"></i><b>9.1</b> Complimentary slackness<span></span></a></li>
 </ul></li>
+<li class="chapter" data-level="10" data-path="dual-of-a-general-linear-program.html"><a href="dual-of-a-general-linear-program.html"><i class="fa fa-check"></i><b>10</b> Dual of a general linear program<span></span></a></li>
 </ul>
 
       </nav>
@@ -179,21 +180,21 @@ div.csl-indent {
 </div>
 <div class="proof">
 <p><span id="unlabeled-div-27" class="proof"><em>Proof</em>. </span><strong>( <span class="math inline">\(\Rightarrow\)</span> )</strong></p>
-<p>If <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are optimal solutions, then they are feasible by definition and by strong duality <a href="#eq:strong-duality">(<strong>??</strong>)</a> they have the same objective value.</p>
+<p>If <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are optimal solutions, then they are feasible by definition and by strong duality (Theorem <a href="weak-and-strong-duality.html#thm:strong-duality">8.2</a>) they have the same objective value.</p>
 <p><strong>( <span class="math inline">\(\Leftarrow\)</span> )</strong></p>
-<p>If <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are feasible solutions then by weak duality <a href="#eq:weak-duality">(<strong>??</strong>)</a> the dual objective values provide an upper bound on the primal objective value. Because this upper bound is attained at <span class="math inline">\(x\)</span>, <span class="math inline">\(x\)</span> must be an optimal solution of the primal. Similarly, for <span class="math inline">\(y\)</span>.</p>
+<p>If <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are feasible solutions then by weak duality (Theorem <a href="weak-and-strong-duality.html#thm:weak-duality">8.1</a>) the dual objective values provide an upper bound on the primal objective value. Because this upper bound is attained at <span class="math inline">\(x\)</span>, <span class="math inline">\(x\)</span> must be an optimal solution of the primal. Similarly, for <span class="math inline">\(y\)</span>.</p>
 </div>
 <div id="complimentary-slackness" class="section level2 hasAnchor" number="9.1">
 <h2><span class="header-section-number">9.1</span> Complimentary slackness<a href="certificate-of-optimality.html#complimentary-slackness" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>There is another closely related method for verifying the correctness of solution using primal and dual slack variables.</p>
 <p>Denote by <span class="math inline">\(w = \begin{bmatrix} w_1 \\ \vdots \\ w_m \end{bmatrix}\)</span> the primal slack variables and by <span class="math inline">\(z = \begin{bmatrix} v_1 \\ \vdots \\ v_n \end{bmatrix}\)</span> the dual slack variables. More explicitly,</p>
 <p><span class="math display">\[\begin{align}
-  w &amp;= b - A x \\
+  w &amp;= b - A x \\ 
   z &amp;= -c + A^T y.  
 \end{align}\]</span></p>
 <p>We use this convention for <span class="math inline">\(z\)</span> as then at a dual feasible solution <span class="math inline">\(z \ge 0\)</span>.</p>
 <div class="theorem">
-<p><span id="thm:complimentary-slackness" class="theorem"><strong>Theorem 9.2  (Complimentary slackness) </strong></span>Suppose <span class="math inline">\(x\)</span> is primal feasible and <span class="math inline">\(y\)</span> is dual feasible. Then <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are optimal if and only if</p>
+<p><span id="thm:complementary-slackness" class="theorem"><strong>Theorem 9.2  (Complementary slackness) </strong></span>Suppose <span class="math inline">\(x\)</span> is primal feasible and <span class="math inline">\(y\)</span> is dual feasible. Then <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are optimal if and only if</p>
 <ol style="list-style-type: decimal">
 <li>for all <span class="math inline">\(1 \le j \le n\)</span>, <span class="math inline">\(x_j z_j = 0\)</span>, and</li>
 <li>for all <span class="math inline">\(1 \le i \le m\)</span>, <span class="math inline">\(y_i w_i = 0\)</span>.</li>
@@ -204,13 +205,13 @@ div.csl-indent {
 <p><strong>Claim:</strong> <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are optimal solutions if and only if <span class="math inline">\(x^T z = 0\)</span> and <span class="math inline">\(y^T w = 0\)</span>.</p>
 <p>We start by rewriting the slack variable:</p>
 <p><span class="math display">\[\begin{align}
-    &amp;&amp; x^T z = 0 &amp;&amp; \mbox{ and } &amp;&amp; y^T w = 0 \\
-  \Leftrightarrow
-  &amp;&amp; x^T (-c + A^T y) = 0 &amp;&amp; \mbox{ and } &amp;&amp; y^T (b - A x) = 0 \\
-  \Leftrightarrow
-  &amp;&amp; x^T c = x^T A^T y &amp;&amp; \mbox{ and } &amp;&amp; y^T b = y^T A x \\
-  \Leftrightarrow
-  &amp;&amp; c^T x = y^T A x &amp;&amp; \mbox{ and } &amp;&amp; b^T y = y^T A x \\
+    &amp;&amp; x^T z = 0 &amp;&amp; \mbox{ and } &amp;&amp; y^T w = 0 \\ 
+  \Leftrightarrow 
+  &amp;&amp; x^T (-c + A^T y) = 0 &amp;&amp; \mbox{ and } &amp;&amp; y^T (b - A x) = 0 \\ 
+  \Leftrightarrow 
+  &amp;&amp; x^T c = x^T A^T y &amp;&amp; \mbox{ and } &amp;&amp; y^T b = y^T A x \\ 
+  \Leftrightarrow 
+  &amp;&amp; c^T x = y^T A x &amp;&amp; \mbox{ and } &amp;&amp; b^T y = y^T A x \\ 
 \end{align}\]</span></p>
 <p>Thus we are reduced to showing that <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are optimal solutions if and only if <span class="math inline">\(c^T x = y^T A x\)</span> and <span class="math inline">\(b^T y = y^T A x\)</span>.</p>
 <p><strong>( <span class="math inline">\(\Leftarrow\)</span> )</strong>
@@ -237,7 +238,7 @@ The only way the two can be simultaneously true is if <span class="math inline">
         </div>
       </div>
 <a href="weak-and-strong-duality.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="dual-of-a-general-linear-program.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

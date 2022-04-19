@@ -1,0 +1,20 @@
+# Dual of a general linear program 
+
+We saw how to standardized non-standard linear programs in Chapter \@ref(standardization). We need to "fix" the objective function, constraints, and signs of decision variables. To find the dual of a non-standard linear program, we can first standardize it and then form the dual. However, doing so changes the coefficients of the constraints. After standardization, we can "revert the standardization" of the dual so that the matrix that defines the dual constraints is precisely the transpose of the matrix that defines the primal constraints. This requires us to change appropriate inequalities in the dual as described in the following table. 
+
+| Primal | Dual | 
+| :----: | :--: |
+| $a_{i1} x_1 + \dots + a_{in} x_n \le b_i$ | $y_i \ge 0$ |
+| $a_{i1} x_1 + \dots + a_{in} x_n \ge b_i$ | $y_i \le 0$ |
+| $a_{i1} x_1 + \dots + a_{in} x_n = b_i$ | $y_i$ is free |
+| $x_j \ge 0$ | $a_{1j}y_1 + \dots + a_{mj} y_m \ge c_j$ |
+| $x_j \le 0$ | $a_{1j}y_1 + \dots + a_{mj} y_m \le c_j$ |
+| $x_j$ is free | $a_{1j}y_1 + \dots + a_{mj} y_m = c_j$ |
+
+Note that if we define slack variables as before 
+\begin{align}
+  w &= b - A x \\ 
+  z &= -c + A^T y,
+\end{align}
+then even for a general linear program we will have $x_j w_j \ge 0$ for all $1 \le j \le n$ and $y_i z_i \ge 0$ for all $1 \le i \le m$. 
+Hence, complementary slackness, as stated in Theorem \@ref(thm:complementary-slackness), holds true for the general linear programs.

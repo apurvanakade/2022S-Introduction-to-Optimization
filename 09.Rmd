@@ -16,11 +16,11 @@ $x$ is an optimal solution for the primal and $y$ is an optimal solution for the
 
 **( $\Rightarrow$ )** 
 
-If $x$ and $y$ are optimal solutions, then they are feasible by definition and by strong duality \@ref(eq:strong-duality) they have the same objective value. 
+If $x$ and $y$ are optimal solutions, then they are feasible by definition and by strong duality (Theorem \@ref(thm:strong-duality)) they have the same objective value. 
 
 **( $\Leftarrow$ )**
 
-If $x$ and $y$ are feasible solutions then by weak duality \@ref(eq:weak-duality) the dual objective values provide an upper bound on the primal objective value. Because this upper bound is attained at $x$, $x$ must be an optimal solution of the primal. Similarly, for $y$.
+If $x$ and $y$ are feasible solutions then by weak duality (Theorem \@ref(thm:weak-duality)) the dual objective values provide an upper bound on the primal objective value. Because this upper bound is attained at $x$, $x$ must be an optimal solution of the primal. Similarly, for $y$.
 
 :::
 
@@ -38,7 +38,7 @@ Denote by $w = \begin{bmatrix} w_1 \\ \vdots \\ w_m \end{bmatrix}$ the primal sl
 
 We use this convention for $z$ as then at a dual feasible solution $z \ge 0$.
 
-::: {.theorem name="Complimentary slackness" #complimentary-slackness}
+::: {.theorem name="Complementary slackness" #complementary-slackness}
 
 Suppose $x$ is primal feasible and $y$ is dual feasible. Then $x$ and $y$ are optimal if and only if 
 

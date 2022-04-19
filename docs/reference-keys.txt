@@ -39,7 +39,7 @@ lem:pivot
 lem:optimality
 thm:strong-duality
 thm:certificate-of-optimality
-thm:complimentary-slackness
+thm:complementary-slackness
 introduction
 software-tools
 graphing-calculator
@@ -74,3 +74,4 @@ weak-duality
 strong-duality
 certificate-of-optimality
 complimentary-slackness
+dual-of-a-general-linear-program
