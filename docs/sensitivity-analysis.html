@@ -4,34 +4,34 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 6 Standardization | Introduction to Optimization</title>
-  <meta name="description" content="Chapter 6 Standardization | Introduction to Optimization." />
+  <title>Chapter 11 Sensitivity analysis | Introduction to Optimization</title>
+  <meta name="description" content="Chapter 11 Sensitivity analysis | Introduction to Optimization." />
   <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 6 Standardization | Introduction to Optimization" />
+  <meta property="og:title" content="Chapter 11 Sensitivity analysis | Introduction to Optimization" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="Chapter 6 Standardization | Introduction to Optimization." />
+  <meta property="og:description" content="Chapter 11 Sensitivity analysis | Introduction to Optimization." />
   <meta name="github-repo" content="apurvanakade/2022S-Introduction-to-optimization" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 6 Standardization | Introduction to Optimization" />
+  <meta name="twitter:title" content="Chapter 11 Sensitivity analysis | Introduction to Optimization" />
   
-  <meta name="twitter:description" content="Chapter 6 Standardization | Introduction to Optimization." />
+  <meta name="twitter:description" content="Chapter 11 Sensitivity analysis | Introduction to Optimization." />
   
 
 <meta name="author" content="Apurva Nakade" />
 
 
-<meta name="date" content="2022-04-28" />
+<meta name="date" content="2022-04-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="halting-problem.html"/>
-<link rel="next" href="dual-linear-program.html"/>
+<link rel="prev" href="dual-of-a-general-linear-program.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -150,11 +150,7 @@ div.csl-indent {
 <li class="chapter" data-level="9.1" data-path="certificate-of-optimality.html"><a href="certificate-of-optimality.html#complimentary-slackness"><i class="fa fa-check"></i><b>9.1</b> Complimentary slackness<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="dual-of-a-general-linear-program.html"><a href="dual-of-a-general-linear-program.html"><i class="fa fa-check"></i><b>10</b> Dual of a general linear program<span></span></a></li>
-<li class="chapter" data-level="11" data-path="sensitivity-analysis---constraints.html"><a href="sensitivity-analysis---constraints.html"><i class="fa fa-check"></i><b>11</b> Sensitivity analysis - Constraints<span></span></a>
-<ul>
-<li class="chapter" data-level="11.1" data-path="sensitivity-analysis---constraints.html"><a href="sensitivity-analysis---constraints.html#matrix-notation"><i class="fa fa-check"></i><b>11.1</b> Matrix notation<span></span></a></li>
-<li class="chapter" data-level="11.2" data-path="sensitivity-analysis---constraints.html"><a href="sensitivity-analysis---constraints.html#range-of-optimality"><i class="fa fa-check"></i><b>11.2</b> Range of optimality<span></span></a></li>
-</ul></li>
+<li class="chapter" data-level="11" data-path="sensitivity-analysis.html"><a href="sensitivity-analysis.html"><i class="fa fa-check"></i><b>11</b> Sensitivity analysis<span></span></a></li>
 </ul>
 
       </nav>
@@ -172,44 +168,18 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="standardization" class="section level1 hasAnchor" number="6">
-<h1><span class="header-section-number">Chapter 6</span> Standardization<a href="standardization.html#standardization" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>A <strong>general linear program</strong> is an optimization question where the objective function is a linear program and the constraints are linear equalities or inequalities.</p>
-<div class="remark">
-<p><span id="unlabeled-div-18" class="remark"><em>Remark</em>. </span>We do not allow the inequalities to be “&lt;” or “&gt;”. This is because the region defined by using such inequalities is an open set and extreme value theorem is not applicable to these open sets. This further implies that the fundamental theorem of linear programming is no longer valid for these kinds of constraints.</p>
-<p>For example, consider the following linear program:</p>
-<p><span class="math display">\[\begin{align}
-\mbox{maximize: } &amp; x \\
-\mbox{subject to: } &amp; x &lt; 1 \\
-&amp; x \geq 1. \\
-\end{align}\]</span></p>
-<p>The feasible region is <span class="math inline">\([0, 1)\)</span> which is bounded from above and yet there is no optimal solution.</p>
-</div>
-<p>Given a general linear program, we can <strong>standardize</strong> it by a sequence of algebraic transformations and convert it to a standard linear program of the form <a href="standard-linear-program.html#eq:standard-lp">(2.1)</a>.</p>
-<div id="objective" class="section level3 hasAnchor" number="6.0.1">
-<h3><span class="header-section-number">6.0.1</span> Objective<a href="standardization.html#objective" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>If the goal is to minimize the objective function then to convert it to a maximization problem, we simply multiply the objective function by <span class="math inline">\(-1\)</span>. Minimizing a function <span class="math inline">\(f\)</span> is the same as maximizing <span class="math inline">\(-f\)</span>.</p>
-</div>
-<div id="constraints" class="section level3 hasAnchor" number="6.0.2">
-<h3><span class="header-section-number">6.0.2</span> Constraints<a href="standardization.html#constraints" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We first move all the variables in the constraints to the LHS and the constants to the RHS and then fix the constraints one at a time.</p>
-<p>If a constraint has the inequality <span class="math inline">\(\geq\)</span> then we multiply both sides of the constraint by -1 to change the inequality to <span class="math inline">\(\leq\)</span>.</p>
-<p>If a constraint is an equality constraint, then we replace the equality with two constraints: one with the inequality <span class="math inline">\(\leq\)</span> and one with the inequality <span class="math inline">\(\geq\)</span>.</p>
-</div>
-<div id="variables" class="section level3 hasAnchor" number="6.0.3">
-<h3><span class="header-section-number">6.0.3</span> Variables<a href="standardization.html#variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>If a variable has a non-positivity constraint of the form <span class="math inline">\(x_j \le 0\)</span>, then we replace <span class="math inline">\(x_j\)</span> with <span class="math inline">\(-x_j\)</span> everywhere.</p>
-<p>If a variable <span class="math inline">\(x_j\)</span> is <strong>free</strong> i.e. it does not have any sign constraints on it, then we introduce two new variables <span class="math inline">\(x_j&#39;\)</span>, <span class="math inline">\(x_j&#39;&#39;\)</span> which are both non-negative and make the substitution <span class="math inline">\(x_j = x_j&#39; - x_j&#39;&#39;\)</span>. This trick works because any real number can be written as a difference of two non-negative reals.</p>
+<div id="sensitivity-analysis" class="section level1 hasAnchor" number="11">
+<h1><span class="header-section-number">Chapter 11</span> Sensitivity analysis<a href="sensitivity-analysis.html#sensitivity-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Linear programs are used to model real world problems. Such models are at best approximate and at worst inaccurate. As such, it is important to understand the <em>sensitivity</em> of our solution to changes in the model. This is broadly called <em>sensitivity analysis</em>. We will focus on understanding the dependence of the optimal objective value of the standard linear program <a href="standard-linear-program.html#eq:standard-lp">(2.1)</a> on the constants <span class="math inline">\(b_i\)</span> and <span class="math inline">\(c_j\)</span>.</p>
 
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="halting-problem.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="dual-linear-program.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="dual-of-a-general-linear-program.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

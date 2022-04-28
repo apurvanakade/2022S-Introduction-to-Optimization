@@ -16,6 +16,7 @@ eq:example-dictionary-3
 eq:standard-dictionary
 exm:unlabeled-div-9
 exm:unlabeled-div-10
+eq:standard-tableau
 exm:unlabeled-div-11
 eq:auxiliary-lp
 thm:unlabeled-div-12
@@ -40,6 +41,11 @@ lem:optimality
 thm:strong-duality
 thm:certificate-of-optimality
 thm:complementary-slackness
+eq:dictionary-matrix
+eq:basic-non-basic-matrix
+exm:unlabeled-div-29
+lem:unlabeled-div-30
+exm:unlabeled-div-31
 introduction
 software-tools
 graphing-calculator
@@ -75,3 +81,6 @@ strong-duality
 certificate-of-optimality
 complimentary-slackness
 dual-of-a-general-linear-program
+sensitivity-analysis---constraints
+matrix-notation
+range-of-optimality

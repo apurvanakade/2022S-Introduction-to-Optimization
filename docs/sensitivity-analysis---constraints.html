@@ -4,20 +4,20 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 6 Standardization | Introduction to Optimization</title>
-  <meta name="description" content="Chapter 6 Standardization | Introduction to Optimization." />
+  <title>Chapter 11 Sensitivity analysis - Constraints | Introduction to Optimization</title>
+  <meta name="description" content="Chapter 11 Sensitivity analysis - Constraints | Introduction to Optimization." />
   <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 6 Standardization | Introduction to Optimization" />
+  <meta property="og:title" content="Chapter 11 Sensitivity analysis - Constraints | Introduction to Optimization" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="Chapter 6 Standardization | Introduction to Optimization." />
+  <meta property="og:description" content="Chapter 11 Sensitivity analysis - Constraints | Introduction to Optimization." />
   <meta name="github-repo" content="apurvanakade/2022S-Introduction-to-optimization" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 6 Standardization | Introduction to Optimization" />
+  <meta name="twitter:title" content="Chapter 11 Sensitivity analysis - Constraints | Introduction to Optimization" />
   
-  <meta name="twitter:description" content="Chapter 6 Standardization | Introduction to Optimization." />
+  <meta name="twitter:description" content="Chapter 11 Sensitivity analysis - Constraints | Introduction to Optimization." />
   
 
 <meta name="author" content="Apurva Nakade" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="halting-problem.html"/>
-<link rel="next" href="dual-linear-program.html"/>
+<link rel="prev" href="dual-of-a-general-linear-program.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -172,34 +172,115 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="standardization" class="section level1 hasAnchor" number="6">
-<h1><span class="header-section-number">Chapter 6</span> Standardization<a href="standardization.html#standardization" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>A <strong>general linear program</strong> is an optimization question where the objective function is a linear program and the constraints are linear equalities or inequalities.</p>
-<div class="remark">
-<p><span id="unlabeled-div-18" class="remark"><em>Remark</em>. </span>We do not allow the inequalities to be “&lt;” or “&gt;”. This is because the region defined by using such inequalities is an open set and extreme value theorem is not applicable to these open sets. This further implies that the fundamental theorem of linear programming is no longer valid for these kinds of constraints.</p>
-<p>For example, consider the following linear program:</p>
+<div id="sensitivity-analysis---constraints" class="section level1 hasAnchor" number="11">
+<h1><span class="header-section-number">Chapter 11</span> Sensitivity analysis - Constraints<a href="sensitivity-analysis---constraints.html#sensitivity-analysis---constraints" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Linear programs are used to model real world problems. Such models are at best approximate and at worst inaccurate. As such, it is important to understand the <em>sensitivity</em> of our solution to changes in the model. This is broadly called <em>sensitivity analysis</em>. We will focus on understanding the dependence of the optimal objective value of the standard linear program <a href="standard-linear-program.html#eq:standard-lp">(2.1)</a> on the constants <span class="math inline">\(b_i\)</span> and <span class="math inline">\(c_j\)</span>.</p>
+<div id="matrix-notation" class="section level2 hasAnchor" number="11.1">
+<h2><span class="header-section-number">11.1</span> Matrix notation<a href="sensitivity-analysis---constraints.html#matrix-notation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In our previous analysis of the simplex method, we assumed that the constants <span class="math inline">\(b_i\)</span>, <span class="math inline">\(c_j\)</span>, and <span class="math inline">\(a_{ij}\)</span> were being dynamically updated. However, now we’ll assume that they are fixed constants as our goal is no longer to run the simplex algorithm but rather to find the dependence of the solution on the initial values of these constants.</p>
+<p>We will start by finding a succinct way to describe the dictionary at the optimal solution. Recall that the decision and slack variables are related to each other by the Equation <a href="simplex-method.html#eq:standard-tableau">(3.5)</a> which can written as:</p>
+<p><span class="math display" id="eq:dictionary-matrix">\[\begin{equation}
+  \begin{bmatrix} A &amp; I_m \end{bmatrix}
+    \begin{bmatrix} x \\ w \end{bmatrix}
+      = b.
+  \tag{11.1}
+\end{equation}\]</span></p>
+<p>Let <span class="math inline">\(\widehat{A} := \begin{bmatrix} A &amp; I_m \end{bmatrix}\)</span>. We’ll decompose <span class="math inline">\(\widehat{A}\)</span> using the basic and non-basic variables. Suppose <a href="standard-linear-program.html#eq:standard-lp">(2.1)</a> has an optimal solution. Then let <span class="math inline">\(\mathcal{B}\)</span> be the matrix formed by combining the columns of <span class="math inline">\(\widehat{A}\)</span> corresponding to the basic variables and let <span class="math inline">\(\mathcal{N}\)</span> be the matrix formed by combining the columns of <span class="math inline">\(\widehat{A}\)</span> corresponding to the non-basic variables. Let <span class="math inline">\(x_{\mathcal{B}}\)</span> be the vector of basic variables and <span class="math inline">\(x_{\mathcal{N}}\)</span> be the vector of non-basic variables.</p>
+<p>By rearranging the columns of <span class="math inline">\(\widehat{A}\)</span> if necessary, we can rewrite <a href="sensitivity-analysis---constraints.html#eq:dictionary-matrix">(11.1)</a> as</p>
 <p><span class="math display">\[\begin{align}
-\mbox{maximize: } &amp; x \\
-\mbox{subject to: } &amp; x &lt; 1 \\
-&amp; x \geq 1. \\
+  &amp;&amp;
+    \begin{bmatrix} \mathcal{B} &amp; \mathcal{N} \end{bmatrix}
+    \begin{bmatrix} x_{\mathcal{B}} \\ x_{\mathcal{N}} \end{bmatrix}
+      &amp;= b,\\
+  \implies
+  &amp;&amp;
+    \mathcal{B} x_{\mathcal{B}} + \mathcal{N} x_{\mathcal{N}} &amp;= b, \\
+  \implies
+  &amp;&amp;
+    \mathcal{B} x_{\mathcal{B}} &amp;= b -  \mathcal{N} x_{\mathcal{N}}.
 \end{align}\]</span></p>
-<p>The feasible region is <span class="math inline">\([0, 1)\)</span> which is bounded from above and yet there is no optimal solution.</p>
+<p>One can show that the matrix <span class="math inline">\(\mathcal{B}\)</span> is always invertible (hence the name “basic” variables) and the above equation can be further simplified to the following:
+<span class="math display" id="eq:basic-non-basic-matrix">\[\begin{equation}
+  x_{\mathcal{B}} = \mathcal{B}^{-1} b - \mathcal{B}^{-1} \mathcal{N} x_{\mathcal{N}}.
+  \tag{11.2}
+\end{equation}\]</span></p>
+<p>This is nothing but the dictionary at the optimal solution.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-29" class="example"><strong>Example 11.1  </strong></span>Consider Example <a href="introduction.html#eq:bond-portfolio-lp">(1.2)</a> again. At the optimal solution <span class="math inline">\(w_1\)</span> and <span class="math inline">\(w_2\)</span> are non-basic and have the value 0, and <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(w_3\)</span> are basic with values <span class="math inline">\(0.3\)</span>, <span class="math inline">\(0.6\)</span>, and <span class="math inline">\(0.9\)</span>, respectively. Using the above notation, we have</p>
+<p><span class="math display">\[\begin{align}
+  \mathcal{B} =
+    \begin{bmatrix}
+    3 &amp; 6 &amp; 0 \\
+    2 &amp; 1 &amp; 0 \\
+    1 &amp; 1 &amp; 1
+    \end{bmatrix},
+  x_{\mathcal{B}}
+    = \begin{bmatrix} x \\ y \\ w_3 \end{bmatrix}, \\
+  \mathcal{N} =
+    \begin{bmatrix}
+    1 &amp; 0 \\
+    0 &amp; 1 \\
+    0 &amp; 0
+    \end{bmatrix},
+  x_{\mathcal{N}}
+    = \begin{bmatrix} w_1 \\ w_2 \end{bmatrix}.
+\end{align}\]</span>
+Using Equation <a href="sensitivity-analysis---constraints.html#eq:basic-non-basic-matrix">(11.2)</a> the dictionary at the optimal solution becomes
+<span class="math display">\[\begin{align}
+  \begin{bmatrix} x \\ y \\ w_3 \end{bmatrix}
+   &amp;= \begin{bmatrix}
+    3 &amp; 6 &amp; 0 \\
+    2 &amp; 1 &amp; 0 \\
+    1 &amp; 1 &amp; 1
+    \end{bmatrix}^{-1}
+    \begin{bmatrix}
+    3.6 \\ 1.5 \\ 1
+    \end{bmatrix} -
+    \begin{bmatrix}
+    3 &amp; 6 &amp; 0 \\
+    2 &amp; 1 &amp; 0 \\
+    1 &amp; 1 &amp; 1
+    \end{bmatrix}^{-1} \begin{bmatrix}
+    1 &amp; 0 \\
+    0 &amp; 1 \\
+    0 &amp; 0
+    \end{bmatrix}
+  \begin{bmatrix} w_1 \\ w_2 \end{bmatrix} \\
+  &amp;
+  = \begin{bmatrix} 0.3 \\ 0.6 \\ 0.9 \end{bmatrix}
+  -
+  \begin{bmatrix}
+    2/9 &amp; -1/3 \\
+    -1/9 &amp; 2/3 \\
+    -1/9 &amp; -1/3
+  \end{bmatrix}
+  \begin{bmatrix} w_1 \\ w_2 \end{bmatrix}.
+\end{align}\]</span></p>
+<p>This is precisely the dictionary <a href="simplex-method.html#eq:example-dictionary-3">(3.3)</a> at the optimal solution.</p>
 </div>
-<p>Given a general linear program, we can <strong>standardize</strong> it by a sequence of algebraic transformations and convert it to a standard linear program of the form <a href="standard-linear-program.html#eq:standard-lp">(2.1)</a>.</p>
-<div id="objective" class="section level3 hasAnchor" number="6.0.1">
-<h3><span class="header-section-number">6.0.1</span> Objective<a href="standardization.html#objective" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>If the goal is to minimize the objective function then to convert it to a maximization problem, we simply multiply the objective function by <span class="math inline">\(-1\)</span>. Minimizing a function <span class="math inline">\(f\)</span> is the same as maximizing <span class="math inline">\(-f\)</span>.</p>
+<p>Because we set the non-basic variables <span class="math inline">\(x_{\mathcal{N}}\)</span> to 0 at any vertex, and in particular, at the the optimal solution, using the Equation <a href="sensitivity-analysis---constraints.html#eq:basic-non-basic-matrix">(11.2)</a> we get the following useful result:</p>
+<div class="lemma">
+<p><span id="lem:unlabeled-div-30" class="lemma"><strong>Lemma 11.1  </strong></span>Using the above notation, <span class="math inline">\(\mathcal{B}^{-1}b\)</span> is the value of the basic variables at the optimal solution.</p>
 </div>
-<div id="constraints" class="section level3 hasAnchor" number="6.0.2">
-<h3><span class="header-section-number">6.0.2</span> Constraints<a href="standardization.html#constraints" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We first move all the variables in the constraints to the LHS and the constants to the RHS and then fix the constraints one at a time.</p>
-<p>If a constraint has the inequality <span class="math inline">\(\geq\)</span> then we multiply both sides of the constraint by -1 to change the inequality to <span class="math inline">\(\leq\)</span>.</p>
-<p>If a constraint is an equality constraint, then we replace the equality with two constraints: one with the inequality <span class="math inline">\(\leq\)</span> and one with the inequality <span class="math inline">\(\geq\)</span>.</p>
 </div>
-<div id="variables" class="section level3 hasAnchor" number="6.0.3">
-<h3><span class="header-section-number">6.0.3</span> Variables<a href="standardization.html#variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>If a variable has a non-positivity constraint of the form <span class="math inline">\(x_j \le 0\)</span>, then we replace <span class="math inline">\(x_j\)</span> with <span class="math inline">\(-x_j\)</span> everywhere.</p>
-<p>If a variable <span class="math inline">\(x_j\)</span> is <strong>free</strong> i.e. it does not have any sign constraints on it, then we introduce two new variables <span class="math inline">\(x_j&#39;\)</span>, <span class="math inline">\(x_j&#39;&#39;\)</span> which are both non-negative and make the substitution <span class="math inline">\(x_j = x_j&#39; - x_j&#39;&#39;\)</span>. This trick works because any real number can be written as a difference of two non-negative reals.</p>
+<div id="range-of-optimality" class="section level2 hasAnchor" number="11.2">
+<h2><span class="header-section-number">11.2</span> Range of optimality<a href="sensitivity-analysis---constraints.html#range-of-optimality" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We now try to determine the change in optimal solution as we change the constraint upper bounds <span class="math inline">\(b_i\)</span>. It is likely that by changing <span class="math inline">\(b_i\)</span> we change the optimal solution. But we would want this change to be differentiable. This can be achieved by requiring the set of basic and non-basic variables to remain unchanged. In this case, the equation <a href="sensitivity-analysis---constraints.html#eq:basic-non-basic-matrix">(11.2)</a> will still be the equation describing the dictionary at the optimal solution and the change in <span class="math inline">\(b_i\)</span> will result in a differentiable (in fact, smooth) change in <span class="math inline">\(x_{\mathcal{B}}\)</span>.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-31" class="example"><strong>Example 11.2  </strong></span>Suppose we vary <span class="math inline">\(b_3 = 1\)</span> in Example <a href="introduction.html#eq:bond-portfolio-lp">(1.2)</a>. One can check that at the optimal solution <span class="math inline">\(w_1\)</span> and <span class="math inline">\(w_2\)</span> are non-basic as long as <span class="math inline">\(b_3 &gt; 0.9\)</span>. Thus we can say that out model is a good model as long as the error in <span class="math inline">\(b_3\)</span> is less than <span class="math inline">\(0.1\)</span>.</p>
+</div>
+<p>Suppose we change <span class="math inline">\(b_i\)</span> to <span class="math inline">\(b_i + \delta\)</span>, where <span class="math inline">\(\delta\)</span> is a real number, and leave all the other constants unchanged. This is equivalent to changing <span class="math inline">\(b\)</span> to <span class="math inline">\(b + \delta e_i\)</span> where <span class="math inline">\(e_i\)</span> is the <span class="math inline">\(i^{th}\)</span> standard basis vector. This changes equation <a href="sensitivity-analysis---constraints.html#eq:basic-non-basic-matrix">(11.2)</a> to</p>
+<p><span class="math display">\[\begin{align}
+  x_{\mathcal{B}}
+    &amp;= \mathcal{B}^{-1} b + \delta \mathcal{B}^{-1} e_i - \mathcal{B}^{-1} \mathcal{N} x_{\mathcal{N}} \\
+    &amp;= \mathcal{B}^{-1} b + \delta (\mathcal{B}^{-1})_{i} - \mathcal{B}^{-1} \mathcal{N} x_{\mathcal{N}}.
+\end{align}\]</span>
+where <span class="math inline">\((\mathcal{B}^{-1})_{i}\)</span> denotes the <span class="math inline">\(i^{th}\)</span> column of <span class="math inline">\(\mathcal{B}^{-1}\)</span>.</p>
+<p>Note that the coefficients of <span class="math inline">\(x_{\mathcal{N}}\)</span> remain unchanged. So, for this dictionary to stay optimal we only need the constants to remain non-negative i.e.</p>
+<p><span class="math display">\[\begin{align}
+  \mathcal{B}^{-1} b + \delta (\mathcal{B}^{-1})_{i} \ge 0.
+\end{align}\]</span></p>
+<p>The <strong>range of optimality</strong> for <span class="math inline">\(b_i\)</span> is the interval <span class="math inline">\((b + \delta_-, b + \delta_+)\)</span> such that <span class="math inline">\(\mathcal{B}^{-1} b + \delta (\mathcal{B}^{-1})_{i} \ge 0\)</span> for all <span class="math inline">\(\delta \in (\delta_-, \delta_+)\)</span>.</p>
 
 </div>
 </div>
@@ -208,8 +289,8 @@ div.csl-indent {
           </div>
         </div>
       </div>
-<a href="halting-problem.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="dual-linear-program.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="dual-of-a-general-linear-program.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

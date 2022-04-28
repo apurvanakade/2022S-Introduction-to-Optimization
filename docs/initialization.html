@@ -23,7 +23,7 @@
 <meta name="author" content="Apurva Nakade" />
 
 
-<meta name="date" content="2022-04-18" />
+<meta name="date" content="2022-04-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -150,6 +150,11 @@ div.csl-indent {
 <li class="chapter" data-level="9.1" data-path="certificate-of-optimality.html"><a href="certificate-of-optimality.html#complimentary-slackness"><i class="fa fa-check"></i><b>9.1</b> Complimentary slackness<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="dual-of-a-general-linear-program.html"><a href="dual-of-a-general-linear-program.html"><i class="fa fa-check"></i><b>10</b> Dual of a general linear program<span></span></a></li>
+<li class="chapter" data-level="11" data-path="sensitivity-analysis---constraints.html"><a href="sensitivity-analysis---constraints.html"><i class="fa fa-check"></i><b>11</b> Sensitivity analysis - Constraints<span></span></a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="sensitivity-analysis---constraints.html"><a href="sensitivity-analysis---constraints.html#matrix-notation"><i class="fa fa-check"></i><b>11.1</b> Matrix notation<span></span></a></li>
+<li class="chapter" data-level="11.2" data-path="sensitivity-analysis---constraints.html"><a href="sensitivity-analysis---constraints.html#range-of-optimality"><i class="fa fa-check"></i><b>11.2</b> Range of optimality<span></span></a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -178,13 +183,13 @@ The origin is in the feasible region of the standard linear program <a href="sta
 <span class="math display" id="eq:auxiliary-lp">\[\begin{equation}
   \begin{array}{lrrrrrrrrrrr}
     \mbox{maximize: } &amp;  &amp;  &amp;   &amp;  &amp; &amp;  &amp; &amp; - &amp; x_0 &amp; \\
-    \mbox{subject to: } 
+    \mbox{subject to: }
       &amp; &amp; &amp; a_{11} x_1 &amp; + &amp; \dots &amp; + &amp; a_{1n} x_n &amp; - &amp;x_0 &amp; \leq &amp; b_1 \\
       &amp; &amp; &amp; a_{21} x_1 &amp; + &amp; \dots &amp; + &amp; a_{2n} x_n &amp; - &amp;x_0 &amp; \leq &amp; b_2 \\
       &amp; &amp; &amp; &amp; &amp; \vdots &amp;  \\
       &amp; &amp; &amp; a_{m1} x_1 &amp; + &amp; \dots &amp; + &amp; a_{mn} x_n &amp; - &amp;x_0 &amp; \leq &amp; b_m \\
       &amp; &amp; &amp; x_1, &amp; x_2, &amp; \dots &amp;, &amp; x_n &amp; , &amp; x_0 &amp; \geq &amp; 0
-  \end{array} 
+  \end{array}
   \tag{4.1}
 \end{equation}\]</span></p>
 <p>One can show, using the <a href="https://en.wikipedia.org/wiki/Extreme_value_theorem">extreme value theorem</a>, that the auxiliary linear program <a href="initialization.html#eq:auxiliary-lp">(4.1)</a> always has an optimal solution. Furthermore, using some basic algebraic manipulations one can prove the following theorem.</p>
@@ -195,13 +200,13 @@ The origin is in the feasible region of the standard linear program <a href="sta
 <span class="math display">\[\begin{equation}
   \begin{array}{lrrrrrrrrrrr}
     \mbox{minimize: } &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; x_0 &amp; \\
-    \mbox{subject to: } 
+    \mbox{subject to: }
       &amp; &amp; &amp; a_{11} x_1 &amp; + &amp; \dots &amp; + &amp; a_{1n} x_n &amp; \leq &amp; b_1 &amp; + &amp; x_0 \\
       &amp; &amp; &amp; a_{21} x_1 &amp; + &amp; \dots &amp; + &amp; a_{2n} x_n &amp; \leq &amp; b_2 &amp; + &amp; x_0 \\
       &amp; &amp; &amp; &amp; &amp; \vdots &amp;  \\
       &amp; &amp; &amp; a_{m1} x_1 &amp; + &amp; \dots &amp; + &amp; a_{mn} x_n &amp; \leq &amp; b_m &amp; + &amp; x_0 \\
       &amp; &amp; &amp; x_1, &amp; x_2, &amp; \dots &amp;, &amp; x_n &amp; , &amp; x_0 &amp; \geq &amp; 0
-  \end{array} 
+  \end{array}
 \end{equation}\]</span></p>
 <p>We can then interpret <span class="math inline">\(x_0\)</span> as a relaxation of the constraints. The auxiliary linear program is then asking - <em>what is the smallest constraint relaxation necessary to make our linear program feasible?</em>. The primary linear program is feasible if and only if no relaxation is necessary.</p>
 <p>If the origin is not a vertex of the feasible region, then the method of solving the standard linear program <a href="standard-linear-program.html#eq:standard-lp">(2.1)</a>, starting with <strong>Phase I</strong>, is as follows:</p>
@@ -226,7 +231,7 @@ The origin is in the feasible region of the standard linear program <a href="sta
       a_{21}  &amp; &amp; \dots &amp; &amp; a_{2n}  &amp; &amp; &amp; 1 &amp; &amp; &amp; &amp; -1 &amp;b_2\\
       &amp; &amp; &amp; &amp; &amp; \vdots &amp; &amp; &amp; &amp; &amp; &amp; \vdots &amp; \vdots \\
       a_{m1}  &amp; &amp; \dots &amp; &amp; a_{mn}  &amp; &amp; &amp; &amp; &amp; &amp; 1 &amp; -1 &amp;b_m\\
-  \end{array} 
+  \end{array}
 \end{equation}\]</span></p>
 <p>The first row of the tableau is the objective function of the primary linear program and the second row of the tableau is the objective of the auxiliary linear program. We use the combined tableau to first perform Phase I and then neglect the auxiliary objective and the variable <span class="math inline">\(x_0\)</span> and proceed on to Phase II using the same tableau.</p>
 <div class="example">
@@ -285,8 +290,8 @@ The origin is in the feasible region of the standard linear program <a href="sta
 <p><span class="math display">\[\begin{align}
   \begin{bmatrix}
     0 &amp; 0 &amp; -1 &amp; 0 &amp; -1 &amp; -4 \\
-    0 &amp; 0 &amp; 1 &amp; 0 &amp; 2 &amp; 1 \\
-    0 &amp; 1 &amp; 0 &amp; 1 &amp; -1 &amp; 2 \\
+    0 &amp; 0 &amp; 1 &amp; 1 &amp; 2 &amp; 1 \\
+    0 &amp; 1 &amp; 0 &amp; 0 &amp; -1 &amp; 2 \\
     1 &amp; 0 &amp; 1 &amp; 0 &amp; 2 &amp; 2
   \end{bmatrix}
 \end{align}\]</span></p>

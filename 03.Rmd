@@ -161,7 +161,8 @@ We start by rewriting the constraints in the dictionary with all the variables o
       & & & & & \vdots &  \\
       a_{m1} x_1 & + & \dots & + & a_{mn} x_n & & & & & & + & w_m & = & b_m\\
   \end{array} 
-  \end{equation}
+  (\#eq:standard-tableau)
+\end{equation}
 
 This can then be encoded using the following augmented matrix:
 
