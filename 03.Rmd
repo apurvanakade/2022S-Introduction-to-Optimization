@@ -70,7 +70,7 @@ Finally, the non-basic variables at the optimal solution are $w_1, w_2$. We can 
   \mbox{objective} & = & 3.3 & + & (-5/3)w_2 & + & (-2/9)w_1 \\
   y & = & 0.3 & - & (-1/3) w_2 & - & 2/9 w_1 \\
   x & = & 0.6 & - & 2/3 w_2 & - & (-1/9) w_1 \\
-  w_3 & = & 0.9 & - & (-1/3) w_2 & - & (-1/9) w_1.
+  w_3 & = & 0.1 & - & (-1/3) w_2 & - & (-1/9) w_1.
   \end{array}
   (\#eq:example-dictionary-3)
 \end{equation}
