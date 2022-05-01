@@ -23,7 +23,7 @@
 <meta name="author" content="Apurva Nakade" />
 
 
-<meta name="date" content="2022-04-28" />
+<meta name="date" content="2022-04-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -154,6 +154,8 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="11.1" data-path="sensitivity-analysis---constraints.html"><a href="sensitivity-analysis---constraints.html#matrix-notation"><i class="fa fa-check"></i><b>11.1</b> Matrix notation<span></span></a></li>
 <li class="chapter" data-level="11.2" data-path="sensitivity-analysis---constraints.html"><a href="sensitivity-analysis---constraints.html#range-of-optimality"><i class="fa fa-check"></i><b>11.2</b> Range of optimality<span></span></a></li>
+<li class="chapter" data-level="11.3" data-path="sensitivity-analysis---constraints.html"><a href="sensitivity-analysis---constraints.html#rate-of-change"><i class="fa fa-check"></i><b>11.3</b> Rate of change<span></span></a></li>
+<li class="chapter" data-level="11.4" data-path="sensitivity-analysis---constraints.html"><a href="sensitivity-analysis---constraints.html#dual-variables"><i class="fa fa-check"></i><b>11.4</b> Dual variables<span></span></a></li>
 </ul></li>
 </ul>
 
@@ -194,7 +196,7 @@ div.csl-indent {
 <p>There is another closely related method for verifying the correctness of solution using primal and dual slack variables.</p>
 <p>Denote by <span class="math inline">\(w = \begin{bmatrix} w_1 \\ \vdots \\ w_m \end{bmatrix}\)</span> the primal slack variables and by <span class="math inline">\(z = \begin{bmatrix} v_1 \\ \vdots \\ v_n \end{bmatrix}\)</span> the dual slack variables. More explicitly,</p>
 <p><span class="math display">\[\begin{align}
-  w &amp;= b - A x \\
+  w &amp;= b - A x \\ 
   z &amp;= -c + A^T y.  
 \end{align}\]</span></p>
 <p>We use this convention for <span class="math inline">\(z\)</span> as then at a dual feasible solution <span class="math inline">\(z \ge 0\)</span>.</p>
@@ -210,13 +212,13 @@ div.csl-indent {
 <p><strong>Claim:</strong> <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are optimal solutions if and only if <span class="math inline">\(x^T z = 0\)</span> and <span class="math inline">\(y^T w = 0\)</span>.</p>
 <p>We start by rewriting the slack variable:</p>
 <p><span class="math display">\[\begin{align}
-    &amp;&amp; x^T z = 0 &amp;&amp; \mbox{ and } &amp;&amp; y^T w = 0 \\
-  \Leftrightarrow
-  &amp;&amp; x^T (-c + A^T y) = 0 &amp;&amp; \mbox{ and } &amp;&amp; y^T (b - A x) = 0 \\
-  \Leftrightarrow
-  &amp;&amp; x^T c = x^T A^T y &amp;&amp; \mbox{ and } &amp;&amp; y^T b = y^T A x \\
-  \Leftrightarrow
-  &amp;&amp; c^T x = y^T A x &amp;&amp; \mbox{ and } &amp;&amp; b^T y = y^T A x \\
+    &amp;&amp; x^T z = 0 &amp;&amp; \mbox{ and } &amp;&amp; y^T w = 0 \\ 
+  \Leftrightarrow 
+  &amp;&amp; x^T (-c + A^T y) = 0 &amp;&amp; \mbox{ and } &amp;&amp; y^T (b - A x) = 0 \\ 
+  \Leftrightarrow 
+  &amp;&amp; x^T c = x^T A^T y &amp;&amp; \mbox{ and } &amp;&amp; y^T b = y^T A x \\ 
+  \Leftrightarrow 
+  &amp;&amp; c^T x = y^T A x &amp;&amp; \mbox{ and } &amp;&amp; b^T y = y^T A x \\ 
 \end{align}\]</span></p>
 <p>Thus we are reduced to showing that <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are optimal solutions if and only if <span class="math inline">\(c^T x = y^T A x\)</span> and <span class="math inline">\(b^T y = y^T A x\)</span>.</p>
 <p><strong>( <span class="math inline">\(\Leftarrow\)</span> )</strong>

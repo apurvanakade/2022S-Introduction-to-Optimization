@@ -43,9 +43,13 @@ thm:certificate-of-optimality
 thm:complementary-slackness
 eq:dictionary-matrix
 eq:basic-non-basic-matrix
+exm:basic-non-basic-matrix
+lem:basic-values
 exm:unlabeled-div-29
-lem:unlabeled-div-30
-exm:unlabeled-div-31
+eq:range-of-optimality
+exm:unlabeled-div-30
+thm:rate-of-change-constraints
+thm:dual-optimal-values
 introduction
 software-tools
 graphing-calculator
@@ -84,3 +88,5 @@ dual-of-a-general-linear-program
 sensitivity-analysis---constraints
 matrix-notation
 range-of-optimality
+rate-of-change
+dual-variables

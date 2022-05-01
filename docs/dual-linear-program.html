@@ -23,7 +23,7 @@
 <meta name="author" content="Apurva Nakade" />
 
 
-<meta name="date" content="2022-04-28" />
+<meta name="date" content="2022-04-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -154,6 +154,8 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="11.1" data-path="sensitivity-analysis---constraints.html"><a href="sensitivity-analysis---constraints.html#matrix-notation"><i class="fa fa-check"></i><b>11.1</b> Matrix notation<span></span></a></li>
 <li class="chapter" data-level="11.2" data-path="sensitivity-analysis---constraints.html"><a href="sensitivity-analysis---constraints.html#range-of-optimality"><i class="fa fa-check"></i><b>11.2</b> Range of optimality<span></span></a></li>
+<li class="chapter" data-level="11.3" data-path="sensitivity-analysis---constraints.html"><a href="sensitivity-analysis---constraints.html#rate-of-change"><i class="fa fa-check"></i><b>11.3</b> Rate of change<span></span></a></li>
+<li class="chapter" data-level="11.4" data-path="sensitivity-analysis---constraints.html"><a href="sensitivity-analysis---constraints.html#dual-variables"><i class="fa fa-check"></i><b>11.4</b> Dual variables<span></span></a></li>
 </ul></li>
 </ul>
 
@@ -189,7 +191,7 @@ div.csl-indent {
 <p><span class="math display">\[\begin{equation}
 \begin{array}{lrll}
   \mbox{maximize: } &amp; c^T x \\
-  \mbox{subject to: }
+  \mbox{subject to: } 
     &amp; A x &amp; \leq &amp; b \\
     &amp; x &amp; \geq &amp; 0.
 \end{array}
@@ -198,7 +200,7 @@ div.csl-indent {
 <p><span class="math display" id="eq:standard-dual-lp">\[\begin{equation}
   \begin{array}{lrll}
     \mbox{minimize: } &amp; b^T y \\
-    \mbox{subject to: }
+    \mbox{subject to: } 
       &amp; A^T y &amp; \geq &amp; c \\
       &amp; y &amp; \geq &amp; 0,
   \end{array}
@@ -215,7 +217,7 @@ The dual decision variables correspond to the constraints of the original linear
 <p><span id="exm:unlabeled-div-20" class="example"><strong>Example 7.1  </strong></span>The dual of <a href="introduction.html#eq:bond-portfolio-lp">(1.2)</a> is:</p>
 <p><span class="math display" id="eq:bond-portfolio-dual">\[\begin{equation}
 \begin{array}{lrrrrrrrrrr}
-  \mbox{minimize: }
+  \mbox{minimize: } 
     &amp; 3.6 y_1 &amp; + &amp; 1.5 y_2 &amp; + &amp; y_3 \\
   \mbox{subject to: }
     &amp; 3y_1 &amp; + &amp; 2 y_2 &amp; + &amp; y_3 &amp; \geq &amp; 4 \\
