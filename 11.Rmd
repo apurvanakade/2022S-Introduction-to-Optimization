@@ -2,11 +2,13 @@
 
 Linear programs are used to model real world problems. Such models are at best approximate and at worst inaccurate. As such, it is important to understand the *sensitivity* of our solution to changes in the model. This is broadly called *sensitivity analysis*. We will focus on understanding the dependence of the optimal objective value of the standard linear program \@ref(eq:standard-lp) on the constants $b_i$ and $c_j$.
 
+*Throughout this chapter, we'll assume that our linear programs have an optimal solution.*
+
 ## Matrix notation
 
 In our previous analysis of the simplex method, we assumed that the constants $b_i$, $c_j$, and $a_{ij}$ were being dynamically updated. However, now we'll assume that they are fixed constants as our goal is no longer to run the simplex algorithm but rather to find the dependence of the solution on the initial values of these constants.
 
-We will start by finding a succinct way to describe the dictionary at the optimal solution. Recall that the decision and slack variables are related to each other by the Equation \@ref(eq:standard-tableau) which can written as:
+We will start by finding a succinct way to describe the dictionary at the optimal solution. Recall that the decision and slack variables are related to each other by the Equation \@ref(eq:standard-tableau) which can be written as:
 
 \begin{equation}
   \begin{bmatrix} A & I_m \end{bmatrix}
@@ -15,7 +17,7 @@ We will start by finding a succinct way to describe the dictionary at the optima
   (\#eq:dictionary-matrix)
 \end{equation}
 
-Let $\widehat{A} := \begin{bmatrix} A & I_m \end{bmatrix}$. We'll decompose $\widehat{A}$ using the basic and non-basic variables. Suppose \@ref(eq:standard-lp) has an optimal solution. Then let $\mathcal{B}$ be the matrix formed by combining the columns of $\widehat{A}$ corresponding to the basic variables and let $\mathcal{N}$ be the matrix formed by combining the columns of $\widehat{A}$ corresponding to the non-basic variables. Let $x_{\mathcal{B}}$ be the vector of basic variables and $x_{\mathcal{N}}$ be the vector of non-basic variables. 
+Let $\widehat{A} := \begin{bmatrix} A & I_m \end{bmatrix}$. We'll decompose $\widehat{A}$ using the basic and non-basic variables. Then let $\mathcal{B}$ be the matrix formed by combining the columns of $\widehat{A}$ corresponding to the basic variables and let $\mathcal{N}$ be the matrix formed by combining the columns of $\widehat{A}$ corresponding to the non-basic variables. Let $x_{\mathcal{B}}$ be the vector of basic variables and $x_{\mathcal{N}}$ be the vector of non-basic variables. 
 
 By rearranging the columns of $\widehat{A}$ if necessary, we can rewrite \@ref(eq:dictionary-matrix) as 
 
@@ -154,7 +156,8 @@ Note that the coefficients of $x_{\mathcal{N}}$ remain unchanged. So, for this d
 
 The **range of optimality** for $b_i$ is the interval $(b + \delta_-, b + \delta_+)$ such that $\mathcal{B}^{-1} b + \delta (\mathcal{B}^{-1})_{*i} \ge 0$ for all $\delta \in (\delta_-, \delta_+)$.
 
-In practice, Equation \@ref(eq:range-of-optimality) gives us $m$ inequalities, all of which need to be simultaneously satisfied. These give us candidate values for $\delta$ some of which are positive and some of which are negative. We then choose $\delta_+$ to be the smallest positive value and $\delta_-$ to be the largest negative value. If $\delta_+$ does not exist the upper bound is $\infty$ and if $\delta_-$ does not exist the lower bound is $-\infty$.
+In practice, Equation \@ref(eq:range-of-optimality) gives us $m$ inequalities, all of which need to be simultaneously satisfied. These give us candidate values for $\delta$ some of which are positive and some of which are negative. We then choose $\delta_+$ to be the smallest positive value and $\delta_-$ to be the largest negative value. If $\delta_+$ does not exist the upper bound is $\infty$ and if $\delta_-$ does not exist the lower bound is $-\infty$. If either $\delta_+$ or $\delta_-$ is 0 then the linear program is degenerate and the range of optimality of $b_i$ is empty. In this case, our program is very sensitive to perturbations in $b_i$.
+
 
 ::: {.example}
 
@@ -233,6 +236,47 @@ Using $i = 3$ and Lemma \@ref(lem:basic-values) in Equation \@ref(eq:range-of-op
 
 which gives us $\delta \ge -0.1$ and so the range of optimality of $b_3$ is $(1 - 0.1, \infty) = (0.9, \infty)$.
 
+:::
 
+
+
+## Rate of change
+
+Assume now that neither of $\delta_+$ or $\delta_-$ is zero. Then, we can use Lemma \@ref(lem:basic-values) to find the rate of change of the optimal solution with respect to $b_i$. Call the objective function $\mathbb{O} = c^{T} x$. We think of $\mathbb{O}$ as being a function of $b_i$, $c_j$, and $a_{ij}$. Using Lemma \@ref(lem:basic-values) we get
+
+\begin{align}
+  \dfrac{\partial x_i}{\partial b_i} 
+    &= j^{th} \mbox{ row of } \dfrac{\partial \mathcal{B}^{-1}b}{\partial b_i} \\
+    &= (\mathcal{B}^{-1})_{ji} \\
+  \implies 
+  \dfrac{\partial \mathbb{O}}{\partial b_i} 
+    &= \dfrac{\partial c^T x}{\partial b_i} \\
+    &= \sum \limits_{j=1}^n c_j (\mathcal{B}^{-1})_{ji} \\
+    &= c^T (\mathcal{B}^{-1})_{*i} \\
+\end{align}
+
+::: {.theorem #rate-of-change-constraints}
+
+For a non-degenerate linear program, the rate of change of the optimal solution with respect to $b_i$ is given by $c^T (\mathcal{B}^{-1})_{*i}$.
 
 :::
+
+
+## Dual variables
+
+There is an alternate way to find the rate of change of the objective function with respect to $b_i$. By strong duality, we know that the optimal objective value of the primal and dual are the same so that at the optimal solution $\mathbb{O} = b^T y^*$ where $y^*$ is a dual optimal solution. Then 
+
+\begin{align}
+  \dfrac{\partial \mathbb{O}}{\partial b_i} = y^*_i.
+\end{align}
+
+Because of this relationship, the dual optimal solution is also called the **marginal cost** or the **shadow price** of $b_i$.
+Combining this result with \@ref(thm:rate-of-change-constraints) we get 
+
+::: {.theorem #dual-optimal-values}
+
+For a non-degenerate linear program, the dual optimal solution is given by $c^T \mathcal{B}^{-1}$.
+
+:::
+
+This gives us a way to compute the dual optimal solution directly without having to run the simplex method again on the dual linear program.

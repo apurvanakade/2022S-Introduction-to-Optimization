@@ -23,7 +23,7 @@
 <meta name="author" content="Apurva Nakade" />
 
 
-<meta name="date" content="2022-04-29" />
+<meta name="date" content="2022-04-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -154,6 +154,8 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="11.1" data-path="sensitivity-analysis---constraints.html"><a href="sensitivity-analysis---constraints.html#matrix-notation"><i class="fa fa-check"></i><b>11.1</b> Matrix notation<span></span></a></li>
 <li class="chapter" data-level="11.2" data-path="sensitivity-analysis---constraints.html"><a href="sensitivity-analysis---constraints.html#range-of-optimality"><i class="fa fa-check"></i><b>11.2</b> Range of optimality<span></span></a></li>
+<li class="chapter" data-level="11.3" data-path="sensitivity-analysis---constraints.html"><a href="sensitivity-analysis---constraints.html#rate-of-change"><i class="fa fa-check"></i><b>11.3</b> Rate of change<span></span></a></li>
+<li class="chapter" data-level="11.4" data-path="sensitivity-analysis---constraints.html"><a href="sensitivity-analysis---constraints.html#dual-variables"><i class="fa fa-check"></i><b>11.4</b> Dual variables<span></span></a></li>
 </ul></li>
 </ul>
 
@@ -183,12 +185,12 @@ We say that a vector <span class="math inline">\(x = \begin{bmatrix} x_1 \\ \vdo
 </div>
 <div class="proof">
 <p><span id="unlabeled-div-21" class="proof"><em>Proof</em>. </span>The proof relies on analyzing the term <span class="math inline">\(y^T A x\)</span> and follows by looking at the following sequence of inequalities:</p>
-<p><span class="math display">\[\begin{align}
-b^T y
+<p><span class="math display">\[\begin{align} 
+b^T y 
   &amp; = y^T b \\
   &amp; \ge y^T (Ax) &amp;&amp; \mbox{ as } Ax \leq b \mbox{ and } y \geq 0 \\
   &amp; = (y^T A x)^T \\
-  &amp; = x^T A^T y \\
+  &amp; = x^T A^T y \\ 
   &amp; \ge x^T c &amp;&amp; \mbox{ as } A^Ty \geq c \mbox{ and } x \geq 0 \\
   &amp; = c^T x.
 \end{align}\]</span></p>
@@ -209,18 +211,18 @@ b^T y
 <div id="strong-duality" class="section level2 hasAnchor" number="8.2">
 <h2><span class="header-section-number">8.2</span> Strong duality<a href="weak-and-strong-duality.html#strong-duality" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The tableau of the primal problem <a href="standard-linear-program.html#eq:standard-lp">(2.1)</a> is as follows:</p>
-<p><span class="math display" id="eq:tableau-primal">\[\begin{equation}
+<p><span class="math display" id="eq:tableau-primal">\[\begin{equation} 
   \begin{array}{ll|r}
   c^T &amp; 0 &amp; c_0 \\ \hline
-  A &amp; I_m &amp; b
+  A &amp; I_m &amp; b 
   \end{array}
   \tag{8.1}
 \end{equation}\]</span></p>
 <p>We can standardize the dual problem <a href="dual-linear-program.html#eq:standard-dual-lp">(7.1)</a> and form its tableau:</p>
-<p><span class="math display" id="eq:tableau-dual">\[\begin{equation}
+<p><span class="math display" id="eq:tableau-dual">\[\begin{equation} 
   \begin{array}{ll|r}
   -b^T &amp; 0 &amp; -c_0 \\ \hline
-  -A^T &amp; I_n &amp; -c
+  -A^T &amp; I_n &amp; -c 
   \end{array}
   \tag{8.2}
 \end{equation}\]</span></p>
