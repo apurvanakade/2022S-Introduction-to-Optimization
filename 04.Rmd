@@ -79,8 +79,8 @@ Consider the following linear program:
   \mbox{maximize:} & x & + & y \\
   \mbox{subject to:}
     & x & + & 2y & \le & 6 \\
-    & -x &  &  & \ge & -1 \\
-    &  &  & -y & \ge & -2 \\
+    & -x &  &  & \le & -1 \\
+    &  &  & -y & \le & -2 \\
     & x & , & y & \ge & 0.
   \end{array}
 \end{equation}
