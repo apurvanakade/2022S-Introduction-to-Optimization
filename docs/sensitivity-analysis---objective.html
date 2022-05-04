@@ -4,20 +4,20 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 10 Dual of a general linear program | Introduction to Optimization</title>
-  <meta name="description" content="Chapter 10 Dual of a general linear program | Introduction to Optimization." />
+  <title>Chapter 12 Sensitivity analysis - Objective | Introduction to Optimization</title>
+  <meta name="description" content="Chapter 12 Sensitivity analysis - Objective | Introduction to Optimization." />
   <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 10 Dual of a general linear program | Introduction to Optimization" />
+  <meta property="og:title" content="Chapter 12 Sensitivity analysis - Objective | Introduction to Optimization" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="Chapter 10 Dual of a general linear program | Introduction to Optimization." />
+  <meta property="og:description" content="Chapter 12 Sensitivity analysis - Objective | Introduction to Optimization." />
   <meta name="github-repo" content="apurvanakade/2022S-Introduction-to-optimization" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 10 Dual of a general linear program | Introduction to Optimization" />
+  <meta name="twitter:title" content="Chapter 12 Sensitivity analysis - Objective | Introduction to Optimization" />
   
-  <meta name="twitter:description" content="Chapter 10 Dual of a general linear program | Introduction to Optimization." />
+  <meta name="twitter:description" content="Chapter 12 Sensitivity analysis - Objective | Introduction to Optimization." />
   
 
 <meta name="author" content="Apurva Nakade" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="certificate-of-optimality.html"/>
-<link rel="next" href="sensitivity-analysis---constraints.html"/>
+<link rel="prev" href="sensitivity-analysis---constraints.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -175,50 +175,43 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="dual-of-a-general-linear-program" class="section level1 hasAnchor" number="10">
-<h1><span class="header-section-number">Chapter 10</span> Dual of a general linear program<a href="dual-of-a-general-linear-program.html#dual-of-a-general-linear-program" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>We saw how to standardized non-standard linear programs in Chapter <a href="standardization.html#standardization">6</a>. We need to “fix” the objective function, constraints, and signs of decision variables. To find the dual of a non-standard linear program, we can first standardize it and then form the dual. However, doing so changes the coefficients of the constraints. After standardization, we can “revert the standardization” of the dual so that the matrix that defines the dual constraints is precisely the transpose of the matrix that defines the primal constraints. This requires us to change appropriate inequalities in the dual as described in the following table.</p>
-<table>
-<thead>
-<tr class="header">
-<th align="center">Primal</th>
-<th align="center">Dual</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center"><span class="math inline">\(a_{i1} x_1 + \dots + a_{in} x_n \le b_i\)</span></td>
-<td align="center"><span class="math inline">\(y_i \ge 0\)</span></td>
-</tr>
-<tr class="even">
-<td align="center"><span class="math inline">\(a_{i1} x_1 + \dots + a_{in} x_n \ge b_i\)</span></td>
-<td align="center"><span class="math inline">\(y_i \le 0\)</span></td>
-</tr>
-<tr class="odd">
-<td align="center"><span class="math inline">\(a_{i1} x_1 + \dots + a_{in} x_n = b_i\)</span></td>
-<td align="center"><span class="math inline">\(y_i\)</span> is free</td>
-</tr>
-<tr class="even">
-<td align="center"><span class="math inline">\(x_j \ge 0\)</span></td>
-<td align="center"><span class="math inline">\(a_{1j}y_1 + \dots + a_{mj} y_m \ge c_j\)</span></td>
-</tr>
-<tr class="odd">
-<td align="center"><span class="math inline">\(x_j \le 0\)</span></td>
-<td align="center"><span class="math inline">\(a_{1j}y_1 + \dots + a_{mj} y_m \le c_j\)</span></td>
-</tr>
-<tr class="even">
-<td align="center"><span class="math inline">\(x_j\)</span> is free</td>
-<td align="center"><span class="math inline">\(a_{1j}y_1 + \dots + a_{mj} y_m = c_j\)</span></td>
-</tr>
-</tbody>
-</table>
-<p>Note that if we define slack variables as before
-<span class="math display">\[\begin{align}
-  w &amp;= b - A x \\ 
-  z &amp;= -c + A^T y,
-\end{align}\]</span>
-then even for a general linear program we will have <span class="math inline">\(x_j w_j \ge 0\)</span> for all <span class="math inline">\(1 \le j \le n\)</span> and <span class="math inline">\(y_i z_i \ge 0\)</span> for all <span class="math inline">\(1 \le i \le m\)</span>.
-Hence, complementary slackness, as stated in Theorem <a href="certificate-of-optimality.html#thm:complementary-slackness">9.2</a>, holds true for the general linear programs.</p>
+<div id="sensitivity-analysis---objective" class="section level1 hasAnchor" number="12">
+<h1><span class="header-section-number">Chapter 12</span> Sensitivity analysis - Objective<a href="sensitivity-analysis---objective.html#sensitivity-analysis---objective" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>We can ask the same questions as in the previous chapter about the change in the objective coefficients - how far can we change the objective coefficient <span class="math inline">\(c_i\)</span> without changing the set of basic and non-basic variables at the optimal solution. Note that in this case we are not changing the constraints and therefore the feasible region. So, this is the same as asking - how far can we change the objective coefficient <span class="math inline">\(c_i\)</span> without changing the optimal solution.</p>
+<p>We can redo the entire analysis for the objective coefficients from scratch. However, we also know the objective coefficients are the constraint upper bounds for the dual linear program and by Strong duality (Theorem <a href="weak-and-strong-duality.html#thm:strong-duality">8.2</a>) the primal and dual optimal objective values are the same. Thus performing sensitivity analysis on the objective coefficients of the primal is the same as performing sensitivity analysis on the constraints of the dual.</p>
+<p>Consider the standardized dual
+<span class="math display">\[\begin{equation}
+  \begin{array}{lrll}
+    \mbox{minimize: } &amp; -b^T y \\
+    \mbox{subject to: } 
+      &amp; -A^T y &amp; \leq &amp; -c \\
+      &amp; y &amp; \geq &amp; 0,
+  \end{array}
+\end{equation}\]</span></p>
+<p>Using Equation <a href="sensitivity-analysis---constraints.html#eq:range-of-optimality">(11.3)</a> for this dictionary we get the range of optimality for <span class="math inline">\(-c_j\)</span> to be
+<span class="math display">\[\begin{equation}
+  (-\mathcal{B}_d)^{-1} (-c) + \delta (-\mathcal{B}_d^{-1})_{*j} \ge 0.
+\end{equation}\]</span>
+where <span class="math inline">\(\mathcal{B}_d\)</span> is the basic submatrix of the standardized dual which simplifies to
+<span class="math display">\[\begin{equation}
+  \mathcal{B}_d^{-1} c - \delta (\mathcal{B}_d^{-1})_{*j} \ge 0.
+\end{equation}\]</span>
+Note that this is the range of optimality for <span class="math inline">\(-c_j\)</span>. To get the range of optimality for <span class="math inline">\(c_j\)</span> we need to replace <span class="math inline">\(\delta\)</span> by <span class="math inline">\(-\delta\)</span> to get
+<span class="math display">\[\begin{equation}
+  \mathcal{B}_d^{-1} c + \delta (\mathcal{B}_d^{-1})_{*j} \ge 0.
+\end{equation}\]</span></p>
+<p>Finally, by Lemma <a href="sensitivity-analysis---constraints.html#lem:basic-values">11.1</a> <span class="math inline">\(\mathcal{B}_d^{-1} c\)</span> is the vector of values of the dual basic variables. Hence we get, the <strong>range of optimality</strong> for <span class="math inline">\(c_j\)</span> is the interval <span class="math inline">\((c_j + \delta_-, c_j + \delta_+)\)</span> such that <span class="math inline">\(y_{\mathcal{B}}^* + \delta (\mathcal{B}_d^{-1})_{*j} \ge 0\)</span> for all <span class="math inline">\(\delta \in (\delta_-, \delta_+)\)</span>. Note that as a happy accident all the negative signs cancel out and the equation for finding the range of optimality for the objective coefficients is exactly the same as the one for finding the range of optimality for the constraints.</p>
+<p>::: {theorem #range-of-optimality}</p>
+<p>The range of optimality for the constraints and the objective functions are given the following formulae:</p>
+<p><strong>Range of optimality for <span class="math inline">\(b_i\)</span>:</strong></p>
+<p><span class="math display">\[\begin{equation}
+  x_{\mathcal{B}}^* + \delta (\mathcal{B}^{-1})_{*i} \ge 0.
+\end{equation}\]</span></p>
+<p><strong>Range of optimality for <span class="math inline">\(c_j\)</span>:</strong></p>
+<p><span class="math display">\[\begin{equation}
+  y_{\mathcal{B}}^* + \delta (\mathcal{B}_d^{-1})_{*j} \ge 0.
+\end{equation}\]</span></p>
+<p>:::</p>
 
 </div>
             </section>
@@ -226,8 +219,8 @@ Hence, complementary slackness, as stated in Theorem <a href="certificate-of-opt
           </div>
         </div>
       </div>
-<a href="certificate-of-optimality.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="sensitivity-analysis---constraints.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="sensitivity-analysis---constraints.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

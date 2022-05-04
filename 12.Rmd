@@ -1,0 +1,48 @@
+# Sensitivity analysis - Objective
+
+We can ask the same questions as in the previous chapter about the change in the objective coefficients - how far can we change the objective coefficient $c_i$ without changing the set of basic and non-basic variables at the optimal solution. Note that in this case we are not changing the constraints and therefore the feasible region. So, this is the same as asking - how far can we change the objective coefficient $c_i$ without changing the optimal solution.
+
+We can redo the entire analysis for the objective coefficients from scratch. However, we also know the objective coefficients are the constraint upper bounds for the dual linear program and by Strong duality (Theorem \@ref(thm:strong-duality)) the primal and dual optimal objective values are the same. Thus performing sensitivity analysis on the objective coefficients of the primal is the same as performing sensitivity analysis on the constraints of the dual.
+
+Consider the standardized dual 
+\begin{equation}
+  \begin{array}{lrll}
+    \mbox{minimize: } & -b^T y \\
+    \mbox{subject to: } 
+      & -A^T y & \leq & -c \\
+      & y & \geq & 0,
+  \end{array}
+\end{equation}
+
+Using Equation \@ref(eq:range-of-optimality) for this dictionary we get the range of optimality for $-c_j$ to be
+\begin{equation}
+  (-\mathcal{B}_d)^{-1} (-c) + \delta (-\mathcal{B}_d^{-1})_{*j} \ge 0.
+\end{equation}
+where $\mathcal{B}_d$ is the basic submatrix of the standardized dual which simplifies to 
+\begin{equation}
+  \mathcal{B}_d^{-1} c - \delta (\mathcal{B}_d^{-1})_{*j} \ge 0.
+\end{equation}
+Note that this is the range of optimality for $-c_j$. To get the range of optimality for $c_j$ we need to replace $\delta$ by $-\delta$ to get 
+\begin{equation}
+  \mathcal{B}_d^{-1} c + \delta (\mathcal{B}_d^{-1})_{*j} \ge 0.
+\end{equation}
+
+Finally, by Lemma \@ref(lem:basic-values) $\mathcal{B}_d^{-1} c$ is the vector of values of the dual basic variables. Hence we get, the **range of optimality** for $c_j$ is the interval $(c_j + \delta_-, c_j + \delta_+)$ such that $y_{\mathcal{B}}^* + \delta (\mathcal{B}_d^{-1})_{*j} \ge 0$ for all $\delta \in (\delta_-, \delta_+)$. Note that as a happy accident all the negative signs cancel out and the equation for finding the range of optimality for the objective coefficients is exactly the same as the one for finding the range of optimality for the constraints.
+
+::: {theorem #range-of-optimality}
+
+The range of optimality for the constraints and the objective functions are given the following formulae:
+
+**Range of optimality for $b_i$:**
+
+\begin{equation}
+  x_{\mathcal{B}}^* + \delta (\mathcal{B}^{-1})_{*i} \ge 0.
+\end{equation}
+
+**Range of optimality for $c_j$:**
+
+\begin{equation}
+  y_{\mathcal{B}}^* + \delta (\mathcal{B}_d^{-1})_{*j} \ge 0.
+\end{equation}
+
+:::
