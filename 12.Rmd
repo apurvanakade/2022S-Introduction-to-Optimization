@@ -29,9 +29,9 @@ Note that this is the range of optimality for $-c_j$. To get the range of optima
 
 Finally, by Lemma \@ref(lem:basic-values) $\mathcal{B}_d^{-1} c$ is the vector of values of the dual basic variables. Hence we get, the **range of optimality** for $c_j$ is the interval $(c_j + \delta_-, c_j + \delta_+)$ such that $y_{\mathcal{B}}^* + \delta (\mathcal{B}_d^{-1})_{*j} \ge 0$ for all $\delta \in (\delta_-, \delta_+)$. Note that as a happy accident all the negative signs cancel out and the equation for finding the range of optimality for the objective coefficients is exactly the same as the one for finding the range of optimality for the constraints.
 
-::: {theorem #range-of-optimality}
+::: {.theorem #range-of-optimality}
 
-The range of optimality for the constraints and the objective functions are given the following formulae:
+The range of optimality for the constraints and the objective functions are given by the following formulae:
 
 **Range of optimality for $b_i$:**
 

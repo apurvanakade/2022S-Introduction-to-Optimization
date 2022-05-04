@@ -50,6 +50,7 @@ eq:range-of-optimality
 exm:unlabeled-div-30
 thm:dual-solution
 exm:unlabeled-div-31
+thm:range-of-optimality
 introduction
 software-tools
 graphing-calculator
