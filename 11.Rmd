@@ -156,7 +156,7 @@ Note that the coefficients of $x_{\mathcal{N}}$ remain unchanged. So, for this d
 
 The **range of optimality** for $b_i$ is the interval $(b_i + \delta_-, b_i + \delta_+)$ such that $\mathcal{B}^{-1} b + \delta (\mathcal{B}^{-1})_{*i} \ge 0$ for all $\delta \in (\delta_-, \delta_+)$.
 
-In practice, Equation \@ref(eq:range-of-optimality) gives us $m$ inequalities, all of which need to be simultaneously satisfied. These give us candidate values for $\delta$ some of which are positive and some of which are negative. We then choose $\delta_+$ to be the smallest positive value and $\delta_-$ to be the largest negative value. If $\delta_+$ does not exist the upper bound is $\infty$ and if $\delta_-$ does not exist the lower bound is $-\infty$. If either $\delta_+$ or $\delta_-$ is 0 then the linear program is degenerate and the range of optimality of $b_i$ is empty. In this case, our program is very sensitive to perturbations in $b_i$.
+In practice, Equation \@ref(eq:range-of-optimality) gives us $m$ inequalities, all of which need to be simultaneously satisfied. These give us candidate values for $\delta$ some of which are positive and some of which are negative. We then choose $\delta_+$ to be the smallest positive value and $\delta_-$ to be the largest negative value. If $\delta_+$ does not exist the upper bound is $\infty$ and if $\delta_-$ does not exist the lower bound is $-\infty$. If either $\delta_+$ or $\delta_-$ is 0 then the linear program is degenerate and the range of optimality for $b_i$ is empty. In this case, our program is very sensitive to perturbations in $b_i$.
 
 
 ::: {.example}
@@ -196,7 +196,7 @@ which gives us the inequalities
   \end{array}
 \end{align}
 
-So, $\delta_- = -1.35$ and $\delta_+ = \min(5.4, 0.9) = 0.9$ and the range of optimality of $b_1$ is $(3.6 - 1.35, 3.6 + 0.9) = (2.85, 3.45)$.
+So, $\delta_- = -1.35$ and $\delta_+ = \min(5.4, 0.9) = 0.9$ and the range of optimality for $b_1$ is $(3.6 - 1.35, 3.6 + 0.9) = (2.85, 3.45)$.
 
 Using $i = 2$ and Lemma \@ref(lem:basic-values) in Equation \@ref(eq:range-of-optimality) we get
 
@@ -220,7 +220,7 @@ which gives us the inequalities
   \end{array}
 \end{align}
 
-So, $\delta_- = -0.9$ and $\delta_+ = \min(0.3, 0.9) = 0.3$ and the range of optimality of $b_2$ is $(1.5 - 0.9, 1.5 + 0.3) = (0.6, 1.8)$.
+So, $\delta_- = -0.9$ and $\delta_+ = \min(0.3, 0.9) = 0.3$ and the range of optimality for $b_2$ is $(1.5 - 0.9, 1.5 + 0.3) = (0.6, 1.8)$.
 
 Using $i = 3$ and Lemma \@ref(lem:basic-values) in Equation \@ref(eq:range-of-optimality) we get
 
@@ -234,7 +234,7 @@ Using $i = 3$ and Lemma \@ref(lem:basic-values) in Equation \@ref(eq:range-of-op
   \end{bmatrix} > 0
 \end{align}
 
-which gives us $\delta \ge -0.1$ and so the range of optimality of $b_3$ is $(1 - 0.1, \infty) = (0.9, \infty)$.
+which gives us $\delta \ge -0.1$ and so the range of optimality for $b_3$ is $(1 - 0.1, \infty) = (0.9, \infty)$.
 
 :::
 
