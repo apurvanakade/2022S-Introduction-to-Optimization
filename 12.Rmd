@@ -46,3 +46,20 @@ The range of optimality for the constraints and the objective functions are give
 \end{equation}
 
 :::
+
+Finally, to find $\mathcal{B}_d$ we note that, by Complementary Slackness (Theorem \@ref(thm:complementary-slackness)), if the linear program is non-degenerate then the dual basic variables correspond to the primal non-basic variables (as the dual basic variables must be non-zero). This statement is true even for degenerate linear programs but in this case the proof is more subtle and requires the use of Strong duality (Theorem \@ref(thm:strong-duality)).
+
+
+::: {.example}
+
+Consider the linear program \@ref(eq:bond-portfolio-lp) again. At the optimal solution, as $w_1$ and $w_2$ are non-basic, the corresponding dual variables ($y_1$ and $y_2$) will be basic for the dual linear program \@ref(eq:bond-portfolio-dual). This gives us 
+
+\begin{align}
+  \mathcal{B}_d &= \begin{bmatrix} 3 & 2 \\ 6 & 1 \end{bmatrix} \\
+  \implies 
+  \mathcal{B}_d^{-1} &= \begin{bmatrix} -1/9 & 2/9 \\ 6/9 & 3/9 \end{bmatrix}.
+\end{align}
+
+
+
+:::
