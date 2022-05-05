@@ -23,7 +23,7 @@
 <meta name="author" content="Apurva Nakade" />
 
 
-<meta name="date" content="2022-05-04" />
+<meta name="date" content="2022-05-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -329,10 +329,10 @@ where <span class="math inline">\((\mathcal{B}^{-1})_{*i}\)</span> denotes the <
 \end{align}\]</span></p>
 <p>which gives us the inequalities</p>
 <p><span class="math display">\[\begin{align}
-  \begin{array}{llllllll}
-    0.6 + \delta (-1/9) &amp;\ge 0 &amp; \implies &amp; \delta &amp;\le - 0.6 (9) = 5.4 \\
-    0.3 + \delta (2/9) &amp;\ge 0 &amp; \implies &amp; \delta &amp;\ge -0.3 (9/2) = -1.35  \\
-    0.1 + \delta (-1/9) &amp;\ge 0 &amp; \implies &amp; \delta &amp; \le 0.1 (9) = 0.9.  
+  \begin{array}{lrlrrll}
+    0.6 + \delta (-1/9) &amp;\ge &amp; 0 &amp; \implies &amp; \delta &amp;\le &amp; 0.6 (9) = 5.4 \\
+    0.3 + \delta (2/9) &amp;\ge &amp; 0 &amp; \implies &amp; \delta &amp;\ge &amp; -0.3 (9/2) = -1.35  \\
+    0.1 + \delta (-1/9) &amp;\ge &amp; 0 &amp; \implies &amp; \delta &amp; \le &amp; 0.1 (9) = 0.9.  
   \end{array}
 \end{align}\]</span></p>
 <p>So, <span class="math inline">\(\delta_- = -1.35\)</span> and <span class="math inline">\(\delta_+ = \min(5.4, 0.9) = 0.9\)</span> and the range of optimality of <span class="math inline">\(b_1\)</span> is <span class="math inline">\((3.6 - 1.35, 3.6 + 0.9) = (2.85, 3.45)\)</span>.</p>
@@ -348,10 +348,10 @@ where <span class="math inline">\((\mathcal{B}^{-1})_{*i}\)</span> denotes the <
 \end{align}\]</span></p>
 <p>which gives us the inequalities</p>
 <p><span class="math display">\[\begin{align}
-  \begin{array}{llllllll}
-    0.6 + \delta (2/3) &amp;\ge 0 &amp; \implies &amp; \delta &amp;\ge - 0.6 (3/2) = -0.9 \\
-    0.3 + \delta (-1/3) &amp;\ge 0 &amp; \implies &amp; \delta &amp;\le 0.3 (3) = 0.9  \\
-    0.1 + \delta (-1/3) &amp;\ge 0 &amp; \implies &amp; \delta &amp; \le 0.3 (1) = 0.3.  
+  \begin{array}{lrlrrll}
+    0.6 + \delta (2/3) &amp;\ge&amp; 0 &amp; \implies &amp; \delta &amp;\ge&amp; - 0.6 (3/2) = -0.9 \\
+    0.3 + \delta (-1/3) &amp;\ge &amp;0 &amp; \implies &amp; \delta &amp;\le &amp;0.3 (3) = 0.9  \\
+    0.1 + \delta (-1/3) &amp;\ge &amp;0 &amp; \implies &amp; \delta &amp; \le&amp; 0.3 (1) = 0.3.  
   \end{array}
 \end{align}\]</span></p>
 <p>So, <span class="math inline">\(\delta_- = -0.9\)</span> and <span class="math inline">\(\delta_+ = \min(0.3, 0.9) = 0.3\)</span> and the range of optimality of <span class="math inline">\(b_2\)</span> is <span class="math inline">\((1.5 - 0.9, 1.5 + 0.3) = (0.6, 1.8)\)</span>.</p>
@@ -405,7 +405,7 @@ Using these we can find the rate of change of the optimal solution <span class="
 </div>
 <p>This theorem provides yet another method of finding the dual optimal solution without having to solve the dual linear program.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-31" class="example"><strong>Example 11.4  </strong></span>For the linear program <a href="introduction.html#eq:bond-portfolio-lp">(1.2)</a>, the objective function is</p>
+<p><span id="exm:dual-solution" class="example"><strong>Example 11.4  </strong></span>For the linear program <a href="introduction.html#eq:bond-portfolio-lp">(1.2)</a>, the objective function is</p>
 <p><span class="math display">\[\begin{align}
   \mathbb{O} &amp; = 4 x + 3y \\
   &amp; = 4x + 3y + 0 w_3 + 0 w_1 + 0 w_2 

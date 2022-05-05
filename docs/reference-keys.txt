@@ -49,8 +49,9 @@ exm:unlabeled-div-29
 eq:range-of-optimality
 exm:unlabeled-div-30
 thm:dual-solution
-exm:unlabeled-div-31
+exm:dual-solution
 thm:range-of-optimality
+exm:unlabeled-div-31
 introduction
 software-tools
 graphing-calculator

@@ -189,10 +189,10 @@ Using $i = 1$ and Lemma \@ref(lem:basic-values) in Equation \@ref(eq:range-of-op
 which gives us the inequalities 
 
 \begin{align}
-  \begin{array}{llllllll}
-    0.6 + \delta (-1/9) &\ge 0 & \implies & \delta &\le - 0.6 (9) = 5.4 \\
-    0.3 + \delta (2/9) &\ge 0 & \implies & \delta &\ge -0.3 (9/2) = -1.35  \\
-    0.1 + \delta (-1/9) &\ge 0 & \implies & \delta & \le 0.1 (9) = 0.9.  
+  \begin{array}{lrlrrll}
+    0.6 + \delta (-1/9) &\ge & 0 & \implies & \delta &\le & 0.6 (9) = 5.4 \\
+    0.3 + \delta (2/9) &\ge & 0 & \implies & \delta &\ge & -0.3 (9/2) = -1.35  \\
+    0.1 + \delta (-1/9) &\ge & 0 & \implies & \delta & \le & 0.1 (9) = 0.9.  
   \end{array}
 \end{align}
 
@@ -213,10 +213,10 @@ Using $i = 2$ and Lemma \@ref(lem:basic-values) in Equation \@ref(eq:range-of-op
 which gives us the inequalities 
 
 \begin{align}
-  \begin{array}{llllllll}
-    0.6 + \delta (2/3) &\ge 0 & \implies & \delta &\ge - 0.6 (3/2) = -0.9 \\
-    0.3 + \delta (-1/3) &\ge 0 & \implies & \delta &\le 0.3 (3) = 0.9  \\
-    0.1 + \delta (-1/3) &\ge 0 & \implies & \delta & \le 0.3 (1) = 0.3.  
+  \begin{array}{lrlrrll}
+    0.6 + \delta (2/3) &\ge& 0 & \implies & \delta &\ge& - 0.6 (3/2) = -0.9 \\
+    0.3 + \delta (-1/3) &\ge &0 & \implies & \delta &\le &0.3 (3) = 0.9  \\
+    0.1 + \delta (-1/3) &\ge &0 & \implies & \delta & \le& 0.3 (1) = 0.3.  
   \end{array}
 \end{align}
 
@@ -286,7 +286,7 @@ For a non-degenerate linear program, the dual optimal solution is given by $(\ma
 
 This theorem provides yet another method of finding the dual optimal solution without having to solve the dual linear program. 
 
-::: {.example} 
+::: {.example #dual-solution} 
 For the linear program \@ref(eq:bond-portfolio-lp), the objective function is 
 
 \begin{align}
