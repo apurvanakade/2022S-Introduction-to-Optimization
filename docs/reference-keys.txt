@@ -48,8 +48,10 @@ lem:basic-values
 exm:unlabeled-div-29
 eq:range-of-optimality
 exm:unlabeled-div-30
-thm:rate-of-change-constraints
-thm:dual-optimal-values
+thm:dual-solution
+exm:dual-solution
+thm:range-of-optimality
+exm:unlabeled-div-31
 introduction
 software-tools
 graphing-calculator
@@ -90,3 +92,4 @@ matrix-notation
 range-of-optimality
 rate-of-change
 dual-variables
+sensitivity-analysis---objective

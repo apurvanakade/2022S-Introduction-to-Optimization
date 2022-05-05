@@ -4,20 +4,20 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 6 Standardization | Introduction to Optimization</title>
-  <meta name="description" content="Chapter 6 Standardization | Introduction to Optimization." />
+  <title>Chapter 12 Sensitivity analysis - Objective | Introduction to Optimization</title>
+  <meta name="description" content="Chapter 12 Sensitivity analysis - Objective | Introduction to Optimization." />
   <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 6 Standardization | Introduction to Optimization" />
+  <meta property="og:title" content="Chapter 12 Sensitivity analysis - Objective | Introduction to Optimization" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="Chapter 6 Standardization | Introduction to Optimization." />
+  <meta property="og:description" content="Chapter 12 Sensitivity analysis - Objective | Introduction to Optimization." />
   <meta name="github-repo" content="apurvanakade/2022S-Introduction-to-optimization" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 6 Standardization | Introduction to Optimization" />
+  <meta name="twitter:title" content="Chapter 12 Sensitivity analysis - Objective | Introduction to Optimization" />
   
-  <meta name="twitter:description" content="Chapter 6 Standardization | Introduction to Optimization." />
+  <meta name="twitter:description" content="Chapter 12 Sensitivity analysis - Objective | Introduction to Optimization." />
   
 
 <meta name="author" content="Apurva Nakade" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="halting-problem.html"/>
-<link rel="next" href="dual-linear-program.html"/>
+<link rel="prev" href="sensitivity-analysis---constraints.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -175,44 +175,90 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="standardization" class="section level1 hasAnchor" number="6">
-<h1><span class="header-section-number">Chapter 6</span> Standardization<a href="standardization.html#standardization" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>A <strong>general linear program</strong> is an optimization question where the objective function is a linear program and the constraints are linear equalities or inequalities.</p>
-<div class="remark">
-<p><span id="unlabeled-div-18" class="remark"><em>Remark</em>. </span>We do not allow the inequalities to be “&lt;” or “&gt;”. This is because the region defined by using such inequalities is an open set and extreme value theorem is not applicable to these open sets. This further implies that the fundamental theorem of linear programming is no longer valid for these kinds of constraints.</p>
-<p>For example, consider the following linear program:</p>
+<div id="sensitivity-analysis---objective" class="section level1 hasAnchor" number="12">
+<h1><span class="header-section-number">Chapter 12</span> Sensitivity analysis - Objective<a href="sensitivity-analysis---objective.html#sensitivity-analysis---objective" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>We can ask the same questions as in the previous chapter about the change in the objective coefficients - how far can we change the objective coefficient <span class="math inline">\(c_i\)</span> without changing the set of basic and non-basic variables at the optimal solution. Note that in this case we are not changing the constraints and therefore the feasible region. So, this is the same as asking - how far can we change the objective coefficient <span class="math inline">\(c_i\)</span> without changing the optimal solution.</p>
+<p>We can redo the entire analysis for the objective coefficients from scratch. However, we also know the objective coefficients are the constraint upper bounds for the dual linear program and by Strong duality (Theorem <a href="weak-and-strong-duality.html#thm:strong-duality">8.2</a>) the primal and dual optimal objective values are the same. Thus performing sensitivity analysis on the objective coefficients of the primal is the same as performing sensitivity analysis on the constraints of the dual.</p>
+<p>Consider the standardized dual
+<span class="math display">\[\begin{equation}
+  \begin{array}{lrll}
+    \mbox{minimize: } &amp; -b^T y \\
+    \mbox{subject to: } 
+      &amp; -A^T y &amp; \leq &amp; -c \\
+      &amp; y &amp; \geq &amp; 0,
+  \end{array}
+\end{equation}\]</span></p>
+<p>Using Equation <a href="sensitivity-analysis---constraints.html#eq:range-of-optimality">(11.3)</a> for this dictionary we get the range of optimality for <span class="math inline">\(-c_j\)</span> to be
+<span class="math display">\[\begin{equation}
+  (-\mathcal{B}_d)^{-1} (-c) + \delta (-\mathcal{B}_d^{-1})_{*j} \ge 0.
+\end{equation}\]</span>
+where <span class="math inline">\(\mathcal{B}_d\)</span> is the basic submatrix of the standardized dual which simplifies to
+<span class="math display">\[\begin{equation}
+  \mathcal{B}_d^{-1} c - \delta (\mathcal{B}_d^{-1})_{*j} \ge 0.
+\end{equation}\]</span>
+Note that this is the range of optimality for <span class="math inline">\(-c_j\)</span>. To get the range of optimality for <span class="math inline">\(c_j\)</span> we need to replace <span class="math inline">\(\delta\)</span> by <span class="math inline">\(-\delta\)</span> to get
+<span class="math display">\[\begin{equation}
+  \mathcal{B}_d^{-1} c + \delta (\mathcal{B}_d^{-1})_{*j} \ge 0.
+\end{equation}\]</span></p>
+<p>Finally, by Lemma <a href="sensitivity-analysis---constraints.html#lem:basic-values">11.1</a> <span class="math inline">\(\mathcal{B}_d^{-1} c\)</span> is the vector of values of the dual basic variables. Hence we get, the <strong>range of optimality</strong> for <span class="math inline">\(c_j\)</span> is the interval <span class="math inline">\((c_j + \delta_-, c_j + \delta_+)\)</span> such that <span class="math inline">\(y_{\mathcal{B}}^* + \delta (\mathcal{B}_d^{-1})_{*j} \ge 0\)</span> for all <span class="math inline">\(\delta \in (\delta_-, \delta_+)\)</span>. Note that as a happy accident all the negative signs cancel out and the equation for finding the range of optimality for the objective coefficients is exactly the same as the one for finding the range of optimality for the constraints.</p>
+<div class="theorem">
+<p><span id="thm:range-of-optimality" class="theorem"><strong>Theorem 12.1  </strong></span>The range of optimality for the constraints and the objective functions are given by the following formulae:</p>
+<p><strong>Range of optimality for <span class="math inline">\(b_i\)</span>:</strong></p>
+<p><span class="math display">\[\begin{equation}
+  x_{\mathcal{B}}^* + \delta (\mathcal{B}^{-1})_{*i} \ge 0.
+\end{equation}\]</span></p>
+<p><strong>Range of optimality for <span class="math inline">\(c_j\)</span>:</strong></p>
+<p><span class="math display">\[\begin{equation}
+  y_{\mathcal{B}}^* + \delta (\mathcal{B}_d^{-1})_{*j} \ge 0.
+\end{equation}\]</span></p>
+</div>
+<p>Finally, to find <span class="math inline">\(\mathcal{B}_d\)</span> we note that, by Complementary Slackness (Theorem <a href="certificate-of-optimality.html#thm:complementary-slackness">9.2</a>), if the linear program is non-degenerate then the dual basic variables correspond to the primal non-basic variables (as the dual basic variables must be non-zero). This statement is true even for degenerate linear programs but in this case the proof is more subtle and requires the use of Strong duality (Theorem <a href="weak-and-strong-duality.html#thm:strong-duality">8.2</a>).</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-31" class="example"><strong>Example 12.1  </strong></span>Consider the linear program <a href="introduction.html#eq:bond-portfolio-lp">(1.2)</a> again. At the optimal solution, as <span class="math inline">\(w_1\)</span> and <span class="math inline">\(w_2\)</span> are non-basic, the corresponding dual variables (<span class="math inline">\(y_1\)</span> and <span class="math inline">\(y_2\)</span>) will be basic for the dual linear program <a href="dual-linear-program.html#eq:bond-portfolio-dual">(7.2)</a>. This gives us</p>
 <p><span class="math display">\[\begin{align}
-\mbox{maximize: } &amp; x \\
-\mbox{subject to: } &amp; x &lt; 1 \\
-&amp; x \geq 1. \\
+  \mathcal{B}_d &amp;= \begin{bmatrix} 3 &amp; 2 \\ 6 &amp; 1 \end{bmatrix} \\
+  \implies 
+  \mathcal{B}_d^{-1} &amp;= \begin{bmatrix} -1/9 &amp; 2/9 \\ 2/3 &amp; -1/3 \end{bmatrix}.
 \end{align}\]</span></p>
-<p>The feasible region is <span class="math inline">\([0, 1)\)</span> which is bounded from above and yet there is no optimal solution.</p>
+<p>From Example <a href="sensitivity-analysis---constraints.html#exm:dual-solution">11.4</a> we know that <span class="math inline">\(y_1 = 2/9\)</span> and <span class="math inline">\(y_2 = 5/3\)</span> at the dual optimal solution. Using these, we can now find the range of optimality for the objective coefficients.</p>
+<p>To find the range of optimality for <span class="math inline">\(c_1 = 4\)</span> we solve
+<span class="math display">\[\begin{align}
+  \begin{bmatrix} 2/9 \\ 5/3 \end{bmatrix} 
+  + 
+  \delta \begin{bmatrix} -1/9 \\ 2/3 \end{bmatrix} \ge 0
+\end{align}\]</span>
+which gives us the inequalities
+<span class="math display">\[\begin{align}
+  \begin{array}{lrlrrll}
+  2/9 + \delta (-1/9) &amp; \ge &amp; 0 &amp; \implies &amp; \delta &amp; \le &amp; 2 \\
+  5/3 + \delta (2/3) &amp; \ge &amp; 0 &amp; \implies &amp; \delta &amp; \ge &amp; -5/2
+  \end{array}
+\end{align}\]</span>
+So, <span class="math inline">\(\delta_- = -5/2\)</span> and <span class="math inline">\(\delta_+ = 2\)</span> and the range of optimality of <span class="math inline">\(c_1\)</span> is <span class="math inline">\((4 - 5/2, 4 + 2) = (1.5, 6)\)</span>.</p>
+<p>To find the range of optimality for <span class="math inline">\(c_2 = 3\)</span> we solve
+<span class="math display">\[\begin{align}
+  \begin{bmatrix} 2/9 \\ 5/3 \end{bmatrix} 
+  + 
+  \delta \begin{bmatrix} 2/9 \\ -1/3 \end{bmatrix} \ge 0
+\end{align}\]</span>
+which gives us the inequalities
+<span class="math display">\[\begin{align}
+  \begin{array}{lrlrrll}
+  2/9 + \delta (2/9) &amp; \ge &amp; 0 &amp; \implies &amp; \delta &amp; \ge &amp; -1 \\
+  5/3 + \delta (-1/3) &amp; \ge &amp; 0 &amp; \implies &amp; \delta &amp; \le &amp; 5
+  \end{array}
+\end{align}\]</span>
+So, <span class="math inline">\(\delta_- = -1\)</span> and <span class="math inline">\(\delta_+ = 5\)</span> and the range of optimality of <span class="math inline">\(c_1\)</span> is <span class="math inline">\((3 - 1, 3 + 5) = (2, 8)\)</span>.</p>
 </div>
-<p>Given a general linear program, we can <strong>standardize</strong> it by a sequence of algebraic transformations and convert it to a standard linear program of the form <a href="standard-linear-program.html#eq:standard-lp">(2.1)</a>.</p>
-<div id="objective" class="section level3 hasAnchor" number="6.0.1">
-<h3><span class="header-section-number">6.0.1</span> Objective<a href="standardization.html#objective" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>If the goal is to minimize the objective function then to convert it to a maximization problem, we simply multiply the objective function by <span class="math inline">\(-1\)</span>. Minimizing a function <span class="math inline">\(f\)</span> is the same as maximizing <span class="math inline">\(-f\)</span>.</p>
-</div>
-<div id="constraints" class="section level3 hasAnchor" number="6.0.2">
-<h3><span class="header-section-number">6.0.2</span> Constraints<a href="standardization.html#constraints" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We first move all the variables in the constraints to the LHS and the constants to the RHS and then fix the constraints one at a time.</p>
-<p>If a constraint has the inequality <span class="math inline">\(\geq\)</span> then we multiply both sides of the constraint by -1 to change the inequality to <span class="math inline">\(\leq\)</span>.</p>
-<p>If a constraint is an equality constraint, then we replace the equality with two constraints: one with the inequality <span class="math inline">\(\leq\)</span> and one with the inequality <span class="math inline">\(\geq\)</span>.</p>
-</div>
-<div id="variables" class="section level3 hasAnchor" number="6.0.3">
-<h3><span class="header-section-number">6.0.3</span> Variables<a href="standardization.html#variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>If a variable has a non-positivity constraint of the form <span class="math inline">\(x_j \le 0\)</span>, then we replace <span class="math inline">\(x_j\)</span> with <span class="math inline">\(-x_j\)</span> everywhere.</p>
-<p>If a variable <span class="math inline">\(x_j\)</span> is <strong>free</strong> i.e. it does not have any sign constraints on it, then we introduce two new variables <span class="math inline">\(x_j&#39;\)</span>, <span class="math inline">\(x_j&#39;&#39;\)</span> which are both non-negative and make the substitution <span class="math inline">\(x_j = x_j&#39; - x_j&#39;&#39;\)</span>. This trick works because any real number can be written as a difference of two non-negative reals.</p>
 
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="halting-problem.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="dual-linear-program.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="sensitivity-analysis---constraints.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

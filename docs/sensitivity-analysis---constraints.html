@@ -23,7 +23,7 @@
 <meta name="author" content="Apurva Nakade" />
 
 
-<meta name="date" content="2022-04-30" />
+<meta name="date" content="2022-05-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="dual-of-a-general-linear-program.html"/>
-<link rel="next" href="references.html"/>
+<link rel="next" href="sensitivity-analysis---objective.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -157,6 +157,7 @@ div.csl-indent {
 <li class="chapter" data-level="11.3" data-path="sensitivity-analysis---constraints.html"><a href="sensitivity-analysis---constraints.html#rate-of-change"><i class="fa fa-check"></i><b>11.3</b> Rate of change<span></span></a></li>
 <li class="chapter" data-level="11.4" data-path="sensitivity-analysis---constraints.html"><a href="sensitivity-analysis---constraints.html#dual-variables"><i class="fa fa-check"></i><b>11.4</b> Dual variables<span></span></a></li>
 </ul></li>
+<li class="chapter" data-level="12" data-path="sensitivity-analysis---objective.html"><a href="sensitivity-analysis---objective.html"><i class="fa fa-check"></i><b>12</b> Sensitivity analysis - Objective<span></span></a></li>
 </ul>
 
       </nav>
@@ -287,7 +288,7 @@ Using Equation <a href="sensitivity-analysis---constraints.html#eq:basic-non-bas
 </div>
 <div id="range-of-optimality" class="section level2 hasAnchor" number="11.2">
 <h2><span class="header-section-number">11.2</span> Range of optimality<a href="sensitivity-analysis---constraints.html#range-of-optimality" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>We now try to determine the change in optimal solution as we change the constraint upper bounds <span class="math inline">\(b_i\)</span>. It is likely that by changing <span class="math inline">\(b_i\)</span> we change the optimal solution. But we would want this change to be differentiable. This can be achieved by requiring the set of basic and non-basic variables to remain unchanged. In this case, the equation <a href="sensitivity-analysis---constraints.html#eq:basic-non-basic-matrix">(11.2)</a> will still be the equation describing the dictionary at the optimal solution and the change in <span class="math inline">\(b_i\)</span> will result in a differentiable (in fact, smooth) change in <span class="math inline">\(x_{\mathcal{B}}\)</span>.</p>
+<p>We now try to determine the change in optimal solution as we change the constraint upper bounds <span class="math inline">\(b_i\)</span>. It is likely that by changing <span class="math inline">\(b_i\)</span> we change the optimal solution. But we would want this change to be differentiable. This can be achieved by requiring the set of basic and non-basic variables to remain unchanged. In this case, the equation <a href="sensitivity-analysis---constraints.html#eq:basic-non-basic-matrix">(11.2)</a> will still be the equation describing the dictionary at the optimal solution and the change in <span class="math inline">\(b_i\)</span> will result in a differentiable (in fact, linear) change in <span class="math inline">\(x_{\mathcal{B}}\)</span>.</p>
 <div class="example">
 <p><span id="exm:unlabeled-div-29" class="example"><strong>Example 11.2  </strong></span>Suppose we vary <span class="math inline">\(b_3 = 1\)</span> in Example <a href="introduction.html#eq:bond-portfolio-lp">(1.2)</a>. One can check that at the optimal solution <span class="math inline">\(w_1\)</span> and <span class="math inline">\(w_2\)</span> are non-basic as long as <span class="math inline">\(b_3 &gt; 0.9\)</span>. Thus we can say that out model is a good model as long as the error in <span class="math inline">\(b_3\)</span> is less than <span class="math inline">\(0.1\)</span>.</p>
 </div>
@@ -303,7 +304,7 @@ where <span class="math inline">\((\mathcal{B}^{-1})_{*i}\)</span> denotes the <
   \mathcal{B}^{-1} b + \delta (\mathcal{B}^{-1})_{*i} \ge 0.
   \tag{11.3}
 \end{equation}\]</span></p>
-<p>The <strong>range of optimality</strong> for <span class="math inline">\(b_i\)</span> is the interval <span class="math inline">\((b + \delta_-, b + \delta_+)\)</span> such that <span class="math inline">\(\mathcal{B}^{-1} b + \delta (\mathcal{B}^{-1})_{*i} \ge 0\)</span> for all <span class="math inline">\(\delta \in (\delta_-, \delta_+)\)</span>.</p>
+<p>The <strong>range of optimality</strong> for <span class="math inline">\(b_i\)</span> is the interval <span class="math inline">\((b_i + \delta_-, b_i + \delta_+)\)</span> such that <span class="math inline">\(\mathcal{B}^{-1} b + \delta (\mathcal{B}^{-1})_{*i} \ge 0\)</span> for all <span class="math inline">\(\delta \in (\delta_-, \delta_+)\)</span>.</p>
 <p>In practice, Equation <a href="sensitivity-analysis---constraints.html#eq:range-of-optimality">(11.3)</a> gives us <span class="math inline">\(m\)</span> inequalities, all of which need to be simultaneously satisfied. These give us candidate values for <span class="math inline">\(\delta\)</span> some of which are positive and some of which are negative. We then choose <span class="math inline">\(\delta_+\)</span> to be the smallest positive value and <span class="math inline">\(\delta_-\)</span> to be the largest negative value. If <span class="math inline">\(\delta_+\)</span> does not exist the upper bound is <span class="math inline">\(\infty\)</span> and if <span class="math inline">\(\delta_-\)</span> does not exist the lower bound is <span class="math inline">\(-\infty\)</span>. If either <span class="math inline">\(\delta_+\)</span> or <span class="math inline">\(\delta_-\)</span> is 0 then the linear program is degenerate and the range of optimality of <span class="math inline">\(b_i\)</span> is empty. In this case, our program is very sensitive to perturbations in <span class="math inline">\(b_i\)</span>.</p>
 <div class="example">
 <p><span id="exm:unlabeled-div-30" class="example"><strong>Example 11.3  </strong></span>Let us find the range of optimality for <span class="math inline">\(b_1 = 3.6\)</span>, <span class="math inline">\(b_2=1.5\)</span>, and <span class="math inline">\(b_3 = 1\)</span> in <a href="introduction.html#eq:bond-portfolio-lp">(1.2)</a> using our calculations in Example <a href="sensitivity-analysis---constraints.html#exm:basic-non-basic-matrix">11.1</a>.</p>
@@ -328,10 +329,10 @@ where <span class="math inline">\((\mathcal{B}^{-1})_{*i}\)</span> denotes the <
 \end{align}\]</span></p>
 <p>which gives us the inequalities</p>
 <p><span class="math display">\[\begin{align}
-  \begin{array}{llllllll}
-    0.6 + \delta (-1/9) &amp;\ge 0 &amp; \implies &amp; \delta &amp;\le - 0.6 (9) = 5.4 \\
-    0.3 + \delta (2/9) &amp;\ge 0 &amp; \implies &amp; \delta &amp;\ge -0.3 (9/2) = -1.35  \\
-    0.1 + \delta (-1/9) &amp;\ge 0 &amp; \implies &amp; \delta &amp; \le 0.1 (9) = 0.9.  
+  \begin{array}{lrlrrll}
+    0.6 + \delta (-1/9) &amp;\ge &amp; 0 &amp; \implies &amp; \delta &amp;\le &amp; 0.6 (9) = 5.4 \\
+    0.3 + \delta (2/9) &amp;\ge &amp; 0 &amp; \implies &amp; \delta &amp;\ge &amp; -0.3 (9/2) = -1.35  \\
+    0.1 + \delta (-1/9) &amp;\ge &amp; 0 &amp; \implies &amp; \delta &amp; \le &amp; 0.1 (9) = 0.9.  
   \end{array}
 \end{align}\]</span></p>
 <p>So, <span class="math inline">\(\delta_- = -1.35\)</span> and <span class="math inline">\(\delta_+ = \min(5.4, 0.9) = 0.9\)</span> and the range of optimality of <span class="math inline">\(b_1\)</span> is <span class="math inline">\((3.6 - 1.35, 3.6 + 0.9) = (2.85, 3.45)\)</span>.</p>
@@ -347,10 +348,10 @@ where <span class="math inline">\((\mathcal{B}^{-1})_{*i}\)</span> denotes the <
 \end{align}\]</span></p>
 <p>which gives us the inequalities</p>
 <p><span class="math display">\[\begin{align}
-  \begin{array}{llllllll}
-    0.6 + \delta (2/3) &amp;\ge 0 &amp; \implies &amp; \delta &amp;\ge - 0.6 (3/2) = -0.9 \\
-    0.3 + \delta (-1/3) &amp;\ge 0 &amp; \implies &amp; \delta &amp;\le 0.3 (3) = 0.9  \\
-    0.1 + \delta (-1/3) &amp;\ge 0 &amp; \implies &amp; \delta &amp; \le 0.3 (1) = 0.3.  
+  \begin{array}{lrlrrll}
+    0.6 + \delta (2/3) &amp;\ge&amp; 0 &amp; \implies &amp; \delta &amp;\ge&amp; - 0.6 (3/2) = -0.9 \\
+    0.3 + \delta (-1/3) &amp;\ge &amp;0 &amp; \implies &amp; \delta &amp;\le &amp;0.3 (3) = 0.9  \\
+    0.1 + \delta (-1/3) &amp;\ge &amp;0 &amp; \implies &amp; \delta &amp; \le&amp; 0.3 (1) = 0.3.  
   \end{array}
 \end{align}\]</span></p>
 <p>So, <span class="math inline">\(\delta_- = -0.9\)</span> and <span class="math inline">\(\delta_+ = \min(0.3, 0.9) = 0.3\)</span> and the range of optimality of <span class="math inline">\(b_2\)</span> is <span class="math inline">\((1.5 - 0.9, 1.5 + 0.3) = (0.6, 1.8)\)</span>.</p>
@@ -369,33 +370,70 @@ where <span class="math inline">\((\mathcal{B}^{-1})_{*i}\)</span> denotes the <
 </div>
 <div id="rate-of-change" class="section level2 hasAnchor" number="11.3">
 <h2><span class="header-section-number">11.3</span> Rate of change<a href="sensitivity-analysis---constraints.html#rate-of-change" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Assume now that neither of <span class="math inline">\(\delta_+\)</span> or <span class="math inline">\(\delta_-\)</span> is zero. Then, we can use Lemma <a href="sensitivity-analysis---constraints.html#lem:basic-values">11.1</a> to find the rate of change of the optimal solution with respect to <span class="math inline">\(b_i\)</span>. Call the objective function <span class="math inline">\(\mathbb{O} = c^{T} x\)</span>. We think of <span class="math inline">\(\mathbb{O}\)</span> as being a function of <span class="math inline">\(b_i\)</span>, <span class="math inline">\(c_j\)</span>, and <span class="math inline">\(a_{ij}\)</span>. Using Lemma <a href="sensitivity-analysis---constraints.html#lem:basic-values">11.1</a> we get</p>
+<p>Assume now that neither of <span class="math inline">\(\delta_+\)</span> or <span class="math inline">\(\delta_-\)</span> is zero. Then, we can use Lemma <a href="sensitivity-analysis---constraints.html#lem:basic-values">11.1</a> to find the rate of change of the optimal solution with respect to <span class="math inline">\(b_i\)</span>. Call the objective function <span class="math inline">\(\mathbb{O} = c^{T} x\)</span>. We think of <span class="math inline">\(\mathbb{O}\)</span> as being a function of <span class="math inline">\(b_i\)</span>, <span class="math inline">\(c_j\)</span>, and <span class="math inline">\(a_{ij}.\)</span> Using Lemma <a href="sensitivity-analysis---constraints.html#lem:basic-values">11.1</a> we get</p>
 <p><span class="math display">\[\begin{align}
-  \dfrac{\partial x_i}{\partial b_i} 
+  \dfrac{\partial x_{\mathcal{B}_j}}{\partial b_i} 
     &amp;= j^{th} \mbox{ row of } \dfrac{\partial \mathcal{B}^{-1}b}{\partial b_i} \\
     &amp;= (\mathcal{B}^{-1})_{ji} \\
-  \implies 
+\end{align}\]</span>
+where <span class="math inline">\(x_{\mathcal{B}_j}\)</span> denotes the <span class="math inline">\(j^{th}\)</span> basic variable and</p>
+<p><span class="math display">\[\begin{align}
+  \dfrac{\partial x_{\mathcal{N}}}{\partial b_i} 
+    &amp;= 0
+\end{align}\]</span>
+as the non-basic variables remain 0 when we perturb <span class="math inline">\(b_i\)</span> within the range of optimality.
+Using these we can find the rate of change of the optimal solution <span class="math inline">\(\mathbb{O}\)</span> with respect to <span class="math inline">\(b_i\)</span>. We first start by re-indexing the variables and objective coefficients using the basic and non-basic variables.</p>
+<p><span class="math display">\[\begin{align}
+  \mathbb{O} 
+    &amp;= c^T x \\
+    &amp;= c^T_{\mathcal{B}} x_{\mathcal{B}} + c^T_{\mathcal{N}} x_{\mathcal{N}} \\
+\implies
   \dfrac{\partial \mathbb{O}}{\partial b_i} 
-    &amp;= \dfrac{\partial c^T x}{\partial b_i} \\
-    &amp;= \sum \limits_{j=1}^n c_j (\mathcal{B}^{-1})_{ji} \\
-    &amp;= c^T (\mathcal{B}^{-1})_{*i} \\
+    &amp;= c^T_{\mathcal{B}} \dfrac{\partial x_{\mathcal{B}}}{\partial b_i} + c^T_{\mathcal{N}} \dfrac{\partial x_{\mathcal{N}}}{\partial b_i} \\
+    &amp;= c^T_{\mathcal{B}} (\mathcal{B}^{-1})_{*i} \\
 \end{align}\]</span></p>
-<div class="theorem">
-<p><span id="thm:rate-of-change-constraints" class="theorem"><strong>Theorem 11.1  </strong></span>For a non-degenerate linear program, the rate of change of the optimal solution with respect to <span class="math inline">\(b_i\)</span> is given by <span class="math inline">\(c^T (\mathcal{B}^{-1})_{*i}\)</span>.</p>
-</div>
 </div>
 <div id="dual-variables" class="section level2 hasAnchor" number="11.4">
 <h2><span class="header-section-number">11.4</span> Dual variables<a href="sensitivity-analysis---constraints.html#dual-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>There is an alternate way to find the rate of change of the objective function with respect to <span class="math inline">\(b_i\)</span>. By strong duality, we know that the optimal objective value of the primal and dual are the same so that at the optimal solution <span class="math inline">\(\mathbb{O} = b^T y^*\)</span> where <span class="math inline">\(y^*\)</span> is a dual optimal solution. Then</p>
-<p><span class="math display">\[\begin{align}
-  \dfrac{\partial \mathbb{O}}{\partial b_i} = y^*_i.
+<p>We saw above that this rate of change is exactly the dual optimal solution <span class="math inline">\(y_i^*\)</span>. Hence, we get
+<span class="math display">\[\begin{align}
+  y^*_i = c^T_{\mathcal{B}} (\mathcal{B}^{-1})_{*i}.
 \end{align}\]</span></p>
-<p>Because of this relationship, the dual optimal solution is also called the <strong>marginal cost</strong> or the <strong>shadow price</strong> of <span class="math inline">\(b_i\)</span>.
-Combining this result with <a href="sensitivity-analysis---constraints.html#thm:rate-of-change-constraints">11.1</a> we get</p>
+<p>We can combine all the above coordinates into a single vector to get the following result.</p>
 <div class="theorem">
-<p><span id="thm:dual-optimal-values" class="theorem"><strong>Theorem 11.2  </strong></span>For a non-degenerate linear program, the dual optimal solution is given by <span class="math inline">\(c^T \mathcal{B}^{-1}\)</span>.</p>
+<p><span id="thm:dual-solution" class="theorem"><strong>Theorem 11.1  </strong></span>For a non-degenerate linear program, the dual optimal solution is given by <span class="math inline">\((\mathcal{B}^{-1})^Tc_{\mathcal{B}}\)</span>.</p>
 </div>
-<p>This gives us a way to compute the dual optimal solution directly without having to run the simplex method again on the dual linear program.</p>
+<p>This theorem provides yet another method of finding the dual optimal solution without having to solve the dual linear program.</p>
+<div class="example">
+<p><span id="exm:dual-solution" class="example"><strong>Example 11.4  </strong></span>For the linear program <a href="introduction.html#eq:bond-portfolio-lp">(1.2)</a>, the objective function is</p>
+<p><span class="math display">\[\begin{align}
+  \mathbb{O} &amp; = 4 x + 3y \\
+  &amp; = 4x + 3y + 0 w_3 + 0 w_1 + 0 w_2 
+\end{align}\]</span></p>
+<p>So, <span class="math inline">\(c_{\mathcal{B}} = \begin{bmatrix}4 \\ 3 \\ 0 \end{bmatrix}\)</span> and <span class="math inline">\(\mathcal{N} = \begin{bmatrix}0 \\ 0 \end{bmatrix}\)</span>. Using the value of <span class="math inline">\(\mathcal{B}^{-1}\)</span> calculated above, we get</p>
+<p><span class="math display">\[\begin{align}
+  y^* &amp; = (\mathcal{B}^{-1})^Tc_{\mathcal{B}} \\
+  &amp; = 
+    \begin{bmatrix}
+    -1/9 &amp; 2/9 &amp; -1/9 \\
+    2/3 &amp; -1/3 &amp; -1/3 \\
+    0 &amp; 0 &amp; 1
+    \end{bmatrix} 
+    \begin{bmatrix}
+      4 \\ 3 \\ 0
+    \end{bmatrix}\\
+  &amp; = 
+  \begin{bmatrix}
+    2/9 \\ 5/3 \\ 0.
+  \end{bmatrix}
+\end{align}\]</span></p>
+<p>To check that this is indeed dual-optimal, we calculate the dual-objective value at this solution</p>
+<p><span class="math display">\[\begin{align}
+  b^T y^* &amp; = 3.6 (2/9) + 1.5 (5/3) + 0 (1) \\
+  &amp;= 3.3
+\end{align}\]</span></p>
+<p>which equals the optimal objective value of the primal. One can check that this solution is also dual-feasible and hence is the dual-optimal solution by Certificate of Optimality (Theorem <a href="certificate-of-optimality.html#thm:certificate-of-optimality">9.1</a>).</p>
+</div>
 
 </div>
 </div>
@@ -405,7 +443,7 @@ Combining this result with <a href="sensitivity-analysis---constraints.html#thm:
         </div>
       </div>
 <a href="dual-of-a-general-linear-program.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="sensitivity-analysis---objective.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
