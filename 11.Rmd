@@ -122,7 +122,7 @@ Because we set the non-basic variables $x_{\mathcal{N}}$ to 0 at any vertex, and
 
 ::: {.lemma #basic-values}
 
-Using the above notation, $\mathcal{B}^{-1}b$ is the value of the basic variables at the optimal solution.
+Using the above notation, $\mathcal{B}^{-1}b$ is the value of the basic variables $x^*_{\mathcal{B}}$ at the optimal solution.
 
 :::
 
@@ -142,19 +142,19 @@ Suppose we change $b_i$ to $b_i + \delta$, where $\delta$ is a real number, and 
 \begin{align}
   x_{\mathcal{B}} 
     &= \mathcal{B}^{-1} b + \delta \mathcal{B}^{-1} e_i - \mathcal{B}^{-1} \mathcal{N} x_{\mathcal{N}} \\
-    &= \mathcal{B}^{-1} b + \delta (\mathcal{B}^{-1})_{*i} - \mathcal{B}^{-1} \mathcal{N} x_{\mathcal{N}}.
+    &= \mathcal{B}^{-1} b + \delta (\mathcal{B}^{-1})_{\_i} - \mathcal{B}^{-1} \mathcal{N} x_{\mathcal{N}}.
 \end{align}
-where $(\mathcal{B}^{-1})_{*i}$ denotes the $i^{th}$ column of $\mathcal{B}^{-1}$.
+where $(\mathcal{B}^{-1})_{\_i}$ denotes the $i^{th}$ column of $\mathcal{B}^{-1}$.
 
 Note that the coefficients of $x_{\mathcal{N}}$ remain unchanged. So, for this dictionary to stay optimal we only need the constants to remain non-negative i.e.
 
 \begin{equation}
-  \mathcal{B}^{-1} b + \delta (\mathcal{B}^{-1})_{*i} \ge 0.
+  \mathcal{B}^{-1} b + \delta (\mathcal{B}^{-1})_{\_i} \ge 0.
   (\#eq:range-of-optimality)
 \end{equation}
 
 
-The **range of optimality** for $b_i$ is the interval $(b_i + \delta_-, b_i + \delta_+)$ such that $\mathcal{B}^{-1} b + \delta (\mathcal{B}^{-1})_{*i} \ge 0$ for all $\delta \in (\delta_-, \delta_+)$.
+The **range of optimality** for $b_i$ is the interval $(b_i + \delta_-, b_i + \delta_+)$ such that $\mathcal{B}^{-1} b + \delta (\mathcal{B}^{-1})_{\_i} \ge 0$ for all $\delta \in (\delta_-, \delta_+)$.
 
 In practice, Equation \@ref(eq:range-of-optimality) gives us $m$ inequalities, all of which need to be simultaneously satisfied. These give us candidate values for $\delta$ some of which are positive and some of which are negative. We then choose $\delta_+$ to be the smallest positive value and $\delta_-$ to be the largest negative value. If $\delta_+$ does not exist the upper bound is $\infty$ and if $\delta_-$ does not exist the lower bound is $-\infty$. If either $\delta_+$ or $\delta_-$ is 0 then the linear program is degenerate and the range of optimality for $b_i$ is empty. In this case, our program is very sensitive to perturbations in $b_i$.
 
@@ -242,17 +242,16 @@ which gives us $\delta \ge -0.1$ and so the range of optimality for $b_3$ is $(1
 
 ## Rate of change
 
-Assume now that neither of $\delta_+$ or $\delta_-$ is zero. Then, we can use Lemma \@ref(lem:basic-values) to find the rate of change of the optimal solution with respect to $b_i$. Call the objective function $\mathbb{O} = c^{T} x$. We think of $\mathbb{O}$ as being a function of $b_i$, $c_j$, and $a_{ij}.$ Using Lemma \@ref(lem:basic-values) we get
+Assume now that neither of $\delta_+$ or $\delta_-$ is zero. Then, we can use Lemma \@ref(lem:basic-values) to find the rate of change of the optimal solution with respect to $b_i$. Call the objective function $\mathbb{O} = c^{T} x^*$. We think of $\mathbb{O}$ as being a function of $b_i$, $c_j$, and $a_{ij}.$ Using Lemma \@ref(lem:basic-values) we get
 
 \begin{align}
-  \dfrac{\partial x_{\mathcal{B}_j}}{\partial b_i} 
+  \dfrac{\partial x^*_{\mathcal{B}_j}}{\partial b_i} 
     &= j^{th} \mbox{ row of } \dfrac{\partial \mathcal{B}^{-1}b}{\partial b_i} \\
     &= (\mathcal{B}^{-1})_{ji} \\
 \end{align}
-where $x_{\mathcal{B}_j}$ denotes the $j^{th}$ basic variable and 
-
+where $x^*_{\mathcal{B}_j}$ denotes the $j^{th}$ basic variable at the optimal solution and 
 \begin{align}
-  \dfrac{\partial x_{\mathcal{N}}}{\partial b_i} 
+  \dfrac{\partial x^*_{\mathcal{N}}}{\partial b_i} 
     &= 0
 \end{align}
 as the non-basic variables remain 0 when we perturb $b_i$ within the range of optimality.
@@ -260,12 +259,12 @@ Using these we can find the rate of change of the optimal solution $\mathbb{O}$ 
 
 \begin{align}
   \mathbb{O} 
-    &= c^T x \\
-    &= c^T_{\mathcal{B}} x_{\mathcal{B}} + c^T_{\mathcal{N}} x_{\mathcal{N}} \\
+    &= c^T x^* \\
+    &= c^T_{\mathcal{B}} x^*_{\mathcal{B}} + c^T_{\mathcal{N}} x^*_{\mathcal{N}} \\
 \implies
   \dfrac{\partial \mathbb{O}}{\partial b_i} 
-    &= c^T_{\mathcal{B}} \dfrac{\partial x_{\mathcal{B}}}{\partial b_i} + c^T_{\mathcal{N}} \dfrac{\partial x_{\mathcal{N}}}{\partial b_i} \\
-    &= c^T_{\mathcal{B}} (\mathcal{B}^{-1})_{*i} \\
+    &= c^T_{\mathcal{B}} \dfrac{\partial x^*_{\mathcal{B}}}{\partial b_i} + c^T_{\mathcal{N}} \dfrac{\partial x^*_{\mathcal{N}}}{\partial b_i} \\
+    &= c^T_{\mathcal{B}} (\mathcal{B}^{-1})_{\_i} \\
 \end{align}
 
 
@@ -273,7 +272,7 @@ Using these we can find the rate of change of the optimal solution $\mathbb{O}$ 
 
 We saw above that this rate of change is exactly the dual optimal solution $y_i^*$. Hence, we get 
 \begin{align}
-  y^*_i = c^T_{\mathcal{B}} (\mathcal{B}^{-1})_{*i}.
+  y^*_i = c^T_{\mathcal{B}} (\mathcal{B}^{-1})_{\_i}.
 \end{align}
 
 We can combine all the above coordinates into a single vector to get the following result.
@@ -309,8 +308,8 @@ So, $c_{\mathcal{B}} = \begin{bmatrix}4 \\ 3 \\ 0 \end{bmatrix}$ and $\mathcal{N
     \end{bmatrix}\\
   & = 
   \begin{bmatrix}
-    2/9 \\ 5/3 \\ 0.
-  \end{bmatrix}
+    2/9 \\ 5/3 \\ 0
+  \end{bmatrix}.
 \end{align}
 
 To check that this is indeed dual-optimal, we calculate the dual-objective value at this solution

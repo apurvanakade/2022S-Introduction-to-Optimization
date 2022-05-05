@@ -283,7 +283,7 @@ Using Equation <a href="sensitivity-analysis---constraints.html#eq:basic-non-bas
 </div>
 <p>Because we set the non-basic variables <span class="math inline">\(x_{\mathcal{N}}\)</span> to 0 at any vertex, and in particular, at the the optimal solution, using the Equation <a href="sensitivity-analysis---constraints.html#eq:basic-non-basic-matrix">(11.2)</a> we get the following useful result:</p>
 <div class="lemma">
-<p><span id="lem:basic-values" class="lemma"><strong>Lemma 11.1  </strong></span>Using the above notation, <span class="math inline">\(\mathcal{B}^{-1}b\)</span> is the value of the basic variables at the optimal solution.</p>
+<p><span id="lem:basic-values" class="lemma"><strong>Lemma 11.1  </strong></span>Using the above notation, <span class="math inline">\(\mathcal{B}^{-1}b\)</span> is the value of the basic variables <span class="math inline">\(x^*_{\mathcal{B}}\)</span> at the optimal solution.</p>
 </div>
 </div>
 <div id="range-of-optimality" class="section level2 hasAnchor" number="11.2">
@@ -296,15 +296,15 @@ Using Equation <a href="sensitivity-analysis---constraints.html#eq:basic-non-bas
 <p><span class="math display">\[\begin{align}
   x_{\mathcal{B}} 
     &amp;= \mathcal{B}^{-1} b + \delta \mathcal{B}^{-1} e_i - \mathcal{B}^{-1} \mathcal{N} x_{\mathcal{N}} \\
-    &amp;= \mathcal{B}^{-1} b + \delta (\mathcal{B}^{-1})_{*i} - \mathcal{B}^{-1} \mathcal{N} x_{\mathcal{N}}.
+    &amp;= \mathcal{B}^{-1} b + \delta (\mathcal{B}^{-1})_{\_i} - \mathcal{B}^{-1} \mathcal{N} x_{\mathcal{N}}.
 \end{align}\]</span>
-where <span class="math inline">\((\mathcal{B}^{-1})_{*i}\)</span> denotes the <span class="math inline">\(i^{th}\)</span> column of <span class="math inline">\(\mathcal{B}^{-1}\)</span>.</p>
+where <span class="math inline">\((\mathcal{B}^{-1})_{\_i}\)</span> denotes the <span class="math inline">\(i^{th}\)</span> column of <span class="math inline">\(\mathcal{B}^{-1}\)</span>.</p>
 <p>Note that the coefficients of <span class="math inline">\(x_{\mathcal{N}}\)</span> remain unchanged. So, for this dictionary to stay optimal we only need the constants to remain non-negative i.e.</p>
 <p><span class="math display" id="eq:range-of-optimality">\[\begin{equation}
-  \mathcal{B}^{-1} b + \delta (\mathcal{B}^{-1})_{*i} \ge 0.
+  \mathcal{B}^{-1} b + \delta (\mathcal{B}^{-1})_{\_i} \ge 0.
   \tag{11.3}
 \end{equation}\]</span></p>
-<p>The <strong>range of optimality</strong> for <span class="math inline">\(b_i\)</span> is the interval <span class="math inline">\((b_i + \delta_-, b_i + \delta_+)\)</span> such that <span class="math inline">\(\mathcal{B}^{-1} b + \delta (\mathcal{B}^{-1})_{*i} \ge 0\)</span> for all <span class="math inline">\(\delta \in (\delta_-, \delta_+)\)</span>.</p>
+<p>The <strong>range of optimality</strong> for <span class="math inline">\(b_i\)</span> is the interval <span class="math inline">\((b_i + \delta_-, b_i + \delta_+)\)</span> such that <span class="math inline">\(\mathcal{B}^{-1} b + \delta (\mathcal{B}^{-1})_{\_i} \ge 0\)</span> for all <span class="math inline">\(\delta \in (\delta_-, \delta_+)\)</span>.</p>
 <p>In practice, Equation <a href="sensitivity-analysis---constraints.html#eq:range-of-optimality">(11.3)</a> gives us <span class="math inline">\(m\)</span> inequalities, all of which need to be simultaneously satisfied. These give us candidate values for <span class="math inline">\(\delta\)</span> some of which are positive and some of which are negative. We then choose <span class="math inline">\(\delta_+\)</span> to be the smallest positive value and <span class="math inline">\(\delta_-\)</span> to be the largest negative value. If <span class="math inline">\(\delta_+\)</span> does not exist the upper bound is <span class="math inline">\(\infty\)</span> and if <span class="math inline">\(\delta_-\)</span> does not exist the lower bound is <span class="math inline">\(-\infty\)</span>. If either <span class="math inline">\(\delta_+\)</span> or <span class="math inline">\(\delta_-\)</span> is 0 then the linear program is degenerate and the range of optimality for <span class="math inline">\(b_i\)</span> is empty. In this case, our program is very sensitive to perturbations in <span class="math inline">\(b_i\)</span>.</p>
 <div class="example">
 <p><span id="exm:unlabeled-div-30" class="example"><strong>Example 11.3  </strong></span>Let us find the range of optimality for <span class="math inline">\(b_1 = 3.6\)</span>, <span class="math inline">\(b_2=1.5\)</span>, and <span class="math inline">\(b_3 = 1\)</span> in <a href="introduction.html#eq:bond-portfolio-lp">(1.2)</a> using our calculations in Example <a href="sensitivity-analysis---constraints.html#exm:basic-non-basic-matrix">11.1</a>.</p>
@@ -370,34 +370,34 @@ where <span class="math inline">\((\mathcal{B}^{-1})_{*i}\)</span> denotes the <
 </div>
 <div id="rate-of-change" class="section level2 hasAnchor" number="11.3">
 <h2><span class="header-section-number">11.3</span> Rate of change<a href="sensitivity-analysis---constraints.html#rate-of-change" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Assume now that neither of <span class="math inline">\(\delta_+\)</span> or <span class="math inline">\(\delta_-\)</span> is zero. Then, we can use Lemma <a href="sensitivity-analysis---constraints.html#lem:basic-values">11.1</a> to find the rate of change of the optimal solution with respect to <span class="math inline">\(b_i\)</span>. Call the objective function <span class="math inline">\(\mathbb{O} = c^{T} x\)</span>. We think of <span class="math inline">\(\mathbb{O}\)</span> as being a function of <span class="math inline">\(b_i\)</span>, <span class="math inline">\(c_j\)</span>, and <span class="math inline">\(a_{ij}.\)</span> Using Lemma <a href="sensitivity-analysis---constraints.html#lem:basic-values">11.1</a> we get</p>
+<p>Assume now that neither of <span class="math inline">\(\delta_+\)</span> or <span class="math inline">\(\delta_-\)</span> is zero. Then, we can use Lemma <a href="sensitivity-analysis---constraints.html#lem:basic-values">11.1</a> to find the rate of change of the optimal solution with respect to <span class="math inline">\(b_i\)</span>. Call the objective function <span class="math inline">\(\mathbb{O} = c^{T} x^*\)</span>. We think of <span class="math inline">\(\mathbb{O}\)</span> as being a function of <span class="math inline">\(b_i\)</span>, <span class="math inline">\(c_j\)</span>, and <span class="math inline">\(a_{ij}.\)</span> Using Lemma <a href="sensitivity-analysis---constraints.html#lem:basic-values">11.1</a> we get</p>
 <p><span class="math display">\[\begin{align}
-  \dfrac{\partial x_{\mathcal{B}_j}}{\partial b_i} 
+  \dfrac{\partial x^*_{\mathcal{B}_j}}{\partial b_i} 
     &amp;= j^{th} \mbox{ row of } \dfrac{\partial \mathcal{B}^{-1}b}{\partial b_i} \\
     &amp;= (\mathcal{B}^{-1})_{ji} \\
 \end{align}\]</span>
-where <span class="math inline">\(x_{\mathcal{B}_j}\)</span> denotes the <span class="math inline">\(j^{th}\)</span> basic variable and</p>
-<p><span class="math display">\[\begin{align}
-  \dfrac{\partial x_{\mathcal{N}}}{\partial b_i} 
+where <span class="math inline">\(x^*_{\mathcal{B}_j}\)</span> denotes the <span class="math inline">\(j^{th}\)</span> basic variable at the optimal solution and
+<span class="math display">\[\begin{align}
+  \dfrac{\partial x^*_{\mathcal{N}}}{\partial b_i} 
     &amp;= 0
 \end{align}\]</span>
 as the non-basic variables remain 0 when we perturb <span class="math inline">\(b_i\)</span> within the range of optimality.
 Using these we can find the rate of change of the optimal solution <span class="math inline">\(\mathbb{O}\)</span> with respect to <span class="math inline">\(b_i\)</span>. We first start by re-indexing the variables and objective coefficients using the basic and non-basic variables.</p>
 <p><span class="math display">\[\begin{align}
   \mathbb{O} 
-    &amp;= c^T x \\
-    &amp;= c^T_{\mathcal{B}} x_{\mathcal{B}} + c^T_{\mathcal{N}} x_{\mathcal{N}} \\
+    &amp;= c^T x^* \\
+    &amp;= c^T_{\mathcal{B}} x^*_{\mathcal{B}} + c^T_{\mathcal{N}} x^*_{\mathcal{N}} \\
 \implies
   \dfrac{\partial \mathbb{O}}{\partial b_i} 
-    &amp;= c^T_{\mathcal{B}} \dfrac{\partial x_{\mathcal{B}}}{\partial b_i} + c^T_{\mathcal{N}} \dfrac{\partial x_{\mathcal{N}}}{\partial b_i} \\
-    &amp;= c^T_{\mathcal{B}} (\mathcal{B}^{-1})_{*i} \\
+    &amp;= c^T_{\mathcal{B}} \dfrac{\partial x^*_{\mathcal{B}}}{\partial b_i} + c^T_{\mathcal{N}} \dfrac{\partial x^*_{\mathcal{N}}}{\partial b_i} \\
+    &amp;= c^T_{\mathcal{B}} (\mathcal{B}^{-1})_{\_i} \\
 \end{align}\]</span></p>
 </div>
 <div id="dual-variables" class="section level2 hasAnchor" number="11.4">
 <h2><span class="header-section-number">11.4</span> Dual variables<a href="sensitivity-analysis---constraints.html#dual-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We saw above that this rate of change is exactly the dual optimal solution <span class="math inline">\(y_i^*\)</span>. Hence, we get
 <span class="math display">\[\begin{align}
-  y^*_i = c^T_{\mathcal{B}} (\mathcal{B}^{-1})_{*i}.
+  y^*_i = c^T_{\mathcal{B}} (\mathcal{B}^{-1})_{\_i}.
 \end{align}\]</span></p>
 <p>We can combine all the above coordinates into a single vector to get the following result.</p>
 <div class="theorem">
@@ -424,8 +424,8 @@ Using these we can find the rate of change of the optimal solution <span class="
     \end{bmatrix}\\
   &amp; = 
   \begin{bmatrix}
-    2/9 \\ 5/3 \\ 0.
-  \end{bmatrix}
+    2/9 \\ 5/3 \\ 0
+  \end{bmatrix}.
 \end{align}\]</span></p>
 <p>To check that this is indeed dual-optimal, we calculate the dual-objective value at this solution</p>
 <p><span class="math display">\[\begin{align}
