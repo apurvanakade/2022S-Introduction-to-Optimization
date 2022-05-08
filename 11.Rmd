@@ -105,7 +105,7 @@ Using Equation \@ref(eq:basic-non-basic-matrix) the dictionary at the optimal so
     \end{bmatrix}
   \begin{bmatrix} w_1 \\ w_2 \end{bmatrix} \\
   & 
-  = \begin{bmatrix} 0.6 \\ 0.3 \\ 0.9 \end{bmatrix} 
+  = \begin{bmatrix} 0.6 \\ 0.3 \\ 0.1 \end{bmatrix} 
   -
   \begin{bmatrix}
     -1/9 & 2/3 \\ 
@@ -177,7 +177,7 @@ We know that
 Using $i = 1$ and Lemma \@ref(lem:basic-values) in Equation \@ref(eq:range-of-optimality) we get
 
 \begin{align}
-  \begin{bmatrix} 0.6 \\ 0.3 \\ 0.9 \end{bmatrix} 
+  \begin{bmatrix} 0.6 \\ 0.3 \\ 0.1 \end{bmatrix} 
   + \delta
   \begin{bmatrix}
     -1/9 \\ 
@@ -201,7 +201,7 @@ So, $\delta_- = -1.35$ and $\delta_+ = \min(5.4, 0.9) = 0.9$ and the range of op
 Using $i = 2$ and Lemma \@ref(lem:basic-values) in Equation \@ref(eq:range-of-optimality) we get
 
 \begin{align}
-  \begin{bmatrix} 0.6 \\ 0.3 \\ 0.9 \end{bmatrix} 
+  \begin{bmatrix} 0.6 \\ 0.3 \\ 0.1 \end{bmatrix} 
   + \delta
   \begin{bmatrix}
     2/3 \\ 
