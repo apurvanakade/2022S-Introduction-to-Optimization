@@ -18,7 +18,7 @@ Using Equation \@ref(eq:range-of-optimality) for this dictionary we get the rang
 \begin{equation}
   (-\mathcal{B}_d)^{-1} (-c) + \delta (-\mathcal{B}_d^{-1})_{\_j} \ge 0.
 \end{equation}
-where $\mathcal{B}_d$ is the basic submatrix of the standardized dual which simplifies to 
+where $\mathcal{B}_d$ is the basic submatrix of the dual which simplifies to 
 \begin{equation}
   \mathcal{B}_d^{-1} c - \delta (\mathcal{B}_d^{-1})_{\_j} \ge 0.
 \end{equation}
