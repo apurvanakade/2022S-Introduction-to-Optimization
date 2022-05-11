@@ -4,20 +4,20 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | Introduction to Optimization</title>
-  <meta name="description" content="Page not found | Introduction to Optimization." />
+  <title>Chapter 13 Convexity | Introduction to Optimization</title>
+  <meta name="description" content="Chapter 13 Convexity | Introduction to Optimization." />
   <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Page not found | Introduction to Optimization" />
+  <meta property="og:title" content="Chapter 13 Convexity | Introduction to Optimization" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="Page not found | Introduction to Optimization." />
+  <meta property="og:description" content="Chapter 13 Convexity | Introduction to Optimization." />
   <meta name="github-repo" content="apurvanakade/2022S-Introduction-to-optimization" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | Introduction to Optimization" />
+  <meta name="twitter:title" content="Chapter 13 Convexity | Introduction to Optimization" />
   
-  <meta name="twitter:description" content="Page not found | Introduction to Optimization." />
+  <meta name="twitter:description" content="Chapter 13 Convexity | Introduction to Optimization." />
   
 
 <meta name="author" content="Apurva Nakade" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-
+<link rel="prev" href="sensitivity-analysis---objective.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -180,19 +180,73 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="page-not-found" class="section level1">
-<h1>Page not found</h1>
-<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
-<p>You may want to try searching to find the page's new location, or use
-the table of contents to find the page you are looking for.</p>
+<div id="convexity" class="section level1 hasAnchor" number="13">
+<h1><span class="header-section-number">Chapter 13</span> Convexity<a href="convexity.html#convexity" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>We will now move toward generalizing the concepts from linear programming to non-linear optimization questions.
+Broadly speaking, we have studied three different topics so far:</p>
+<ol style="list-style-type: decimal">
+<li>Simplex method,</li>
+<li>Duality theory, and</li>
+<li>Sensitivity analysis.</li>
+</ol>
+<p>Of these the simplex method is hardest to generalize for any non-linear optimization problem while sensitivity is the easiest. In fact, sensitivity analysis is important for any modeling question and not just optimization problems and the general techniques for it lie beyond the scope of this course. As such, we’ll focus on generalizing duality theory. The class of optimization for which some form of duality holds is the class of <em>convex optimization problems</em>.</p>
+<div id="convex-programming" class="section level2 hasAnchor" number="13.1">
+<h2><span class="header-section-number">13.1</span> Convex programming<a href="convexity.html#convex-programming" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We say that a subset <span class="math inline">\(\mathcal{S}\)</span> of <span class="math inline">\(\mathbb{R}^n\)</span> is called <strong>convex</strong> if for any points <span class="math inline">\(\vec{x}_1\)</span> and <span class="math inline">\(\vec{x}_2\)</span> in <span class="math inline">\(\mathcal{S}\)</span>, the line segment connecting them also lies in <span class="math inline">\(\mathcal{S}\)</span>. More precisely, we say that <span class="math inline">\(S\)</span> is <strong>convex</strong> if forall <span class="math inline">\(\vec{x}_1\)</span> in <span class="math inline">\(\mathcal{S}\)</span>, <span class="math inline">\(\vec{x}_2\)</span> in <span class="math inline">\(\mathcal{S}\)</span>, and <span class="math inline">\(t \in [0,1]\)</span>, the point <span class="math inline">\((1 - t) \vec{x}_1 + t \vec{x}_2\)</span> also lies in <span class="math inline">\(\mathcal{S}\)</span>.</p>
+<p>From now on, we’ll let <span class="math inline">\(\mathcal{S}\)</span> denote a convex subset of <span class="math inline">\(\mathbb{R}^n\)</span>.</p>
+<p>We say that function <span class="math inline">\(f : \mathcal{S} \to \mathbb{R}\)</span> is <strong>convex</strong> if for all <span class="math inline">\(\vec{x}_1\)</span> in <span class="math inline">\(\mathcal{S}\)</span>, <span class="math inline">\(\vec{x}_2\)</span> in <span class="math inline">\(\mathcal{S}\)</span>, and <span class="math inline">\(t \in [0,1]\)</span>, the inequality <span class="math inline">\(f((1 - t) \vec{x}_1 + t \vec{x}_2) \le (1 - t) f(\vec{x}_1) + t f(\vec{x}_2)\)</span> holds. Geometrically, this is the same as saying that the line segment connecting the two points lies above the graph of <span class="math inline">\(f\)</span>.</p>
+<div class="theorem">
+<p><span id="thm:convexity-second-derivative" class="theorem"><strong>Theorem 13.1  </strong></span>Let <span class="math inline">\(f : \mathbb{R}^n \to \mathbb{R}\)</span> be a <span class="math inline">\(C^2\)</span> function. <span class="math inline">\(f\)</span> is convex if and only if the Hessian matrix of <span class="math inline">\(f\)</span> is positive semi-definite. In particular, when <span class="math inline">\(n = 1\)</span>, <span class="math inline">\(f\)</span> is convex if and only if <span class="math inline">\(f&#39;&#39; \ge 0\)</span>.</p>
+</div>
+<p>This theorem provides a quick way to check if a function is convex.</p>
+<p>Finally, we say that a set is <strong>closed</strong> if contains all of its limit points. The precise definition of closedness is beyond the scope of this class. Geometrically, a set is closed if it contains its boundary. For example, the set <span class="math inline">\([0,1]\)</span> is a closed subset of <span class="math inline">\(\mathbb{R}^1\)</span> whereas the set <span class="math inline">\([0,1)\)</span> is not.</p>
+<p>An optimization problem
+<span class="math display" id="eq:convex-optimization-problem">\[\begin{equation}
+  \begin{array}{ll}
+    \mbox{maximize: } &amp; f(x)  \\ 
+    \mbox{subject to: } &amp; x \in \mathcal{S} 
+  \end{array}
+  \tag{13.1}
+\end{equation}\]</span>
+is called <strong>convex</strong> if <span class="math inline">\(\mathcal{S}\)</span> is a convex subset of <span class="math inline">\(\mathbb{R}^n\)</span> and <span class="math inline">\(f : \mathcal{S} \to \mathbb{R}\)</span> is a convex function.</p>
+<p>The following theorem is easy to prove using basic definitions.</p>
+<div class="theorem">
+<p><span id="thm:unlabeled-div-32" class="theorem"><strong>Theorem 13.2  </strong></span>A linear program is a convex optimization problem.</p>
+</div>
+<p>In the next few chapters, we’ll see how several results about linear programs generalize to convex optimization problems.</p>
+</div>
+<div id="boundary" class="section level2 hasAnchor" number="13.2">
+<h2><span class="header-section-number">13.2</span> Boundary<a href="convexity.html#boundary" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Assume that <span class="math inline">\(\mathcal{S}\)</span> is a closed subset of <span class="math inline">\(\mathbb{R}^n\)</span>.</p>
+<div class="theorem">
+<p><span id="thm:optimal-on-boundary" class="theorem"><strong>Theorem 13.3  </strong></span>Consider the convex optimization problem in Equation <a href="convexity.html#eq:convex-optimization-problem">(13.1)</a>. Suppose that <span class="math inline">\(\mathcal{S}\)</span> is closed and bounded (i.e. compact). Then, the convex optimization problem has an optimal solution. Moreover, there is a point on the boundary of <span class="math inline">\(\mathcal{S}\)</span> where the optimal value is attained.</p>
+</div>
+<div class="proof">
+<p><span id="unlabeled-div-33" class="proof"><em>Proof</em>. </span>The existence of an optimal solution is guaranteed by the <a href="https://en.wikipedia.org/wiki/Extreme_value_theorem">Extreme Value Theorem</a>.
+Suppose <span class="math inline">\(\vec{x}\)</span> is a point in the interior of <span class="math inline">\(\mathcal{S}\)</span>.
+It suffices to show that there is some point on the boundary with an objective value that is greater than or equal to the objective value of <span class="math inline">\(\vec{x}\)</span>.</p>
+<p>Let <span class="math inline">\(\vec{x}_1\)</span> be any point on the boundary of <span class="math inline">\(\mathcal{S}\)</span>. Draw a ray starting at <span class="math inline">\(\vec{x}_1\)</span> in the direction of <span class="math inline">\(\vec{x}\)</span>.
+As <span class="math inline">\(\mathcal{S}\)</span> is convex, closed, and bounded, the ray intersects the boundary of <span class="math inline">\(\mathcal{S}\)</span> in exactly one other point, call it <span class="math inline">\(\vec{x}_1\)</span>.
+In this case, we need to show that either <span class="math inline">\(f(\vec{x}) \le f(\vec{x}_1)\)</span> or <span class="math inline">\(f(\vec{x}) \le f(\vec{x}_2)\)</span>.
+We’ll prove this by contradiction. Suppose <span class="math inline">\(f(\vec{x}) &gt; f(\vec{x}_1)\)</span> and <span class="math inline">\(f(\vec{x}) &gt; f(\vec{x}_2)\)</span>.
+Multiplying the first inequality by <span class="math inline">\((1-t)\)</span> and the second by <span class="math inline">\(t\)</span> and adding them together, we get</p>
+<p><span class="math display">\[\begin{align}
+  &amp;&amp; (1-t) f(\vec{x}) + t f(\vec{x}) &amp;&gt; (1-t) f(\vec{x}_1) + t f(\vec{x}_2) \\ 
+  \implies 
+  &amp;&amp; f(\vec{x}) &amp;&gt; (1-t) f(\vec{x}_1) + t f(\vec{x}_2) .
+\end{align}\]</span></p>
+<p>But this contradicts the convexity of <span class="math inline">\(f\)</span>.</p>
+</div>
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-
+<a href="sensitivity-analysis---objective.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

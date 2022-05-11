@@ -52,6 +52,10 @@ thm:dual-solution
 exm:dual-solution
 thm:range-of-optimality
 exm:unlabeled-div-31
+thm:convexity-second-derivative
+eq:convex-optimization-problem
+thm:unlabeled-div-32
+thm:optimal-on-boundary
 introduction
 software-tools
 graphing-calculator
@@ -93,3 +97,6 @@ range-of-optimality
 rate-of-change
 dual-variables
 sensitivity-analysis---objective
+convexity
+convex-programming
+boundary
