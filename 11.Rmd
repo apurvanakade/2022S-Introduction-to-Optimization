@@ -270,7 +270,16 @@ Using these we can find the rate of change of the optimal solution $\mathbb{O}$ 
 
 ## Dual variables
 
-We saw above that this rate of change is exactly the dual optimal solution $y_i^*$. Hence, we get 
+By strong duality, we know that the primal objective value equals the dual objective value i.e. 
+
+\begin{align}
+ \mathbb{O} &= b_1 y_1^* + \cdots + b_m y_m^* 
+\end{align}
+
+So, we get $\partial \mathbb{O}/\partial b_i = y_i^*$. Because of this result, $y_i^*$ is also called the **shadow price** or the **marginal cost** of the $i^{th}$ constraint.
+
+
+Combining this with the rate of change calculation above, we get 
 \begin{align}
   y^*_i = c^T_{\mathcal{B}} (\mathcal{B}^{-1})_{\_i}.
 \end{align}
