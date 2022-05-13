@@ -192,7 +192,7 @@ div.csl-indent {
 <span class="math display">\[\begin{equation}
   (-\mathcal{B}_d)^{-1} (-c) + \delta (-\mathcal{B}_d^{-1})_{\_j} \ge 0.
 \end{equation}\]</span>
-where <span class="math inline">\(-\mathcal{B}_d\)</span> is the basic submatrix of augemented dual <span class="math inline">\(\begin{bmatrix} -A^T &amp; I_n\end{bmatrix}\)</span> and so <span class="math inline">\(\mathcal{B}_d\)</span> is the basic submatrix of augemented dual <span class="math inline">\(\begin{bmatrix} A^T &amp; -I_n\end{bmatrix}\)</span>. This simplifies to
+where <span class="math inline">\(-\mathcal{B}_d\)</span> is formed by combining the dual-basic columns of <span class="math inline">\(\begin{bmatrix} -A^T &amp; I_n\end{bmatrix}\)</span> and so <span class="math inline">\(\mathcal{B}_d\)</span> is formed by combining the dual-basic columns of <span class="math inline">\(\begin{bmatrix} A^T &amp; -I_n\end{bmatrix}\)</span>. This simplifies to
 <span class="math display">\[\begin{equation}
   \mathcal{B}_d^{-1} c - \delta (\mathcal{B}_d^{-1})_{\_j} \ge 0.
 \end{equation}\]</span>
@@ -207,12 +207,12 @@ Note that this is the range of optimality for <span class="math inline">\(-c_j\)
 <p><span class="math display">\[\begin{equation}
   x_{\mathcal{B}}^* + \delta (\mathcal{B}^{-1})_{\_i} \ge 0.
 \end{equation}\]</span></p>
-<p>where <span class="math inline">\(\mathcal{B}\)</span> is formed by combining the primal-basic columns in <span class="math inline">\(\begin{bmatrix} A &amp; I_m \end{bmatrix}\)</span>, and</p>
+<p>where <span class="math inline">\(\mathcal{B}\)</span> is formed by combining the primal-basic columns of <span class="math inline">\(\begin{bmatrix} A &amp; I_m \end{bmatrix}\)</span>, and</p>
 <p><strong>Range of optimality for <span class="math inline">\(c_j\)</span>:</strong></p>
 <p><span class="math display">\[\begin{equation}
   y_{\mathcal{B}}^* + \delta (\mathcal{B}_d^{-1})_{\_j} \ge 0.
 \end{equation}\]</span></p>
-<p>where <span class="math inline">\(\mathcal{B}_d\)</span> is formed by combining the dual-basic columns in <span class="math inline">\(\begin{bmatrix} A^T &amp; -I_n \end{bmatrix}\)</span>.</p>
+<p>where <span class="math inline">\(\mathcal{B}_d\)</span> is formed by combining the dual-basic columns of <span class="math inline">\(\begin{bmatrix} A^T &amp; -I_n \end{bmatrix}\)</span>.</p>
 </div>
 <p>Finally, to find <span class="math inline">\(\mathcal{B}_d\)</span> we note that, by Complementary Slackness (Theorem <a href="certificate-of-optimality.html#thm:complementary-slackness">9.2</a>), if the linear program is non-degenerate then the dual basic variables correspond to the primal non-basic variables (as the dual basic variables must be non-zero). This statement is true even for degenerate linear programs but in this case the proof is more subtle and requires the use of Strong duality (Theorem <a href="weak-and-strong-duality.html#thm:strong-duality">8.2</a>).</p>
 <div class="example">
