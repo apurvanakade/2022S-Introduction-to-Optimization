@@ -23,7 +23,7 @@
 <meta name="author" content="Apurva Nakade" />
 
 
-<meta name="date" content="2022-05-13" />
+<meta name="date" content="2022-05-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -188,7 +188,7 @@ div.csl-indent {
 <span class="math display">\[\begin{equation}
   \begin{array}{lrll}
     \mbox{maximize: } &amp; -b^T y \\
-    \mbox{subject to: }
+    \mbox{subject to: } 
       &amp; -A^T y &amp; \leq &amp; -c \\
       &amp; y &amp; \geq &amp; 0,
   \end{array}
@@ -224,14 +224,14 @@ Note that this is the range of optimality for <span class="math inline">\(-c_j\)
 <p><span id="exm:unlabeled-div-31" class="example"><strong>Example 12.1  </strong></span>Consider the linear program <a href="introduction.html#eq:bond-portfolio-lp">(1.2)</a> again. At the optimal solution, as <span class="math inline">\(w_1\)</span> and <span class="math inline">\(w_2\)</span> are non-basic, the corresponding dual variables (<span class="math inline">\(y_1\)</span> and <span class="math inline">\(y_2\)</span>) will be basic for the dual linear program <a href="dual-linear-program.html#eq:bond-portfolio-dual">(7.2)</a>. This gives us</p>
 <p><span class="math display">\[\begin{align}
   \mathcal{B}_d &amp;= \begin{bmatrix} 3 &amp; 2 \\ 6 &amp; 1 \end{bmatrix} \\
-  \implies
+  \implies 
   \mathcal{B}_d^{-1} &amp;= \begin{bmatrix} -1/9 &amp; 2/9 \\ 2/3 &amp; -1/3 \end{bmatrix}.
 \end{align}\]</span></p>
 <p>From Example <a href="sensitivity-analysis---constraints.html#exm:dual-solution">11.4</a> we know that <span class="math inline">\(y_1 = 2/9\)</span> and <span class="math inline">\(y_2 = 5/3\)</span> at the dual optimal solution. Using these, we can now find the range of optimality for the objective coefficients.</p>
 <p>To find the range of optimality for <span class="math inline">\(c_1 = 4\)</span> we solve
 <span class="math display">\[\begin{align}
-  \begin{bmatrix} 2/9 \\ 5/3 \end{bmatrix}
-  +
+  \begin{bmatrix} 2/9 \\ 5/3 \end{bmatrix} 
+  + 
   \delta \begin{bmatrix} -1/9 \\ 2/3 \end{bmatrix} \ge 0
 \end{align}\]</span>
 which gives us the inequalities
@@ -244,8 +244,8 @@ which gives us the inequalities
 So, <span class="math inline">\(\delta_- = -5/2\)</span> and <span class="math inline">\(\delta_+ = 2\)</span> and the range of optimality for <span class="math inline">\(c_1\)</span> is <span class="math inline">\((4 - 5/2, 4 + 2) = (1.5, 6)\)</span>.</p>
 <p>To find the range of optimality for <span class="math inline">\(c_2 = 3\)</span> we solve
 <span class="math display">\[\begin{align}
-  \begin{bmatrix} 2/9 \\ 5/3 \end{bmatrix}
-  +
+  \begin{bmatrix} 2/9 \\ 5/3 \end{bmatrix} 
+  + 
   \delta \begin{bmatrix} 2/9 \\ -1/3 \end{bmatrix} \ge 0
 \end{align}\]</span>
 which gives us the inequalities

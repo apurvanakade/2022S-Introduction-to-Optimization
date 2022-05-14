@@ -56,6 +56,7 @@ thm:convexity-second-derivative
 eq:convex-optimization-problem
 thm:unlabeled-div-32
 thm:optimal-on-boundary
+thm:unlabeled-div-35
 introduction
 software-tools
 graphing-calculator
