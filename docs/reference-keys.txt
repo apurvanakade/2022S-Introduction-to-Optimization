@@ -57,6 +57,14 @@ eq:convex-optimization-problem
 thm:unlabeled-div-32
 thm:optimal-on-boundary
 thm:unlabeled-div-35
+thm:farkas-lemma
+eq:farkas-eq1
+eq:farkas-eq2
+eq:farkas-primal
+eq:farkas-dual
+thm:farkas-geometry
+thm:separating-hyperplane-theorem
+eq:strong-using-farkas
 introduction
 software-tools
 graphing-calculator
@@ -101,3 +109,11 @@ sensitivity-analysis---objective
 convexity
 convex-programming
 boundary
+convexity-and-duality
+farkas-lemma
+geometry
+convex-cones
+hyperplanes-and-half-spaces
+geometric-version-of-farkas-lemma
+convex-polyhedra
+equivalence-with-strong-duality
