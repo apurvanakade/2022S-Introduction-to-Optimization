@@ -7,7 +7,7 @@ We can redo the entire analysis for the objective coefficients from scratch. How
 Consider the standardized dual 
 \begin{equation}
   \begin{array}{lrll}
-    \mbox{minimize: } & -b^T y \\
+    \mbox{maximize: } & -b^T y \\
     \mbox{subject to: } 
       & -A^T y & \leq & -c \\
       & y & \geq & 0,
@@ -18,7 +18,7 @@ Using Equation \@ref(eq:range-of-optimality) for this dictionary we get the rang
 \begin{equation}
   (-\mathcal{B}_d)^{-1} (-c) + \delta (-\mathcal{B}_d^{-1})_{\_j} \ge 0.
 \end{equation}
-where $\mathcal{B}_d$ is the basic submatrix of the dual. This simplifies to 
+where $-\mathcal{B}_d$ is formed by combining the dual-basic columns of $\begin{bmatrix} -A^T & I_n\end{bmatrix}$ and so $\mathcal{B}_d$ is formed by combining the dual-basic columns of $\begin{bmatrix} A^T & -I_n\end{bmatrix}$. This simplifies to 
 \begin{equation}
   \mathcal{B}_d^{-1} c - \delta (\mathcal{B}_d^{-1})_{\_j} \ge 0.
 \end{equation}
@@ -39,12 +39,15 @@ The range of optimality for the constraints and the objective functions are give
   x_{\mathcal{B}}^* + \delta (\mathcal{B}^{-1})_{\_i} \ge 0.
 \end{equation}
 
+where $\mathcal{B}$ is formed by combining the primal-basic columns of $\begin{bmatrix} A & I_m \end{bmatrix}$, and 
+
 **Range of optimality for $c_j$:**
 
 \begin{equation}
   y_{\mathcal{B}}^* + \delta (\mathcal{B}_d^{-1})_{\_j} \ge 0.
 \end{equation}
 
+where $\mathcal{B}_d$ is formed by combining the dual-basic columns of $\begin{bmatrix} A^T & -I_n \end{bmatrix}$. 
 :::
 
 Finally, to find $\mathcal{B}_d$ we note that, by Complementary Slackness (Theorem \@ref(thm:complementary-slackness)), if the linear program is non-degenerate then the dual basic variables correspond to the primal non-basic variables (as the dual basic variables must be non-zero). This statement is true even for degenerate linear programs but in this case the proof is more subtle and requires the use of Strong duality (Theorem \@ref(thm:strong-duality)).
