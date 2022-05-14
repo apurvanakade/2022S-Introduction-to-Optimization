@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 14 Convexity and duality | Introduction to Optimization</title>
+  <meta name="description" content="Chapter 14 Convexity and duality | Introduction to Optimization." />
+  <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 14 Convexity and duality | Introduction to Optimization" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Chapter 14 Convexity and duality | Introduction to Optimization." />
+  <meta name="github-repo" content="apurvanakade/2022S-Introduction-to-optimization" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 14 Convexity and duality | Introduction to Optimization" />
+  
+  <meta name="twitter:description" content="Chapter 14 Convexity and duality | Introduction to Optimization." />
+  
+
+<meta name="author" content="Apurva Nakade" />
+
+
+<meta name="date" content="2022-05-14" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="convexity.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="index.html#preface">Preface<span></span></a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction<span></span></a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#software-tools"><i class="fa fa-check"></i><b>1.1</b> Software tools<span></span></a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="introduction.html"><a href="introduction.html#graphing-calculator"><i class="fa fa-check"></i><b>1.1.1</b> Graphing calculator<span></span></a></li>
+<li class="chapter" data-level="1.1.2" data-path="introduction.html"><a href="introduction.html#solver-add-in"><i class="fa fa-check"></i><b>1.1.2</b> Solver add-in<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="standard-linear-program.html"><a href="standard-linear-program.html"><i class="fa fa-check"></i><b>2</b> Standard linear program<span></span></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="standard-linear-program.html"><a href="standard-linear-program.html#slack-variables"><i class="fa fa-check"></i><b>2.1</b> Slack variables<span></span></a></li>
+<li class="chapter" data-level="2.2" data-path="standard-linear-program.html"><a href="standard-linear-program.html#basic-and-non-basic-variables"><i class="fa fa-check"></i><b>2.2</b> Basic and non-basic variables<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="simplex-method.html"><a href="simplex-method.html"><i class="fa fa-check"></i><b>3</b> Simplex method<span></span></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="simplex-method.html"><a href="simplex-method.html#entering-and-leaving-variables"><i class="fa fa-check"></i><b>3.1</b> Entering and leaving variables<span></span></a></li>
+<li class="chapter" data-level="3.2" data-path="simplex-method.html"><a href="simplex-method.html#dictionaries"><i class="fa fa-check"></i><b>3.2</b> Dictionaries<span></span></a></li>
+<li class="chapter" data-level="3.3" data-path="simplex-method.html"><a href="simplex-method.html#the-simplex-step"><i class="fa fa-check"></i><b>3.3</b> The simplex step<span></span></a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="simplex-method.html"><a href="simplex-method.html#choosing-the-entering-variable"><i class="fa fa-check"></i><b>3.3.1</b> Choosing the entering variable<span></span></a></li>
+<li class="chapter" data-level="3.3.2" data-path="simplex-method.html"><a href="simplex-method.html#choosing-the-leaving-variable"><i class="fa fa-check"></i><b>3.3.2</b> Choosing the leaving variable<span></span></a></li>
+<li class="chapter" data-level="3.3.3" data-path="simplex-method.html"><a href="simplex-method.html#tableau"><i class="fa fa-check"></i><b>3.3.3</b> Tableau<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="simplex-method.html"><a href="simplex-method.html#stopping-conditions"><i class="fa fa-check"></i><b>3.4</b> Stopping conditions<span></span></a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="simplex-method.html"><a href="simplex-method.html#no-entering-variable"><i class="fa fa-check"></i><b>3.4.1</b> No entering variable<span></span></a></li>
+<li class="chapter" data-level="3.4.2" data-path="simplex-method.html"><a href="simplex-method.html#no-leaving-variable"><i class="fa fa-check"></i><b>3.4.2</b> No leaving variable<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="initialization.html"><a href="initialization.html"><i class="fa fa-check"></i><b>4</b> Initialization<span></span></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="initialization.html"><a href="initialization.html#auxiliary-linear-program"><i class="fa fa-check"></i><b>4.1</b> Auxiliary linear program<span></span></a></li>
+<li class="chapter" data-level="4.2" data-path="initialization.html"><a href="initialization.html#combined-tableau"><i class="fa fa-check"></i><b>4.2</b> Combined tableau<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="halting-problem.html"><a href="halting-problem.html"><i class="fa fa-check"></i><b>5</b> Halting problem<span></span></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="halting-problem.html"><a href="halting-problem.html#fundamental-theorem-of-linear-programming"><i class="fa fa-check"></i><b>5.1</b> Fundamental theorem of linear programming<span></span></a></li>
+<li class="chapter" data-level="5.2" data-path="halting-problem.html"><a href="halting-problem.html#degeneracy"><i class="fa fa-check"></i><b>5.2</b> Degeneracy<span></span></a></li>
+<li class="chapter" data-level="5.3" data-path="halting-problem.html"><a href="halting-problem.html#blands-rule"><i class="fa fa-check"></i><b>5.3</b> Bland’s rule<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="standardization.html"><a href="standardization.html"><i class="fa fa-check"></i><b>6</b> Standardization<span></span></a>
+<ul>
+<li class="chapter" data-level="6.0.1" data-path="standardization.html"><a href="standardization.html#objective"><i class="fa fa-check"></i><b>6.0.1</b> Objective<span></span></a></li>
+<li class="chapter" data-level="6.0.2" data-path="standardization.html"><a href="standardization.html#constraints"><i class="fa fa-check"></i><b>6.0.2</b> Constraints<span></span></a></li>
+<li class="chapter" data-level="6.0.3" data-path="standardization.html"><a href="standardization.html#variables"><i class="fa fa-check"></i><b>6.0.3</b> Variables<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="dual-linear-program.html"><a href="dual-linear-program.html"><i class="fa fa-check"></i><b>7</b> Dual linear program<span></span></a></li>
+<li class="chapter" data-level="8" data-path="weak-and-strong-duality.html"><a href="weak-and-strong-duality.html"><i class="fa fa-check"></i><b>8</b> Weak and strong duality<span></span></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="weak-and-strong-duality.html"><a href="weak-and-strong-duality.html#weak-duality"><i class="fa fa-check"></i><b>8.1</b> Weak duality<span></span></a></li>
+<li class="chapter" data-level="8.2" data-path="weak-and-strong-duality.html"><a href="weak-and-strong-duality.html#strong-duality"><i class="fa fa-check"></i><b>8.2</b> Strong duality<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="certificate-of-optimality.html"><a href="certificate-of-optimality.html"><i class="fa fa-check"></i><b>9</b> Certificate of optimality<span></span></a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="certificate-of-optimality.html"><a href="certificate-of-optimality.html#complimentary-slackness"><i class="fa fa-check"></i><b>9.1</b> Complimentary slackness<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="dual-of-a-general-linear-program.html"><a href="dual-of-a-general-linear-program.html"><i class="fa fa-check"></i><b>10</b> Dual of a general linear program<span></span></a></li>
+<li class="chapter" data-level="11" data-path="sensitivity-analysis---constraints.html"><a href="sensitivity-analysis---constraints.html"><i class="fa fa-check"></i><b>11</b> Sensitivity analysis - Constraints<span></span></a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="sensitivity-analysis---constraints.html"><a href="sensitivity-analysis---constraints.html#matrix-notation"><i class="fa fa-check"></i><b>11.1</b> Matrix notation<span></span></a></li>
+<li class="chapter" data-level="11.2" data-path="sensitivity-analysis---constraints.html"><a href="sensitivity-analysis---constraints.html#range-of-optimality"><i class="fa fa-check"></i><b>11.2</b> Range of optimality<span></span></a></li>
+<li class="chapter" data-level="11.3" data-path="sensitivity-analysis---constraints.html"><a href="sensitivity-analysis---constraints.html#rate-of-change"><i class="fa fa-check"></i><b>11.3</b> Rate of change<span></span></a></li>
+<li class="chapter" data-level="11.4" data-path="sensitivity-analysis---constraints.html"><a href="sensitivity-analysis---constraints.html#dual-variables"><i class="fa fa-check"></i><b>11.4</b> Dual variables<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="sensitivity-analysis---objective.html"><a href="sensitivity-analysis---objective.html"><i class="fa fa-check"></i><b>12</b> Sensitivity analysis - Objective<span></span></a></li>
+<li class="chapter" data-level="13" data-path="convexity.html"><a href="convexity.html"><i class="fa fa-check"></i><b>13</b> Convexity<span></span></a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="convexity.html"><a href="convexity.html#convex-programming"><i class="fa fa-check"></i><b>13.1</b> Convex programming<span></span></a></li>
+<li class="chapter" data-level="13.2" data-path="convexity.html"><a href="convexity.html#boundary"><i class="fa fa-check"></i><b>13.2</b> Boundary<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="convexity-and-duality.html"><a href="convexity-and-duality.html"><i class="fa fa-check"></i><b>14</b> Convexity and duality<span></span></a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="convexity-and-duality.html"><a href="convexity-and-duality.html#farkas-lemma"><i class="fa fa-check"></i><b>14.1</b> Farkas’ lemma<span></span></a></li>
+<li class="chapter" data-level="14.2" data-path="convexity-and-duality.html"><a href="convexity-and-duality.html#geometry"><i class="fa fa-check"></i><b>14.2</b> Geometry<span></span></a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="convexity-and-duality.html"><a href="convexity-and-duality.html#convex-cones"><i class="fa fa-check"></i><b>14.2.1</b> Convex cones<span></span></a></li>
+<li class="chapter" data-level="14.2.2" data-path="convexity-and-duality.html"><a href="convexity-and-duality.html#hyperplanes-and-half-spaces"><i class="fa fa-check"></i><b>14.2.2</b> Hyperplanes and Half-spaces<span></span></a></li>
+<li class="chapter" data-level="14.2.3" data-path="convexity-and-duality.html"><a href="convexity-and-duality.html#geometric-version-of-farkas-lemma"><i class="fa fa-check"></i><b>14.2.3</b> Geometric version of Farkas’ lemma<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="convexity-and-duality.html"><a href="convexity-and-duality.html#convex-polyhedra"><i class="fa fa-check"></i><b>14.3</b> Convex polyhedra<span></span></a></li>
+<li class="chapter" data-level="14.4" data-path="convexity-and-duality.html"><a href="convexity-and-duality.html#equivalence-with-strong-duality"><i class="fa fa-check"></i><b>14.4</b> Equivalence with Strong Duality<span></span></a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Optimization</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="convexity-and-duality" class="section level1 hasAnchor" number="14">
+<h1><span class="header-section-number">Chapter 14</span> Convexity and duality<a href="convexity-and-duality.html#convexity-and-duality" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>We’ll next prove a couple of <em>geometric</em> results that are equivalent to strong duality theorem (Theorem <a href="weak-and-strong-duality.html#thm:strong-duality">8.2</a>).</p>
+<div id="farkas-lemma" class="section level2 hasAnchor" number="14.1">
+<h2><span class="header-section-number">14.1</span> Farkas’ lemma<a href="convexity-and-duality.html#farkas-lemma" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="theorem">
+<p><span id="thm:farkas-lemma" class="theorem"><strong>Theorem 14.1  (Farkas' lemma) </strong></span>Let <span class="math inline">\(A\)</span> be an <span class="math inline">\(m \times n\)</span> matrix and <span class="math inline">\(b\)</span> be a vector in <span class="math inline">\(\mathbb{R}^m\)</span>.
+Exactly one of the following systems has a solution:</p>
+<p><span class="math display" id="eq:farkas-eq1">\[\begin{align}
+  A x &amp; = b \\ 
+  x &amp; \ge 0.
+\tag{14.1}
+\end{align}\]</span></p>
+<p><span class="math display" id="eq:farkas-eq2">\[\begin{align}
+  y^T A &amp; \ge 0 \\ 
+  y^T b &amp; &lt; 0.
+\tag{14.2}
+\end{align}\]</span></p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(A x = b\)</span>, <span class="math inline">\(x \ge 0.\)</span></li>
+<li><span class="math inline">\(y^T A \ge 0\)</span>, <span class="math inline">\(y^T b &lt; 0.\)</span></li>
+</ol>
+</div>
+<div class="proof">
+<p><span id="unlabeled-div-36" class="proof"><em>Proof</em>. </span>We’ll prove Farkas’ lemma using strong duality. Consider the following linear program:</p>
+<p><span class="math display" id="eq:farkas-primal">\[\begin{equation}
+  \begin{array}{llll}
+    \mbox{maximize: } &amp; 0 \\
+    \mbox{subject to: } 
+      &amp; A x &amp; = &amp; b \\ 
+      &amp; x &amp; \ge &amp; 0.
+  \end{array}
+\tag{14.3}
+\end{equation}\]</span></p>
+<p>The optimal solution to the linear program <a href="convexity-and-duality.html#eq:farkas-primal">(14.3)</a> is a feasible solution to <a href="convexity-and-duality.html#eq:farkas-eq1">(14.1)</a>. The dual to this linear program is</p>
+<p><span class="math display" id="eq:farkas-dual">\[\begin{equation}
+  \begin{array}{llll}
+    \mbox{minimize: } &amp; y^T b \\
+    \mbox{subject to: } 
+      &amp; y^T A &amp; \ge &amp; 0.
+  \end{array}
+\tag{14.4}
+\end{equation}\]</span></p>
+<p><strong>Case 1: Suppose <a href="convexity-and-duality.html#eq:farkas-eq1">(14.1)</a> has a solution.</strong></p>
+<p>In this case, <a href="convexity-and-duality.html#eq:farkas-primal">(14.3)</a> has an optimal solution. By strong duality, <a href="convexity-and-duality.html#eq:farkas-dual">(14.4)</a> also has an optimal solution with optimal objective <span class="math inline">\(0\)</span>. So, the minimum value of <span class="math inline">\(y^T b\)</span> is <span class="math inline">\(0\)</span> and hence the system <a href="convexity-and-duality.html#eq:farkas-eq2">(14.2)</a> does not have a solution.</p>
+<p><strong>Case 2: Suppose <a href="convexity-and-duality.html#eq:farkas-eq2">(14.2)</a> does not have a solution.</strong></p>
+<p>In this case, <a href="convexity-and-duality.html#eq:farkas-primal">(14.3)</a> has no optimal solution. By strong duality, neither does <a href="convexity-and-duality.html#eq:farkas-dual">(14.4)</a>. So, <a href="convexity-and-duality.html#eq:farkas-dual">(14.4)</a> is either infeasible or unbounded. As <span class="math inline">\(y = 0\)</span> is a feasible solution to <a href="convexity-and-duality.html#eq:farkas-dual">(14.4)</a> it cannot be infeasible, and hence it must be unbounded. But this means that the value of <span class="math inline">\(y^T b\)</span> can be made arbitrarily small, and in particular, can be made negative. Hence, the system <a href="convexity-and-duality.html#eq:farkas-eq2">(14.2)</a> has a solution.</p>
+</div>
+<p>We’ll next interpret Farkas’ lemma geometrically using positive cones and separating hyperplanes.</p>
+</div>
+<div id="geometry" class="section level2 hasAnchor" number="14.2">
+<h2><span class="header-section-number">14.2</span> Geometry<a href="convexity-and-duality.html#geometry" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="convex-cones" class="section level3 hasAnchor" number="14.2.1">
+<h3><span class="header-section-number">14.2.1</span> Convex cones<a href="convexity-and-duality.html#convex-cones" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<!-- Let $\{v_1, \dots, v_n\}$ be a set of vectors in $\mathbb{R}^m$.  -->
+<p>Define the <strong>convex cone</strong>, also called the <strong>positive cone</strong>, of a finite set of vectors in <span class="math inline">\(\mathbb{R}^m\)</span> to be the set of positive linear combinations of vectors in the set.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
+<p><span class="math display">\[\begin{align}
+  C_+(v_1, \dots, v_n) &amp; := \{c_1 v_1 + \dots + c_n v_n \mid c_i \ge 0 \}.
+\end{align}\]</span></p>
+</div>
+<div id="hyperplanes-and-half-spaces" class="section level3 hasAnchor" number="14.2.2">
+<h3><span class="header-section-number">14.2.2</span> Hyperplanes and Half-spaces<a href="convexity-and-duality.html#hyperplanes-and-half-spaces" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A <strong>hyperplane</strong> in <span class="math inline">\(\mathbb{R}^m\)</span> is the set of solutions to a single linear equation.
+The complement of a hyperplane in <span class="math inline">\(\mathbb{R}^n\)</span> consists of two connected components. The closures of these components are called <strong>half-spaces</strong>.</p>
+<p>If the equation of the hyperplane is given by <span class="math inline">\(b^T y = b_0\)</span>, where <span class="math inline">\(b\)</span> is a vector in <span class="math inline">\(\mathbb{R}^m\)</span> and <span class="math inline">\(b_0 \in \mathbb{R}\)</span>, then the corresponding two half-spaces are described by <span class="math inline">\(b^T y \le b_0\)</span> and <span class="math inline">\(b^T y \ge b_0\)</span>.</p>
+<p>We say that a hyperplane <span class="math inline">\(H\)</span> separates two subsets <span class="math inline">\(S_1\)</span> and <span class="math inline">\(S_2\)</span> of <span class="math inline">\(\mathbb{R}^m\)</span> if <span class="math inline">\(S_1\)</span> and <span class="math inline">\(S_2\)</span> belongs to the two different half-spaces of <span class="math inline">\(H\)</span>.</p>
+</div>
+<div id="geometric-version-of-farkas-lemma" class="section level3 hasAnchor" number="14.2.3">
+<h3><span class="header-section-number">14.2.3</span> Geometric version of Farkas’ lemma<a href="convexity-and-duality.html#geometric-version-of-farkas-lemma" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Using convex cones and separating hyperplanes, we can reinterpret <a href="convexity-and-duality.html#thm:farkas-lemma">14.1</a> as follows.</p>
+<div class="theorem">
+<p><span id="thm:farkas-geometry" class="theorem"><strong>Theorem 14.2  (Geometric version of Farkas' lemma) </strong></span>Let <span class="math inline">\(v_1, \dots, v_n, b\)</span> be vectors in <span class="math inline">\(\mathbb{R}^m\)</span>. Exactly one of the following statements is true:</p>
+<ol style="list-style-type: decimal">
+<li>Either <span class="math inline">\(b\)</span> lies inside <span class="math inline">\(C_+(v_1, \dots, v_n)\)</span>, or</li>
+<li>There is a hyperplane <span class="math inline">\(H\)</span> that separates <span class="math inline">\(b\)</span> from <span class="math inline">\(C_+(v_1, \dots, v_n)\)</span>.</li>
+</ol>
+</div>
+<p>As we’ll see below, this is a special case of the Separating Hyperplane Theorem <a href="#thm:separating-hyperplane"><strong>??</strong></a>. Based on these theorems, we can design algorithms that search for a separating hyperplane when trying to separate convex regions. See <a href="https://en.wikipedia.org/wiki/Support-vector_machine">Support Vector Machines</a> for an example of such an algorithm.</p>
+</div>
+</div>
+<div id="convex-polyhedra" class="section level2 hasAnchor" number="14.3">
+<h2><span class="header-section-number">14.3</span> Convex polyhedra<a href="convexity-and-duality.html#convex-polyhedra" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A point <span class="math inline">\(b\)</span> and a convex cone <span class="math inline">\(C_+(v_1, \dots, v_n)\)</span> are convex subsets of <span class="math inline">\(\mathbb{R}^m\)</span>. The statement of Farkas’ lemma <a href="convexity-and-duality.html#thm:farkas-geometry">14.2</a> can be generalized to arbitrary convex sets using metric topology. For now, we’ll generalize it to convex polyhedra.</p>
+<p>Intersection of finitely many half-spaces is called a <strong>convex polyhedron</strong>. So, a convex polyhedron is the set of solutions to a system of linear inequalities <span class="math inline">\(A x \le b\)</span>. But this set is precisely the feasible region of a linear program! The class of convex polyhedra is very large and all geometric “linear” convex objects, like points, lines, planes, half-spaces, hyperplanes, convex cones, etc. can be realized as convex polyhedra.</p>
+<p>The following is an extension of Farkas’ lemma to convex polyhedra.</p>
+<div class="theorem">
+<p><span id="thm:separating-hyperplane-theorem" class="theorem"><strong>Theorem 14.3  (Separating Hyperplane Theorem) </strong></span>Let <span class="math inline">\(P\)</span> and <span class="math inline">\(P&#39;\)</span> be two non-empty, disjoint, convex polyhedra in <span class="math inline">\(\mathbb{R}^m\)</span>. There exists a half-plane <span class="math inline">\(H\)</span> that separates <span class="math inline">\(P\)</span> and <span class="math inline">\(P&#39;\)</span>.</p>
+</div>
+<div class="proof">
+<p><span id="unlabeled-div-37" class="proof"><em>Proof</em>. </span>We’ll show the following stronger statement: there exists a vector <span class="math inline">\(c \in \mathbb{R}^m\)</span> and constants <span class="math inline">\(d &lt; d&#39;\)</span> such that <span class="math inline">\(P\)</span> is a subset of the hyperplane <span class="math inline">\(c^T y \le d_1\)</span> and <span class="math inline">\(P&#39;\)</span> is a subset of the hyperplane <span class="math inline">\(c^T y \ge d_2\)</span>. We can then choose our separating hyperplane to be <span class="math inline">\(c^T y = (d + d&#39;)/2\)</span>.</p>
+<p>Suppose <span class="math inline">\(P\)</span> and <span class="math inline">\(P&#39;\)</span> are described by the equations <span class="math inline">\(A x \le b\)</span> and <span class="math inline">\(A&#39;x \le b&#39;\)</span>, respectively. Then because the two sets are disjoint, the following system does not have a solution:</p>
+<p><span class="math display">\[\begin{align}
+  A x &amp;\le b \\
+  A&#39;x &amp;\le b&#39;
+\end{align}\]</span></p>
+<p>which can be rewritten as</p>
+<p><span class="math display">\[\begin{align}
+  \begin{bmatrix} A \\ A&#39; \end{bmatrix} x &amp; \le \begin{bmatrix} b \\ b&#39; \end{bmatrix}.
+\end{align}\]</span></p>
+<p>We can now apply (a variant of) Farkas’ lemma (Theorem <a href="convexity-and-duality.html#farkas-lemma">14.1</a>) to this system to extract <span class="math inline">\(c\)</span>, <span class="math inline">\(d\)</span>, <span class="math inline">\(d&#39;\)</span> from solutions from the dual system.</p>
+</div>
+</div>
+<div id="equivalence-with-strong-duality" class="section level2 hasAnchor" number="14.4">
+<h2><span class="header-section-number">14.4</span> Equivalence with Strong Duality<a href="convexity-and-duality.html#equivalence-with-strong-duality" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>It is possible to prove Strong Duality using Farkas’ lemma, which itself can be proven using metric topology. So, Strong Duality, Farkas’ lemma, and Separating Hyperplane Theorem should all be thought of as equivalent to each other.</p>
+<div class="proof">
+<p><span id="unlabeled-div-38" class="proof"><em>Proof</em>. </span>Consider the system of equations</p>
+<p><span class="math display" id="eq:strong-using-farkas">\[\begin{equation}
+\begin{split}
+Ax &amp; \le b \\
+-A^T y &amp; \le -c \\ 
+x, y &amp; \ge 0 \\
+-c^T x + b^T y &amp; \le 0.
+\end{split}
+\tag{14.5}
+\end{equation}\]</span></p>
+<p>Suppose this system has a feasible solution. The first three equations are equivalent to saying that <span class="math inline">\(x\)</span> is primal-feasible and <span class="math inline">\(y\)</span> is dual-feasible. If such a solution exists, by Weak Duality (Theorem <a href="weak-and-strong-duality.html#thm:weak-duality">8.1</a>) we know that <span class="math inline">\(c^T x \le b^T y\)</span>. So, the only way the fourth inequality is satisfied is if <span class="math inline">\(c^T x = b^T y\)</span> i.e. the primal-objective value at <span class="math inline">\(x\)</span> equals the dual-objective value at <span class="math inline">\(y\)</span>. But by Weak Duality, these must then be the optimal solutions thereby proving Strong Duality. So, it suffices to show that <a href="convexity-and-duality.html#eq:strong-using-farkas">(14.5)</a> has a feasible solution if the primal has an optimal solution.</p>
+<p>We prove this by contradiction. Suppose <a href="convexity-and-duality.html#eq:strong-using-farkas">(14.5)</a> does not have an optimal solution. We rewrite the system as</p>
+<p><span class="math display">\[\begin{equation}
+  \begin{split}
+    \begin{bmatrix} A &amp; 0 \\ 0 &amp; -A^T \\ -c^T &amp; b^T \end{bmatrix}
+    \begin{bmatrix} x \\ y  \end{bmatrix}
+      &amp; \le 
+    \begin{bmatrix} b \\ -c \\ 0 \end{bmatrix} \\
+    x, y &amp; \ge 0.
+  \end{split}
+\end{equation}\]</span></p>
+<p>By (a variant of) Farkas’ lemma, the corresponding dual system must have a solution. We then analyze the solution to the dual system to show that this is not possible.</p>
+<!-- 
+By (a variant of) Farkas' lemma, the following dual system must have a solution.
+
+\begin{equation}
+  \begin{split}
+    \begin{bmatrix} z^T & w^T & t \end{bmatrix}
+      \begin{bmatrix} b \\ -c \\ 0 \end{bmatrix} & \le 0 \\
+    \begin{bmatrix} z^T & w^T & t \end{bmatrix}
+      \begin{bmatrix} A & 0 \\ 0 & -A^T \\ -c^T & b^T \end{bmatrix}
+        & \ge 0\\
+    z, w, t & \ge 0.
+  \end{split}
+\end{equation}
+
+which can be rewritten as 
+
+\begin{equation}
+  \begin{split}
+    z^T b & < w^T c \\
+    z^T A & \ge t c^T \\
+    t b^T & \ge w^T A^T \\
+    z, w, t & \ge 0.
+  \end{split}
+\end{equation}
+
+We then multiply the second inequality by $w$ and the third inequality by $z$ on the right to obtain 
+
+\begin{equation}
+  \begin{split}
+    z^T b & < w^T c \\
+    z^T A w & \ge t c^T w \\
+    t b^T z & \ge w^T A^T z \\
+    z, w, t & \ge 0.
+  \end{split}
+\end{equation}
+
+Transposing the second inequality and combining the second and third inequalities we get 
+
+\begin{equation}
+  \begin{split}
+    z^T b & < w^T c \\
+    t z^T b & \ge t w^T c \\
+    z, w, t & \ge 0.
+  \end{split}
+\end{equation}
+
+If $t > 0$, this is not possible, so we must have $t = 0$. Plugging $t = 0$ back in the original dual system we get, that the following system has a solution.
+
+\begin{equation}
+  \begin{split}
+    z^T b & < w^T c \\
+    z^T A w & \ge 0\\
+    0 & \ge w^T A^T z \\
+    z, w & \ge 0.
+  \end{split}
+\end{equation}
+
+But now we apply (variant of) Farkas' lemma to this system again to say that the following system does not have a solution. 
+
+\begin{equation}
+  \begin{split}
+    \begin{bmatrix} A & 0 \\ 0 & -A^T \\ -c^T & b^T \end{bmatrix}
+    \begin{bmatrix} x \\ y  \end{bmatrix}
+      & \le 
+    x, y & \ge 0.
+  \end{split}
+\end{equation}
+
+But this is a contradiction as we know that both the primal and dual systems have a solution. -->
+</div>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="2">
+<li id="fn2"><p>One can also define convex cones for infinite sets of vectors. In this case, we need to take the closure of the set of positive linear combinations.<a href="convexity-and-duality.html#fnref2" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="convexity.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": "github"
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "lunr",
+"options": null
+},
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"toolbar": {
+"position": "fixed"
+},
+"info": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
