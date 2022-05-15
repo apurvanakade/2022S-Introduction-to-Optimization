@@ -170,6 +170,8 @@ We prove this by contradiction. Suppose \@ref(eq:strong-using-farkas) does not h
 
 By (a variant of) Farkas' lemma, the corresponding dual system must have a solution. We then analyze the solution to the dual system to show that this is not possible.
 
+<!-- Reference: https://math.stackexchange.com/questions/876391/proof-of-strong-duality-via-farkas-lemma -->
+
 <!-- 
 By (a variant of) Farkas' lemma, the following dual system must have a solution.
 
