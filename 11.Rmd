@@ -158,6 +158,8 @@ The **range of optimality** for $b_i$ is the interval $(b_i + \delta_-, b_i + \d
 
 In practice, Equation \@ref(eq:range-of-optimality) gives us $m$ inequalities, all of which need to be simultaneously satisfied. These give us candidate values for $\delta$ some of which are positive and some of which are negative. We then choose $\delta_+$ to be the smallest positive value and $\delta_-$ to be the largest negative value. If $\delta_+$ does not exist the upper bound is $\infty$ and if $\delta_-$ does not exist the lower bound is $-\infty$. If either $\delta_+$ or $\delta_-$ is 0 then the linear program is degenerate and the range of optimality for $b_i$ is empty. In this case, our program is very sensitive to perturbations in $b_i$.
 
+<!-- Think about whether to keep the range of optimality open or closed. This affects the range of optimality for degenerate vertices. -->
+
 
 ::: {.example}
 
