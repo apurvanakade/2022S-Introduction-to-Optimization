@@ -117,3 +117,5 @@ hyperplanes-and-half-spaces
 geometric-version-of-farkas-lemma
 convex-polyhedra
 equivalence-with-strong-duality
+interior-point-methods
+gradient-descent
