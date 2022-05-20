@@ -65,6 +65,7 @@ eq:farkas-dual
 thm:farkas-geometry
 thm:separating-hyperplane-theorem
 eq:strong-using-farkas
+eq:constrained-optimization-problem
 introduction
 software-tools
 graphing-calculator
@@ -119,3 +120,4 @@ convex-polyhedra
 equivalence-with-strong-duality
 interior-point-methods
 gradient-descent
+barrier-functions
