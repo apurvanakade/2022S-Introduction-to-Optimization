@@ -86,8 +86,8 @@ These need to be satisfied in addition to the original constraint $x \ge 0$. The
 
 Consider the linear program 
 \begin{align}
-  \mbox{minimize:} & c^T x \\
-  \mbox{subject to:} & Ax \ge b 
+  \mbox{minimize: } & c^T x \\
+  \mbox{subject to: } & Ax \ge b 
 \end{align}
 The KKT conditions for this problem are
 \begin{align}
