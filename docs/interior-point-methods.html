@@ -4,20 +4,20 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 5 Halting problem | Introduction to Optimization</title>
-  <meta name="description" content="Chapter 5 Halting problem | Introduction to Optimization." />
+  <title>Chapter 15 Interior point methods | Introduction to Optimization</title>
+  <meta name="description" content="Chapter 15 Interior point methods | Introduction to Optimization." />
   <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 5 Halting problem | Introduction to Optimization" />
+  <meta property="og:title" content="Chapter 15 Interior point methods | Introduction to Optimization" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="Chapter 5 Halting problem | Introduction to Optimization." />
+  <meta property="og:description" content="Chapter 15 Interior point methods | Introduction to Optimization." />
   <meta name="github-repo" content="apurvanakade/2022S-Introduction-to-optimization" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 5 Halting problem | Introduction to Optimization" />
+  <meta name="twitter:title" content="Chapter 15 Interior point methods | Introduction to Optimization" />
   
-  <meta name="twitter:description" content="Chapter 5 Halting problem | Introduction to Optimization." />
+  <meta name="twitter:description" content="Chapter 15 Interior point methods | Introduction to Optimization." />
   
 
 <meta name="author" content="Apurva Nakade" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="initialization.html"/>
-<link rel="next" href="standardization.html"/>
+<link rel="prev" href="convexity-and-duality.html"/>
+<link rel="next" href="kkt-conditions.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -201,87 +201,100 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="halting-problem" class="section level1 hasAnchor" number="5">
-<h1><span class="header-section-number">Chapter 5</span> Halting problem<a href="halting-problem.html#halting-problem" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>We now have a complete algorithm for solving a standard linear program. However, we have not shown that it always finds the optimal solution. Let us start with the existence of optimal solution.</p>
-<div id="fundamental-theorem-of-linear-programming" class="section level2 hasAnchor" number="5.1">
-<h2><span class="header-section-number">5.1</span> Fundamental theorem of linear programming<a href="halting-problem.html#fundamental-theorem-of-linear-programming" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>To resolve the issue of getting stuck in a loop, we first need the following theorem about linear programs:</p>
-<div class="theorem">
-<p><span id="thm:unlabeled-div-14" class="theorem"><strong>Theorem 5.1  (Fundamental theorem of linear programming) </strong></span>Every standard linear program is exactly one of the following:</p>
-<ol style="list-style-type: decimal">
-<li>Infeasible,</li>
-<li>Unbounded,</li>
-<li>Has an optimal solution. In this case, the optimal solution is obtained at one of the vertices of the feasible region.</li>
-</ol>
-</div>
-<p>This theorem is an easy corollary of the <a href="https://en.wikipedia.org/wiki/Extreme_value_theorem">extreme value theorem</a> for multi-variate functions and relies on the closedness of the feasible region of a standard linear program and the continuity of the objective function.</p>
-<p>We see that the simplex method is able to detect all three cases. The first case happens when the Phase I algorithm is unable to find a feasible solution, the second case happens when no leaving variable is found, and the third case happens when no entering variable is found.</p>
-<p>However, it is possible for the simplex method to get stuck in a loop. This is called <strong>cycling</strong>. One way to show that the simplex method does not cycle is to show that the <em>objective value always increases after the simplex step</em>. If this were the case then we would never visit the same vertex twice. The vertices of the feasible region are obtained by intersecting constraint boundaries and hence only are finite in number (even if the region is unbounded). So, if we never visit the same vertex twice, the simplex method must halt.</p>
-<p>However, it is not always the case that the objective value increases after a simplex step!</p>
-</div>
-<div id="degeneracy" class="section level2 hasAnchor" number="5.2">
-<h2><span class="header-section-number">5.2</span> Degeneracy<a href="halting-problem.html#degeneracy" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>We saw in Section <a href="simplex-method.html#choosing-the-leaving-variable">3.3.2</a> that after the simplex step the entering and leaving variable gets updated as follows:
+<div id="interior-point-methods" class="section level1 hasAnchor" number="15">
+<h1><span class="header-section-number">Chapter 15</span> Interior point methods<a href="interior-point-methods.html#interior-point-methods" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Throughout this chapter we will let <span class="math inline">\(f\)</span> denote a twice differentiable function from <span class="math inline">\(\mathbb{R}^n\)</span> to <span class="math inline">\(\mathbb{R}\)</span>.</p>
+<div id="gradient-descent" class="section level2 hasAnchor" number="15.1">
+<h2><span class="header-section-number">15.1</span> Gradient descent<a href="interior-point-methods.html#gradient-descent" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We will start by trying to solve the following unconstrained optimization problem:
 <span class="math display">\[\begin{align}
-  x_j &amp; \mapsto b_i/a_{ij} \\
-  w_i &amp; \mapsto 0.
+  \mbox{minimize: } &amp; f(x)
 \end{align}\]</span>
-This increases the value of the objective function by <span class="math inline">\(c_j b_i/a_{ij}\)</span>. Because of the criterion for choosing the entering and leaving variables, the constants <span class="math inline">\(c_i\)</span> and <span class="math inline">\(a_{ij}\)</span> are always positive. We know that <span class="math inline">\(b_i\)</span> this is the value of the basic variable <span class="math inline">\(w_i\)</span> and hence must be <span class="math inline">\(\ge 0\)</span>. But we cannot guarantee that <span class="math inline">\(b_i &gt; 0\)</span>. If <span class="math inline">\(b_i = 0\)</span>, then the objective value does not increase after the simplex step. This can result in the simplex method to get stuck in a loop.</p>
-<p>We say that the dictionary at a feasible vertex is <strong>degenerate</strong> if some <span class="math inline">\(b_i = 0\)</span>. In this case, one of the basic variables also has the value 0 at this vertex. Geometrically, this is saying that more than <span class="math inline">\(n\)</span> constraints are satisfied at this vertex.</p>
-<div class="example">
-<p><span id="exm:unlabeled-div-15" class="example"><strong>Example 5.1  </strong></span>The following slight modification of Example <a href="introduction.html#eq:bond-portfolio-lp">(1.2)</a> is a degenerate linear program:</p>
-<p><span class="math display">\[\begin{equation}
-  \begin{array}{rrrrrl}
-  \mbox{maximize:} &amp; 4x &amp; + &amp; 3y \\
-  \mbox{subject to:}
-    &amp; 3x &amp; + &amp; 6y &amp; \le &amp; 4.5 \\
-    &amp; 2x &amp; + &amp; y &amp; \le &amp; 1.5 \\
-    &amp; x &amp; + &amp; y &amp; \le &amp; 1 \\
-    &amp; x &amp; , &amp; y &amp; \ge &amp; 0.
-  \end{array}
-\end{equation}\]</span></p>
-<p><img src="Introduction-to-Optimization_files/figure-html/fig-degenerate-lp-1.png" width="672" /></p>
-<p>At the optimal solution, <span class="math inline">\((0.5, 0.5)\)</span> all three constraints are met. At this vertex, one of the rows is
-<span class="math display">\[\begin{align}
-  w_3 &amp;= 0 + 0.33 w_2 + 0.11 w_1.
-\end{align}\]</span></p>
-</div>
-<div class="example">
-<p><span id="exm:cycling" class="example"><strong>Example 5.2  </strong></span>Consider the following degenerate linear program:</p>
-<p><span class="math display">\[\begin{equation}
-  \begin{array}{rrrrrrrl}
-  \mbox{maximize:} &amp; x_1 &amp; - &amp; 2x_2 &amp; &amp; &amp; - &amp; 2x_4 \\
-  \mbox{subject to:}
-    &amp; 0.5 x_1 &amp; - &amp; 3.5x_2 &amp; - &amp; 2x_3 &amp; + &amp; 4 x_4 &amp; \le &amp; 0 \\
-    &amp; 0.5 x_1 &amp; - &amp; x_2 &amp; - &amp; 0.5 x_3 &amp; + &amp; 0.5 x_4 &amp; \le &amp; 0 \\
-    &amp; x_1 &amp; &amp; &amp; &amp; &amp;  &amp;  &amp; \le &amp; 1 \\
-    &amp; x_1 &amp; , &amp; x_2 &amp; , &amp; x_3 &amp; , &amp; x_4 &amp; \ge &amp; 0 \\
-  \end{array}
-\end{equation}\]</span></p>
-<p>The following is a valid sequence of simplex steps:</p>
+where <span class="math inline">\(x\)</span> is any vector in <span class="math inline">\(\mathbb{R}^n\)</span>.
+<strong>Gradient descent</strong> is a simple algorithm for solving this problem using basic differential calculus.
+Gradient descent relies on the fact that <em>the negative of the gradient points in the direction in which the function decreases the fastest</em>.
+So the general principle is to move in the direction of the negative gradient until the function is no longer decreasing.</p>
+<p>More precisely,</p>
+<ul>
+<li><p>Let <span class="math inline">\(k = 0\)</span>.</p></li>
+<li><p>Start with a guess <span class="math inline">\(x_0\)</span> for the optimal solution.</p></li>
+<li><p>While minima is not reached:</p>
+<ul>
+<li>Set <span class="math inline">\(x_{k+1} = x_k - t_k \nabla f(x_k)\)</span>.</li>
+<li>Increase <span class="math inline">\(k\)</span> to <span class="math inline">\(k+1\)</span>.</li>
+</ul></li>
+</ul>
+<p>Here <span class="math inline">\(t_k\)</span> is the “step size” for the <span class="math inline">\(k^{th}\)</span> iteration and can be chosen to be a small constant or some function of <span class="math inline">\(k\)</span>, <span class="math inline">\(x_k\)</span>, <span class="math inline">\(f(x_k)\)</span>, or <span class="math inline">\(\nabla f(x_k)\)</span>.</p>
+<p>There are several issues with the above algorithm:</p>
 <ol style="list-style-type: decimal">
-<li><span class="math inline">\(x_1\)</span> enters and <span class="math inline">\(w_1\)</span> leaves,</li>
-<li><span class="math inline">\(x_2\)</span> enters and <span class="math inline">\(w_2\)</span> leaves,</li>
-<li><span class="math inline">\(x_3\)</span> enters and <span class="math inline">\(x_1\)</span> leaves,</li>
-<li><span class="math inline">\(x_4\)</span> enters and <span class="math inline">\(x_2\)</span> leaves,</li>
-<li><span class="math inline">\(w_1\)</span> enters and <span class="math inline">\(x_3\)</span> leaves,</li>
-<li><span class="math inline">\(w_2\)</span> enters and <span class="math inline">\(x_4\)</span> leaves.</li>
+<li>If the function has multiple local minima, then the algorithm might converge to a non-absolute minima depending on the starting guess and the choice of step sizes.</li>
+<li>If the step sizes are chosen to be too large, then the algorithm can completely miss the minima and may not converge.</li>
+<li>If the step sizes are chosen to be too small, then the algorithm may take a long time to converge.</li>
 </ol>
-<p>At the end of the <span class="math inline">\(6^{th}\)</span> simplex step, we end up looping back to the origin.</p>
+<p>Unfortunately, there is no easy way to resolve these issues. In practice, either we need to be able to control the function and its gradient or we proceed by trial and error to find step sizes that work. Even then there is no guarantee that the algorithm will converge to an absolute minima and not a local minima, if at all. In spite of these issues, because of its simplicity, ease of implementation, and good convergence properties in practice, Gradient Descent is a very popular algorithm for solving unconstrained optimization problems.</p>
 </div>
-</div>
-<div id="blands-rule" class="section level2 hasAnchor" number="5.3">
-<h2><span class="header-section-number">5.3</span> Bland’s rule<a href="halting-problem.html#blands-rule" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>There are various ways of dealing with cycling. The simplex way is to remember all the simplex steps taken so far and if we happen to revisit a vertex then we simple make a different choice of entering and leaving variables.</p>
-<p>However, as it turns out, there is a much simpler way to avoid cycling by using Bland’s rule. <strong>Bland’s rule</strong> says that if there are multiple candidates for the entering/variable then we choose the one with the smallest index. (We assume that the decision variables have a smaller index than the slack variables.)</p>
-<div class="theorem">
-<p><span id="thm:unlabeled-div-16" class="theorem"><strong>Theorem 5.2  (Bland's rule) </strong></span>The simplex method always terminates provided that both the
-entering and the leaving variable are chosen according to Bland’s rule.</p>
-</div>
-<p>The proof of this theorem is too complicated for this course. With this modification, for both Phase I and Phase II of the simplex method, we now have a complete algorithm for solving linear programs.</p>
+<div id="barrier-functions" class="section level2 hasAnchor" number="15.2">
+<h2><span class="header-section-number">15.2</span> Barrier functions<a href="interior-point-methods.html#barrier-functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Gradient descent algorithm can be modified to solve constrained optimization problems. Consider the following problem:</p>
+<p><span class="math display" id="eq:constrained-optimization-problem">\[\begin{equation}
+  \begin{array}{llr}
+    \mbox{minimize: } &amp; f(x) \\
+    \mbox{subject to: } &amp; g_i(x) \ge 0, &amp; \mbox{ for } 1 \le i \le m. \\
+  \end{array}
+  \tag{15.1}
+\end{equation}\]</span></p>
+<p>We can apply GD to this problem and find a critical point for <span class="math inline">\(f(x)\)</span>. However, this might not answer the optimization question for two reasons:</p>
+<ol style="list-style-type: decimal">
+<li>The critical point might not be in the feasible region.</li>
+<li>The optimal solution might not be obtained at a critical of <span class="math inline">\(f(x)\)</span> and could lie on the boundary, as is the case for linear programming.</li>
+</ol>
+<p>The issue is that the gradient function algorithm only <em>sees</em> the objective function and does not <em>know</em> the constraints. So, we modify the objective function to include the constraints using barrier functions.</p>
+<p>A <strong>barrier function</strong> is a differentiable function <span class="math inline">\(b\)</span> from <span class="math inline">\((0, \infty)\)</span> to <span class="math inline">\(\mathbb{R}\)</span> that has the property <span class="math inline">\(\lim \limits_{x \to 0^+} f(x) = \infty\)</span>. We’ll use the barrier function <span class="math inline">\(-\ln x\)</span>. Using a small positive parameter <span class="math inline">\(\mu\)</span>, we create a new objective function:</p>
+<p><span class="math display">\[\begin{align}
+  f_\mu(x) := &amp; f(x) - \mu \sum \limits_{i = 1} ^ m \ln (g_i(x)).
+\end{align}\]</span></p>
+<p>Because the domain of <span class="math inline">\(\ln(x)\)</span> is <span class="math inline">\((0, \infty)\)</span>, any critical point of <span class="math inline">\(f_\mu(x)\)</span> must lie in the feasible region of <a href="interior-point-methods.html#eq:constrained-optimization-problem">(15.1)</a>. Moreover, the following unconstrained optimization problem will always have an optimal solution away from the boundary of <a href="interior-point-methods.html#eq:constrained-optimization-problem">(15.1)</a> as the <em>cost</em> of approaching the boundary goes to <span class="math inline">\(\infty\)</span>:</p>
+<p><span class="math display">\[\begin{align}
+  \mbox{minimize: } &amp; f_\mu (x).
+\end{align}\]</span></p>
+<p>Let <span class="math inline">\(x_\mu^*\)</span> be a solution of the above problem. We’ll make the following assumption without proof: <em><span class="math inline">\(x_\mu^*\)</span> is continuous in <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\lim \limits_{\mu \to 0^+} x_\mu^* = x^*\)</span> where <span class="math inline">\(x^*\)</span> is an optimal solution to <a href="interior-point-methods.html#eq:constrained-optimization-problem">(15.1)</a>.</em> This assumption is valid, for example, when <span class="math inline">\(f(x)\)</span> and <span class="math inline">\(g_i(x)\)</span> are convex functions. With this assumption, we now have a method for solving <a href="interior-point-methods.html#eq:constrained-optimization-problem">(15.1)</a>:</p>
+<ul>
+<li>Start with a small <span class="math inline">\(\mu_0 &gt; 0\)</span> and optimize <span class="math inline">\(f_{\mu_0}(x)\)</span> using GD. Call the solution <span class="math inline">\(x_{\mu_0}^*\)</span>.</li>
+<li>Repeat the following until the sequence <span class="math inline">\(x_{\mu_k}^*\)</span> stabilizes sufficiently:
+<ol style="list-style-type: decimal">
+<li>Set <span class="math inline">\(\mu_{k+1} = \mu_k - \delta_k\)</span> for some small <span class="math inline">\(\delta_k\)</span>.</li>
+<li>Using <span class="math inline">\(x_{\mu_k}\)</span> as a starting point for GD, optimize <span class="math inline">\(f_{\mu_{k+1}}(x)\)</span>. Call the solution <span class="math inline">\(x_{\mu_k}^*\)</span>.</li>
+</ol></li>
+</ul>
+<p>This method is a very simplified <strong>interior point method</strong>. The sequence of points <span class="math inline">\(x_{\mu}\)</span> is called the <strong>central path</strong>.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-17" class="example"><strong>Example 5.3  </strong></span>In Example <a href="halting-problem.html#exm:cycling">5.2</a>, the <em>sixth simplex step</em> violates Bland’s rule. Once we choose the entering and leaving variables using Bland’s rule, we can check that the simplex step for Example <a href="halting-problem.html#exm:cycling">5.2</a> indeed terminates at the optimal solution.</p>
+<p><span id="exm:ip-kkt" class="example"><strong>Example 15.1  </strong></span>We can compute the central path explicitly for some simple examples. Consider the optimization problem:</p>
+<p><span class="math display">\[\begin{align}
+  \mbox{minimize: } &amp; (x + 1)^2 \\
+  \mbox{subject to: } &amp; x \ge 0.
+\end{align}\]</span></p>
+<p>It is easy to see that <span class="math inline">\(x^* = 0\)</span> is the optimal solution. We can calculate the central path as follows:</p>
+<p><span class="math display">\[\begin{align}
+  f_\mu(x) := (x + 1)^2 - \mu \ln (x).
+\end{align}\]</span></p>
+<p>The critical points for this function can be obtained by setting the derivative to 0.</p>
+<p><span class="math display">\[\begin{align}
+  f&#39;_\mu(x) &amp;= 0 \\ 
+  \implies 2(x + 1) - \dfrac{\mu}{x} &amp;= 0 \\
+  \implies x^2 + x - \mu/2 &amp;= 0 \\
+  \implies x &amp;= \dfrac{-1 \pm \sqrt{1 + 2 \mu}}{2}.
+\end{align}\]</span></p>
+<p>Only one of the two satisfy <span class="math inline">\(x \ge 0\)</span>, so we get</p>
+<p><span class="math display">\[\begin{align}
+  x_\mu^* = \dfrac{-1 + \sqrt{1 + 2 \mu}}{2}. 
+\end{align}\]</span></p>
+<p>This is the central path. Taking the limit as <span class="math inline">\(\mu \to 0\)</span> we get,</p>
+<p><span class="math display">\[\begin{align}
+  \lim \limits_{\mu \to 0^+} x_\mu^* 
+  &amp; = \lim \limits_{\mu \to 0^+} \dfrac{-1 + \sqrt{1 + 2 \mu}}{2} \\ 
+  &amp;= 0 \\
+  &amp;= x^*.
+\end{align}\]</span></p>
 </div>
 
 </div>
@@ -291,8 +304,8 @@ entering and the leaving variable are chosen according to Bland’s rule.</p>
           </div>
         </div>
       </div>
-<a href="initialization.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="standardization.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="convexity-and-duality.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="kkt-conditions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

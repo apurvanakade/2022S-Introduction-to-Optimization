@@ -111,7 +111,7 @@ Intersection of finitely many half-spaces is called a **convex polyhedron**. So,
 
 The following is an extension of Farkas' lemma to convex polyhedra.
 
-::: {.theorem #separating-hyperplane-theorem name="Separating Hyperplane Theorem"}
+::: {.theorem #separating-hyperplane name="Separating Hyperplane Theorem"}
 
 Let $P$ and $P'$ be two non-empty, disjoint, convex polyhedra in $\mathbb{R}^m$. There exists a half-plane $H$ that separates $P$ and $P'$.
 

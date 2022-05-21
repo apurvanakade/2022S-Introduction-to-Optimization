@@ -23,7 +23,7 @@
 <meta name="author" content="Apurva Nakade" />
 
 
-<meta name="date" content="2022-05-14" />
+<meta name="date" content="2022-05-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="convexity.html"/>
-<link rel="next" href="references.html"/>
+<link rel="next" href="interior-point-methods.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -175,6 +175,15 @@ div.csl-indent {
 <li class="chapter" data-level="14.3" data-path="convexity-and-duality.html"><a href="convexity-and-duality.html#convex-polyhedra"><i class="fa fa-check"></i><b>14.3</b> Convex polyhedra<span></span></a></li>
 <li class="chapter" data-level="14.4" data-path="convexity-and-duality.html"><a href="convexity-and-duality.html#equivalence-with-strong-duality"><i class="fa fa-check"></i><b>14.4</b> Equivalence with Strong Duality<span></span></a></li>
 </ul></li>
+<li class="chapter" data-level="15" data-path="interior-point-methods.html"><a href="interior-point-methods.html"><i class="fa fa-check"></i><b>15</b> Interior point methods<span></span></a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="interior-point-methods.html"><a href="interior-point-methods.html#gradient-descent"><i class="fa fa-check"></i><b>15.1</b> Gradient descent<span></span></a></li>
+<li class="chapter" data-level="15.2" data-path="interior-point-methods.html"><a href="interior-point-methods.html#barrier-functions"><i class="fa fa-check"></i><b>15.2</b> Barrier functions<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="kkt-conditions.html"><a href="kkt-conditions.html"><i class="fa fa-check"></i><b>16</b> KKT conditions<span></span></a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="kkt-conditions.html"><a href="kkt-conditions.html#kkt-conditions-1"><i class="fa fa-check"></i><b>16.1</b> KKT conditions<span></span></a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -269,7 +278,7 @@ The complement of a hyperplane in <span class="math inline">\(\mathbb{R}^n\)</sp
 <li>There is a hyperplane <span class="math inline">\(H\)</span> that separates <span class="math inline">\(b\)</span> from <span class="math inline">\(C_+(v_1, \dots, v_n)\)</span>.</li>
 </ol>
 </div>
-<p>As we’ll see below, this is a special case of the Separating Hyperplane Theorem <a href="#thm:separating-hyperplane"><strong>??</strong></a>. Based on these theorems, we can design algorithms that search for a separating hyperplane when trying to separate convex regions. See <a href="https://en.wikipedia.org/wiki/Support-vector_machine">Support Vector Machines</a> for an example of such an algorithm.</p>
+<p>As we’ll see below, this is a special case of the Separating Hyperplane Theorem <a href="convexity-and-duality.html#thm:separating-hyperplane">14.3</a>. Based on these theorems, we can design algorithms that search for a separating hyperplane when trying to separate convex regions. See <a href="https://en.wikipedia.org/wiki/Support-vector_machine">Support Vector Machines</a> for an example of such an algorithm.</p>
 </div>
 </div>
 <div id="convex-polyhedra" class="section level2 hasAnchor" number="14.3">
@@ -278,7 +287,7 @@ The complement of a hyperplane in <span class="math inline">\(\mathbb{R}^n\)</sp
 <p>Intersection of finitely many half-spaces is called a <strong>convex polyhedron</strong>. So, a convex polyhedron is the set of solutions to a system of linear inequalities <span class="math inline">\(A x \le b\)</span>. But this set is precisely the feasible region of a linear program! The class of convex polyhedra is very large and all geometric “linear” convex objects, like points, lines, planes, half-spaces, hyperplanes, convex cones, etc. can be realized as convex polyhedra.</p>
 <p>The following is an extension of Farkas’ lemma to convex polyhedra.</p>
 <div class="theorem">
-<p><span id="thm:separating-hyperplane-theorem" class="theorem"><strong>Theorem 14.3  (Separating Hyperplane Theorem) </strong></span>Let <span class="math inline">\(P\)</span> and <span class="math inline">\(P&#39;\)</span> be two non-empty, disjoint, convex polyhedra in <span class="math inline">\(\mathbb{R}^m\)</span>. There exists a half-plane <span class="math inline">\(H\)</span> that separates <span class="math inline">\(P\)</span> and <span class="math inline">\(P&#39;\)</span>.</p>
+<p><span id="thm:separating-hyperplane" class="theorem"><strong>Theorem 14.3  (Separating Hyperplane Theorem) </strong></span>Let <span class="math inline">\(P\)</span> and <span class="math inline">\(P&#39;\)</span> be two non-empty, disjoint, convex polyhedra in <span class="math inline">\(\mathbb{R}^m\)</span>. There exists a half-plane <span class="math inline">\(H\)</span> that separates <span class="math inline">\(P\)</span> and <span class="math inline">\(P&#39;\)</span>.</p>
 </div>
 <div class="proof">
 <p><span id="unlabeled-div-37" class="proof"><em>Proof</em>. </span>We’ll show the following stronger statement: there exists a vector <span class="math inline">\(c \in \mathbb{R}^m\)</span> and constants <span class="math inline">\(d &lt; d&#39;\)</span> such that <span class="math inline">\(P\)</span> is a subset of the hyperplane <span class="math inline">\(c^T y \le d_1\)</span> and <span class="math inline">\(P&#39;\)</span> is a subset of the hyperplane <span class="math inline">\(c^T y \ge d_2\)</span>. We can then choose our separating hyperplane to be <span class="math inline">\(c^T y = (d + d&#39;)/2\)</span>.</p>
@@ -406,7 +415,7 @@ But this is a contradiction as we know that both the primal and dual systems hav
         </div>
       </div>
 <a href="convexity.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="interior-point-methods.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

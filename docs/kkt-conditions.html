@@ -4,20 +4,20 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 5 Halting problem | Introduction to Optimization</title>
-  <meta name="description" content="Chapter 5 Halting problem | Introduction to Optimization." />
+  <title>Chapter 16 KKT conditions | Introduction to Optimization</title>
+  <meta name="description" content="Chapter 16 KKT conditions | Introduction to Optimization." />
   <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 5 Halting problem | Introduction to Optimization" />
+  <meta property="og:title" content="Chapter 16 KKT conditions | Introduction to Optimization" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="Chapter 5 Halting problem | Introduction to Optimization." />
+  <meta property="og:description" content="Chapter 16 KKT conditions | Introduction to Optimization." />
   <meta name="github-repo" content="apurvanakade/2022S-Introduction-to-optimization" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 5 Halting problem | Introduction to Optimization" />
+  <meta name="twitter:title" content="Chapter 16 KKT conditions | Introduction to Optimization" />
   
-  <meta name="twitter:description" content="Chapter 5 Halting problem | Introduction to Optimization." />
+  <meta name="twitter:description" content="Chapter 16 KKT conditions | Introduction to Optimization." />
   
 
 <meta name="author" content="Apurva Nakade" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="initialization.html"/>
-<link rel="next" href="standardization.html"/>
+<link rel="prev" href="interior-point-methods.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -201,87 +201,87 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="halting-problem" class="section level1 hasAnchor" number="5">
-<h1><span class="header-section-number">Chapter 5</span> Halting problem<a href="halting-problem.html#halting-problem" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>We now have a complete algorithm for solving a standard linear program. However, we have not shown that it always finds the optimal solution. Let us start with the existence of optimal solution.</p>
-<div id="fundamental-theorem-of-linear-programming" class="section level2 hasAnchor" number="5.1">
-<h2><span class="header-section-number">5.1</span> Fundamental theorem of linear programming<a href="halting-problem.html#fundamental-theorem-of-linear-programming" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>To resolve the issue of getting stuck in a loop, we first need the following theorem about linear programs:</p>
-<div class="theorem">
-<p><span id="thm:unlabeled-div-14" class="theorem"><strong>Theorem 5.1  (Fundamental theorem of linear programming) </strong></span>Every standard linear program is exactly one of the following:</p>
-<ol style="list-style-type: decimal">
-<li>Infeasible,</li>
-<li>Unbounded,</li>
-<li>Has an optimal solution. In this case, the optimal solution is obtained at one of the vertices of the feasible region.</li>
-</ol>
-</div>
-<p>This theorem is an easy corollary of the <a href="https://en.wikipedia.org/wiki/Extreme_value_theorem">extreme value theorem</a> for multi-variate functions and relies on the closedness of the feasible region of a standard linear program and the continuity of the objective function.</p>
-<p>We see that the simplex method is able to detect all three cases. The first case happens when the Phase I algorithm is unable to find a feasible solution, the second case happens when no leaving variable is found, and the third case happens when no entering variable is found.</p>
-<p>However, it is possible for the simplex method to get stuck in a loop. This is called <strong>cycling</strong>. One way to show that the simplex method does not cycle is to show that the <em>objective value always increases after the simplex step</em>. If this were the case then we would never visit the same vertex twice. The vertices of the feasible region are obtained by intersecting constraint boundaries and hence only are finite in number (even if the region is unbounded). So, if we never visit the same vertex twice, the simplex method must halt.</p>
-<p>However, it is not always the case that the objective value increases after a simplex step!</p>
-</div>
-<div id="degeneracy" class="section level2 hasAnchor" number="5.2">
-<h2><span class="header-section-number">5.2</span> Degeneracy<a href="halting-problem.html#degeneracy" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>We saw in Section <a href="simplex-method.html#choosing-the-leaving-variable">3.3.2</a> that after the simplex step the entering and leaving variable gets updated as follows:
+<div id="kkt-conditions" class="section level1 hasAnchor" number="16">
+<h1><span class="header-section-number">Chapter 16</span> KKT conditions<a href="kkt-conditions.html#kkt-conditions" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>We can use the central path to derive necessary conditions for optimality.
+Consider the optimization problem <a href="interior-point-methods.html#eq:constrained-optimization-problem">(15.1)</a> again. As before, we’ll assume that <em>there is a central path <span class="math inline">\(x_\mu^*\)</span> converging to an optimal solution <span class="math inline">\(x^*\)</span>.</em>
+Because <span class="math inline">\(x_\mu^*\)</span> is a critical point of <span class="math inline">\(f_\mu(x)\)</span>, we get</p>
+<p><span class="math display">\[\begin{align}
+  \nabla_x f_\mu(x_\mu^*) &amp;= 0 \\
+  \implies \nabla f(x_\mu^*) - \sum \limits_{i = 1}^m \dfrac{\mu}{g_i(x_\mu^*)} \nabla g_i (x_\mu^*)&amp;= 0 
+\end{align}\]</span></p>
+<p>Applying <span class="math inline">\(\lim \limits_{\mu \to 0^+}\)</span> to both sides, we get
 <span class="math display">\[\begin{align}
-  x_j &amp; \mapsto b_i/a_{ij} \\
-  w_i &amp; \mapsto 0.
+   \lim \limits_{\mu \to 0^+} \nabla f(x_\mu^*) - \sum \limits_{i = 1}^m \lim \limits_{\mu \to 0^+}\dfrac{\mu}{g_i(x_\mu^*)} \nabla g_i (x_\mu^*)&amp;= 0 
 \end{align}\]</span>
-This increases the value of the objective function by <span class="math inline">\(c_j b_i/a_{ij}\)</span>. Because of the criterion for choosing the entering and leaving variables, the constants <span class="math inline">\(c_i\)</span> and <span class="math inline">\(a_{ij}\)</span> are always positive. We know that <span class="math inline">\(b_i\)</span> this is the value of the basic variable <span class="math inline">\(w_i\)</span> and hence must be <span class="math inline">\(\ge 0\)</span>. But we cannot guarantee that <span class="math inline">\(b_i &gt; 0\)</span>. If <span class="math inline">\(b_i = 0\)</span>, then the objective value does not increase after the simplex step. This can result in the simplex method to get stuck in a loop.</p>
-<p>We say that the dictionary at a feasible vertex is <strong>degenerate</strong> if some <span class="math inline">\(b_i = 0\)</span>. In this case, one of the basic variables also has the value 0 at this vertex. Geometrically, this is saying that more than <span class="math inline">\(n\)</span> constraints are satisfied at this vertex.</p>
-<div class="example">
-<p><span id="exm:unlabeled-div-15" class="example"><strong>Example 5.1  </strong></span>The following slight modification of Example <a href="introduction.html#eq:bond-portfolio-lp">(1.2)</a> is a degenerate linear program:</p>
+which simplifies to
+<span class="math display">\[\begin{align}
+  \nabla f(x^*) = \sum \limits_{i = 1}^m \lambda_i \nabla g_i (x^*) 
+\end{align}\]</span>
+where <span class="math inline">\(\lambda_i = \lim \limits_{\mu \to 0^+}\frac{\mu}{g_i(x_\mu^*)}\)</span> for <span class="math inline">\(1 \le i \le m\)</span>. (There are several assumptions here about the existence and convergence of limits that we’re brushing under the rug.)
+We can further analyze the constants <span class="math inline">\(\lambda_i\)</span>.
+<span class="math display">\[\begin{align}
+  &amp;&amp; \dfrac{\mu}{g_i(x_\mu^*)} \cdot g_i(x_\mu^*) &amp;= \mu \\ 
+  \implies &amp;&amp; \lim \limits_{\mu \to 0^+}\dfrac{\mu}{g_i(x_\mu^*)} \cdot \lim \limits_{\mu \to 0^+}g_i(x_\mu^*) &amp;= \lim \limits_{\mu \to 0^+}\mu \\ 
+  \implies &amp;&amp;\lambda_i g_i(x^*) &amp;= 0.
+\end{align}\]</span>
+Finally, because <span class="math inline">\(g_i(x_\mu^*) \ge 0\)</span> and <span class="math inline">\(\mu &gt; 0\)</span>, we must have
+<span class="math display">\[\begin{align}
+  \lambda_i \ge 0.
+\end{align}\]</span>
+To summarize, if <span class="math inline">\(x^*\)</span> is an optimal solution to <a href="interior-point-methods.html#eq:constrained-optimization-problem">(15.1)</a> and there exists a central path <span class="math inline">\(x_\mu^*\)</span> converging to <span class="math inline">\(x^*\)</span>, then the following conditions are satisfied:
+<span class="math display">\[\begin{align}
+  \nabla f(x^*) &amp;= \sum \limits_{i = 1}^m \lambda_i \nabla g_i (x^*) \\
+  \lambda_i g_i(x^*) &amp;= 0 \\
+  \lambda_i &amp;\ge 0.
+\end{align}\]</span>
+These are called the KKT conditions.</p>
+<div id="kkt-conditions-1" class="section level2 hasAnchor" number="16.1">
+<h2><span class="header-section-number">16.1</span> KKT conditions<a href="kkt-conditions.html#kkt-conditions-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We can combine the above conditions with Lagrange multipliers to get the following slight generalization:</p>
+<div class="theorem">
+<p><span id="thm:kkt-conditions" class="theorem"><strong>Theorem 16.1  (KKT conditions) </strong></span>Consider the optimization problem:</p>
 <p><span class="math display">\[\begin{equation}
-  \begin{array}{rrrrrl}
-  \mbox{maximize:} &amp; 4x &amp; + &amp; 3y \\
-  \mbox{subject to:}
-    &amp; 3x &amp; + &amp; 6y &amp; \le &amp; 4.5 \\
-    &amp; 2x &amp; + &amp; y &amp; \le &amp; 1.5 \\
-    &amp; x &amp; + &amp; y &amp; \le &amp; 1 \\
-    &amp; x &amp; , &amp; y &amp; \ge &amp; 0.
+  \begin{array}{llr}
+    \mbox{minimize: } &amp; f(x) \\
+    \mbox{subject to: } 
+      &amp; g_i(x) \ge 0, &amp; \mbox{ for } 1 \le i \le m \\
+      &amp; h_i(x) = 0, &amp; \mbox{ for } 1 \le i \le k.
   \end{array}
 \end{equation}\]</span></p>
-<p><img src="Introduction-to-Optimization_files/figure-html/fig-degenerate-lp-1.png" width="672" /></p>
-<p>At the optimal solution, <span class="math inline">\((0.5, 0.5)\)</span> all three constraints are met. At this vertex, one of the rows is
-<span class="math display">\[\begin{align}
-  w_3 &amp;= 0 + 0.33 w_2 + 0.11 w_1.
+<p>Assume that this problem has an optimal solution <span class="math inline">\(x^*\)</span> and there is a central path <span class="math inline">\(x_\mu^*\)</span> converging to <span class="math inline">\(x^*\)</span>.</p>
+<p>Then under certain regularity conditions, the following conditions are satisfied:</p>
+<p><span class="math display">\[\begin{align}
+  \nabla f(x^*) &amp;= \sum \limits_{i = 1}^m \lambda_i \nabla g_i (x^*) 
+  + \sum \limits_{i = 1}^k \lambda&#39;_i \nabla h_i (x^*) \\
+  \lambda_i g_i(x^*) &amp;= 0, \mbox{ for } 1 \le i \le m \\
+  \lambda_i &amp;\ge 0, \mbox{ for } 1 \le i \le m.
 \end{align}\]</span></p>
 </div>
+<p>The conditions for convergence and the regularity conditions are quite non-trivial and requires us to study the Lagrangian dual of the optimization problem.</p>
 <div class="example">
-<p><span id="exm:cycling" class="example"><strong>Example 5.2  </strong></span>Consider the following degenerate linear program:</p>
-<p><span class="math display">\[\begin{equation}
-  \begin{array}{rrrrrrrl}
-  \mbox{maximize:} &amp; x_1 &amp; - &amp; 2x_2 &amp; &amp; &amp; - &amp; 2x_4 \\
-  \mbox{subject to:}
-    &amp; 0.5 x_1 &amp; - &amp; 3.5x_2 &amp; - &amp; 2x_3 &amp; + &amp; 4 x_4 &amp; \le &amp; 0 \\
-    &amp; 0.5 x_1 &amp; - &amp; x_2 &amp; - &amp; 0.5 x_3 &amp; + &amp; 0.5 x_4 &amp; \le &amp; 0 \\
-    &amp; x_1 &amp; &amp; &amp; &amp; &amp;  &amp;  &amp; \le &amp; 1 \\
-    &amp; x_1 &amp; , &amp; x_2 &amp; , &amp; x_3 &amp; , &amp; x_4 &amp; \ge &amp; 0 \\
-  \end{array}
-\end{equation}\]</span></p>
-<p>The following is a valid sequence of simplex steps:</p>
-<ol style="list-style-type: decimal">
-<li><span class="math inline">\(x_1\)</span> enters and <span class="math inline">\(w_1\)</span> leaves,</li>
-<li><span class="math inline">\(x_2\)</span> enters and <span class="math inline">\(w_2\)</span> leaves,</li>
-<li><span class="math inline">\(x_3\)</span> enters and <span class="math inline">\(x_1\)</span> leaves,</li>
-<li><span class="math inline">\(x_4\)</span> enters and <span class="math inline">\(x_2\)</span> leaves,</li>
-<li><span class="math inline">\(w_1\)</span> enters and <span class="math inline">\(x_3\)</span> leaves,</li>
-<li><span class="math inline">\(w_2\)</span> enters and <span class="math inline">\(x_4\)</span> leaves.</li>
-</ol>
-<p>At the end of the <span class="math inline">\(6^{th}\)</span> simplex step, we end up looping back to the origin.</p>
+<p><span id="exm:unlabeled-div-39" class="example"><strong>Example 16.1  </strong></span>Consider Example <a href="interior-point-methods.html#exm:ip-kkt">15.1</a> again. The KKT conditions for this example are</p>
+<p><span class="math display">\[\begin{align}
+  2(x + 1) &amp;= \lambda \\
+  \lambda x &amp;= 0 \\
+  \lambda &amp;\ge 0.
+\end{align}\]</span></p>
+<p>These need to be satisfied in addition to the original constraint <span class="math inline">\(x \ge 0\)</span>. The only solution to this system is <span class="math inline">\(x = 0\)</span>, which is indeed the optimal solution.</p>
 </div>
-</div>
-<div id="blands-rule" class="section level2 hasAnchor" number="5.3">
-<h2><span class="header-section-number">5.3</span> Bland’s rule<a href="halting-problem.html#blands-rule" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>There are various ways of dealing with cycling. The simplex way is to remember all the simplex steps taken so far and if we happen to revisit a vertex then we simple make a different choice of entering and leaving variables.</p>
-<p>However, as it turns out, there is a much simpler way to avoid cycling by using Bland’s rule. <strong>Bland’s rule</strong> says that if there are multiple candidates for the entering/variable then we choose the one with the smallest index. (We assume that the decision variables have a smaller index than the slack variables.)</p>
-<div class="theorem">
-<p><span id="thm:unlabeled-div-16" class="theorem"><strong>Theorem 5.2  (Bland's rule) </strong></span>The simplex method always terminates provided that both the
-entering and the leaving variable are chosen according to Bland’s rule.</p>
-</div>
-<p>The proof of this theorem is too complicated for this course. With this modification, for both Phase I and Phase II of the simplex method, we now have a complete algorithm for solving linear programs.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-17" class="example"><strong>Example 5.3  </strong></span>In Example <a href="halting-problem.html#exm:cycling">5.2</a>, the <em>sixth simplex step</em> violates Bland’s rule. Once we choose the entering and leaving variables using Bland’s rule, we can check that the simplex step for Example <a href="halting-problem.html#exm:cycling">5.2</a> indeed terminates at the optimal solution.</p>
+<p><span id="exm:unlabeled-div-40" class="example"><strong>Example 16.2  </strong></span>Consider the linear program
+<span class="math display">\[\begin{align}
+  \mbox{minimize:} &amp; c^T x \\
+  \mbox{subject to:} &amp; Ax \ge b 
+\end{align}\]</span>
+The KKT conditions for this problem are
+<span class="math display">\[\begin{align}
+  c &amp;= A^T \lambda \\
+  x_i \lambda _i &amp;= 0, \mbox{ for } 1 \le i \le n,\\
+  \lambda &amp;\ge 0.
+\end{align}\]</span>
+This is precisely the dual of the linear programming problem and <em>complementary slackness</em> condition.
+Thus the KKT conditions recover the duality in the linear programming sense.</p>
 </div>
 
 </div>
@@ -291,8 +291,8 @@ entering and the leaving variable are chosen according to Bland’s rule.</p>
           </div>
         </div>
       </div>
-<a href="initialization.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="standardization.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="interior-point-methods.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
