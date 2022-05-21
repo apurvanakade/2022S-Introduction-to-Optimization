@@ -63,9 +63,13 @@ eq:farkas-eq2
 eq:farkas-primal
 eq:farkas-dual
 thm:farkas-geometry
-thm:separating-hyperplane-theorem
+thm:separating-hyperplane
 eq:strong-using-farkas
 eq:constrained-optimization-problem
+exm:ip-kkt
+thm:kkt-conditions
+exm:unlabeled-div-39
+exm:unlabeled-div-40
 introduction
 software-tools
 graphing-calculator
@@ -121,3 +125,5 @@ equivalence-with-strong-duality
 interior-point-methods
 gradient-descent
 barrier-functions
+kkt-conditions
+kkt-conditions-1

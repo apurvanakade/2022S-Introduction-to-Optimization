@@ -74,7 +74,7 @@ Let $x_\mu^*$ be a solution of the above problem. We'll make the following assum
 
 This method is a very simplified **interior point method**. The sequence of points $x_{\mu}$ is called the **central path**. 
 
-::: {.example}
+::: {.example #ip-kkt}
 
 We can compute the central path explicitly for some simple examples. Consider the optimization problem:
 

@@ -1,17 +1,17 @@
 # KKT conditions
 
 We can use the central path to derive necessary conditions for optimality. 
-Consider the optimization problem \@ref(eq:constrained-optimization-problem) again. As before we'll assume that we have a central path $x_\mu^*$ converging to an optimal solution $x^*$.
+Consider the optimization problem \@ref(eq:constrained-optimization-problem) again. As before, we'll assume that *there is a central path $x_\mu^*$ converging to an optimal solution $x^*$.*
 Because $x_\mu^*$ is a critical point of $f_\mu(x)$, we get 
 
 \begin{align}
-  \nabla f_\mu(x_\mu^*) &= 0 \\
+  \nabla_x f_\mu(x_\mu^*) &= 0 \\
   \implies \nabla f(x_\mu^*) - \sum \limits_{i = 1}^m \dfrac{\mu}{g_i(x_\mu^*)} \nabla g_i (x_\mu^*)&= 0 
 \end{align}
 
 Applying $\lim \limits_{\mu \to 0^+}$ to both sides, we get 
 \begin{align}
-  \implies \lim \limits_{\mu \to 0^+} \nabla f(x_\mu^*) - \sum \limits_{i = 1}^m \lim \limits_{\mu \to 0^+}\dfrac{\mu}{g_i(x_\mu^*)} \nabla g_i (x_\mu^*)&= 0 
+   \lim \limits_{\mu \to 0^+} \nabla f(x_\mu^*) - \sum \limits_{i = 1}^m \lim \limits_{\mu \to 0^+}\dfrac{\mu}{g_i(x_\mu^*)} \nabla g_i (x_\mu^*)&= 0 
 \end{align}
 which simplifies to 
 \begin{align}
@@ -34,14 +34,68 @@ To summarize, if $x^*$ is an optimal solution to \@ref(eq:constrained-optimizati
   \lambda_i g_i(x^*) &= 0 \\
   \lambda_i &\ge 0.
 \end{align}
-These are called the **KKT conditions**.
+These are called the KKT conditions.
 
 ## KKT conditions
 
-We did a loose derivation of the KKT conditions for the optimization problem \@ref(eq:constrained-optimization-problem) in the previous section using interior point methods with several assumptions about convergence. These conditions can also be derived directly from basic multivariable calculus for a much more general form of optimization problem as stated below.
+We can combine the above conditions with Lagrange multipliers to get the following slight generalization: 
 
 ::: {.theorem #kkt-conditions name="KKT conditions"}
 
+Consider the optimization problem: 
 
+\begin{equation}
+  \begin{array}{llr}
+    \mbox{minimize: } & f(x) \\
+    \mbox{subject to: } 
+      & g_i(x) \ge 0, & \mbox{ for } 1 \le i \le m \\
+      & h_i(x) = 0, & \mbox{ for } 1 \le i \le k.
+  \end{array}
+\end{equation}
+
+Assume that this problem has an optimal solution $x^*$ and there is a central path $x_\mu^*$ converging to $x^*$. 
+
+Then under certain regularity conditions, the following conditions are satisfied:
+
+\begin{align}
+  \nabla f(x^*) &= \sum \limits_{i = 1}^m \lambda_i \nabla g_i (x^*) 
+  + \sum \limits_{i = 1}^k \lambda'_i \nabla h_i (x^*) \\
+  \lambda_i g_i(x^*) &= 0, \mbox{ for } 1 \le i \le m \\
+  \lambda_i &\ge 0, \mbox{ for } 1 \le i \le m.
+\end{align}
+
+:::
+
+The conditions for convergence and the regularity conditions are quite non-trivial and requires us to study the Lagrangian dual of the optimization problem. 
+
+::: {.example}
+
+Consider Example \@ref(exm:ip-kkt) again. The KKT conditions for this example are 
+
+\begin{align}
+  2(x + 1) &= \lambda \\
+  \lambda x &= 0 \\
+  \lambda &\ge 0.
+\end{align}
+
+These need to be satisfied in addition to the original constraint $x \ge 0$. The only solution to this system is $x = 0$, which is indeed the optimal solution. 
+
+:::
+
+::: {.example}
+
+Consider the linear program 
+\begin{align}
+  \mbox{minimize:} & c^T x \\
+  \mbox{subject to:} & Ax \ge b 
+\end{align}
+The KKT conditions for this problem are
+\begin{align}
+  c &= A^T \lambda \\
+  x_i \lambda _i &= 0, \mbox{ for } 1 \le i \le n,\\
+  \lambda &\ge 0.
+\end{align}
+This is precisely the dual of the linear programming problem and *complementary slackness* condition. 
+Thus the KKT conditions recover the duality in the linear programming sense.
 
 :::
