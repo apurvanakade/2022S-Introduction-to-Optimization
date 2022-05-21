@@ -67,6 +67,54 @@ Because the domain of $\ln(x)$ is $(0, \infty)$, any critical point of $f_\mu(x)
 
 Let $x_\mu^*$ be a solution of the above problem. We'll make the following assumption without proof: *$x_\mu^*$ is continuous in $\mu$ and $\lim \limits_{\mu \to 0^+} x_\mu^* = x^*$ where $x^*$ is an optimal solution to \@ref(eq:constrained-optimization-problem).* This assumption is valid, for example, when $f(x)$ and $g_i(x)$ are convex functions. With this assumption, we now have a method for solving \@ref(eq:constrained-optimization-problem):
 
-1. Start with a small $\mu_0 > 0$ and optimize $f_{\mu_0}(x)$ using GD. Call the solution $x_{\mu_0}^*$.
-2. Repeat until the sequence $x_{\mu_k}^*$ stabilizes:
-    1. 
+- Start with a small $\mu_0 > 0$ and optimize $f_{\mu_0}(x)$ using GD. Call the solution $x_{\mu_0}^*$.
+- Repeat the following until the sequence $x_{\mu_k}^*$ stabilizes sufficiently:
+    1. Set $\mu_{k+1} = \mu_k - \delta_k$ for some small $\delta_k$.
+    2. Using $x_{\mu_k}$ as a starting point for GD, optimize $f_{\mu_{k+1}}(x)$. Call the solution $x_{\mu_k}^*$.
+
+This method is a very simplified **interior point method**. The sequence of points $x_{\mu}$ is called the **central path**. 
+
+::: {.example}
+
+We can compute the central path explicitly for some simple examples. Consider the optimization problem:
+
+\begin{align}
+  \mbox{minimize: } & (x + 1)^2 \\
+  \mbox{subject to: } & x \ge 0.
+\end{align}
+
+It is easy to see that $x^* = 0$ is the optimal solution. We can calculate the central path as follows:
+
+\begin{align}
+  f_\mu(x) := (x + 1)^2 - \mu \ln (x).
+\end{align}
+
+The critical points for this function can be obtained by setting the derivative to 0. 
+
+
+\begin{align}
+  f'_\mu(x) &= 0 \\ 
+  \implies 2(x + 1) - \dfrac{\mu}{x} &= 0 \\
+  \implies x^2 + x - \mu/2 &= 0 \\
+  \implies x &= \dfrac{-1 \pm \sqrt{1 + 2 \mu}}{2}.
+\end{align}
+
+Only one of the two satisfy $x \ge 0$, so we get 
+
+\begin{align}
+  x_\mu^* = \dfrac{-1 + \sqrt{1 + 2 \mu}}{2}. 
+\end{align}
+
+This is the central path. Taking the limit as $\mu \to 0$ we get,
+
+\begin{align}
+  \lim \limits_{\mu \to 0^+} x_\mu^* 
+  & = \lim \limits_{\mu \to 0^+} \dfrac{-1 + \sqrt{1 + 2 \mu}}{2} \\ 
+  &= 0 \\
+  &= x^*.
+\end{align}
+
+
+
+
+:::

@@ -1,0 +1,47 @@
+# KKT conditions
+
+We can use the central path to derive necessary conditions for optimality. 
+Consider the optimization problem \@ref(eq:constrained-optimization-problem) again. As before we'll assume that we have a central path $x_\mu^*$ converging to an optimal solution $x^*$.
+Because $x_\mu^*$ is a critical point of $f_\mu(x)$, we get 
+
+\begin{align}
+  \nabla f_\mu(x_\mu^*) &= 0 \\
+  \implies \nabla f(x_\mu^*) - \sum \limits_{i = 1}^m \dfrac{\mu}{g_i(x_\mu^*)} \nabla g_i (x_\mu^*)&= 0 
+\end{align}
+
+Applying $\lim \limits_{\mu \to 0^+}$ to both sides, we get 
+\begin{align}
+  \implies \lim \limits_{\mu \to 0^+} \nabla f(x_\mu^*) - \sum \limits_{i = 1}^m \lim \limits_{\mu \to 0^+}\dfrac{\mu}{g_i(x_\mu^*)} \nabla g_i (x_\mu^*)&= 0 
+\end{align}
+which simplifies to 
+\begin{align}
+  \nabla f(x^*) = \sum \limits_{i = 1}^m \lambda_i \nabla g_i (x^*) 
+\end{align}
+where $\lambda_i = \lim \limits_{\mu \to 0^+}\frac{\mu}{g_i(x_\mu^*)}$ for $1 \le i \le m$. (There are several assumptions here about the existence and convergence of limits that we're brushing under the rug.) 
+We can further analyze the constants $\lambda_i$. 
+\begin{align}
+  && \dfrac{\mu}{g_i(x_\mu^*)} \cdot g_i(x_\mu^*) &= \mu \\ 
+  \implies && \lim \limits_{\mu \to 0^+}\dfrac{\mu}{g_i(x_\mu^*)} \cdot \lim \limits_{\mu \to 0^+}g_i(x_\mu^*) &= \lim \limits_{\mu \to 0^+}\mu \\ 
+  \implies &&\lambda_i g_i(x^*) &= 0.
+\end{align}
+Finally, because $g_i(x_\mu^*) \ge 0$ and $\mu > 0$, we must have 
+\begin{align}
+  \lambda_i \ge 0.
+\end{align}
+To summarize, if $x^*$ is an optimal solution to \@ref(eq:constrained-optimization-problem) and there exists a central path $x_\mu^*$ converging to $x^*$, then the following conditions are satisfied:
+\begin{align}
+  \nabla f(x^*) &= \sum \limits_{i = 1}^m \lambda_i \nabla g_i (x^*) \\
+  \lambda_i g_i(x^*) &= 0 \\
+  \lambda_i &\ge 0.
+\end{align}
+These are called the **KKT conditions**.
+
+## KKT conditions
+
+We did a loose derivation of the KKT conditions for the optimization problem \@ref(eq:constrained-optimization-problem) in the previous section using interior point methods with several assumptions about convergence. These conditions can also be derived directly from basic multivariable calculus for a much more general form of optimization problem as stated below.
+
+::: {.theorem #kkt-conditions name="KKT conditions"}
+
+
+
+:::
