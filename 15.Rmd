@@ -59,18 +59,19 @@ A **barrier function** is a differentiable function $b$ from $(0, \infty)$ to $\
   f_\mu(x) := & f(x) - \mu \sum \limits_{i = 1} ^ m \ln (g_i(x)).
 \end{align}
 
-Because the domain of $\ln(x)$ is $(0, \infty)$, any critical point of $f_\mu(x)$ must lie in the feasible region of \@ref(eq:constrained-optimization-problem). Moreover, the following unconstrained optimization problem will always have an optimal solution away from the boundary of \@ref(eq:constrained-optimization-problem) as the *cost* of approaching the boundary goes to $\infty$:
+Because the domain of $\ln(x)$ is $(0, \infty)$, any critical point of $f_\mu(x)$ must lie in the feasible region of \@ref(eq:constrained-optimization-problem). Moreover, if the following unconstrained optimization problem has an optimal solution then it will be away from the boundary of \@ref(eq:constrained-optimization-problem) as the *cost* of approaching the boundary goes to $\infty$:
 
 \begin{align}
   \mbox{minimize: } & f_\mu (x).
 \end{align}
 
-Let $x_\mu^*$ be a solution of the above problem. We'll make the following assumption without proof: *$x_\mu^*$ is continuous in $\mu$ and $\lim \limits_{\mu \to 0^+} x_\mu^* = x^*$ where $x^*$ is an optimal solution to \@ref(eq:constrained-optimization-problem).* This assumption is valid, for example, when $f(x)$ and $g_i(x)$ are convex functions. With this assumption, we now have a method for solving \@ref(eq:constrained-optimization-problem):
+Let $x_\mu^*$ be a solution of the above problem. We'll make the following assumption without proof: *$x_\mu^*$ exists and is continuous in $\mu$ and $\lim \limits_{\mu \to 0^+} x_\mu^* = x^*$ where $x^*$ is an optimal solution to \@ref(eq:constrained-optimization-problem).* This assumption is valid, for example, when $f(x)$ and $g_i(x)$ are convex functions and the feasible region has an interior. With this assumption, we now have a method for solving \@ref(eq:constrained-optimization-problem):
 
 - Start with a small $\mu_0 > 0$ and optimize $f_{\mu_0}(x)$ using GD. Call the solution $x_{\mu_0}^*$.
 - Repeat the following until the sequence $x_{\mu_k}^*$ stabilizes sufficiently:
     1. Set $\mu_{k+1} = \mu_k - \delta_k$ for some small $\delta_k$.
-    2. Using $x_{\mu_k}$ as a starting point for GD, optimize $f_{\mu_{k+1}}(x)$. Call the solution $x_{\mu_k}^*$.
+    2. Using $x^*_{\mu_k}$ as a starting point for GD, optimize $f_{\mu_{k+1}}(x)$. Call the solution $x_{\mu_{k+1}}^*$.
+    3. Increase $k$ to $k + 1$.
 
 This method is a very simplified **interior point method**. The sequence of points $x_{\mu}$ is called the **central path**. 
 

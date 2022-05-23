@@ -23,7 +23,7 @@
 <meta name="author" content="Apurva Nakade" />
 
 
-<meta name="date" content="2022-05-21" />
+<meta name="date" content="2022-05-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -253,17 +253,18 @@ So the general principle is to move in the direction of the negative gradient un
 <p><span class="math display">\[\begin{align}
   f_\mu(x) := &amp; f(x) - \mu \sum \limits_{i = 1} ^ m \ln (g_i(x)).
 \end{align}\]</span></p>
-<p>Because the domain of <span class="math inline">\(\ln(x)\)</span> is <span class="math inline">\((0, \infty)\)</span>, any critical point of <span class="math inline">\(f_\mu(x)\)</span> must lie in the feasible region of <a href="interior-point-methods.html#eq:constrained-optimization-problem">(15.1)</a>. Moreover, the following unconstrained optimization problem will always have an optimal solution away from the boundary of <a href="interior-point-methods.html#eq:constrained-optimization-problem">(15.1)</a> as the <em>cost</em> of approaching the boundary goes to <span class="math inline">\(\infty\)</span>:</p>
+<p>Because the domain of <span class="math inline">\(\ln(x)\)</span> is <span class="math inline">\((0, \infty)\)</span>, any critical point of <span class="math inline">\(f_\mu(x)\)</span> must lie in the feasible region of <a href="interior-point-methods.html#eq:constrained-optimization-problem">(15.1)</a>. Moreover, if the following unconstrained optimization problem has an optimal solution then it will be away from the boundary of <a href="interior-point-methods.html#eq:constrained-optimization-problem">(15.1)</a> as the <em>cost</em> of approaching the boundary goes to <span class="math inline">\(\infty\)</span>:</p>
 <p><span class="math display">\[\begin{align}
   \mbox{minimize: } &amp; f_\mu (x).
 \end{align}\]</span></p>
-<p>Let <span class="math inline">\(x_\mu^*\)</span> be a solution of the above problem. We’ll make the following assumption without proof: <em><span class="math inline">\(x_\mu^*\)</span> is continuous in <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\lim \limits_{\mu \to 0^+} x_\mu^* = x^*\)</span> where <span class="math inline">\(x^*\)</span> is an optimal solution to <a href="interior-point-methods.html#eq:constrained-optimization-problem">(15.1)</a>.</em> This assumption is valid, for example, when <span class="math inline">\(f(x)\)</span> and <span class="math inline">\(g_i(x)\)</span> are convex functions. With this assumption, we now have a method for solving <a href="interior-point-methods.html#eq:constrained-optimization-problem">(15.1)</a>:</p>
+<p>Let <span class="math inline">\(x_\mu^*\)</span> be a solution of the above problem. We’ll make the following assumption without proof: <em><span class="math inline">\(x_\mu^*\)</span> exists and is continuous in <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\lim \limits_{\mu \to 0^+} x_\mu^* = x^*\)</span> where <span class="math inline">\(x^*\)</span> is an optimal solution to <a href="interior-point-methods.html#eq:constrained-optimization-problem">(15.1)</a>.</em> This assumption is valid, for example, when <span class="math inline">\(f(x)\)</span> and <span class="math inline">\(g_i(x)\)</span> are convex functions and the feasible region has an interior. With this assumption, we now have a method for solving <a href="interior-point-methods.html#eq:constrained-optimization-problem">(15.1)</a>:</p>
 <ul>
 <li>Start with a small <span class="math inline">\(\mu_0 &gt; 0\)</span> and optimize <span class="math inline">\(f_{\mu_0}(x)\)</span> using GD. Call the solution <span class="math inline">\(x_{\mu_0}^*\)</span>.</li>
 <li>Repeat the following until the sequence <span class="math inline">\(x_{\mu_k}^*\)</span> stabilizes sufficiently:
 <ol style="list-style-type: decimal">
 <li>Set <span class="math inline">\(\mu_{k+1} = \mu_k - \delta_k\)</span> for some small <span class="math inline">\(\delta_k\)</span>.</li>
-<li>Using <span class="math inline">\(x_{\mu_k}\)</span> as a starting point for GD, optimize <span class="math inline">\(f_{\mu_{k+1}}(x)\)</span>. Call the solution <span class="math inline">\(x_{\mu_k}^*\)</span>.</li>
+<li>Using <span class="math inline">\(x^*_{\mu_k}\)</span> as a starting point for GD, optimize <span class="math inline">\(f_{\mu_{k+1}}(x)\)</span>. Call the solution <span class="math inline">\(x_{\mu_{k+1}}^*\)</span>.</li>
+<li>Increase <span class="math inline">\(k\)</span> to <span class="math inline">\(k + 1\)</span>.</li>
 </ol></li>
 </ul>
 <p>This method is a very simplified <strong>interior point method</strong>. The sequence of points <span class="math inline">\(x_{\mu}\)</span> is called the <strong>central path</strong>.</p>
