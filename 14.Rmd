@@ -9,7 +9,7 @@ We'll next prove a couple of *geometric* results that are equivalent to strong d
 Let $A$ be an $m \times n$ matrix and $b$ be a vector in $\mathbb{R}^m$.
 Exactly one of the following systems has a solution: 
 
-<!-- \begin{align}
+\begin{align}
   A x & = b \\ 
   x & \ge 0.
 (\#eq:farkas-eq1)
@@ -20,10 +20,10 @@ Exactly one of the following systems has a solution:
   y^T A & \ge 0 \\ 
   y^T b & < 0.
 (\#eq:farkas-eq2)
-\end{align} -->
-
+\end{align}
+<!-- 
 1. $A x = b$, $x \ge 0.$
-2. $y^T A \ge 0$, $y^T b < 0.$
+2. $y^T A \ge 0$, $y^T b < 0.$ -->
 
 :::
 
@@ -57,7 +57,7 @@ The optimal solution to the linear program \@ref(eq:farkas-primal) is a feasible
 
 In this case, \@ref(eq:farkas-primal) has an optimal solution. By strong duality, \@ref(eq:farkas-dual) also has an optimal solution with optimal objective $0$. So, the minimum value of $y^T b$ is $0$ and hence the system \@ref(eq:farkas-eq2) does not have a solution.
 
-**Case 2: Suppose \@ref(eq:farkas-eq2) does not have a solution.**
+**Case 2: Suppose \@ref(eq:farkas-eq1) does not have a solution.**
 
 In this case, \@ref(eq:farkas-primal) has no optimal solution. By strong duality, neither does \@ref(eq:farkas-dual). So, \@ref(eq:farkas-dual) is either infeasible or unbounded. As $y = 0$ is a feasible solution to \@ref(eq:farkas-dual) it cannot be infeasible, and hence it must be unbounded. But this means that the value of $y^T b$ can be made arbitrarily small, and in particular, can be made negative. Hence, the system \@ref(eq:farkas-eq2) has a solution.
 
