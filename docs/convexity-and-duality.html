@@ -209,16 +209,18 @@ div.csl-indent {
 <div class="theorem">
 <p><span id="thm:farkas-lemma" class="theorem"><strong>Theorem 14.1  (Farkas' lemma) </strong></span>Let <span class="math inline">\(A\)</span> be an <span class="math inline">\(m \times n\)</span> matrix and <span class="math inline">\(b\)</span> be a vector in <span class="math inline">\(\mathbb{R}^m\)</span>.
 Exactly one of the following systems has a solution:</p>
-<p><span class="math display" id="eq:farkas-eq1">\[\begin{align}
-  A x &amp; = b \\ 
-  x &amp; \ge 0.
-\tag{14.1}
-\end{align}\]</span></p>
-<p><span class="math display" id="eq:farkas-eq2">\[\begin{align}
-  y^T A &amp; \ge 0 \\ 
-  y^T b &amp; &lt; 0.
-\tag{14.2}
-\end{align}\]</span></p>
+<!-- \begin{align}
+  A x & = b \\ 
+  x & \ge 0.
+(\#eq:farkas-eq1)
+\end{align}
+
+
+\begin{align}
+  y^T A & \ge 0 \\ 
+  y^T b & < 0.
+(\#eq:farkas-eq2)
+\end{align} -->
 <ol style="list-style-type: decimal">
 <li><span class="math inline">\(A x = b\)</span>, <span class="math inline">\(x \ge 0.\)</span></li>
 <li><span class="math inline">\(y^T A \ge 0\)</span>, <span class="math inline">\(y^T b &lt; 0.\)</span></li>
@@ -233,21 +235,21 @@ Exactly one of the following systems has a solution:</p>
       &amp; A x &amp; = &amp; b \\ 
       &amp; x &amp; \ge &amp; 0.
   \end{array}
-\tag{14.3}
+\tag{14.1}
 \end{equation}\]</span></p>
-<p>The optimal solution to the linear program <a href="convexity-and-duality.html#eq:farkas-primal">(14.3)</a> is a feasible solution to <a href="convexity-and-duality.html#eq:farkas-eq1">(14.1)</a>. The dual to this linear program is</p>
+<p>The optimal solution to the linear program <a href="convexity-and-duality.html#eq:farkas-primal">(14.1)</a> is a feasible solution to <a href="#eq:farkas-eq1">(<strong>??</strong>)</a>. The dual to this linear program is</p>
 <p><span class="math display" id="eq:farkas-dual">\[\begin{equation}
   \begin{array}{llll}
     \mbox{minimize: } &amp; y^T b \\
     \mbox{subject to: } 
       &amp; y^T A &amp; \ge &amp; 0.
   \end{array}
-\tag{14.4}
+\tag{14.2}
 \end{equation}\]</span></p>
-<p><strong>Case 1: Suppose <a href="convexity-and-duality.html#eq:farkas-eq1">(14.1)</a> has a solution.</strong></p>
-<p>In this case, <a href="convexity-and-duality.html#eq:farkas-primal">(14.3)</a> has an optimal solution. By strong duality, <a href="convexity-and-duality.html#eq:farkas-dual">(14.4)</a> also has an optimal solution with optimal objective <span class="math inline">\(0\)</span>. So, the minimum value of <span class="math inline">\(y^T b\)</span> is <span class="math inline">\(0\)</span> and hence the system <a href="convexity-and-duality.html#eq:farkas-eq2">(14.2)</a> does not have a solution.</p>
-<p><strong>Case 2: Suppose <a href="convexity-and-duality.html#eq:farkas-eq2">(14.2)</a> does not have a solution.</strong></p>
-<p>In this case, <a href="convexity-and-duality.html#eq:farkas-primal">(14.3)</a> has no optimal solution. By strong duality, neither does <a href="convexity-and-duality.html#eq:farkas-dual">(14.4)</a>. So, <a href="convexity-and-duality.html#eq:farkas-dual">(14.4)</a> is either infeasible or unbounded. As <span class="math inline">\(y = 0\)</span> is a feasible solution to <a href="convexity-and-duality.html#eq:farkas-dual">(14.4)</a> it cannot be infeasible, and hence it must be unbounded. But this means that the value of <span class="math inline">\(y^T b\)</span> can be made arbitrarily small, and in particular, can be made negative. Hence, the system <a href="convexity-and-duality.html#eq:farkas-eq2">(14.2)</a> has a solution.</p>
+<p><strong>Case 1: Suppose <a href="#eq:farkas-eq1">(<strong>??</strong>)</a> has a solution.</strong></p>
+<p>In this case, <a href="convexity-and-duality.html#eq:farkas-primal">(14.1)</a> has an optimal solution. By strong duality, <a href="convexity-and-duality.html#eq:farkas-dual">(14.2)</a> also has an optimal solution with optimal objective <span class="math inline">\(0\)</span>. So, the minimum value of <span class="math inline">\(y^T b\)</span> is <span class="math inline">\(0\)</span> and hence the system <a href="#eq:farkas-eq2">(<strong>??</strong>)</a> does not have a solution.</p>
+<p><strong>Case 2: Suppose <a href="#eq:farkas-eq2">(<strong>??</strong>)</a> does not have a solution.</strong></p>
+<p>In this case, <a href="convexity-and-duality.html#eq:farkas-primal">(14.1)</a> has no optimal solution. By strong duality, neither does <a href="convexity-and-duality.html#eq:farkas-dual">(14.2)</a>. So, <a href="convexity-and-duality.html#eq:farkas-dual">(14.2)</a> is either infeasible or unbounded. As <span class="math inline">\(y = 0\)</span> is a feasible solution to <a href="convexity-and-duality.html#eq:farkas-dual">(14.2)</a> it cannot be infeasible, and hence it must be unbounded. But this means that the value of <span class="math inline">\(y^T b\)</span> can be made arbitrarily small, and in particular, can be made negative. Hence, the system <a href="#eq:farkas-eq2">(<strong>??</strong>)</a> has a solution.</p>
 </div>
 <p>We’ll next interpret Farkas’ lemma geometrically using positive cones and separating hyperplanes.</p>
 </div>
@@ -315,10 +317,10 @@ Ax &amp; \le b \\
 x, y &amp; \ge 0 \\
 -c^T x + b^T y &amp; \le 0.
 \end{split}
-\tag{14.5}
+\tag{14.3}
 \end{equation}\]</span></p>
-<p>Suppose this system has a feasible solution. The first three equations are equivalent to saying that <span class="math inline">\(x\)</span> is primal-feasible and <span class="math inline">\(y\)</span> is dual-feasible. If such a solution exists, by Weak Duality (Theorem <a href="weak-and-strong-duality.html#thm:weak-duality">8.1</a>) we know that <span class="math inline">\(c^T x \le b^T y\)</span>. So, the only way the fourth inequality is satisfied is if <span class="math inline">\(c^T x = b^T y\)</span> i.e. the primal-objective value at <span class="math inline">\(x\)</span> equals the dual-objective value at <span class="math inline">\(y\)</span>. But by Weak Duality, these must then be the optimal solutions thereby proving Strong Duality. So, it suffices to show that <a href="convexity-and-duality.html#eq:strong-using-farkas">(14.5)</a> has a feasible solution if the primal has an optimal solution.</p>
-<p>We prove this by contradiction. Suppose <a href="convexity-and-duality.html#eq:strong-using-farkas">(14.5)</a> does not have an optimal solution. We rewrite the system as</p>
+<p>Suppose this system has a feasible solution. The first three equations are equivalent to saying that <span class="math inline">\(x\)</span> is primal-feasible and <span class="math inline">\(y\)</span> is dual-feasible. If such a solution exists, by Weak Duality (Theorem <a href="weak-and-strong-duality.html#thm:weak-duality">8.1</a>) we know that <span class="math inline">\(c^T x \le b^T y\)</span>. So, the only way the fourth inequality is satisfied is if <span class="math inline">\(c^T x = b^T y\)</span> i.e. the primal-objective value at <span class="math inline">\(x\)</span> equals the dual-objective value at <span class="math inline">\(y\)</span>. But by Weak Duality, these must then be the optimal solutions thereby proving Strong Duality. So, it suffices to show that <a href="convexity-and-duality.html#eq:strong-using-farkas">(14.3)</a> has a feasible solution if the primal has an optimal solution.</p>
+<p>We prove this by contradiction. Suppose <a href="convexity-and-duality.html#eq:strong-using-farkas">(14.3)</a> does not have an optimal solution. We rewrite the system as</p>
 <p><span class="math display">\[\begin{equation}
   \begin{split}
     \begin{bmatrix} A &amp; 0 \\ 0 &amp; -A^T \\ -c^T &amp; b^T \end{bmatrix}

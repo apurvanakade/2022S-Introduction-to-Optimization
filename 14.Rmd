@@ -9,7 +9,7 @@ We'll next prove a couple of *geometric* results that are equivalent to strong d
 Let $A$ be an $m \times n$ matrix and $b$ be a vector in $\mathbb{R}^m$.
 Exactly one of the following systems has a solution: 
 
-\begin{align}
+<!-- \begin{align}
   A x & = b \\ 
   x & \ge 0.
 (\#eq:farkas-eq1)
@@ -20,9 +20,7 @@ Exactly one of the following systems has a solution:
   y^T A & \ge 0 \\ 
   y^T b & < 0.
 (\#eq:farkas-eq2)
-\end{align}
-
-
+\end{align} -->
 
 1. $A x = b$, $x \ge 0.$
 2. $y^T A \ge 0$, $y^T b < 0.$
