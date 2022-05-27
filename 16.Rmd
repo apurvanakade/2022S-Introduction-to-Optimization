@@ -92,10 +92,11 @@ Consider the linear program
 The KKT conditions for this problem are
 \begin{align}
   c &= A^T \lambda \\
-  x_i \lambda _i &= 0, \mbox{ for } 1 \le i \le n,\\
+   \lambda _i (a_{i1} x_1 + \dots + a_{in}x_n - b_i) &= 0, \mbox{ for } 1 \le i \le m,\\
   \lambda &\ge 0.
 \end{align}
 This is precisely the dual of the linear programming problem and *complementary slackness* condition. 
 Thus the KKT conditions recover the duality in the linear programming sense.
 
 :::
+

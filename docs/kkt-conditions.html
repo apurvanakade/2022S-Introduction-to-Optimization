@@ -23,7 +23,7 @@
 <meta name="author" content="Apurva Nakade" />
 
 
-<meta name="date" content="2022-05-23" />
+<meta name="date" content="2022-05-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -208,21 +208,21 @@ Consider the optimization problem <a href="interior-point-methods.html#eq:constr
 Because <span class="math inline">\(x_\mu^*\)</span> is a critical point of <span class="math inline">\(f_\mu(x)\)</span>, we get</p>
 <p><span class="math display">\[\begin{align}
   \nabla_x f_\mu(x_\mu^*) &amp;= 0 \\
-  \implies \nabla f(x_\mu^*) - \sum \limits_{i = 1}^m \dfrac{\mu}{g_i(x_\mu^*)} \nabla g_i (x_\mu^*)&amp;= 0 
+  \implies \nabla f(x_\mu^*) - \sum \limits_{i = 1}^m \dfrac{\mu}{g_i(x_\mu^*)} \nabla g_i (x_\mu^*)&amp;= 0
 \end{align}\]</span></p>
 <p>Applying <span class="math inline">\(\lim \limits_{\mu \to 0^+}\)</span> to both sides, we get
 <span class="math display">\[\begin{align}
-   \lim \limits_{\mu \to 0^+} \nabla f(x_\mu^*) - \sum \limits_{i = 1}^m \lim \limits_{\mu \to 0^+}\dfrac{\mu}{g_i(x_\mu^*)} \nabla g_i (x_\mu^*)&amp;= 0 
+   \lim \limits_{\mu \to 0^+} \nabla f(x_\mu^*) - \sum \limits_{i = 1}^m \lim \limits_{\mu \to 0^+}\dfrac{\mu}{g_i(x_\mu^*)} \nabla g_i (x_\mu^*)&amp;= 0
 \end{align}\]</span>
 which simplifies to
 <span class="math display">\[\begin{align}
-  \nabla f(x^*) = \sum \limits_{i = 1}^m \lambda_i \nabla g_i (x^*) 
+  \nabla f(x^*) = \sum \limits_{i = 1}^m \lambda_i \nabla g_i (x^*)
 \end{align}\]</span>
 where <span class="math inline">\(\lambda_i = \lim \limits_{\mu \to 0^+}\frac{\mu}{g_i(x_\mu^*)}\)</span> for <span class="math inline">\(1 \le i \le m\)</span>. (There are several assumptions here about the existence and convergence of limits that we’re brushing under the rug.)
 We can further analyze the constants <span class="math inline">\(\lambda_i\)</span>.
 <span class="math display">\[\begin{align}
-  &amp;&amp; \dfrac{\mu}{g_i(x_\mu^*)} \cdot g_i(x_\mu^*) &amp;= \mu \\ 
-  \implies &amp;&amp; \lim \limits_{\mu \to 0^+}\dfrac{\mu}{g_i(x_\mu^*)} \cdot \lim \limits_{\mu \to 0^+}g_i(x_\mu^*) &amp;= \lim \limits_{\mu \to 0^+}\mu \\ 
+  &amp;&amp; \dfrac{\mu}{g_i(x_\mu^*)} \cdot g_i(x_\mu^*) &amp;= \mu \\
+  \implies &amp;&amp; \lim \limits_{\mu \to 0^+}\dfrac{\mu}{g_i(x_\mu^*)} \cdot \lim \limits_{\mu \to 0^+}g_i(x_\mu^*) &amp;= \lim \limits_{\mu \to 0^+}\mu \\
   \implies &amp;&amp;\lambda_i g_i(x^*) &amp;= 0.
 \end{align}\]</span>
 Finally, because <span class="math inline">\(g_i(x_\mu^*) \ge 0\)</span> and <span class="math inline">\(\mu &gt; 0\)</span>, we must have
@@ -244,7 +244,7 @@ These are called the KKT conditions.</p>
 <p><span class="math display">\[\begin{equation}
   \begin{array}{llr}
     \mbox{minimize: } &amp; f(x) \\
-    \mbox{subject to: } 
+    \mbox{subject to: }
       &amp; g_i(x) \ge 0, &amp; \mbox{ for } 1 \le i \le m \\
       &amp; h_i(x) = 0, &amp; \mbox{ for } 1 \le i \le k.
   \end{array}
@@ -252,7 +252,7 @@ These are called the KKT conditions.</p>
 <p>Assume that this problem has an optimal solution <span class="math inline">\(x^*\)</span> and there is a central path <span class="math inline">\(x_\mu^*\)</span> converging to <span class="math inline">\(x^*\)</span>.</p>
 <p>Then under certain regularity conditions, the following conditions are satisfied:</p>
 <p><span class="math display">\[\begin{align}
-  \nabla f(x^*) &amp;= \sum \limits_{i = 1}^m \lambda_i \nabla g_i (x^*) 
+  \nabla f(x^*) &amp;= \sum \limits_{i = 1}^m \lambda_i \nabla g_i (x^*)
   + \sum \limits_{i = 1}^k \lambda&#39;_i \nabla h_i (x^*) \\
   \lambda_i g_i(x^*) &amp;= 0, \mbox{ for } 1 \le i \le m \\
   \lambda_i &amp;\ge 0, \mbox{ for } 1 \le i \le m.
@@ -272,12 +272,12 @@ These are called the KKT conditions.</p>
 <p><span id="exm:unlabeled-div-40" class="example"><strong>Example 16.2  </strong></span>Consider the linear program
 <span class="math display">\[\begin{align}
   \mbox{minimize: } &amp; c^T x \\
-  \mbox{subject to: } &amp; Ax \ge b 
+  \mbox{subject to: } &amp; Ax \ge b
 \end{align}\]</span>
 The KKT conditions for this problem are
 <span class="math display">\[\begin{align}
   c &amp;= A^T \lambda \\
-  x_i \lambda _i &amp;= 0, \mbox{ for } 1 \le i \le n,\\
+   \lambda _i (a_{i1} x_1 + \dots + a_{in}x_n - b_i) &amp;= 0, \mbox{ for } 1 \le i \le m,\\
   \lambda &amp;\ge 0.
 \end{align}\]</span>
 This is precisely the dual of the linear programming problem and <em>complementary slackness</em> condition.
